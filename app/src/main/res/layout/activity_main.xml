@@ -4,4 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    android:onClick="submitEmail"
+    tools:context="universal.appfactory.aeroindia2023.MainActivity">
+
+    <Button
+        android:id="@+id/emailButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="420dp"
+        android:onClick="submitEmail"
+        android:text="@string/button_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
+
+    <EditText
+        android:id="@+id/emailAddress"
+        android:layout_width="309dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="168dp"
+        android:ems="10"
+        android:hint="@string/email_address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/emailButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loginHeading"
+        android:layout_width="327dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="83dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/register_heading"
+        android:textSize="40sp"
+        android:typeface="sans"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

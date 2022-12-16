@@ -10,10 +10,10 @@ import universal.appfactory.aeroindia2023.R
 
 class OtpActivity : AppCompatActivity() {
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        val emailIDShared1: String = intent?.getStringExtra("email").toString()
-    }
+//    override fun onNewIntent(intent: Intent?) {
+//        super.onNewIntent(intent)
+//        val emailIDShared1: String = intent?.getStringExtra("email").toString()
+//    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {

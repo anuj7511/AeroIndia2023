@@ -6,4 +6,17 @@
     <string name="username">Name</string>
     <string name="mobileNo">Mobile number</string>
     <string name="otp_heading">Enter OTP</string>
+    <string name="_3_30pm">3:30pm</string>
+    <string name="_5_30pm">5:30pm</string>
+    <string name="manthan_the_annual_defense_innovation_event">Manthan- The Annual Defense Innovation Event</string>
+    <string name="tuesday_october_8">Tuesday, October 8</string>
+    <string name="line">line</string>
+    <string name="calendar">calendar</string>
+    <string name="agenda">Agenda</string>
+    <string name="assocham">Assocham</string>
+    <string name="ssb_aircraft_repair_nplant_jsc">SSB AIRCRAFT REPAIR \nPLANT, JSC</string>
+    <string name="india">India</string>
+    <string name="hall_12_12s_34">Hall 12 12S.34</string>
+    <string name="logo">logo</string>
+    <string name="all_exhibitors">All Exhibitors</string>
 </resources>

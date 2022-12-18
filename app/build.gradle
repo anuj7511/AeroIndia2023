@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'datshin.appfactory.aeroindia2023'
+    namespace 'universal.appfactory.aeroindia2023'
     compileSdk 32
 
     defaultConfig {
-        applicationId "datshin.appfactory.aeroindia2023"
+        applicationId "universal.appfactory.aeroindia2023"
         minSdk 27
         targetSdk 32
         versionCode 1

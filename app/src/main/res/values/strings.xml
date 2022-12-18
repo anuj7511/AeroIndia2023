@@ -23,4 +23,13 @@
     //Maps Stings
     <string name="Api_key">AIzaSyDUk-YDNCE5c7UdnlQX5JY3Tz16rRGEH-8</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="profile_image">profile_image</string>
+    <string name="mr_alok_nanda">Mr. Alok Nanda</string>
+    <string name="ceo_and_cto">CEO and CTO</string>
+    <string name="ge_india_industrial_pvt_ltd_ge_south_asia">GE India Industrial Pvt. Ltd./ GE South Asia</string>
+    <string name="technologies_required_for_manufacturing_of_an_indigenous_aero_engine_for_atmanirbhar_bharat">Technologies required for manufacturing of an Indigenous Aero engine for Atmanirbhar Bharat</string>
+    <string name="_3_30pm_5_30pm">3:30pm - 5:30pm</string>
+    <string name="information">information</string>
+    <string name="speakers">speakers</string>
+    <string name="notes">notes</string>
 </resources>

@@ -7,6 +7,7 @@
     app:cardElevation="2dp"
     app:strokeColor="@color/black"
     app:strokeWidth="2dp"
+    app:cardBackgroundColor="@color/white"
     android:layout_margin="10dp">
 
     <LinearLayout
@@ -33,6 +34,7 @@
                 android:id="@+id/country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#808080"
                 android:text="@string/india"
                 android:textSize="12sp"/>
 
@@ -40,13 +42,14 @@
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#808080"
                 android:text="@string/hall_12_12s_34"
                 android:textSize="12sp"/>
 
         </LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/aeroindia_logo"
             android:layout_weight="0.5"

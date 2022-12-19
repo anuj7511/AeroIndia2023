@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.SurfaceHolder
 import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.animation.AnimationUtils.loadAnimation
 import android.widget.Button
 import android.widget.EditText
@@ -16,12 +17,10 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
-import com.google.android.material.animation.AnimationUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
-import universal.appfactory.aeroindia2023.databinding.ActivityMainBinding
 import java.io.IOException
 
 class Feedback : AppCompatActivity() {

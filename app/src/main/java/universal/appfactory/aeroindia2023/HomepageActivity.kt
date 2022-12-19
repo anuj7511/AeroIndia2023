@@ -14,5 +14,6 @@ class HomepageActivity : AppCompatActivity() {
     }
 
     fun iconClicked(view: View){
+
     }
 }

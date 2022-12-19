@@ -19,8 +19,7 @@ class HomepageActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val bundle = intent.extras
-        findViewById<TextView>(R.id.userNameView).text =
-            bundle?.getString("username", "DEFAULT USER")
+        findViewById<TextView>(R.id.userNameView).text = bundle?.getString("username", "DEFAULT USER")
 
     }
 
@@ -32,23 +31,24 @@ class HomepageActivity : AppCompatActivity() {
 
         startActivity(intent)
 
+        var navigateIntent: Intent = Intent(this@HomepageActivity, DummyActivity::class.java)
         when(tag.toInt()){
-            0 -> {val intent = Intent(this@HomepageActivity, AgendaActivity::class.java)}
-            1 -> {val intent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}
-            2 -> {val intent = Intent(this@HomepageActivity, MapsActivity::class.java)}
-            3 -> {val intent = Intent(this@HomepageActivity, DummyActivity::class.java)}
-            4 -> {val intent = Intent(this@HomepageActivity, DummyActivity::class.java)}
-            5 -> {val intent = Intent(this@HomepageActivity, DummyActivity::class.java)}
-            6 -> {val intent = Intent(this@HomepageActivity, DummyActivity::class.java)}
-            7 -> {val intent = Intent(this@HomepageActivity, AgendaActivity::class.java)}
-            8 -> {val intent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}
+            1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}
+            2 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)}
+            3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            4 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            6 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}
+            8 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
             else -> {
                 Log.i("Homepage msg", "Nothing was clicked")
             }
         }
 
-        intent.putExtras(bundle!!)
-        startActivity(intent)
+        navigateIntent.putExtras(bundle!!)
+        startActivity(navigateIntent)
 
     }
 }

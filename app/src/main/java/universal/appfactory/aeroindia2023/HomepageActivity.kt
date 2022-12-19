@@ -37,11 +37,11 @@ class HomepageActivity : AppCompatActivity() {
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}
             2 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)}
             3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
-            4 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)}
             5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
             6 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}
-            8 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}
+            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}
             else -> {
                 Log.i("Homepage msg", "Nothing was clicked")
             }

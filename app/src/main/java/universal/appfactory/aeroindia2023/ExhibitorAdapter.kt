@@ -36,7 +36,7 @@ class ExhibitorAdapter(private val mList: ArrayList<ExhibitorModel>) : RecyclerV
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         // setting data to our views of recycler view.
-        val itemsViewModel = mList[position]
+        val itemsViewModel = exhibitorModelArrayList[position]
         val location = itemsViewModel.getHallNo() + ", Stall " + itemsViewModel.getStallNo()
 
         // sets the text to the textview from our itemHolder class
@@ -48,7 +48,7 @@ class ExhibitorAdapter(private val mList: ArrayList<ExhibitorModel>) : RecyclerV
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
-        return mList.size
+        return exhibitorModelArrayList.size
     }
 
     // Holds the views for adding it to image and text
@@ -58,7 +58,7 @@ class ExhibitorAdapter(private val mList: ArrayList<ExhibitorModel>) : RecyclerV
         var nameText: TextView = itemView.findViewById(R.id.exhibitor_name)
         var countryText: TextView = itemView.findViewById(R.id.country)
         var locationText: TextView = itemView.findViewById(R.id.location)
-        
+
     }
 
     // creating a constructor for our variables.

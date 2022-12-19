@@ -3,6 +3,7 @@ package universal.appfactory.aeroindia2023
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,8 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AgendaActivity : AppCompatActivity() {
 
@@ -25,6 +28,8 @@ class AgendaActivity : AppCompatActivity() {
 
         // getting the recyclerview by its id
         recyclerview = findViewById(R.id.recycler_view)
+        // getting searchview by its id
+        val searchView = findViewById<SearchView>(R.id.search_bar)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -32,6 +37,37 @@ class AgendaActivity : AppCompatActivity() {
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         fetchAgendaData()
+
+        // below line is to call set on query text listener method.
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                filter(newText)
+                return false
+            }
+        })
+    }
+
+    private fun filter(text: String) {
+        // creating a new array list to filter our data.
+        val filteredList = ArrayList<AgendaModel>()
+
+        // running a for loop to compare elements.
+        for (item in data) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getEvent().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredList.add(item)
+            }
+        }
+
+        adapter.filterList(filteredList)
     }
 
     @OptIn(DelicateCoroutinesApi::class)

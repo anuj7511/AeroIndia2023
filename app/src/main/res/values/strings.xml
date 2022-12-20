@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Aero India 2023</string>
     <string name="button_name">Generate OTP</string>
-    <string name="register_heading">Register</string>
+    <string name="register_heading">USER REGISTRATION</string>
     <string name="email_address">Email address</string>
     <string name="username">Name</string>
     <string name="mobileNo">Mobile number</string>

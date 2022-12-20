@@ -15,7 +15,8 @@
         android:text="@string/button_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
 
     <EditText
         android:id="@+id/emailAddress"
@@ -27,25 +28,28 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/emailButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.639" />
 
     <TextView
         android:id="@+id/loginHeading"
         android:layout_width="302dp"
         android:layout_height="68dp"
+        android:gravity="center_vertical"
         android:layout_marginBottom="83dp"
         android:layout_marginEnd="46dp"
         android:layout_marginStart="46dp"
-        android:layout_marginTop="45dp"
         android:text="@string/register_heading"
-        android:textSize="40sp"
+        android:textColor="#000000"
+        android:textSize="30sp"
         android:typeface="sans"
         app:layout_constraintBottom_toTopOf="@+id/emailAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
+        app:layout_constraintTop_toBottomOf="@+id/registrationLogo" />
 
     <EditText
         android:id="@+id/username"
@@ -73,4 +77,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
+
+    <ImageView
+        android:id="@+id/registrationLogo"
+        android:layout_width="401dp"
+        android:layout_height="133dp"
+        android:layout_marginBottom="27dp"
+        android:layout_marginTop="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/loginHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/aero_india_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

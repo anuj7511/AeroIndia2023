@@ -27,6 +27,8 @@ class ExhibitorsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exhibitors)
 
+        supportActionBar?.hide()
+
         // getting the recyclerview by its id
         recyclerview = findViewById<RecyclerView>(R.id.recycler_view)
         // getting searchview by its id

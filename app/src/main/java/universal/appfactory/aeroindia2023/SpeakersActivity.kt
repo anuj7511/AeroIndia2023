@@ -23,6 +23,8 @@ class SpeakersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speakers)
 
+        supportActionBar?.hide()
+
         // getting the recyclerview by its id
         recyclerview = findViewById<RecyclerView>(R.id.recycler_view)
 

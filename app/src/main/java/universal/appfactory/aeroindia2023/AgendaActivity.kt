@@ -26,6 +26,7 @@ class AgendaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agenda)
 
+        supportActionBar?.hide()
         // getting the recyclerview by its id
         recyclerview = findViewById(R.id.recycler_view)
         // getting searchview by its id

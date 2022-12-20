@@ -31,7 +31,7 @@ class HomepageActivity : AppCompatActivity() {
 
         startActivity(intent)
 
-        var navigateIntent: Intent = Intent(this@HomepageActivity, DummyActivity::class.java)
+        var navigateIntent: Intent = Intent(this@HomepageActivity,  DummyActivity::class.java)
         when(tag.toInt()){
             0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}

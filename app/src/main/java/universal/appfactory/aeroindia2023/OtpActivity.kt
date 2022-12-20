@@ -49,7 +49,7 @@ class OtpActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
-                Toast.makeText(this, "Enter correct OTP", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
             }
         }
 

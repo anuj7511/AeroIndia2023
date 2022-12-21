@@ -15,19 +15,18 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AgendaActivity : AppCompatActivity() {
+class ProductsActivity : AppCompatActivity() {
 
     // variable for our adapter
     // class and array list
-    private lateinit var adapter: AgendaAdapter
-    private lateinit var data: ArrayList<AgendaModel>
+    private lateinit var adapter: ProductAdapter
+    private lateinit var data: ArrayList<ProductModel>
     private lateinit var recyclerview: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agenda)
+        setContentView(R.layout.activity_products)
 
-        supportActionBar?.hide()
         // getting the recyclerview by its id
         recyclerview = findViewById(R.id.recycler_view)
         // getting searchview by its id
@@ -39,7 +38,8 @@ class AgendaActivity : AppCompatActivity() {
 
         // ArrayList of class ItemsViewModel
         data = ArrayList()
-        fetchAgendaData()
+        fetchProductData()
+
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -55,21 +55,20 @@ class AgendaActivity : AppCompatActivity() {
             }
         })
 
-
         refreshView.setOnRefreshListener{
-            fetchAgendaData()
+            fetchProductData()
             refreshView.isRefreshing = false
         }
     }
 
     private fun filter(text: String) {
         // creating a new array list to filter our data.
-        val filteredList = ArrayList<AgendaModel>()
+        val filteredList = ArrayList<ProductModel>()
 
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getEvent().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+            if (item.getProductTitle().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredList.add(item)
@@ -80,29 +79,29 @@ class AgendaActivity : AppCompatActivity() {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun fetchAgendaData () {
-        val agendaApi = ApiClient.getInstance().create(ApiInterface::class.java)
+    fun fetchProductData () {
+        val productApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            agendaApi.getAgenda("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
-                Callback<AgendaResponse?> {
+            productApi.getProducts("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+                Callback<ProductResponse?> {
                 override fun onResponse(
-                    call: Call<AgendaResponse?>,
-                    response: Response<AgendaResponse?>
+                    call: Call<ProductResponse?>,
+                    response: Response<ProductResponse?>
                 ) {
 
                     Log.d("Response: ", response.body().toString())
-                    data = response.body()?.data as ArrayList<AgendaModel>
+                    data = response.body()?.data as ArrayList<ProductModel>
                     // This will pass the ArrayList to our Adapter
-                    adapter = AgendaAdapter(data)
+                    adapter = ProductAdapter(data)
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
 
                 }
 
-                override fun onFailure(call: Call<AgendaResponse?>, t: Throwable) {
+                override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
                     Toast.makeText(applicationContext, t.message,
                         Toast.LENGTH_SHORT).show()
                     Log.d("Failure Response: ", t.message.toString())

@@ -36,4 +36,11 @@
     <string name="products">Products</string>
     <string name="air_systems">Air Systems</string>
     <string name="_17">17</string>
+    <string name="product_image">product_image</string>
+    <string name="high_altitude_parachute_hap">High Altitude Parachute(HAP)</string>
+    <string name="category">Category</string>
+    <string name="exhibitor">Exhibitor</string>
+    <string name="gliders_india_limited">Gliders India Limited</string>
+    <string name="description">Description</string>
+    <string name="high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones">High Altitude parachute has been designed and developed for use in high altitude dropping zones. High Altitude parachute has been designed and developed for use in high altitude dropping zones. High Altitude parachute has been designed and developed for use in high altitude dropping zones</string>
 </resources>

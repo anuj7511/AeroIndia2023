@@ -8,6 +8,7 @@ import android.widget.Toast
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,9 +29,10 @@ class ExhibitorsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_exhibitors)
 
         // getting the recyclerview by its id
-        recyclerview = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerview = findViewById(R.id.recycler_view)
         // getting searchview by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
+        val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -38,6 +40,7 @@ class ExhibitorsActivity : AppCompatActivity() {
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         fetchExhibitorData()
+
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -52,6 +55,12 @@ class ExhibitorsActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        refreshView.setOnRefreshListener{
+            fetchExhibitorData()
+            refreshView.isRefreshing = false
+        }
+
 
     }
 
@@ -80,10 +89,10 @@ class ExhibitorsActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
             exhibitorApi.getExhibitors("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
-                Callback<ExhibitorResponse?> {
+                Callback<ProductResponse?> {
                 override fun onResponse(
-                    call: Call<ExhibitorResponse?>,
-                    response: Response<ExhibitorResponse?>
+                    call: Call<ProductResponse?>,
+                    response: Response<ProductResponse?>
                 ) {
 
                     Log.d("Response: ", response.body().toString())
@@ -95,7 +104,7 @@ class ExhibitorsActivity : AppCompatActivity() {
 
                 }
 
-                override fun onFailure(call: Call<ExhibitorResponse?>, t: Throwable) {
+                override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
                     Toast.makeText(applicationContext, t.message,
                         Toast.LENGTH_SHORT).show()
                     Log.d("Failure Response: ", t.message.toString())

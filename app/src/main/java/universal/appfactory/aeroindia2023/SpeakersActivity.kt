@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +25,8 @@ class SpeakersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_speakers)
 
         // getting the recyclerview by its id
-        recyclerview = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerview = findViewById(R.id.recycler_view)
+        val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -32,6 +34,11 @@ class SpeakersActivity : AppCompatActivity() {
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         fetchSpeakerData()
+
+        refreshView.setOnRefreshListener{
+            fetchSpeakerData()
+            refreshView.isRefreshing = false
+        }
     }
 
 

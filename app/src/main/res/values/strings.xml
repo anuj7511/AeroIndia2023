@@ -43,4 +43,13 @@
     <string name="gliders_india_limited">Gliders India Limited</string>
     <string name="description">Description</string>
     <string name="high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones">High Altitude parachute has been designed and developed for use in high altitude dropping zones. High Altitude parachute has been designed and developed for use in high altitude dropping zones. High Altitude parachute has been designed and developed for use in high altitude dropping zones</string>
+    <string name="my_profile">My Profile</string>
+    <string name="notifications">Notifications</string>
+    <string name="my_name">My Name</string>
+    <string name="sm">SM</string>
+    <string name="icon">icon</string>
+    <string name="my_profile_information">My Profile Information</string>
+    <string name="settings">Settings</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_out_and_delete_my_account">Sign Out and delete My Account</string>
 </resources>

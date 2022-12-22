@@ -86,7 +86,7 @@ class AgendaActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            agendaApi.getAgenda("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+            agendaApi.getAgendas("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                 Callback<AgendaResponse?> {
                 override fun onResponse(
                     call: Call<AgendaResponse?>,
@@ -96,7 +96,7 @@ class AgendaActivity : AppCompatActivity() {
                     Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<AgendaModel>
                     // This will pass the ArrayList to our Adapter
-                    adapter = AgendaAdapter(data)
+                    adapter = AgendaAdapter(data, this@AgendaActivity)
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
 

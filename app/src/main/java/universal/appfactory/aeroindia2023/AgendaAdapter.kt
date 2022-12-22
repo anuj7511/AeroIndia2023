@@ -1,13 +1,16 @@
 package universal.appfactory.aeroindia2023
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class AgendaAdapter(private val mList: ArrayList<AgendaModel>) : RecyclerView.Adapter<AgendaAdapter.ViewHolder>() {
+class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context) : RecyclerView.Adapter<AgendaAdapter.ViewHolder>() {
 
     // creating a variable for array list and context.
     private var agendaModelArrayList: ArrayList<AgendaModel>
@@ -45,6 +48,19 @@ class AgendaAdapter(private val mList: ArrayList<AgendaModel>) : RecyclerView.Ad
         holder.eventName.text = itemsViewModel.getEvent().trim()
         holder.date.text = date
 
+        holder.agendaCard.setOnClickListener{
+            val intent = Intent(mContext,SelectedAgendaActivity::class.java)
+            intent.putExtra("Name",itemsViewModel.getEvent().trim())
+            intent.putExtra("Start Time",itemsViewModel.getStartTime().trim().drop(10))
+            intent.putExtra("End Time",itemsViewModel.getEndTime().trim().drop(10))
+            intent.putExtra("Date",date)
+            intent.putExtra("Location",itemsViewModel.getLocationName().trim())
+            intent.putExtra("Category",itemsViewModel.getCategories().trim())
+            intent.putExtra("Description",itemsViewModel.getDescription().trim())
+            intent.putExtra("Speakers",itemsViewModel.getSpeakers())
+            mContext.startActivity(intent)
+        }
+
     }
 
     // return the number of the items in the list
@@ -60,6 +76,7 @@ class AgendaAdapter(private val mList: ArrayList<AgendaModel>) : RecyclerView.Ad
         var endTime: TextView = itemView.findViewById(R.id.end_time)
         var eventName: TextView = itemView.findViewById(R.id.event_name)
         var date: TextView = itemView.findViewById(R.id.date)
+        var agendaCard: CardView = itemView.findViewById(R.id.agenda_card)
 
     }
 

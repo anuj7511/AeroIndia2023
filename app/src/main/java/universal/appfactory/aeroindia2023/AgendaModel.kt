@@ -26,13 +26,28 @@ class AgendaModel (@SerializedName("id")
         return session_name
     }
 
-
     fun getStartTime(): String {
         return start_date_time
     }
 
     fun getEndTime(): String {
         return end_date_time
+    }
+
+    fun getLocationName(): String {
+        return location_name
+    }
+
+    fun getCategories(): String {
+        return categories
+    }
+
+    fun getDescription(): String {
+        return description
+    }
+
+    fun getSpeakers(): String {
+        return speakers
     }
 
 }

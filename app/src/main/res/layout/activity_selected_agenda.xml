@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_img_agenda"
+    tools:context=".SelectedAgendaActivity">
+
+    <ImageView
+        android:id="@+id/above_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/main_line_above"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/line" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/event_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/above_line"
+        app:strokeColor="@color/black"
+        android:padding="2dp"
+        app:strokeWidth="2dp"
+        app:cardBackgroundColor="#66FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/agenda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/technologies_required_for_manufacturing_of_an_indigenous_aero_engine_for_atmanirbhar_bharat"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="5dp"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/sand_clock"
+                        android:contentDescription="@string/line" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_3_30pm_5_30pm"
+                        android:background="@drawable/time_background"
+                        android:textColor="@color/white"
+                        android:padding="3dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tuesday_october_8"
+                        android:background="@drawable/date_background"
+                        android:textColor="@color/white"
+                        android:padding="3dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar"
+                        android:contentDescription="@string/line" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/below_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/above_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/event_card"
+        android:contentDescription="@string/line" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/below_line"
+        android:background="#F0F3F7"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="7dp">
+
+        <TextView
+            android:id="@+id/information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/information"
+            android:textAllCaps="true"
+            android:textColor="#6A6667"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="0.3"/>
+
+        <TextView
+            android:id="@+id/speakers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/speakers"
+            android:textAllCaps="true"
+            android:textColor="#6A6667"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="0.3"/>
+
+        <TextView
+            android:id="@+id/notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notes"
+            android:textAllCaps="true"
+            android:textColor="#6A6667"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="0.3"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/under_line"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/line"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/profile_underline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/under_line">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location"
+                    android:background="@drawable/time_background"
+                    android:textColor="@color/white"
+                    android:padding="3dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_location"
+                        android:contentDescription="@string/logo"/>
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:text="@string/hall_12_12s_34" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category"
+                    android:background="@drawable/time_background"
+                    android:textColor="@color/white"
+                    android:padding="3dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp" />
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/ficci"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"
+                    android:background="@drawable/time_background"
+                    android:textColor="@color/white"
+                    android:padding="3dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="15dp" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:text="@string/high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="100dp"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </ScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        tools:listitem="@layout/speaker_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/under_line"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

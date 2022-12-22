@@ -95,7 +95,7 @@ class ProductsActivity : AppCompatActivity() {
                     Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<ProductModel>
                     // This will pass the ArrayList to our Adapter
-                    adapter = ProductAdapter(data)
+                    adapter = ProductAdapter(data,this@ProductsActivity)
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
 

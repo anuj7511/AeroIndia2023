@@ -4,178 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_img_agenda"
+    android:background="@drawable/background_img_exhibitors"
     tools:context=".SpeakersActivity">
 
-    <ImageView
-        android:id="@+id/above_line"
+    <SearchView
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/main_line_above"
+        android:background="@drawable/search_bar_background"
+        android:layout_margin="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/line" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/event_card"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/all_speakers"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/above_line"
-        app:strokeColor="@color/black"
-        android:padding="2dp"
-        app:strokeWidth="2dp"
-        app:cardBackgroundColor="#66FFFFFF">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/event"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/technologies_required_for_manufacturing_of_an_indigenous_aero_engine_for_atmanirbhar_bharat"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginHorizontal="5dp"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/sand_clock"
-                        android:contentDescription="@string/line" />
-
-                    <TextView
-                        android:id="@+id/time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/_3_30pm_5_30pm"
-                        android:background="@drawable/time_background"
-                        android:textColor="@color/white"
-                        android:padding="3dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tuesday_october_8"
-                        android:background="@drawable/date_background"
-                        android:textColor="@color/white"
-                        android:padding="3dp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_calendar"
-                        android:contentDescription="@string/line" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <ImageView
-        android:id="@+id/below_line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/above_line"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/event_card"
-        android:contentDescription="@string/line" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/below_line"
-        android:background="#D9D9D9"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="7dp">
-
-        <TextView
-            android:id="@+id/information"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/information"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/speakers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/speakers"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/notes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notes"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/agenda_background"
+        android:paddingHorizontal="13dp"
+        android:text="@string/all_speakers"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@id/all_speakers">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             tools:listitem="@layout/speaker_card"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

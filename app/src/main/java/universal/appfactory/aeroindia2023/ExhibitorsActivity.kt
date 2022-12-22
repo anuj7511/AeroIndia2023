@@ -73,7 +73,8 @@ class ExhibitorsActivity : AppCompatActivity() {
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getName().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+            val name = item.getFirstName() + " " + item.getLastName()
+            if (name.lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredList.add(item)
@@ -100,7 +101,7 @@ class ExhibitorsActivity : AppCompatActivity() {
                     Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<ExhibitorModel>
                     // This will pass the ArrayList to our Adapter
-                    adapter = ExhibitorAdapter(data)
+                    adapter = ExhibitorAdapter(data, this@ExhibitorsActivity)
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
 

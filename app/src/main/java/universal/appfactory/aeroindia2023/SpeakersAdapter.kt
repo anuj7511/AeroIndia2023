@@ -1,13 +1,29 @@
 package universal.appfactory.aeroindia2023
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class SpeakersAdapter(private val mList: ArrayList<SpeakerModel>) : RecyclerView.Adapter<SpeakersAdapter.ViewHolder>() {
+class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Context) : RecyclerView.Adapter<SpeakersAdapter.ViewHolder>() {
+
+    // creating a variable for array list and context.
+    private var speakerModelArrayList: ArrayList<SpeakerModel>
+
+    // method for filtering our recyclerview items.
+    fun filterList(filterList: ArrayList<SpeakerModel>) {
+        // below line is to add our filtered
+        // list in our course array list.
+        speakerModelArrayList = filterList
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged()
+    }
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,18 +39,26 @@ class SpeakersAdapter(private val mList: ArrayList<SpeakerModel>) : RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         // setting data to our views of recycler view.
-        val itemsViewModel = mList[position]
+        val itemsViewModel = speakerModelArrayList[position]
         val fullName = itemsViewModel.getSalutation().trim() + itemsViewModel.getFirstName().trim() + " " + itemsViewModel.getLastName().trim()
         // sets the text to the textview from our itemHolder class
         holder.nameText.text = fullName
         holder.designationText.text = itemsViewModel.getTitle().trim()
         holder.addressText.text = itemsViewModel.getCompany().trim()
 
+        holder.speakerCard.setOnClickListener{
+            val intent = Intent(mContext,SelectedSpeakerActivity::class.java)
+            intent.putExtra("Name",fullName)
+            intent.putExtra("Image",itemsViewModel.getProfilePictureLink())
+            intent.putExtra("Biography",itemsViewModel.getBiography())
+            mContext.startActivity(intent)
+        }
+
     }
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
-        return mList.size
+        return speakerModelArrayList.size
     }
 
     // Holds the views for adding it to image and text
@@ -44,7 +68,13 @@ class SpeakersAdapter(private val mList: ArrayList<SpeakerModel>) : RecyclerView
         var nameText: TextView = itemView.findViewById(R.id.speaker_name)
         var designationText: TextView = itemView.findViewById(R.id.designation)
         var addressText: TextView = itemView.findViewById(R.id.address)
+        var speakerCard: CardView = itemView.findViewById(R.id.speaker_card)
         
+    }
+
+    // creating a constructor for our variables.
+    init {
+        this.speakerModelArrayList = mList
     }
 
 }

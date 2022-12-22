@@ -13,16 +13,19 @@ class SelectedProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_selected_product)
 
+        val nameText = findViewById<TextView>(R.id.name)
         val categoryText = findViewById<TextView>(R.id.category)
         val exhibitorText = findViewById<TextView>(R.id.exhibitor)
         val descriptionText = findViewById<TextView>(R.id.description)
         val productImage = findViewById<ImageView>(R.id.product_img)
 
+        val name = intent.getStringExtra("Name")
         val category = intent.getStringExtra("Category")
         val exhibitor = intent.getStringExtra("Exhibitor")
         val description = intent.getStringExtra("Description")
         val image = intent.getStringExtra("Image")
 
+        nameText.text = name
         categoryText.text = category
         exhibitorText.text = exhibitor
         descriptionText.text = description

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -44,8 +45,9 @@ class ProductAdapter(mList: ArrayList<ProductModel>, private val mContext: Conte
         // sets the text to the textview from our itemHolder class
         holder.nameText.text = itemsViewModel.getProductTitle()
 
-        holder.nextButton.setOnClickListener{
+        holder.nextCard.setOnClickListener{
             val intent = Intent(mContext,SelectedProductActivity::class.java)
+            intent.putExtra("Name",itemsViewModel.getProductTitle())
             intent.putExtra("Category",itemsViewModel.getFirstCategory())
             intent.putExtra("Exhibitor",itemsViewModel.getExhibitorName())
             intent.putExtra("Description",itemsViewModel.getDescription())
@@ -66,7 +68,7 @@ class ProductAdapter(mList: ArrayList<ProductModel>, private val mContext: Conte
         // creating variables for our views.
         var nameText: TextView = itemView.findViewById(R.id.product_name)
         var numberText: TextView = itemView.findViewById(R.id.number)
-        val nextButton: ImageButton = itemView.findViewById(R.id.next_arrow)
+        val nextCard: CardView = itemView.findViewById(R.id.product_card)
 
     }
 

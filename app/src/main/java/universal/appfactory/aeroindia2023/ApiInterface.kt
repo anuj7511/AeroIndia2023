@@ -19,6 +19,9 @@ interface ApiInterface {
     @GET("api/get-agenda")
     fun getAgenda(@Header("Authorization") bearerToken: String) : Call<AgendaResponse?>?
 
+    @GET("api/get-products")
+    fun getProducts(@Header("Authorization") bearerToken: String) : Call<ProductResponse?>?
+
     @GET("api/get-complaint/1")
     fun getproblem(@Header("Authorization") bearerToken: String) :Call<ManagerResponse?>?
 

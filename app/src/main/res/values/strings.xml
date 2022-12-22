@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Aero India 2023</string>
     <string name="button_name">Generate OTP</string>
-    <string name="register_heading">Register</string>
+    <string name="register_heading">USER REGISTRATION</string>
     <string name="email_address">Email address</string>
     <string name="username">Name</string>
     <string name="mobileNo">Mobile number</string>
@@ -33,13 +33,14 @@
     <string name="information">information</string>
     <string name="speakers">speakers</string>
     <string name="notes">notes</string>
-    <string name="title_activity_manager_cleanliness">ManagerCleanlinessActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="products">Products</string>
+    <string name="air_systems">Air Systems</string>
+    <string name="_17">17</string>
+    <string name="product_image">product_image</string>
+    <string name="high_altitude_parachute_hap">High Altitude Parachute(HAP)</string>
+    <string name="category">Category</string>
+    <string name="exhibitor">Exhibitor</string>
+    <string name="gliders_india_limited">Gliders India Limited</string>
+    <string name="description">Description</string>
+    <string name="high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones_high_altitude_parachute_has_been_designed_and_developed_for_use_in_high_altitude_dropping_zones">High Altitude parachute has been designed and developed for use in high altitude dropping zones. High Altitude parachute has been designed and developed for use in high altitude dropping zones. High Altitude parachute has been designed and developed for use in high altitude dropping zones</string>
 </resources>

@@ -18,4 +18,13 @@ interface ApiInterface {
 
     @GET("api/get-agenda")
     fun getAgenda(@Header("Authorization") bearerToken: String) : Call<AgendaResponse?>?
+
+    @GET("api/get-complaint/1")
+    fun getproblem(@Header("Authorization") bearerToken: String) :Call<ManagerResponse?>?
+
+    @GET("api/get-complaint")
+    fun getmanagers(@Header ("Authorisation") bearerToken: String) :Call<ZonalManagerResponse?>?
+
+    @GET("api/get-users")
+    fun gethistory(@Header("Authorisation") bearerToken: String) :Call<UserHistoryResponse?>?
 }

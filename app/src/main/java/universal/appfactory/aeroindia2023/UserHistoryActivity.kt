@@ -11,19 +11,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SpeakersActivity : AppCompatActivity() {
-
-    // variable for our adapter
-    // class and array list
-    private lateinit var adapter: SpeakersAdapter
-    private lateinit var data: ArrayList<SpeakerModel>
+class UserHistoryActivity : AppCompatActivity() {
+    private lateinit var adapter: UserHistoryAdapter
+    private lateinit var data: ArrayList<UserHistoryModel>
     private lateinit var recyclerview: RecyclerView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_speakers)
-
-        // getting the recyclerview by its id
+        setContentView(R.layout.activity_user_history)
         recyclerview = findViewById<RecyclerView>(R.id.recycler_view)
 
         // this creates a vertical layout Manager
@@ -31,39 +25,41 @@ class SpeakersActivity : AppCompatActivity() {
 
         // ArrayList of class ItemsViewModel
         data = ArrayList()
-        fetchSpeakerData()
-    }
+        fetchPData()   }
 
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun fetchSpeakerData () {
-        val speakerApi = ApiClient.getInstance().create(ApiInterface::class.java)
+    fun fetchPData () {
+        val UApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            speakerApi.getSpeakers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
-                Callback<SpeakerResponse?> {
+            UApi.gethistory("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+                Callback<UserHistoryResponse?> {
                 override fun onResponse(
-                    call: Call<SpeakerResponse?>,
-                    response: Response<SpeakerResponse?>
+                    call: Call<UserHistoryResponse?>,
+                    response: Response<UserHistoryResponse?>,
                 ) {
 
                     Log.d("Response: ", response.body().toString())
-                    data = response.body()?.data as ArrayList<SpeakerModel>
+                    data = response.body()?.data as ArrayList<UserHistoryModel>
                     // This will pass the ArrayList to our Adapter
-                    adapter = SpeakersAdapter(data)
+                    adapter = UserHistoryAdapter(data)
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
 
                 }
 
-                override fun onFailure(call: Call<SpeakerResponse?>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message,
-                        Toast.LENGTH_SHORT).show()
+                override fun onFailure(call: Call<UserHistoryResponse?>, t: Throwable) {
+                    Toast.makeText(
+                        applicationContext, t.message,
+                        Toast.LENGTH_SHORT,
+                    ).show()
                     Log.d("Failure Response: ", t.message.toString())
                 }
-            })
+            },
+            )
 
 
         }

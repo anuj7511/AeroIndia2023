@@ -1,5 +1,6 @@
 package universal.appfactory.aeroindia2023
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,6 +27,10 @@ import universal.appfactory.aeroindia2023.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    var status: String = ""
+    var flag: Boolean = false
+
+    val bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,18 +59,12 @@ class MainActivity : AppCompatActivity() {
 
                     Log.i("Unshared user information", "Name: $username\nMobile number: $mobileNo\nEmail: $email")
 
-                    val bundle = Bundle()
                     bundle.putString("email", email)
                     bundle.putString("username", username)
                     bundle.putString("mobileNo", mobileNo)
 
-                    val intent = Intent(this@MainActivity, OtpActivity::class.java)
-
                     submitUserData(email, username, mobileNo)
 
-                    // OTP activity is initialized only after user registration using API
-                    intent.putExtras(bundle)
-                    startActivity(intent)
                 }
             }
         }
@@ -87,27 +87,45 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         val user_id = response.body()?.user_id.toString()
                         val verify = response.body()?.verify.toString()
-                        val status = response.body()?.status.toString()
+                        status = response.body()?.status.toString()
                         val msg = response.body()?.message.toString()
 
-
-                        Toast.makeText(this@MainActivity, status,
+                        Toast.makeText(this@MainActivity, "Status: $status",
                             Toast.LENGTH_SHORT).show()
 
-                        //TODO: Error part using extension class for response model
-                        val nameError = response.body()?.errors?.name
-                        val phoneNoError = response.body()?.errors?.phone_no
-                        val emailError = response.body()?.errors?.email_id
+                        if(status=="fail") {
+                            flag = true
 
-                        Log.i("Components", "User ID: $user_id, Verify: $verify, Status: $status, Msg: $msg")
-                        Log.i("Errors", "$nameError, $phoneNoError, $emailError")
+                            var nameError: Array<String> = arrayOf<String>()
+                            var phoneNoError: Array<String> = arrayOf<String>()
+                            var emailError: Array<String> = arrayOf<String>()
+
+                            nameError = response.body()?.errors?.name as Array<String>
+                            phoneNoError = response.body()?.errors?.phone_no as Array<String>
+                            emailError = response.body()?.errors?.email_id as Array<String>
+
+                            Log.i("Errors", nameError[0]+" "+phoneNoError[0]+" "+emailError[0])
+                        }
+
+                        Log.i("Components", "User ID: $user_id, Verify: $verify, Status: $status, Msg: $msg, Flag: $flag")
+
+                        val intent = Intent(this@MainActivity, OtpActivity::class.java)
+                        intent.putExtras(bundle)
+
+                        if(flag){
+                            Log.i("Mismatched info", "Info not entered correctly")
+                            Toast.makeText(this@MainActivity, "Enter details correctly", Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            startActivity(intent)
+                        }
 
                     }
 
                     override fun onFailure(call: Call<UserRegisterResponseModel>, text: Throwable ) {
-                        Toast.makeText(this@MainActivity, text.toString(), Toast.LENGTH_LONG)
+                        Toast.makeText(this@MainActivity, "User exists", Toast.LENGTH_LONG)
                             .show()
-                        Log.i("User registration failure", "Activity failed to engage")
+                        Log.i("User registration failure", text.toString())
                     }
                 }
             )
@@ -118,4 +136,5 @@ class MainActivity : AppCompatActivity() {
         throwable.printStackTrace()
     }
 }
+
 

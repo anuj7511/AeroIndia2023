@@ -17,7 +17,7 @@ class HomepageActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val bundle = intent.extras
-        findViewById<TextView>(R.id.userNameView).text = "Welcome, " + bundle?.getString("username", "DEFAULT USER")
+        findViewById<TextView>(R.id.userNameView).text = bundle?.getString("username", "DEFAULT USER")
 
     }
 
@@ -36,8 +36,8 @@ class HomepageActivity : AppCompatActivity() {
             2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}        // Venue maps
             3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)}         // Driving directions
             4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)}   // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}     // Videos
-            6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)}        // Twitter or products
+            5 -> {navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java)}      // Videos
+            6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)}     // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // FAQ
             8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}             // Lodging complaints
             else -> {

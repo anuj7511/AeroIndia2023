@@ -131,11 +131,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="377dp"
-        android:layout_height="69dp"
+        android:layout_width="150dp"
+        android:layout_height="31dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="261dp"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -145,27 +144,27 @@
 
         <ImageView
             android:id="@+id/userIcon"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="31dp"
             app:srcCompat="@drawable/user_icon" />
 
         <TextView
             android:id="@+id/userNameView"
-            android:layout_width="315dp"
-            android:layout_height="69dp"
+            android:layout_width="110dp"
+            android:layout_height="31dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
             android:paddingLeft="15sp"
-            android:text="Welcome, User"
+            android:text="User"
             android:textColor="#000000"
-            android:textSize="20sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="386dp"
-        android:layout_height="229dp"
+        android:layout_width="378dp"
+        android:layout_height="254dp"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
@@ -177,7 +176,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="wrap_content"
             app:srcCompat="@drawable/combined_logo" />
 
         <ImageView

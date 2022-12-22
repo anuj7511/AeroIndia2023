@@ -15,6 +15,7 @@ interface ApiInterface {
 
     @GET("api/get-exhibitors")
     fun getExhibitors(@Header("Authorization") bearerToken: String) : Call<ProductResponse?>?
+//    fun getExhibitors(@Header("Authorization") bearerToken: String) : Call<ExhibitorResponse?>?
 
     @GET("api/get-agenda")
     fun getAgenda(@Header("Authorization") bearerToken: String) : Call<AgendaResponse?>?
@@ -28,4 +29,13 @@ interface ApiInterface {
     @POST("api/register-verify")
     //TODO: Params needs to be changed accordingly
     fun verifyUserData(@Body userDataRequestModel: UserDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserRegisterResponseModel>
+
+    @GET("api/get-complaint/1")
+    fun getproblem(@Header("Authorization") bearerToken: String) :Call<ManagerResponse?>?
+
+    @GET("api/get-complaint")
+    fun getmanagers(@Header ("Authorisation") bearerToken: String) :Call<ZonalManagerResponse?>?
+
+    @GET("api/get-users")
+    fun gethistory(@Header("Authorisation") bearerToken: String) :Call<UserHistoryResponse?>?
 }

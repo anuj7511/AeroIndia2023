@@ -45,7 +45,6 @@ class OtpActivity : AppCompatActivity() {
         val otpButton = findViewById<Button>(R.id.otpButton)
 
         // TODO: OTP generation & validation is required using API
-        Toast.makeText(this, "OTP Generated", Toast.LENGTH_LONG).show()
 
         // Homepage activity is popped after OTP validation
         otpButton.setOnClickListener {
@@ -53,6 +52,8 @@ class OtpActivity : AppCompatActivity() {
 
             //TODO: OTP Validation using API
             if(OTP.length == 4) {
+
+                //TODO: OTP Comparison
                 val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                 intent.putExtras(bundle!!)
                 startActivity(intent)

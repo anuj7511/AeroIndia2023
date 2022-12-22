@@ -29,15 +29,15 @@ class HomepageActivity : AppCompatActivity() {
 
         startActivity(intent)
 
-        var navigateIntent: Intent = Intent(this@HomepageActivity,  DummyActivity::class.java)
+        var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
         when(tag.toInt()){
             0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}     // Speakers
-            2 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)}         // Venue maps
-            3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}        // Driving directions
+            2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}        // Venue maps
+            3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)}         // Driving directions
             4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)}   // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}        // Videos
-            6 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}        // Twitter
+            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}     // Videos
+            6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)}        // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // FAQ
             8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}             // Lodging complaints
             else -> {

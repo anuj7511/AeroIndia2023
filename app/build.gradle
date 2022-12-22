@@ -66,6 +66,4 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     //OkHttp Libraries
     implementation 'com.squareup.okhttp3:okhttp:3.14.0'
-    implementation 'androidx.gridlayout:gridlayout:1.0.0'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

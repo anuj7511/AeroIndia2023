@@ -2,6 +2,7 @@ package universal.appfactory.aeroindia2023
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 import android.widget.Button
 import android.widget.EditText
@@ -19,10 +20,13 @@ class Feedback : AppCompatActivity() {
 
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
-    lateinit var washroomId:String
+    var washroomId: String = "-1" // Previously lateinit washroomId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.hide()
+
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -66,7 +70,7 @@ class Feedback : AppCompatActivity() {
 
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun submitFeedback(feedback:String,washroomId:String) {
+    fun submitFeedback(feedback:String, washroomId:String) {
         val requestModel = RequestModel(washroomId, "4586", "dfj", feedback)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
@@ -77,12 +81,15 @@ class Feedback : AppCompatActivity() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
+
+                        val responseMsg = response.message().toString()
                         Toast.makeText(
 
                             this@Feedback,
-                            response.message().toString(),
+                            responseMsg,
                             Toast.LENGTH_LONG
                         ).show()
+                        Log.i("Feedback Activity response", "Feedback sent successfully, Response msg: $responseMsg")
                     }
 
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable ) {

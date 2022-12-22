@@ -8,7 +8,7 @@ import retrofit2.http.POST
 interface ApiInterface {
 
     @POST("api/complaint-save")
-    fun sendReq(@Body requestModel: RequestModel,@Header("Authorization") bearerToken: String) : Call<ResponseModel>
+    fun sendReq(@Body requestModel: RequestModel, @Header("Authorization") bearerToken: String) : Call<ResponseModel>
 
     @GET("api/get-speaker")
     fun getSpeakers(@Header("Authorization") bearerToken: String) : Call<SpeakerResponse?>?
@@ -21,4 +21,11 @@ interface ApiInterface {
 
     @GET("api/get-products")
     fun getProducts(@Header("Authorization") bearerToken: String) : Call<ProductResponse?>?
+
+    @POST("api/register-user")
+    fun sendUserData(@Body userDataRequestModel: UserDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserRegisterResponseModel>
+
+    @POST("api/register-verify")
+    //TODO: Params needs to be changed accordingly
+    fun verifyUserData(@Body userDataRequestModel: UserDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserRegisterResponseModel>
 }

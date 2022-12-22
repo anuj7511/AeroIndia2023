@@ -9,9 +9,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_otp.*
-import universal.appfactory.aeroindia2023.R
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
+import universal.appfactory.aeroindia2023.databinding.ActivityOtpBinding
 
 class OtpActivity : AppCompatActivity() {
 
@@ -28,6 +32,9 @@ class OtpActivity : AppCompatActivity() {
         val sharedUsername: String = bundle?.getString("username", "Default Name").toString()
         val sharedMobileNo: String = bundle?.getString("mobileNo", "0000").toString()
 
+        //TODO: API needs to be invoked for registering user data
+
+
         // Userinfo echoed in logcat for reference
         Log.i("Shared user information", "Name: $sharedUsername\n Mobile number: $sharedMobileNo\nEmail: $sharedEmailID")
 
@@ -43,6 +50,8 @@ class OtpActivity : AppCompatActivity() {
         // Homepage activity is popped after OTP validation
         otpButton.setOnClickListener {
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
+
+            //TODO: OTP Validation using API
             if(OTP.length == 4) {
                 val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                 intent.putExtras(bundle!!)

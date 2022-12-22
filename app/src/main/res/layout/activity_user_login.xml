@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context=".UserLoginActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_margin="10sp"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/ic_profile" />
+
+        <EditText
+            android:id="@+id/emailAddress"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_margin="10sp"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/registrationLogo"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_margin="10sp"
+            app:srcCompat="@drawable/aero_india_logo" />
+
+        <TextView
+            android:id="@+id/loginHeading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10sp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/login_heading"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="275dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="143dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <Button
+            android:id="@+id/loginButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@null"
+            android:backgroundTint="#A7C957"
+            android:fadingEdge="horizontal"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            app:cornerRadius="50sp" />
+
+        <Button
+            android:id="@+id/signUpButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="112dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="#EF233C"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            app:cornerRadius="50sp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

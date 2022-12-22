@@ -7,78 +7,79 @@
     android:background="@drawable/login_background"
     tools:context="universal.appfactory.aeroindia2023.OtpActivity">
 
-    <TextView
-        android:id="@+id/userInfo"
-        android:layout_width="360dp"
-        android:layout_height="68dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="22dp"
-        android:background="#6DBABAB9"
-        android:gravity="center_vertical"
-        android:text="sample text preview"
-        android:textColor="#FFFFFF"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/otpMessage2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otpMessage1" />
-
     <EditText
         android:id="@+id/otp"
-        android:layout_width="231dp"
+        android:layout_width="340dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="232dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginBottom="26dp"
         android:ems="10"
-        android:hint="@string/otp_heading"
+        android:hint="Enter OTP"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userInfo"
-        app:layout_constraintVertical_bias="0.732" />
-
-    <TextView
-        android:id="@+id/otpMessage1"
-        android:layout_width="360dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginTop="78dp"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Sample text preview"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/userInfo"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/otpButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/otpMessage2"
-        android:layout_width="360dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="34dp"
-        android:gravity="center_vertical"
-        android:text="Sample text preview"
-        android:textColor="#FFFFFF"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/otp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <Button
         android:id="@+id/otpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="170dp"
-        android:layout_marginTop="41dp"
-        android:text="@string/submit"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="144dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
+        android:text="@string/verify"
+        android:textColor="@color/white"
+        app:cornerRadius="50sp"
+        app:iconPadding="10dp"
+        android:backgroundTint="#001219"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/otp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="395dp"
+        android:layout_height="418dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/otp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/registrationLogo"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_margin="10sp"
+            app:srcCompat="@drawable/aero_india_logo" />
+
+        <TextView
+            android:id="@+id/otpMessage1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="10sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10sp"
+            android:text="@string/otp_heading"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/otpMessage2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10sp"
+            android:text="Sample text preview"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,10 +36,8 @@ class OtpActivity : AppCompatActivity() {
 
 
         // Userinfo echoed in logcat for reference
-        Log.i("Shared user information", "Name: $sharedUsername\n Mobile number: $sharedMobileNo\nEmail: $sharedEmailID")
+        Log.i("Shared user information", "Name: $sharedUsername\nMobile number: $sharedMobileNo\nEmail: $sharedEmailID")
 
-        findViewById<TextView>(R.id.userInfo).text = " Name: $sharedUsername\n Email: $sharedEmailID"
-        findViewById<TextView>(R.id.otpMessage1).text = "OTP VERIFICATION"
         findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email"
 
         val otpButton = findViewById<Button>(R.id.otpButton)

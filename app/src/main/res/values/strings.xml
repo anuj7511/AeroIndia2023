@@ -2,10 +2,13 @@
     <string name="app_name">Aero India 2023</string>
     <string name="button_name">Generate OTP</string>
     <string name="register_heading">USER REGISTRATION</string>
+    <string name="login_heading">USER LOGIN</string>
     <string name="email_address">Email address</string>
     <string name="username">Name</string>
+    <string name="login">LOG IN</string>
+    <string name="sign_up">SIGN UP</string>
     <string name="mobileNo">Mobile number</string>
-    <string name="otp_heading">Enter OTP</string>
+    <string name="otp_heading">OTP VERIFICATION</string>
     <string name="_3_30pm">3:30pm</string>
     <string name="_5_30pm">5:30pm</string>
     <string name="manthan_the_annual_defense_innovation_event">Manthan- The Annual Defense Innovation Event</string>
@@ -18,7 +21,7 @@
     <string name="india">India</string>
     <string name="hall_12_12s_34">Hall 12 12S.34</string>
     <string name="logo">logo</string>
-    <string name="submit">SUBMIT</string>
+    <string name="verify">VERIFY</string>
     <string name="all_exhibitors">All Exhibitors</string>
 
     //Maps Stings

@@ -11,15 +11,26 @@ class UserLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)
 
+        val bundle = Bundle()
+        var intent = Intent(this@UserLoginActivity, OtpActivity::class.java)
+
         val loginButtonId = findViewById<Button>(R.id.loginButton)
         val signUpButtonId = findViewById<Button>(R.id.signUpButton)
 
+        // Required for .setSelection()
+        val emailRefId = findViewById<EditText>(R.id.emailAddress)
+
         loginButtonId.setOnClickListener {
-            val email = findViewById<EditText>(R.id.emailAddress).text.toString()
+            val email = emailRefId.text.toString()
+            bundle.putString("email", email)
+            intent.putExtras(bundle)
+
+            //TODO: Check for existing user and OTP generation
+            startActivity(intent)
         }
 
         signUpButtonId.setOnClickListener{
-            val intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
+            intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
             startActivity(intent)
         }
     }

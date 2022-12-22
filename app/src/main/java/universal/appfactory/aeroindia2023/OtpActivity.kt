@@ -28,12 +28,9 @@ class OtpActivity : AppCompatActivity() {
 
         val bundle = intent.extras
 
-        val sharedEmailID: String =  bundle?.getString("email", "Default email").toString()
-        val sharedUsername: String = bundle?.getString("username", "Default Name").toString()
-        val sharedMobileNo: String = bundle?.getString("mobileNo", "0000").toString()
-
-        //TODO: API needs to be invoked for registering user data
-
+        val sharedEmailID: String =  bundle?.getString("email", "DEFAULT_EMAIL").toString()
+        val sharedUsername: String = bundle?.getString("username", "DEFAULT_NAME").toString()
+        val sharedMobileNo: String = bundle?.getString("mobileNo", "-1").toString()
 
         // Userinfo echoed in logcat for reference
         Log.i("Shared user information", "Name: $sharedUsername\nMobile number: $sharedMobileNo\nEmail: $sharedEmailID")
@@ -41,8 +38,6 @@ class OtpActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email"
 
         val otpButton = findViewById<Button>(R.id.otpButton)
-
-        // TODO: OTP generation & validation is required using API
 
         // Homepage activity is popped after OTP validation
         otpButton.setOnClickListener {

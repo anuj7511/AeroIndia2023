@@ -39,8 +39,8 @@ class HomepageActivity : AppCompatActivity() {
             5 -> {navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java)}      // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)}     // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // FAQ
-            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}              // Lodging complaints
-            9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)}       // Profile view
+            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}             // Lodging complaints
+            9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)}      // Profile view
             else -> {
                 Log.i("Homepage msg", "Nothing was clicked")
             }

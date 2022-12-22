@@ -14,7 +14,7 @@ interface ApiInterface {
     fun getSpeakers(@Header("Authorization") bearerToken: String) : Call<SpeakerResponse?>?
 
     @GET("api/get-exhibitors")
-    fun getExhibitors(@Header("Authorization") bearerToken: String) : Call<ProductResponse?>?
+    fun getExhibitors(@Header("Authorization") bearerToken: String) : Call<ExhibitorResponse?>?
 
     @GET("api/get-agenda")
     fun getAgenda(@Header("Authorization") bearerToken: String) : Call<AgendaResponse?>?

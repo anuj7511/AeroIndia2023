@@ -89,10 +89,10 @@ class ExhibitorsActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
             exhibitorApi.getExhibitors("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
-                Callback<ProductResponse?> {
+                Callback<ExhibitorResponse?> {
                 override fun onResponse(
-                    call: Call<ProductResponse?>,
-                    response: Response<ProductResponse?>
+                    call: Call<ExhibitorResponse?>,
+                    response: Response<ExhibitorResponse?>
                 ) {
 
                     Log.d("Response: ", response.body().toString())
@@ -104,7 +104,7 @@ class ExhibitorsActivity : AppCompatActivity() {
 
                 }
 
-                override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
+                override fun onFailure(call: Call<ExhibitorResponse?>, t: Throwable) {
                     Toast.makeText(applicationContext, t.message,
                         Toast.LENGTH_SHORT).show()
                     Log.d("Failure Response: ", t.message.toString())

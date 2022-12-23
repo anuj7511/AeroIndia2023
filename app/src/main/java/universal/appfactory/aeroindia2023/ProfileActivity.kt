@@ -8,13 +8,16 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 
+var navigableBundle = Bundle()
+
 class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val bundle = intent.extras
-        findViewById<TextView>(R.id.name).text = bundle?.getString("username", "DEFAULT USER")
+        navigableBundle = intent.extras!!
+        findViewById<TextView>(R.id.name).text = navigableBundle.getString("name", "DEFAULT USER")
+        findViewById<TextView>(R.id.designation).text = navigableBundle.getString("designation", "-NIL-")
     }
 
     fun iconClicked(view: View){
@@ -35,7 +38,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 //
 //        // TODO: Properties of User needs to be stored in intent before starting activity
-        Toast.makeText(this@ProfileActivity, "Tag: $tag has been activated", Toast.LENGTH_SHORT).show()
+        navigableIntent.putExtras(navigableBundle)
         startActivity(navigableIntent)
 
     }

@@ -17,14 +17,14 @@ class HomepageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_homepage)
         supportActionBar?.hide()
 
-        val bundle = intent.extras
-        findViewById<TextView>(R.id.userNameView).text = bundle?.getString("username", "DEFAULT USER")
+        val navigableBundle = intent.extras
+        findViewById<TextView>(R.id.userNameView).text = navigableBundle?.getString("name", "DEFAULT USER")
 
     }
 
     fun iconClicked(view: View) {
         val tag = view.getTag().toString()
-        val bundle = intent.extras
+        val navigableBundle = intent.extras
 
         Log.i("Clicked Button tag", tag)
 
@@ -46,7 +46,7 @@ class HomepageActivity : AppCompatActivity() {
             }
         }
 
-        navigateIntent.putExtras(bundle!!)
+        navigateIntent.putExtras(navigableBundle!!)
         startActivity(navigateIntent)
 
     }

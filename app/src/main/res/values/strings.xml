@@ -25,9 +25,11 @@
     <string name="edit_profile">EDIT PROFILE</string>
     <string name="edit_text">Tap to edit profile photo</string>
     <string name="all_exhibitors">All Exhibitors</string>
+    <string name="designation">Designation</string>
 
     // Usertype strings
     <string-array name="user_types">
+        <item>None</item>
         <item>Delegate</item>
         <item>Liaison officer</item>
         <item>Manager</item>

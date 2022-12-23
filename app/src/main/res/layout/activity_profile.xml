@@ -218,7 +218,7 @@
             android:background="@drawable/profile_linear_layout_background"
             android:onClick="iconClicked"
             android:orientation="horizontal"
-            android:tag="0">
+            android:tag="3">
 
             <ImageView
                 android:layout_width="wrap_content"

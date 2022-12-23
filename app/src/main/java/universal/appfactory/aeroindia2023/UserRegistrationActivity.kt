@@ -3,11 +3,8 @@ package universal.appfactory.aeroindia2023
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -23,13 +20,15 @@ import retrofit2.Response
 
 class UserRegistrationActivity : AppCompatActivity() {
 
-    var status: String = ""
     var flag: Boolean = false
-    val navigationBundle = Bundle()
+    private lateinit var status: String
+    private var navigableBundle: Bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_registration)
+
+        navigableBundle = intent.extras!!
 
         supportActionBar?.hide()
 
@@ -37,18 +36,34 @@ class UserRegistrationActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_registration)
         val buttonId: Button = findViewById(R.id.registerButton)
 
+        // ArrayAdapter for user types
+        val spinner = findViewById<Spinner>(R.id.spinner)
+
+        val userTypes = resources.getStringArray(R.array.user_types)
+        val arrayAdapter = ArrayAdapter(this@UserRegistrationActivity, android.R.layout.simple_list_item_1, userTypes)
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = arrayAdapter
+
+        val designation = spinner.selectedItem.toString()
+
         buttonId.setOnClickListener{
             val email = findViewById<EditText>(R.id.emailAddress).text.toString()
-            val username = findViewById<EditText>(R.id.username).text.toString()
+            val username = findViewById<EditText>(R.id.userName).text.toString()
             val mobileNo = findViewById<EditText>(R.id.mobileNumber).text.toString()
 
             Log.i("Unshared user information", "Name: $username\nMobile number: $mobileNo\nEmail: $email")
 
-            navigationBundle.putString("email", email)
-            navigationBundle.putString("username", username)
-            navigationBundle.putString("mobileNo", mobileNo)
+            navigableBundle.putString("email", email)
+            navigableBundle.putString("username", username)
+            navigableBundle.putString("mobileNo", mobileNo)
+            navigableBundle.putString("designation", designation)
 
-            submitUserData(email, username, mobileNo)
+            if((email == "")||(username == "")||(mobileNo == "")){
+                Toast.makeText(this@UserRegistrationActivity, "Fill all the columns", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                submitUserData(email, username, mobileNo)
+            }
         }
 
     }
@@ -56,6 +71,7 @@ class UserRegistrationActivity : AppCompatActivity() {
     @OptIn(DelicateCoroutinesApi::class)
     fun submitUserData(email: String, username: String, mobileNo: String) {
         val userDataRequestModel = UserDataRequestModel(username, mobileNo, email)
+
 
         //Accessing API Interface for pushing user data
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
@@ -67,35 +83,30 @@ class UserRegistrationActivity : AppCompatActivity() {
                         call: Call<UserRegisterResponseModel>,
                         response: Response<UserRegisterResponseModel>
                     ) {
-                        val user_id = response.body()?.user_id.toString()
-                        val verify = response.body()?.verify.toString()
                         status = response.body()?.status.toString()
+                        val userId = response.body()?.user_id.toString()
+                        val verify = response.body()?.verify.toString()
                         val msg = response.body()?.message.toString()
 
-                        if(status=="fail") {
+                        //TODO: Error in API response due to changing datatypes of errors
+                        val nameError = response.body()?.errors?.name.toString()
+                        val phoneNoError = response.body()?.errors?.phone_no.toString()
+                        val emailError  = response.body()?.errors?.email_id.toString()
+
+
+                        if(status == "fail") {
                             flag = true
-                            val nameError = response.body()?.errors?.name as Array<String>
-                            val phoneNoError = response.body()?.errors?.phone_no as Array<String>
-                            val emailError = response.body()?.errors?.email_id as Array<String>
-
-                            Log.i("Errors", "Name error: "+nameError[0]+"\nPhone Number error: "+phoneNoError[0]+"\nEmail error: "+emailError[0])
-
-                        }
-
-                        Log.i("Components", "User ID: $user_id, Verify: $verify, Status: $status, Msg: $msg, Flag: $flag")
-
-                        val intent = Intent(this@UserRegistrationActivity, OtpActivity::class.java)
-
-                        navigationBundle.putString("userId", user_id)
-                        navigationBundle.putString("verify", verify)
-
-                        intent.putExtras(navigationBundle)
-
-                        if(flag){
-                            Log.i("Mismatched info", "Info not entered correctly")
+                            Log.i("Errors", "Name error: "+nameError+"\nPhone Number error: "+phoneNoError+"\nEmail error: "+emailError)
+                            Log.i("Data error!", "Info not entered correctly")
+                            Log.i("Components", "User ID: $userId, Verify: $verify, Status: $status, Msg: $msg")
                             Toast.makeText(this@UserRegistrationActivity, "Enter details correctly", Toast.LENGTH_SHORT).show()
                         }
                         else{
+                            // User registered successfully and pending for OTP verification
+                            val intent = Intent(this@UserRegistrationActivity, OtpActivity::class.java)
+                            navigableBundle.putString("userId", userId)
+                            navigableBundle.putString("verify", verify)
+                            intent.putExtras(navigableBundle)
                             startActivity(intent)
                         }
 

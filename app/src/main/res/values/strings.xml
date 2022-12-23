@@ -57,4 +57,5 @@
     <string name="biography">Biography</string>
     <string name="ficci">FICCI</string>
     <string name="all_speakers">All Speakers</string>
+    <string name="all_events">All Agendas</string>
 </resources>

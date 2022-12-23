@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
@@ -37,7 +38,7 @@ class SelectedAgendaActivity : AppCompatActivity() {
         val notes = findViewById<TextView>(R.id.notes)
         val underLine = findViewById<ImageView>(R.id.under_line)
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
-        recyclerview = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerview = findViewById(R.id.recycler_view)
 
         set.clone(parent)
 
@@ -45,6 +46,7 @@ class SelectedAgendaActivity : AppCompatActivity() {
         val categoryText = findViewById<TextView>(R.id.category)
         val descriptionText = findViewById<TextView>(R.id.description)
 
+        val id = intent.getIntExtra("Id", 1)
         val name = intent.getStringExtra("Name")
         val startTime = intent.getStringExtra("Start Time")
         val endTime = intent.getStringExtra("End Time")
@@ -52,7 +54,6 @@ class SelectedAgendaActivity : AppCompatActivity() {
         val location = intent.getStringExtra("Location")
         val category = intent.getStringExtra("Category")
         val description = intent.getStringExtra("Description")
-        val speakersInfo = intent.getStringExtra("Speakers")
 
         val timeVal = "$startTime-$endTime"
 
@@ -62,6 +63,10 @@ class SelectedAgendaActivity : AppCompatActivity() {
         locationText.text = location
         categoryText.text = category
         descriptionText.text = description
+
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        data = ArrayList()
+        fetchSpeakerData(id)
 
 
         speakers.setOnClickListener {
@@ -90,4 +95,43 @@ class SelectedAgendaActivity : AppCompatActivity() {
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
+    fun fetchSpeakerData (id:Int) {
+        val speakerApi = ApiClient.getInstance().create(ApiInterface::class.java)
+
+        // launching a new coroutine
+        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+
+            speakerApi.getAgendaSpeaker("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)?.enqueue(object :
+                Callback<SpeakerResponse?> {
+                override fun onResponse(
+                    call: Call<SpeakerResponse?>,
+                    response: Response<SpeakerResponse?>
+                ) {
+
+                    Log.d("Response: ", response.body().toString())
+                    data = response.body()?.data as ArrayList<SpeakerModel>
+                    // This will pass the ArrayList to our Adapter
+                    adapter = SpeakersAdapter(data, this@SelectedAgendaActivity)
+                    // Setting the Adapter with the recyclerview
+                    recyclerview.adapter = adapter
+
+                }
+
+                override fun onFailure(call: Call<SpeakerResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("Failure Response: ", t.message.toString())
+                }
+            })
+
+
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+    }
+
 }
+

@@ -22,6 +22,10 @@ class AgendaModel (@SerializedName("id")
                    private var organiser: String,
                ){
 
+    fun getId(): Int {
+        return id
+    }
+
     fun getEvent(): String {
         return session_name
     }

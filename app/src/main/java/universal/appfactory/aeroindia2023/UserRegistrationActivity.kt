@@ -20,8 +20,6 @@ import retrofit2.Response
 
 class UserRegistrationActivity : AppCompatActivity() {
 
-    var flag: Boolean = false
-    private lateinit var status: String
     private var navigableBundle: Bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,23 +81,34 @@ class UserRegistrationActivity : AppCompatActivity() {
                         call: Call<UserRegisterResponseModel>,
                         response: Response<UserRegisterResponseModel>
                     ) {
-                        status = response.body()?.status.toString()
+                        val status = response.body()?.status.toString()
                         val userId = response.body()?.user_id.toString()
                         val verify = response.body()?.verify.toString()
                         val msg = response.body()?.message.toString()
 
-                        //TODO: Error in API response due to changing datatypes of errors
+                        //Warning in API response due to changing datatype of errors
                         val nameError = response.body()?.errors?.name.toString()
                         val phoneNoError = response.body()?.errors?.phone_no.toString()
                         val emailError  = response.body()?.errors?.email_id.toString()
 
 
                         if(status == "fail") {
-                            flag = true
-                            Log.i("Errors", "Name error: "+nameError+"\nPhone Number error: "+phoneNoError+"\nEmail error: "+emailError)
-                            Log.i("Data error!", "Info not entered correctly")
                             Log.i("Components", "User ID: $userId, Verify: $verify, Status: $status, Msg: $msg")
-                            Toast.makeText(this@UserRegistrationActivity, "Enter details correctly", Toast.LENGTH_SHORT).show()
+                            if(phoneNoError != "0"){
+                                Toast.makeText(this@UserRegistrationActivity, "Phone number exists", Toast.LENGTH_SHORT).show()
+                                Log.i("Phone number error", phoneNoError)
+                            }
+                            else if(emailError != "0"){
+                                Toast.makeText(this@UserRegistrationActivity, "Email exists", Toast.LENGTH_SHORT).show()
+                                Log.i("Email error", emailError)
+                            }
+                            else if(nameError != "0") {
+                                Toast.makeText(this@UserRegistrationActivity, "Name exists", Toast.LENGTH_SHORT).show()
+                                Log.i("Name Error", nameError)
+                            }
+                            else{
+                                Log.i("IMPORTANT", "No errors")
+                            }
                         }
                         else{
                             // User registered successfully and pending for OTP verification

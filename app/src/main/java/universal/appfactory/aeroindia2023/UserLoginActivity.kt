@@ -56,7 +56,7 @@ class UserLoginActivity : AppCompatActivity() {
         }
 
     }
-    fun submitUserLoginData(email: String){
+    private fun submitUserLoginData(email: String){
         val userLoginDataRequestModel = UserLoginDataRequestModel(email)
 
         //Accessing API Interface for verifying user email ID

@@ -5,9 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 
 class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: Context) : RecyclerView.Adapter<ExhibitorAdapter.ViewHolder>() {
@@ -45,9 +47,16 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
         // sets the text to the textview from our itemHolder class
         holder.nameText.text = name
         holder.countryText.text = itemsViewModel.getAddress()
+        holder.locationText.text = itemsViewModel.getHallStallNo()
+
+        if(itemsViewModel.getExhibitorLogo() != "")
+        {
+            Glide.with(mContext).load(itemsViewModel.getExhibitorLogo()).into(holder.image)
+        }
 
         holder.exhibitorCard.setOnClickListener{
             val intent = Intent(mContext,SelectedExhibitorActivity::class.java)
+//            intent.putExtra("Id",itemsViewModel.getId())
             intent.putExtra("Name",name)
             intent.putExtra("Image",itemsViewModel.getExhibitorLogo())
             intent.putExtra("Country",itemsViewModel.getCountry())
@@ -56,6 +65,9 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
             intent.putExtra("Mobile",itemsViewModel.getMobile())
             intent.putExtra("Website",itemsViewModel.getCompanyWebsite())
             intent.putExtra("Company",itemsViewModel.getCompanyName())
+            intent.putExtra("Location",itemsViewModel.getHallStallNo())
+            intent.putExtra("Description",itemsViewModel.getDescription())
+            intent.putExtra("Company Email",itemsViewModel.getCompanyEmail())
             mContext.startActivity(intent)
         }
 
@@ -74,6 +86,7 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
         var countryText: TextView = itemView.findViewById(R.id.country)
         var exhibitorCard: CardView = itemView.findViewById(R.id.exhibitor_card)
         var locationText: TextView = itemView.findViewById(R.id.location)
+        var image: ImageView = itemView.findViewById(R.id.image)
 
     }
 

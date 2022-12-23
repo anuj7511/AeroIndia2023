@@ -5,9 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 
 class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Context) : RecyclerView.Adapter<SpeakersAdapter.ViewHolder>() {
@@ -46,6 +48,11 @@ class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Cont
         holder.designationText.text = itemsViewModel.getTitle().trim()
         holder.addressText.text = itemsViewModel.getCompany().trim()
 
+        if(itemsViewModel.getProfilePictureLink() != "")
+        {
+            Glide.with(mContext).load(itemsViewModel.getProfilePictureLink()).into(holder.image)
+        }
+
         holder.speakerCard.setOnClickListener{
             val intent = Intent(mContext,SelectedSpeakerActivity::class.java)
             intent.putExtra("Id",itemsViewModel.getId())
@@ -70,6 +77,7 @@ class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Cont
         var designationText: TextView = itemView.findViewById(R.id.designation)
         var addressText: TextView = itemView.findViewById(R.id.address)
         var speakerCard: CardView = itemView.findViewById(R.id.speaker_card)
+        var image: ImageView = itemView.findViewById(R.id.image)
         
     }
 

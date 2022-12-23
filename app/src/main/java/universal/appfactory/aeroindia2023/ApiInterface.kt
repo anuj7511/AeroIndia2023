@@ -10,7 +10,7 @@ interface ApiInterface {
     @GET("api/get-speaker")
     fun getSpeakers(@Header("Authorization") bearerToken: String) : Call<SpeakerResponse?>?
 
-    @GET("api/get-exhibitors")
+    @POST("api/user")
     fun getExhibitors(@Header("Authorization") bearerToken: String) : Call<ExhibitorResponse?>?
 
     @GET("api/get-agenda")

@@ -34,4 +34,10 @@ interface ApiInterface {
 
     @GET("api/get-users")
     fun gethistory(@Header("Authorisation") bearerToken: String) :Call<UserHistoryResponse?>?
+
+    @GET("api/get-agenda/{id}")
+    fun getAgendaSpeaker(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<SpeakerResponse?>?
+
+    @GET("api/get-speaker/{id}")
+    fun getSpeakerAgenda(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<AgendaResponse?>?
 }

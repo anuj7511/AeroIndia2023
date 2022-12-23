@@ -48,6 +48,7 @@ class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Cont
 
         holder.speakerCard.setOnClickListener{
             val intent = Intent(mContext,SelectedSpeakerActivity::class.java)
+            intent.putExtra("Id",itemsViewModel.getId())
             intent.putExtra("Name",fullName)
             intent.putExtra("Image",itemsViewModel.getProfilePictureLink())
             intent.putExtra("Biography",itemsViewModel.getBiography())

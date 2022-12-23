@@ -1,10 +1,12 @@
 package universal.appfactory.aeroindia2023
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -13,7 +15,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AgendaActivity : AppCompatActivity() {
 
@@ -22,6 +23,7 @@ class AgendaActivity : AppCompatActivity() {
     private lateinit var adapter: AgendaAdapter
     private lateinit var data: ArrayList<AgendaModel>
     private lateinit var recyclerview: RecyclerView
+    private lateinit var checkedItem: IntArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,7 @@ class AgendaActivity : AppCompatActivity() {
         // getting searchview by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        val bOpenAlertDialog = findViewById<ImageView>(R.id.sort)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -60,6 +63,38 @@ class AgendaActivity : AppCompatActivity() {
             fetchAgendaData()
             refreshView.isRefreshing = false
         }
+
+        checkedItem = intArrayOf(0)
+
+        // handle the button to open the alert dialog with the single item selection when clicked
+        bOpenAlertDialog.setOnClickListener {
+            // AlertDialog builder instance to build the alert dialog
+            val alertDialog = AlertDialog.Builder(this)
+
+            // title of the alert dialog
+            alertDialog.setTitle("Choose an Item")
+
+            val listItems = arrayOf("Category", "Time", "Location")
+
+
+            alertDialog.setSingleChoiceItems(listItems, checkedItem[0]) { dialog, which ->
+                checkedItem[0] = which
+
+                // when selected an item the dialog should be closed with the dismiss method
+                dialog.dismiss()
+                fetchAgendaData()
+            }
+
+            // set the negative button if the user is not interested to select or change already selected item
+            alertDialog.setNegativeButton("Cancel") { dialog, which -> }
+
+            // create and build the AlertDialog instance with the AlertDialog builder instance
+            val customAlertDialog = alertDialog.create()
+
+            // show the alert dialog when the button is clicked
+            customAlertDialog.show()
+        }
+
     }
 
     private fun filter(text: String) {
@@ -100,6 +135,19 @@ class AgendaActivity : AppCompatActivity() {
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
 
+                    if(checkedItem[0]==1)
+                    {
+                        Collections.sort(data, SortByTime())
+                    }
+                    else if(checkedItem[0]==2)
+                    {
+                        Collections.sort(data, SortByLocation())
+                    }
+                    else
+                    {
+                        Collections.sort(data, SortByCategory())
+                    }
+
                 }
 
                 override fun onFailure(call: Call<AgendaResponse?>, t: Throwable) {
@@ -114,5 +162,39 @@ class AgendaActivity : AppCompatActivity() {
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
         throwable.printStackTrace()
+    }
+
+
+    private class SortByCategory : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getCategories().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getCategories().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
+    }
+
+    private class SortByTime : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getStartTime().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getStartTime().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
+    }
+
+    private class SortByLocation : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getLocationName().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getLocationName().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
     }
 }

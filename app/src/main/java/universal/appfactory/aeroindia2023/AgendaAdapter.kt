@@ -50,6 +50,7 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
 
         holder.agendaCard.setOnClickListener{
             val intent = Intent(mContext,SelectedAgendaActivity::class.java)
+            intent.putExtra("Id",itemsViewModel.getId())
             intent.putExtra("Name",itemsViewModel.getEvent().trim())
             intent.putExtra("Start Time",itemsViewModel.getStartTime().trim().drop(10))
             intent.putExtra("End Time",itemsViewModel.getEndTime().trim().drop(10))
@@ -57,7 +58,6 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
             intent.putExtra("Location",itemsViewModel.getLocationName().trim())
             intent.putExtra("Category",itemsViewModel.getCategories().trim())
             intent.putExtra("Description",itemsViewModel.getDescription().trim())
-            intent.putExtra("Speakers",itemsViewModel.getSpeakers())
             mContext.startActivity(intent)
         }
 

@@ -72,20 +72,14 @@ class UserRegistrationActivity : AppCompatActivity() {
                         status = response.body()?.status.toString()
                         val msg = response.body()?.message.toString()
 
-                        Toast.makeText(this@UserRegistrationActivity, "Status: $status",
-                            Toast.LENGTH_SHORT).show()
-
-                        var nameError: Array<String> = arrayOf("success")
-                        var phoneNoError: Array<String> = arrayOf("success")
-                        var emailError: Array<String> = arrayOf("success")
-
                         if(status=="fail") {
                             flag = true
-                            nameError = response.body()?.errors?.name as Array<String>
-                            phoneNoError = response.body()?.errors?.phone_no as Array<String>
-                            emailError = response.body()?.errors?.email_id as Array<String>
+                            val nameError = response.body()?.errors?.name as Array<String>
+                            val phoneNoError = response.body()?.errors?.phone_no as Array<String>
+                            val emailError = response.body()?.errors?.email_id as Array<String>
 
-                            Log.i("Errors", nameError[0]+" "+phoneNoError[0]+" "+emailError[0])
+                            Log.i("Errors", "Name error: "+nameError[0]+"\nPhone Number error: "+phoneNoError[0]+"\nEmail error: "+emailError[0])
+
                         }
 
                         Log.i("Components", "User ID: $user_id, Verify: $verify, Status: $status, Msg: $msg, Flag: $flag")

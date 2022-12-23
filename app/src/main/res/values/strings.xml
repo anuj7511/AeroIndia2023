@@ -26,7 +26,14 @@
     <string name="edit_text">Tap to edit profile photo</string>
     <string name="all_exhibitors">All Exhibitors</string>
 
-    //Maps Stings
+    // Usertype strings
+    <string-array name="user_types">
+        <item>Delegate</item>
+        <item>Liaison officer</item>
+        <item>Manager</item>
+    </string-array>
+
+    //Maps Strings
     <string name="Api_key">AIzaSyDUk-YDNCE5c7UdnlQX5JY3Tz16rRGEH-8</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="profile_image">profile_image</string>

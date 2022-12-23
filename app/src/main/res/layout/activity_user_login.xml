@@ -40,6 +40,18 @@
             android:background="@drawable/rectangle_bg"
             android:inputType="textEmailAddress" />
 
+        <AutoCompleteTextView
+            android:id="@+id/userTypeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:padding="10sp"
+            android:text="Role">
+
+        </AutoCompleteTextView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -78,8 +90,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout8"
-        android:layout_width="275dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="143dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

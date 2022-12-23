@@ -22,6 +22,8 @@
     <string name="hall_12_12s_34">Hall 12 12S.34</string>
     <string name="logo">logo</string>
     <string name="verify">VERIFY</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="edit_text">Tap to edit profile photo</string>
     <string name="all_exhibitors">All Exhibitors</string>
 
     //Maps Stings

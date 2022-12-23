@@ -40,17 +40,25 @@
             android:background="@drawable/rectangle_bg"
             android:inputType="textEmailAddress" />
 
-        <AutoCompleteTextView
-            android:id="@+id/userTypeTextView"
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:layout_weight="1"
-            android:inputType="none"
             android:padding="10sp"
-            android:text="Role">
+            android:layout_margin="8sp" />
 
-        </AutoCompleteTextView>
+
+        <!--        <AutoCompleteTextView-->
+<!--            android:id="@+id/userTypeTextView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="8sp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:inputType="none"-->
+<!--            android:padding="10sp"-->
+<!--            android:text="Role">-->
+
+<!--        </AutoCompleteTextView>-->
 
     </LinearLayout>
 

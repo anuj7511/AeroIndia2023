@@ -10,6 +10,7 @@ import android.widget.TextView
 
 
 class HomepageActivity : AppCompatActivity() {
+
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +28,8 @@ class HomepageActivity : AppCompatActivity() {
 
         Log.i("Clicked Button tag", tag)
 
-        startActivity(intent)
-
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
+
         when(tag.toInt()){
             0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}     // Speakers

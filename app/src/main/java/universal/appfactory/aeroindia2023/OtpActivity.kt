@@ -14,8 +14,6 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
-import universal.appfactory.aeroindia2023.databinding.ActivityOtpBinding
 
 class OtpActivity : AppCompatActivity() {
 
@@ -26,11 +24,14 @@ class OtpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_otp)
 
-        val bundle = intent.extras
+        val navigationBundle = intent.extras
 
-        val sharedEmailID: String =  bundle?.getString("email", "DEFAULT_EMAIL").toString()
-        val sharedUsername: String = bundle?.getString("username", "DEFAULT_NAME").toString()
-        val sharedMobileNo: String = bundle?.getString("mobileNo", "-1").toString()
+        val sharedEmailID: String =  navigationBundle?.getString("email", "DEFAULT_EMAIL").toString()
+        val sharedUsername: String = navigationBundle?.getString("username", "DEFAULT_NAME").toString()
+        val sharedMobileNo: String = navigationBundle?.getString("mobileNo", "-1").toString()
+        val userId: String = navigationBundle?.getString("userId", "-1").toString()
+        val verify: String = navigationBundle?.getString("verify", "-1").toString()
+        val type: String = navigationBundle?.getString("type", "-1").toString()
 
         // Userinfo echoed in logcat for reference
         Log.i("Shared user information", "Name: $sharedUsername\nMobile number: $sharedMobileNo\nEmail: $sharedEmailID")
@@ -46,9 +47,19 @@ class OtpActivity : AppCompatActivity() {
             //TODO: OTP Validation using API
             if(OTP.length == 4) {
 
+                if(type == "2") {
+                    submitRegisterOTP(OTP, userId)
+                }
+                else{
+                    //TODO: Temporary setup. New function required for login OTP verification
+                    val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
+                    intent.putExtras(navigationBundle!!)
+                    startActivity(intent)
+                }
+
                 //TODO: OTP Comparison
                 val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
-                intent.putExtras(bundle!!)
+                intent.putExtras(navigationBundle!!)
                 startActivity(intent)
             }
             else{
@@ -57,4 +68,47 @@ class OtpActivity : AppCompatActivity() {
         }
 
     }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun submitRegisterOTP(otp: String, userId: String){
+
+        val userVerifyRequestModel = UserVerifyRequestModel(otp)
+        Log.i("OTP Activity msg", "User ID obtained: $userId")
+
+        //Accessing API Interface for pushing user data
+        val response = ServiceBuilder.buildService(ApiInterface::class.java)
+
+        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
+                object : Callback<UserVerifyResponseModel> {
+                    override fun onResponse(
+                        call: Call<UserVerifyResponseModel>,
+                        response: Response<UserVerifyResponseModel>
+                    ) {
+                            var errorList = arrayOf<String>("success")
+
+                            val status = response.body()?.status.toString()
+
+                            if(status=="fail") {
+                                errorList = response.body()?.errors?.pin as Array<String>
+                            }
+
+                            Toast.makeText(this@OtpActivity, "status: $status", Toast.LENGTH_SHORT).show()
+                            Log.i("OTP Verification msg", "Error: "+errorList[0])
+                    }
+
+                    override fun onFailure(call: Call<UserVerifyResponseModel>, text: Throwable ) {
+                        Toast.makeText(this@OtpActivity, "Error", Toast.LENGTH_LONG)
+                            .show()
+                        Log.i("User registration failure", text.toString())
+                    }
+                }
+            )
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+    }
+
 }

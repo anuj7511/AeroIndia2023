@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 
 class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,22 +17,26 @@ class ProfileActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.name).text = bundle?.getString("username", "DEFAULT USER")
     }
 
-    fun userFunction(view: View){
-        val tag: Int = view.tag as Int
-        var intent = Intent(this@ProfileActivity, ProfileActivity::class.java)
+    fun iconClicked(view: View){
 
-        when(tag){
-            0 -> { intent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
-            1 -> { intent = Intent(this@ProfileActivity, ProfileActivity::class.java) }
-            2 -> { intent = Intent(this@ProfileActivity, ProfileActivity::class.java) }
-            3 -> { intent = Intent(this@ProfileActivity, ProfileActivity::class.java) }
+        val tag = view.getTag().toString()
+        var navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java)
+
+        Log.i("Profile Activity Msg", "userFunction clicked & tag = $tag")
+
+        when(tag.toInt()){
+            0 -> { navigableIntent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
+            1 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
+            2 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
+            3 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
             else -> {
                 Log.i("Profile Activity msg", "Nothing was clicked")
             }
         }
-
-        // TODO: Properties of User needs to be stored in intent before starting activity
-        startActivity(intent)
+//
+//        // TODO: Properties of User needs to be stored in intent before starting activity
+        Toast.makeText(this@ProfileActivity, "Tag: $tag has been activated", Toast.LENGTH_SHORT).show()
+        startActivity(navigableIntent)
 
     }
 }

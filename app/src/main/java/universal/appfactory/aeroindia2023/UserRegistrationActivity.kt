@@ -16,12 +16,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+// API_1: http://aeroindia.gov.in/api/register-user
+// API_2: http://aeroindia.gov.in/api/register-verify
+// Bearer token: 61b25a411a2dad66bb7b6ff145db3c2f
+
 class UserRegistrationActivity : AppCompatActivity() {
 
     var status: String = ""
     var flag: Boolean = false
-
-    val bundle = Bundle()
+    val navigationBundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +44,9 @@ class UserRegistrationActivity : AppCompatActivity() {
 
             Log.i("Unshared user information", "Name: $username\nMobile number: $mobileNo\nEmail: $email")
 
-            bundle.putString("email", email)
-            bundle.putString("username", username)
-            bundle.putString("mobileNo", mobileNo)
+            navigationBundle.putString("email", email)
+            navigationBundle.putString("username", username)
+            navigationBundle.putString("mobileNo", mobileNo)
 
             submitUserData(email, username, mobileNo)
         }
@@ -71,12 +75,15 @@ class UserRegistrationActivity : AppCompatActivity() {
                         Toast.makeText(this@UserRegistrationActivity, "Status: $status",
                             Toast.LENGTH_SHORT).show()
 
+                        var nameError: Array<String> = arrayOf("success")
+                        var phoneNoError: Array<String> = arrayOf("success")
+                        var emailError: Array<String> = arrayOf("success")
+
                         if(status=="fail") {
                             flag = true
-
-                            val nameError: Array<String> = response.body()?.errors?.name as Array<String>
-                            val phoneNoError: Array<String> = response.body()?.errors?.phone_no as Array<String>
-                            val emailError: Array<String> = response.body()?.errors?.email_id as Array<String>
+                            nameError = response.body()?.errors?.name as Array<String>
+                            phoneNoError = response.body()?.errors?.phone_no as Array<String>
+                            emailError = response.body()?.errors?.email_id as Array<String>
 
                             Log.i("Errors", nameError[0]+" "+phoneNoError[0]+" "+emailError[0])
                         }
@@ -84,7 +91,11 @@ class UserRegistrationActivity : AppCompatActivity() {
                         Log.i("Components", "User ID: $user_id, Verify: $verify, Status: $status, Msg: $msg, Flag: $flag")
 
                         val intent = Intent(this@UserRegistrationActivity, OtpActivity::class.java)
-                        intent.putExtras(bundle)
+
+                        navigationBundle.putString("userId", user_id)
+                        navigationBundle.putString("verify", verify)
+
+                        intent.putExtras(navigationBundle)
 
                         if(flag){
                             Log.i("Mismatched info", "Info not entered correctly")

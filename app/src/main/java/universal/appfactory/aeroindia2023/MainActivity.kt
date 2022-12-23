@@ -17,10 +17,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.databinding.ActivityMainBinding
 
-// API_1: http://aeroindia.gov.in/api/register-user
-// API_2: http://aeroindia.gov.in/api/register-verify
-// Bearer token: 61b25a411a2dad66bb7b6ff145db3c2f
-
 // Main Activity
 class MainActivity : AppCompatActivity() {
 

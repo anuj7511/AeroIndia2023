@@ -101,144 +101,150 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="userFunction"
-            android:tag="0"
+            android:background="@drawable/profile_linear_layout_background"
+            android:onClick="iconClicked"
             android:orientation="horizontal"
-            android:background="@drawable/profile_linear_layout_background">
+            android:tag="0">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_profile"
-                android:contentDescription="@string/icon"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/my_profile_information"
-                android:layout_marginVertical="20dp"
-                android:paddingHorizontal="20dp"
-                android:layout_weight="1"/>
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_profile"
+                android:tag="0" />
+
             <ImageView
                 android:id="@+id/profile_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_navigate_next"
-                android:contentDescription="@string/icon"
                 android:layout_marginTop="20dp"
-                />
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_navigate_next"
+                android:tag="0" />
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="20dp"
+                android:tag="0"
+                android:text="@string/my_profile_information"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="17dp"
-            android:onClick="userFunction"
-            android:tag="1"
-            android:background="@drawable/profile_linear_layout_background">
+            android:background="@drawable/profile_linear_layout_background"
+            android:onClick="iconClicked"
+            android:orientation="horizontal"
+            android:tag="1">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_settings"
-                android:contentDescription="@string/icon"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/settings"
-                android:layout_marginVertical="20dp"
-                android:paddingHorizontal="20dp"
-                android:layout_weight="1"/>
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_settings" />
+
             <ImageView
                 android:id="@+id/settings_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_navigate_next"
-                android:contentDescription="@string/icon"
                 android:layout_marginTop="20dp"
-                />
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_navigate_next" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="20dp"
+                android:text="@string/settings"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:onClick="userFunction"
-            android:tag="2"
             android:layout_marginTop="17dp"
-            android:background="@drawable/profile_linear_layout_background">
+            android:background="@drawable/profile_linear_layout_background"
+            android:onClick="iconClicked"
+            android:orientation="horizontal"
+            android:tag="2">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_signout"
-                android:contentDescription="@string/icon"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/sign_out"
-                android:layout_marginVertical="20dp"
-                android:paddingHorizontal="20dp"
-                android:layout_weight="1"/>
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_signout" />
+
             <ImageView
                 android:id="@+id/signOut_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_navigate_next"
-                android:contentDescription="@string/icon"
                 android:layout_marginTop="20dp"
-                />
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_navigate_next" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="20dp"
+                android:text="@string/sign_out"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="17dp"
-            android:onClick="userFunction"
-            android:tag="0"
-            android:background="@drawable/profile_linear_layout_background">
+            android:background="@drawable/profile_linear_layout_background"
+            android:onClick="iconClicked"
+            android:orientation="horizontal"
+            android:tag="0">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_delete_forever_24"
-                android:contentDescription="@string/icon"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="15dp"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:text="@string/sign_out_and_delete_my_account"
-                android:layout_marginVertical="20dp"
-                android:paddingHorizontal="10dp"
-                android:layout_weight="1"/>
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_baseline_delete_forever_24" />
+
             <ImageView
                 android:id="@+id/signOut_delete_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_navigate_next"
-                android:contentDescription="@string/icon"
                 android:layout_marginTop="20dp"
-                />
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_navigate_next" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="10dp"
+                android:text="@string/sign_out_and_delete_my_account"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
 

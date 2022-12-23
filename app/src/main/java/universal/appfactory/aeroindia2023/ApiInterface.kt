@@ -23,8 +23,7 @@ interface ApiInterface {
     fun sendUserData(@Body userDataRequestModel: UserDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserRegisterResponseModel>
 
     @POST("api/register-verify")
-    //TODO: Params needs to be changed accordingly
-    fun verifyUserData(@Body userDataRequestModel: UserDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserRegisterResponseModel>
+    fun verifyUserData(@Body userVerifyRequestModel: UserVerifyRequestModel,@Header("Authorization") bearerToken: String): Call<UserVerifyResponseModel>
 
     @GET("api/get-complaint/1")
     fun getproblem(@Header("Authorization") bearerToken: String) :Call<ManagerResponse?>?

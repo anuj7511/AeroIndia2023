@@ -29,7 +29,7 @@ class ProfileActivity : AppCompatActivity() {
 
         when(tag.toInt()){
             0 -> { navigableIntent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
-            1 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
+            1 -> { navigableIntent = Intent(this@ProfileActivity, ProfileSettingsActivity::class.java) }
             2 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
             3 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
             else -> {

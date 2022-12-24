@@ -26,18 +26,9 @@ class UserLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)
 
-        // ArrayAdapter for user designation
-        val spinner = findViewById<Spinner>(R.id.spinner)
-        val user_types = resources.getStringArray(R.array.user_types)
-        val arrayAdapter = ArrayAdapter(this@UserLoginActivity, android.R.layout.simple_list_item_1, user_types)
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = arrayAdapter
-
         val loginButtonId = findViewById<Button>(R.id.loginButton)
         val signUpButtonId = findViewById<Button>(R.id.signUpButton)
         val emailEditViewId = findViewById<EditText>(R.id.emailAddress)
-
-//        emailEditViewId.setSelection(1)
 
         signUpButtonId.setOnClickListener{
             val intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
@@ -48,10 +39,7 @@ class UserLoginActivity : AppCompatActivity() {
 
         loginButtonId.setOnClickListener {
             val email = emailEditViewId.text.toString()
-
             Log.i("Email", email)
-
-            navigableBundle.putString("designation", spinner.selectedItem.toString())
             navigableBundle.putString("type", "1")
 
             submitUserLoginData(email)

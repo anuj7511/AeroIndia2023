@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 
 
 class HomepageActivity : AppCompatActivity() {
@@ -15,7 +16,10 @@ class HomepageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
-        supportActionBar?.hide()
+
+        this@HomepageActivity.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         val navigableBundle = intent.extras
         findViewById<TextView>(R.id.userNameView).text = navigableBundle?.getString("name", "DEFAULT USER")
@@ -23,7 +27,7 @@ class HomepageActivity : AppCompatActivity() {
     }
 
     fun iconClicked(view: View) {
-        val tag = view.getTag().toString()
+        val tag = view.tag.toString()
         val navigableBundle = intent.extras
 
         Log.i("Clicked Button tag", tag)

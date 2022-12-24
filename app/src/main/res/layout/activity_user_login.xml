@@ -50,36 +50,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="586dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal|center_vertical"
-                android:layout_margin="8sp"
-                android:textSize="15sp"
-                android:text="@string/designation"
-                android:contentDescription="@string/icon"
-                android:textColor="@color/black"
-                android:src="@drawable/ic_profile" />
-
-            <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:backgroundTint="@color/white"
-                    android:padding="10sp"
-                    android:layout_margin="8sp" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout

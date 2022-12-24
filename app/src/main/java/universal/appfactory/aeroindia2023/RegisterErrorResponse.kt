@@ -1,7 +1,11 @@
 package universal.appfactory.aeroindia2023
 
 data class RegisterErrorResponse(
-    val name: Array<String>,
-    val phone_no: Array<String>,
-    val email_id: Array<String>,
+    // Was previously Array<String>
+
+    val name: String = "0",
+    val phone_no: String = "0",
+    val email_id: String = "0",
 )
+
+// 0 -> Zero denotes no error

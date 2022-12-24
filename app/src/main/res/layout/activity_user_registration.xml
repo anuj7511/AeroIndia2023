@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context="universal.appfactory.aeroindia2023.UserRegistrationActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="346dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:contentDescription="@string/icon"
+                android:textColor="@color/black"
+                android:text="@string/username" />
+
+            <EditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
+                android:background="@drawable/rectangle_bg"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:contentDescription="@string/icon"
+                android:textColor="@color/black"
+                android:text="@string/email_address" />
+
+            <EditText
+                android:id="@+id/emailAddress"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:layout_height="40dp"
+                android:background="@drawable/rectangle_bg"
+                android:inputType="textEmailAddress" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:contentDescription="@string/icon"
+                android:textColor="@color/black"
+                android:text="@string/mobileNo" />
+
+            <EditText
+                android:id="@+id/mobileNumber"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:textColor="@color/black"
+                android:background="@drawable/rectangle_bg"
+                android:inputType="numberSigned" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_margin="8sp"
+                android:textSize="15sp"
+                android:text="@string/designation"
+                android:contentDescription="@string/icon"
+                android:textColor="@color/black"
+                android:src="@drawable/ic_profile" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:backgroundTint="@color/white"
+                android:padding="10sp"
+                android:layout_margin="8sp" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:background="@null"
+            android:backgroundTint="#87C38F"
+            android:paddingBottom="3sp"
+            android:paddingTop="3sp"
+            android:text="@string/button_name"
+            android:textColor="@color/black"
+            app:cornerRadius="50sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/registrationLogo"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_margin="10sp"
+            app:srcCompat="@drawable/aero_india_logo" />
+
+        <TextView
+            android:id="@+id/loginHeading"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10sp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/register_heading"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:typeface="sans" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

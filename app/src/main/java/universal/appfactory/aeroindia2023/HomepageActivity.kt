@@ -10,26 +10,26 @@ import android.widget.TextView
 
 
 class HomepageActivity : AppCompatActivity() {
+
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
         supportActionBar?.hide()
 
-        val bundle = intent.extras
-        findViewById<TextView>(R.id.userNameView).text = bundle?.getString("username", "DEFAULT USER")
+        val navigableBundle = intent.extras
+        findViewById<TextView>(R.id.userNameView).text = navigableBundle?.getString("name", "DEFAULT USER")
 
     }
 
     fun iconClicked(view: View) {
         val tag = view.getTag().toString()
-        val bundle = intent.extras
+        val navigableBundle = intent.extras
 
         Log.i("Clicked Button tag", tag)
 
-        startActivity(intent)
-
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
+
         when(tag.toInt()){
             0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)}     // Speakers
@@ -39,14 +39,14 @@ class HomepageActivity : AppCompatActivity() {
             5 -> {navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java)}      // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)}     // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // FAQ
-            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}              // Lodging complaints
-            9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)}       // Profile view
+            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}             // Lodging complaints
+            9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)}      // Profile view
             else -> {
                 Log.i("Homepage msg", "Nothing was clicked")
             }
         }
 
-        navigateIntent.putExtras(bundle!!)
+        navigateIntent.putExtras(navigableBundle!!)
         startActivity(navigateIntent)
 
     }

@@ -43,8 +43,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout7"
-        android:layout_width="395dp"
-        android:layout_height="418dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/otp"

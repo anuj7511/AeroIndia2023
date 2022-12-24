@@ -39,7 +39,7 @@ class OtpActivity : AppCompatActivity() {
         // Userinfo echoed in logcat for reference
         Log.i("Shared user information", "Name: $sharedUsername\nMobile number: $sharedMobileNo\nEmail: $sharedEmailID\nDesignation: $designation\nType: $type\nUser ID: $userId")
 
-        findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email"
+        findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email\n\nEmail: $sharedEmailID"
 
         val otpButton = findViewById<Button>(R.id.otpButton)
 
@@ -93,7 +93,7 @@ class OtpActivity : AppCompatActivity() {
     fun submitRegisterOTP(otp: String, userId: String){
 
         val userVerifyRequestModel = UserVerifyRequestModel(otp, userId)
-        Log.i("OTP Activity msg", "User ID obtained: $userId")
+        Log.i("OTP Register Activity msg", "User ID obtained: $userId")
 
         //Accessing API Interface for pushing user data
         val response = ServiceBuilder.buildService(ApiInterface::class.java)

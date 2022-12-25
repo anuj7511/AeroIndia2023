@@ -56,19 +56,8 @@ class HomepageActivity : AppCompatActivity() {
         startActivity(navigateIntent)
 
     }
+
+    private fun refreshPage(){
+        //TODO: Refresh functionality
+    }
 }
-
-// IN-CASE IF REQUIRED,
-
-//        // Writing data to local storage
-//        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
-//        val edit: SharedPreferences.Editor = sharedPreferences.edit()
-//
-//        edit.putString("name", navigableBundle.getString("name", "NA").toString())
-//        edit.putString("email", navigableBundle.getString("email", "NA").toString())
-//        edit.putString("phoneNo", navigableBundle.getString("phoneNo", "NA").toString())
-//        edit.putString("designation", navigableBundle.getString("designation", "NA").toString())
-//        edit.putString("userId", navigableBundle.getString("userId", "NA").toString())
-//        edit.putBoolean("loginStatus", true)
-//
-//        edit.apply()

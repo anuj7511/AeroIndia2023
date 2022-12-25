@@ -61,7 +61,7 @@ class UserLoginActivity : AppCompatActivity() {
 
         else {
             signUpButtonId.setOnClickListener {
-                val intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
+                intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
                 navigableBundle.putString("type", "2")
                 intent.putExtras(navigableBundle)
                 startActivity(intent)

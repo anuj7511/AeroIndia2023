@@ -36,12 +36,14 @@ class ProfileActivity : AppCompatActivity() {
                     passIn = false
                  }
             3 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
+            4 -> { refreshPage()
+                    passIn = false
+                 }
             else -> {
                 Log.i("Profile Activity msg", "Nothing was clicked")
             }
         }
 //
-//        // TODO: Properties of User needs to be stored in intent before starting activity
         if(passIn) {
             navigableIntent.putExtras(navigableBundle)
             startActivity(navigableIntent)
@@ -58,7 +60,7 @@ class ProfileActivity : AppCompatActivity() {
             .setPositiveButton("Yes"){
                 dialog, which -> Log.i("Positive dialog message", "Entered positive dialog content")
                 sharedPreferences.edit().clear().apply()
-                Log.i("Positive dialog msg", "Exiting positive dialog message")
+                Log.i("Positive dialog msg", "Local user data cleared & exiting positive dialog message")
                 finishAffinity()
             }
             .setNegativeButton("No"){
@@ -67,5 +69,9 @@ class ProfileActivity : AppCompatActivity() {
             }
             .show()
 
+    }
+
+    private fun refreshPage(){
+        //TODO: Refresh functionality
     }
 }

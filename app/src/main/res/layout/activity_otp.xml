@@ -11,7 +11,7 @@
         android:id="@+id/otp"
         android:layout_width="340dp"
         android:layout_height="50dp"
-        android:background="@drawable/rectangle_bg"
+        android:background="@drawable/agenda_background"
         android:ems="10"
         android:gravity="center_vertical|center_horizontal"
         android:inputType="number"

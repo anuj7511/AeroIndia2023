@@ -51,14 +51,14 @@ class OtpActivity : AppCompatActivity() {
             if(OTP.length == 4) {
                 if (type == "2") {
                     submitRegisterOTP(OTP, userId)
-                } else {
-
+                }
+                else {
                     val pin: String = navigableBundle.getString("pin", "0000")
                     if (pin.toInt() == OTP.toInt()) {
                         val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                         intent.putExtras(navigableBundle)
                         startActivity(intent)
-                        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+                        this.finish()
                     } else {
                         Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
                     }
@@ -89,14 +89,17 @@ class OtpActivity : AppCompatActivity() {
                         val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                         intent.putExtras(navigableBundle)
                         startActivity(intent)
-                    } else {
+                        this.finish()
+                    }
+                    else {
                         Toast.makeText(this@OtpActivity, "Enter correct OTP", Toast.LENGTH_SHORT)
                             .show()
                     }
 
-                } else {
-                    Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
                 }
+            }
+            else {
+                Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
             }
         }
 

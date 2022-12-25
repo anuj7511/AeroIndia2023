@@ -2,7 +2,6 @@ package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +41,7 @@ class HomepageActivity : AppCompatActivity() {
             2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}        // Venue maps
             3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)}         // Driving directions
             4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)}   // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java)}      // Videos
+            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)}      // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)}     // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)}       // FAQ
             8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)}             // Lodging complaints
@@ -57,7 +56,8 @@ class HomepageActivity : AppCompatActivity() {
 
     }
 
-    private fun refreshPage(){
+    fun refreshPage(view: View) {
         //TODO: Refresh functionality
+        Log.i("Homepage activity message", "Home page refreshed")
     }
 }

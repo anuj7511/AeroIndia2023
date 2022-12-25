@@ -24,7 +24,7 @@ class ProfileActivity : AppCompatActivity() {
     fun iconClicked(view: View){
 
         var passIn = true
-        val tag = view.getTag().toString()
+        val tag = view.tag.toString()
         var navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java)
 
         Log.i("Profile Activity Msg", "userFunction clicked & tag = $tag")
@@ -36,9 +36,6 @@ class ProfileActivity : AppCompatActivity() {
                     passIn = false
                  }
             3 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
-            4 -> { refreshPage()
-                    passIn = false
-                 }
             else -> {
                 Log.i("Profile Activity msg", "Nothing was clicked")
             }
@@ -71,7 +68,8 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun refreshPage(){
+    fun refreshPage(view: View) {
         //TODO: Refresh functionality
+        Log.i("Profile activity message", "Profile page refreshed")
     }
 }

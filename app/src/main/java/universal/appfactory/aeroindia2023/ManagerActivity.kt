@@ -16,6 +16,7 @@ class ManagerActivity : AppCompatActivity() {
     private lateinit var adapter: ManagerAdapter
     private lateinit var data: ArrayList<ManagerModel>
     private lateinit var recyclerview: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manager)

@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
                 // Starts Login Activity
                 val intent = Intent(this@MainActivity, UserLoginActivity::class.java)
                 startActivity(intent)
+                this@MainActivity.finish()
             }
         }
         timer.start()

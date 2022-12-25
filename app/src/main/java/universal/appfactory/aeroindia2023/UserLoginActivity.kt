@@ -1,5 +1,6 @@
 package universal.appfactory.aeroindia2023
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ class UserLoginActivity : AppCompatActivity() {
 
     private var navigableBundle = Bundle()
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)
@@ -77,6 +79,7 @@ class UserLoginActivity : AppCompatActivity() {
         }
 
     }
+
     private fun submitUserLoginData(email: String){
         val userLoginDataRequestModel = UserLoginDataRequestModel(email)
 
@@ -124,6 +127,7 @@ class UserLoginActivity : AppCompatActivity() {
                             val navigateIntent = Intent(this@UserLoginActivity, OtpActivity::class.java)
                             navigateIntent.putExtras(navigableBundle)
                             startActivity(navigateIntent)
+                            this@UserLoginActivity.finish()
                         }
 
                     }

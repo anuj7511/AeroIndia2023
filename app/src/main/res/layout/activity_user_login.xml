@@ -7,7 +7,6 @@
     android:background="@drawable/login_background"
     tools:context=".UserLoginActivity">
 
-
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
@@ -44,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="40sp"
                 android:layout_margin="8sp"
-                android:text="Sample text preview"
                 android:paddingLeft="10sp"
                 android:background="@drawable/rectangle_bg"
                 android:inputType="textEmailAddress"

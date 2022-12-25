@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 var navigableBundle = Bundle()
@@ -15,6 +16,11 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         navigableBundle = intent.extras!!
         findViewById<TextView>(R.id.name).text = navigableBundle.getString("name", "DEFAULT USER")

@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class UserLoginActivity : AppCompatActivity() {
 
+    var backpress: Int = 0
     private var navigableBundle = Bundle()
 
     @SuppressLint("MissingInflatedId")
@@ -31,7 +32,7 @@ class UserLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)
 
-        this.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
@@ -58,6 +59,7 @@ class UserLoginActivity : AppCompatActivity() {
             navigableBundle.putString(sharedPreferences.getString("type", "-1").toString(), "NA")
 
             intent.putExtras(navigableBundle)
+            backpress=0
             startActivity(intent)
         }
 
@@ -66,15 +68,21 @@ class UserLoginActivity : AppCompatActivity() {
                 intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
                 navigableBundle.putString("type", "2")
                 intent.putExtras(navigableBundle)
+                backpress=0
                 startActivity(intent)
             }
 
             loginButtonId.setOnClickListener {
                 val email = emailEditViewId.text.toString()
-                Log.i("Email", email)
-                navigableBundle.putString("type", "1")
+                if(!email.equals("")) {
+                    Log.i("Email", email)
+                    navigableBundle.putString("type", "1")
 
-                submitUserLoginData(email)
+                    submitUserLoginData(email)
+                }
+                else{
+                    Toast.makeText(this@UserLoginActivity, "Fill all columns", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
@@ -126,6 +134,7 @@ class UserLoginActivity : AppCompatActivity() {
 
                             val navigateIntent = Intent(this@UserLoginActivity, OtpActivity::class.java)
                             navigateIntent.putExtras(navigableBundle)
+                            backpress=0
                             startActivity(navigateIntent)
                             this@UserLoginActivity.finish()
                         }
@@ -145,6 +154,16 @@ class UserLoginActivity : AppCompatActivity() {
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
         throwable.printStackTrace()
+    }
+
+    override fun onBackPressed(){
+        backpress = backpress + 1
+        if(backpress > 1){
+            finishAffinity()
+        }
+        else{
+            Toast.makeText(this, "Press back once again to exit", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

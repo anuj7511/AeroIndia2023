@@ -6,6 +6,7 @@ import android.util.Log
 
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.coroutines.*
@@ -14,13 +15,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
+import kotlin.properties.Delegates
 
 
 class Feedback : AppCompatActivity() {
 
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
-    var washroomId: String = "-1" // Previously lateinit washroomId: String
+    lateinit var washroom_Id:String
+    lateinit var complaint_id:String// Previously lateinit washroomId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +32,21 @@ class Feedback : AppCompatActivity() {
 
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
         val view = binding.root
+        val bundle=intent.extras
+        if(bundle!=null)
+        {
+            complaint_id= bundle.getString("userId")!!
+        }
         setContentView(view)
-        val btn = findViewById<Button>(R.id.submit)
+        val btn = findViewById<TextView>(R.id.submit)
+        val history= findViewById<TextView>(R.id.History)
         val feedback = findViewById<EditText>(R.id.writeText)
         setOnClickListener()
         setupScanner()
 
-        btn.setOnClickListener { submitFeedback(feedback.text.toString(),washroomId) }
+        history.setOnClickListener {  val intent = Intent(this, UserHistoryActivity::class.java)
+            startActivity(intent) }
+        btn.setOnClickListener { submitFeedback(feedback.text.toString(),washroom_Id,complaint_id) }
 
     }
 
@@ -57,7 +68,7 @@ class Feedback : AppCompatActivity() {
             if (result.contents == null) {
                 Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show()
             } else {
-                   washroomId=result.contents
+                   washroom_Id=result.contents
 
                     // Data not in the expected format. So, whole object as toast message.
                     Toast.makeText(this, result.contents, Toast.LENGTH_LONG).show()
@@ -70,8 +81,8 @@ class Feedback : AppCompatActivity() {
 
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun submitFeedback(feedback:String, washroomId:String) {
-        val requestModel = RequestModel(washroomId, "4586", "dfj", feedback)
+    fun submitFeedback(feedback:String, washroomId:String,complaintId:String) {
+        val requestModel = RequestModel(washroomId, "dikshabharti106@gmail.com",complaintId, feedback)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {

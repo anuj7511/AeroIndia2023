@@ -52,6 +52,8 @@ class Feedback : AppCompatActivity() {
 
     private fun setupScanner() {
         qrScanIntegrator = IntentIntegrator(this)
+        qrScanIntegrator?.setOrientationLocked(false)
+        qrScanIntegrator?.setBeepEnabled(false)
     }
 
     private fun setOnClickListener() {

@@ -115,7 +115,8 @@
             android:name=".Feedback"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

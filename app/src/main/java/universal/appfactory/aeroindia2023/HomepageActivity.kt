@@ -2,6 +2,7 @@ package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,12 +18,13 @@ class HomepageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
 
-        this@HomepageActivity.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        this.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
-        val navigableBundle = intent.extras
-        findViewById<TextView>(R.id.userNameView).text = navigableBundle?.getString("name", "DEFAULT USER")
+        val navigableBundle = intent.extras!!
+
+        findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
 
     }
 
@@ -55,3 +57,18 @@ class HomepageActivity : AppCompatActivity() {
 
     }
 }
+
+// IN-CASE IF REQUIRED,
+
+//        // Writing data to local storage
+//        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+//        val edit: SharedPreferences.Editor = sharedPreferences.edit()
+//
+//        edit.putString("name", navigableBundle.getString("name", "NA").toString())
+//        edit.putString("email", navigableBundle.getString("email", "NA").toString())
+//        edit.putString("phoneNo", navigableBundle.getString("phoneNo", "NA").toString())
+//        edit.putString("designation", navigableBundle.getString("designation", "NA").toString())
+//        edit.putString("userId", navigableBundle.getString("userId", "NA").toString())
+//        edit.putBoolean("loginStatus", true)
+//
+//        edit.apply()

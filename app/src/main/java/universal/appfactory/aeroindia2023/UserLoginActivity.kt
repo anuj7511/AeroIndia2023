@@ -1,10 +1,13 @@
 package universal.appfactory.aeroindia2023
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
+import androidx.appcompat.app.ActionBar
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,23 +29,51 @@ class UserLoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_login)
 
+        this.supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
+
         val loginButtonId = findViewById<Button>(R.id.loginButton)
         val signUpButtonId = findViewById<Button>(R.id.signUpButton)
         val emailEditViewId = findViewById<EditText>(R.id.emailAddress)
 
-        signUpButtonId.setOnClickListener{
-            val intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
-            navigableBundle.putString("type", "2")
+        var intent = Intent(this@UserLoginActivity, DummyActivity::class.java)
+
+        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_APPEND)
+
+        Log.i("Login Activity Msg", "Name: "+sharedPreferences.getString("name", "Data Not Stored").toString())
+
+        if(sharedPreferences.getBoolean("loginStatus", false)) {
+            intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)
+
+            navigableBundle.putString(sharedPreferences.getString("name", "NA").toString(), "NA")
+            navigableBundle.putString(sharedPreferences.getString("email", "NA").toString(), "NA")
+            navigableBundle.putString(sharedPreferences.getString("phoneNo", "NA").toString(), "NA")
+            navigableBundle.putString(sharedPreferences.getString("designation", "NA").toString(), "NA")
+            navigableBundle.putString(sharedPreferences.getString("userId", "NA").toString(), "NA")
+            navigableBundle.putString(sharedPreferences.getString("userType", "NA").toString(), "NA")
+            navigableBundle.putString(sharedPreferences.getString("type", "-1").toString(), "NA")
+
             intent.putExtras(navigableBundle)
             startActivity(intent)
         }
 
-        loginButtonId.setOnClickListener {
-            val email = emailEditViewId.text.toString()
-            Log.i("Email", email)
-            navigableBundle.putString("type", "1")
+        else {
+            signUpButtonId.setOnClickListener {
+                val intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
+                navigableBundle.putString("type", "2")
+                intent.putExtras(navigableBundle)
+                startActivity(intent)
+            }
 
-            submitUserLoginData(email)
+            loginButtonId.setOnClickListener {
+                val email = emailEditViewId.text.toString()
+                Log.i("Email", email)
+                navigableBundle.putString("type", "1")
+
+                submitUserLoginData(email)
+            }
         }
 
     }
@@ -59,6 +90,7 @@ class UserLoginActivity : AppCompatActivity() {
                         call: Call<UserLoginDataResponseModel>,
                         response: Response<UserLoginDataResponseModel>
                     ) {
+                        // User data
                         val status = response.body()?.status.toString()
                         val verificationCode = response.body()?.message?.verification_code.toString()
                         val userId = response.body()?.message?.user_id.toString()
@@ -69,6 +101,7 @@ class UserLoginActivity : AppCompatActivity() {
                         val pin = response.body()?.message?.data?.pin.toString()
                         val userType = response.body()?.message?.data?.user_type.toString()
 
+                        // Login errors
                         val emailError = response.body()?.errors?.email_id.toString()
 
                         Log.i("Verification code", verificationCode)

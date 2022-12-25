@@ -1,12 +1,13 @@
 package universal.appfactory.aeroindia2023
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 var navigableBundle = Bundle()
 
@@ -22,6 +23,7 @@ class ProfileActivity : AppCompatActivity() {
 
     fun iconClicked(view: View){
 
+        var passIn = true
         val tag = view.getTag().toString()
         var navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java)
 
@@ -30,7 +32,9 @@ class ProfileActivity : AppCompatActivity() {
         when(tag.toInt()){
             0 -> { navigableIntent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
             1 -> { navigableIntent = Intent(this@ProfileActivity, ProfileSettingsActivity::class.java) }
-            2 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
+            2 -> { userSignOut()
+                    passIn = false
+                 }
             3 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
             else -> {
                 Log.i("Profile Activity msg", "Nothing was clicked")
@@ -38,8 +42,30 @@ class ProfileActivity : AppCompatActivity() {
         }
 //
 //        // TODO: Properties of User needs to be stored in intent before starting activity
-        navigableIntent.putExtras(navigableBundle)
-        startActivity(navigableIntent)
+        if(passIn) {
+            navigableIntent.putExtras(navigableBundle)
+            startActivity(navigableIntent)
+        }
+
+    }
+
+    private fun userSignOut(){
+        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle("WARNING !")
+            .setMessage("Do you want to sign out for sure ? You'll be logged out of the application as well.")
+            .setPositiveButton("Yes"){
+                dialog, which -> Log.i("Positive dialog message", "Entered positive dialog content")
+                sharedPreferences.edit().clear().apply()
+                Log.i("Positive dialog msg", "Exiting positive dialog message")
+                finishAffinity()
+            }
+            .setNegativeButton("No"){
+                dialog, which -> dialog.cancel()
+                Log.i("Negative dialog msg", "Exiting negative dialog message")
+            }
+            .show()
 
     }
 }

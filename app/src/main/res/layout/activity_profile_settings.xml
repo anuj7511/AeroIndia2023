@@ -55,6 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:text="Block chats" />
         </LinearLayout>
@@ -82,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     android:text="Allow push messages" />
         </LinearLayout>

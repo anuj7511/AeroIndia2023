@@ -2,7 +2,7 @@ package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build.ID
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -34,10 +34,11 @@ class OtpActivity : AppCompatActivity() {
         val sharedMobileNo: String = navigableBundle.getString("phoneNo", "-1").toString()
         val designation: String = navigableBundle.getString("designation", "NA").toString()
         val userId: String = navigableBundle.getString("userId", "-1").toString()
+        val userType: String = navigableBundle.getString("userType", "-1").toString()
         val type: String = navigableBundle.getString("type", "-1").toString()
 
         // Userinfo echoed in logcat for reference
-        Log.i("Shared user information", "Name: $sharedUsername\nMobile number: $sharedMobileNo\nEmail: $sharedEmailID\nDesignation: $designation\nType: $type\nUser ID: $userId")
+        Log.i("Shared user information", "Name: $sharedUsername\nMobile number: $sharedMobileNo\nEmail: $sharedEmailID\nDesignation: $designation\nType: $type\nUser ID: $userId\nUser type: $userType")
 
         findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email\n\nEmail: $sharedEmailID"
 
@@ -47,25 +48,22 @@ class OtpActivity : AppCompatActivity() {
         otpButton.setOnClickListener {
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
 
-
-            //TODO: OTP Validation using API
             if(OTP.length == 4) {
                 if (type == "2") {
                     submitRegisterOTP(OTP, userId)
                 } else {
-                    //TODO: Temporary setup. New function required for login OTP verification
 
                     val pin: String = navigableBundle.getString("pin", "0000")
                     if (pin.toInt() == OTP.toInt()) {
                         val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                         intent.putExtras(navigableBundle)
                         startActivity(intent)
+                        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
                     } else {
                         Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
                     }
                 }
 
-                //TODO: OTP Comparison
                 if (type == "2") {
                     if (otpFlag) {
                         Toast.makeText(
@@ -73,6 +71,21 @@ class OtpActivity : AppCompatActivity() {
                             "Registration successful",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        // Writing data to local storage
+                        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+                        val edit: SharedPreferences.Editor = sharedPreferences.edit()
+
+                        edit.putString("name", navigableBundle.getString("name", "NA").toString())
+                        edit.putString("email", navigableBundle.getString("email", "NA").toString())
+                        edit.putString("phoneNo", navigableBundle.getString("phoneNo", "NA").toString())
+                        edit.putString("designation", navigableBundle.getString("designation", "NA").toString())
+                        edit.putString("userId", navigableBundle.getString("userId", "NA").toString())
+                        edit.putString("userType", navigableBundle.getString("userType", "NA").toString())
+                        edit.putBoolean("loginStatus", true)
+
+                        edit.apply()
+
                         val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                         intent.putExtras(navigableBundle)
                         startActivity(intent)

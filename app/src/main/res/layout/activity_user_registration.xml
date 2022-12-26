@@ -152,13 +152,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/registrationLogo"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_margin="10sp"
-            app:srcCompat="@drawable/aero_india_logo" />
-
         <TextView
             android:id="@+id/loginHeading"
             android:layout_width="match_parent"

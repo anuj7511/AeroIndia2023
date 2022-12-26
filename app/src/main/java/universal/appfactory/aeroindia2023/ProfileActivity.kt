@@ -38,15 +38,16 @@ class ProfileActivity : AppCompatActivity() {
         when(tag.toInt()){
             0 -> { navigableIntent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
             1 -> { navigableIntent = Intent(this@ProfileActivity, ProfileSettingsActivity::class.java) }
-            2 -> { userSignOut()
+            2 -> { userSignOut(1)
                     passIn = false
                  }
-            3 -> { navigableIntent = Intent(this@ProfileActivity, DummyActivity::class.java) }
+            3 -> { userSignOut(2)
+                    passIn = false }
             else -> {
                 Log.i("Profile Activity msg", "Nothing was clicked")
             }
         }
-//
+
         if(passIn) {
             navigableIntent.putExtras(navigableBundle)
             startActivity(navigableIntent)
@@ -54,24 +55,49 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun userSignOut(){
+    private fun userSignOut(num: Int){
         val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
-
-        MaterialAlertDialogBuilder(this)
-            .setTitle("WARNING !")
-            .setMessage("Do you want to sign out for sure ? You'll be logged out of the application as well.")
-            .setPositiveButton("Yes"){
-                dialog, which -> Log.i("Positive dialog message", "Entered positive dialog content")
-                sharedPreferences.edit().clear().apply()
-                Log.i("Positive dialog msg", "Local user data cleared & exiting positive dialog message")
-                finishAffinity()
-            }
-            .setNegativeButton("No"){
-                dialog, which -> dialog.cancel()
-                Log.i("Negative dialog msg", "Exiting negative dialog message")
-            }
-            .show()
-
+        if(num == 1) {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("WARNING !")
+                .setMessage("Do you want to sign out for sure ? You'll be logged out of the application as well.")
+                .setPositiveButton("Yes") { dialog, which ->
+                    Log.i("Positive dialog message", "Entered positive dialog content")
+                    sharedPreferences.edit().clear().apply()
+                    Log.i(
+                        "Positive dialog msg",
+                        "Local user data cleared & exiting positive dialog message"
+                    )
+                    finishAffinity()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.cancel()
+                    Log.i("Negative dialog msg", "Exiting negative dialog message")
+                }
+                .show()
+        }
+        else if(num == 2){
+            MaterialAlertDialogBuilder(this)
+                .setTitle("WARNING !")
+                .setMessage("Do you want to delete your account permanently? You'll be logged out of the application as well and you need to register once again to use the application.")
+                .setPositiveButton("Yes") { dialog, which ->
+                    Log.i("Positive dialog message", "Entered positive dialog content")
+                    sharedPreferences.edit().clear().apply()
+                    Log.i(
+                        "Positive dialog msg",
+                        "Local user data cleared & exiting positive dialog message"
+                    )
+                    finishAffinity()
+                }
+                .setNegativeButton("No") { dialog, which ->
+                    dialog.cancel()
+                    Log.i("Negative dialog msg", "Exiting negative dialog message")
+                }
+                .show()
+        }
+        else{
+            Log.i("Profile activity msg", "No action on user data")
+        }
     }
 
     fun refreshPage(view: View) {

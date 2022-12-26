@@ -8,70 +8,15 @@
     tools:context=".UserLoginActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="586dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8sp"
-                android:textSize="15sp"
-                android:text="@string/email_address"
-                android:contentDescription="@string/icon"
-                android:textColor="@color/black"
-                android:src="@drawable/ic_profile" />
-
-            <EditText
-                android:id="@+id/emailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="40sp"
-                android:layout_margin="8sp"
-                android:paddingLeft="10sp"
-                android:background="@drawable/rectangle_bg"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-        <ImageView
-            android:id="@+id/registrationLogo"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_margin="10sp"
-            app:srcCompat="@drawable/aero_india_logo" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/loginHeading"
@@ -90,10 +35,12 @@
         android:id="@+id/linearLayout8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="143dp"
+        android:layout_marginBottom="408dp"
+        android:layout_marginTop="63dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
@@ -123,6 +70,38 @@
             android:text="@string/sign_up"
             android:textColor="@color/white"
             app:cornerRadius="50sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8sp"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/ic_profile"
+            android:text="@string/email_address"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/emailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:layout_margin="8sp"
+            android:background="@drawable/rectangle_bg"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10sp"
+            android:textColor="@color/black" />
+
     </LinearLayout>
 
 

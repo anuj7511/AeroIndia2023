@@ -134,25 +134,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:onClick="iconClicked"
         android:orientation="horizontal"
-        android:tag="9"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/refreshIcon"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:onClick="refreshPage"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/refresh" />
+
         <View
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/userIcon"
+            android:tag="9"
+            android:onClick="iconClicked"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="3sp"
-            app:srcCompat="@drawable/user_icon" />
+            app:srcCompat="@drawable/ic_profile" />
 
 
         <TextView
@@ -165,6 +173,8 @@
             android:paddingEnd="30sp"
             android:paddingStart="5sp"
             android:text="User"
+            android:tag="9"
+            android:onClick="iconClicked"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -174,7 +184,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="378dp"
+        android:layout_width="match_parent"
         android:layout_height="254dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"

@@ -293,8 +293,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_email"
+                        android:src="@drawable/icon_tick"
                         android:contentDescription="@string/logo"/>
+                        <!--    ic_email-->
 
                     <TextView
                         android:id="@+id/emailAddress"
@@ -323,8 +324,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_phone"
+                        android:src="@drawable/icon_tick"
                         android:contentDescription="@string/logo"/>
+                        <!--    ic_phone-->
 
                     <TextView
                         android:id="@+id/mobile"
@@ -353,8 +355,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_link"
+                        android:src="@drawable/icon_tick"
                         android:contentDescription="@string/logo"/>
+                        <!--    ic_link-->
 
                     <TextView
                         android:id="@+id/website"
@@ -383,8 +386,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_company"
+                        android:src="@drawable/icon_tick"
                         android:contentDescription="@string/logo"/>
+                        <!--    ic_company-->
 
                     <TextView
                         android:id="@+id/company"

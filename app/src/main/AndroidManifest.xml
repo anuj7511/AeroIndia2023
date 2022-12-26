@@ -13,8 +13,9 @@
         android:theme="@style/Theme.AeroIndia2023"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".AddNoteActivity"
+            android:name=".ProfileSettingsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -204,10 +205,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/Api_key" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

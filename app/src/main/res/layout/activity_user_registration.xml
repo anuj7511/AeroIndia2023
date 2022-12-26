@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="@color/black"
+                android:paddingLeft="10sp"
                 android:background="@drawable/rectangle_bg"
                 android:inputType="textPersonName" />
 
@@ -60,6 +61,7 @@
             <EditText
                 android:id="@+id/emailAddress"
                 android:layout_width="match_parent"
+                android:paddingLeft="10sp"
                 android:textColor="@color/black"
                 android:layout_height="40dp"
                 android:background="@drawable/rectangle_bg"
@@ -85,6 +87,7 @@
             <EditText
                 android:id="@+id/mobileNumber"
                 android:layout_width="match_parent"
+                android:paddingLeft="10sp"
                 android:layout_height="40sp"
                 android:textColor="@color/black"
                 android:background="@drawable/rectangle_bg"
@@ -104,6 +107,7 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_margin="8sp"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 android:text="@string/designation"
                 android:contentDescription="@string/icon"
                 android:textColor="@color/black"
@@ -147,13 +151,6 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/registrationLogo"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_margin="10sp"
-            app:srcCompat="@drawable/aero_india_logo" />
 
         <TextView
             android:id="@+id/loginHeading"

@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.agendas
 
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.SelectedAgendaActivity
 
 
 class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context) : RecyclerView.Adapter<AgendaAdapter.ViewHolder>() {
@@ -40,22 +42,22 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
 
         // setting data to our views of recycler view.
         val itemsViewModel = agendaModelArrayList[position]
-        val date = itemsViewModel.getStartTime().subSequence(0,11)
+        val date = itemsViewModel.getStart_date_time().subSequence(0,11)
 
         // sets the text to the textview from our itemHolder class
-        holder.startTime.text = itemsViewModel.getStartTime().trim().drop(10)
-        holder.endTime.text = itemsViewModel.getEndTime().trim().drop(10)
-        holder.eventName.text = itemsViewModel.getEvent().trim()
+        holder.startTime.text = itemsViewModel.getStart_date_time().trim().drop(10)
+        holder.endTime.text = itemsViewModel.getEnd_date_time().trim().drop(10)
+        holder.eventName.text = itemsViewModel.getSession_name().trim()
         holder.date.text = date
 
         holder.agendaCard.setOnClickListener{
-            val intent = Intent(mContext,SelectedAgendaActivity::class.java)
+            val intent = Intent(mContext, SelectedAgendaActivity::class.java)
             intent.putExtra("Id",itemsViewModel.getId())
-            intent.putExtra("Name",itemsViewModel.getEvent().trim())
-            intent.putExtra("Start Time",itemsViewModel.getStartTime().trim().drop(10))
-            intent.putExtra("End Time",itemsViewModel.getEndTime().trim().drop(10))
+            intent.putExtra("Name",itemsViewModel.getSession_name().trim())
+            intent.putExtra("Start Time",itemsViewModel.getStart_date_time().trim().drop(10))
+            intent.putExtra("End Time",itemsViewModel.getEnd_date_time().trim().drop(10))
             intent.putExtra("Date",date)
-            intent.putExtra("Location",itemsViewModel.getLocationName().trim())
+            intent.putExtra("Location",itemsViewModel.getLocation_name().trim())
             intent.putExtra("Category",itemsViewModel.getCategories().trim())
             intent.putExtra("Description",itemsViewModel.getDescription().trim())
             mContext.startActivity(intent)

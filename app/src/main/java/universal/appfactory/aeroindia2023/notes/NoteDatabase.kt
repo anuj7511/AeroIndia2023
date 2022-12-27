@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.notes
 
 import android.content.Context
 import androidx.room.Database

@@ -11,7 +11,6 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.ActionBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.lifecycleScope
@@ -22,9 +21,15 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import universal.appfactory.aeroindia2023.notes.Note
+import universal.appfactory.aeroindia2023.notes.NoteDatabase
+import universal.appfactory.aeroindia2023.notes.NotesRVAdapter
+import universal.appfactory.aeroindia2023.notes.RecyclerClickListener
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlinx.coroutines.flow.collect
+import universal.appfactory.aeroindia2023.speakers.SpeakerModel
+import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
+import universal.appfactory.aeroindia2023.speakers.SpeakersAdapter
 
 class SelectedAgendaActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.speakers
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.SelectedSpeakerActivity
 
 
 class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Context) : RecyclerView.Adapter<SpeakersAdapter.ViewHolder>() {
@@ -42,22 +44,22 @@ class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Cont
 
         // setting data to our views of recycler view.
         val itemsViewModel = speakerModelArrayList[position]
-        val fullName = itemsViewModel.getSalutation().trim() + itemsViewModel.getFirstName().trim() + " " + itemsViewModel.getLastName().trim()
+        val fullName = itemsViewModel.getSalutation().trim() + itemsViewModel.getFirst_name().trim() + " " + itemsViewModel.getLast_name().trim()
         // sets the text to the textview from our itemHolder class
         holder.nameText.text = fullName
         holder.designationText.text = itemsViewModel.getTitle().trim()
         holder.addressText.text = itemsViewModel.getCompany().trim()
 
-        if(itemsViewModel.getProfilePictureLink() != "")
+        if(itemsViewModel.getProfile_picture_link() != "")
         {
-            Glide.with(mContext).load(itemsViewModel.getProfilePictureLink()).into(holder.image)
+            Glide.with(mContext).load(itemsViewModel.getProfile_picture_link()).into(holder.image)
         }
 
         holder.speakerCard.setOnClickListener{
-            val intent = Intent(mContext,SelectedSpeakerActivity::class.java)
+            val intent = Intent(mContext, SelectedSpeakerActivity::class.java)
             intent.putExtra("Id",itemsViewModel.getId())
             intent.putExtra("Name",fullName)
-            intent.putExtra("Image",itemsViewModel.getProfilePictureLink())
+            intent.putExtra("Image",itemsViewModel.getProfile_picture_link())
             intent.putExtra("Biography",itemsViewModel.getBiography())
             mContext.startActivity(intent)
         }

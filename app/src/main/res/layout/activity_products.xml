@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_img_exhibitors"
-    tools:context=".ProductsActivity">
+    tools:context=".products.ProductsActivity">
 
     <TextView
         android:id="@+id/products"

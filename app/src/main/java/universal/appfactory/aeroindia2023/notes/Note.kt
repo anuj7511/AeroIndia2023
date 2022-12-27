@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.notes
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

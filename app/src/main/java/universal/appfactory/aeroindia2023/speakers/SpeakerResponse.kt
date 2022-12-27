@@ -1,12 +1,12 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.speakers
 
 import com.google.gson.annotations.SerializedName
 
-data class ProductResponse(
+data class SpeakerResponse(
     @SerializedName("status")
     val status: Int,
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: List<ProductModel>
+    val data: List<SpeakerModel>
 )

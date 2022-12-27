@@ -9,10 +9,13 @@
 
     <EditText
         android:id="@+id/otp"
-        android:layout_width="340dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/agenda_background"
         android:ems="10"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:maxLength="4"
         android:gravity="center_vertical|center_horizontal"
         android:inputType="number"
         android:textColor="@color/black"
@@ -63,7 +66,7 @@
         <TextView
             android:id="@+id/otpMessage1"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10sp"
             android:gravity="center_vertical"
             android:paddingLeft="10sp"
@@ -75,7 +78,7 @@
         <TextView
             android:id="@+id/otpMessage2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10sp"
             android:gravity="center_vertical"
             android:paddingLeft="10sp"

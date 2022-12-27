@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class UserRegistrationActivity : AppCompatActivity() {
 
-    private var navigableBundle: Bundle = Bundle()
+    var navigableBundle: Bundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,6 +121,7 @@ class UserRegistrationActivity : AppCompatActivity() {
                             navigableBundle.putString("verify", verify)
                             intent.putExtras(navigableBundle)
                             startActivity(intent)
+                            this@UserRegistrationActivity.finishAffinity()
                         }
 
                     }

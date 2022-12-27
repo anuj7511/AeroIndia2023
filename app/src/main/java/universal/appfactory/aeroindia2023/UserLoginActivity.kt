@@ -6,9 +6,9 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import kotlinx.android.synthetic.main.zonal_manager_user_card.*
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 class UserLoginActivity : AppCompatActivity() {
 
     var backpress: Int = 0
-    private var navigableBundle = Bundle()
+    var navigableBundle = Bundle()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,34 +43,31 @@ class UserLoginActivity : AppCompatActivity() {
 
         var intent = Intent(this@UserLoginActivity, DummyActivity::class.java)
 
-        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_APPEND)
+        val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
 
-        Log.i("Login Activity Msg", "Name: "+sharedPreferences.getString("name", "Data Not Stored").toString())
+        Log.i("Status of cache", sharedPreferences.getBoolean("loginStatus", false).toString())
+        Log.i("Username", sharedPreferences.getString("name", "N/A").toString())
+        Log.i("Designation", sharedPreferences.getString("designation", "N/A").toString())
+        Log.i("Phone number", sharedPreferences.getString("phoneNo", "N/A").toString())
 
         if(sharedPreferences.getBoolean("loginStatus", false)) {
-            intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)
 
-            navigableBundle.putString(sharedPreferences.getString("name", "NA").toString(), "NA")
-            navigableBundle.putString(sharedPreferences.getString("email", "NA").toString(), "NA")
-            navigableBundle.putString(sharedPreferences.getString("phoneNo", "NA").toString(), "NA")
-            navigableBundle.putString(sharedPreferences.getString("designation", "NA").toString(), "NA")
-            navigableBundle.putString(sharedPreferences.getString("userId", "NA").toString(), "NA")
-            navigableBundle.putString(sharedPreferences.getString("userType", "NA").toString(), "NA")
-            navigableBundle.putString(sharedPreferences.getString("type", "-1").toString(), "NA")
+            navigableBundle.putString("name", sharedPreferences.getString("name", "-"))
+            navigableBundle.putString("email", sharedPreferences.getString("email", "-"))
+            navigableBundle.putString("phoneNo", sharedPreferences.getString("phoneNo", "-"))
+            navigableBundle.putString("designation", sharedPreferences.getString("designation", "-"))
+            navigableBundle.putString("userId", sharedPreferences.getString("userId", "-"))
+            navigableBundle.putString("foreignKeyId", sharedPreferences.getString("foreignKeyId", "-"))
+            navigableBundle.putString("userType", sharedPreferences.getString("userType", "-"))
 
-            intent.putExtras(navigableBundle)
             backpress=0
+            intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)
+            intent.putExtras(navigableBundle)
             startActivity(intent)
+            this@UserLoginActivity.finishAffinity()
         }
 
         else {
-            signUpButtonId.setOnClickListener {
-                intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
-                navigableBundle.putString("type", "2")
-                intent.putExtras(navigableBundle)
-                backpress=0
-                startActivity(intent)
-            }
 
             loginButtonId.setOnClickListener {
                 val email = emailEditViewId.text.toString()
@@ -83,6 +80,14 @@ class UserLoginActivity : AppCompatActivity() {
                 else{
                     Toast.makeText(this@UserLoginActivity, "Fill all columns", Toast.LENGTH_SHORT).show()
                 }
+            }
+
+            signUpButtonId.setOnClickListener {
+                backpress=0
+                intent = Intent(this@UserLoginActivity, UserRegistrationActivity::class.java)
+                navigableBundle.putString("type", "2")
+                intent.putExtras(navigableBundle)
+                startActivity(intent)
             }
         }
 
@@ -103,14 +108,8 @@ class UserLoginActivity : AppCompatActivity() {
                     ) {
                         // User data
                         val status = response.body()?.status.toString()
-                        val verificationCode = response.body()?.message?.verification_code.toString()
                         val userId = response.body()?.message?.user_id.toString()
-                        val name = response.body()?.message?.data?.name.toString()
-                        val email = response.body()?.message?.data?.email_id.toString()
-                        val phoneNo = response.body()?.message?.data?.phone_no.toString()
-                        val id = response.body()?.message?.data?.id.toString()
-                        val pin = response.body()?.message?.data?.pin.toString()
-                        val userType = response.body()?.message?.data?.user_type.toString()
+                        val verificationCode = response.body()?.message?.verification_code.toString()
 
                         // Login errors
                         val emailError = response.body()?.errors?.email_id.toString()
@@ -122,19 +121,12 @@ class UserLoginActivity : AppCompatActivity() {
                             Log.i("Login Activity email error", emailError)
                         }
                         else{
-                            navigableBundle.putString("userId", userId)
-                            navigableBundle.putString("name", name)
                             navigableBundle.putString("email", email)
-                            navigableBundle.putString("phoneNo", phoneNo)
-                            navigableBundle.putString("id", id)
-                            navigableBundle.putString("pin", pin)
-                            navigableBundle.putString("userType", userType)
+                            navigableBundle.putString("userId", userId)
 
-                            Log.i("Generated OTP", "PIN: $pin")
-
+                            backpress=0
                             val navigateIntent = Intent(this@UserLoginActivity, OtpActivity::class.java)
                             navigateIntent.putExtras(navigableBundle)
-                            backpress=0
                             startActivity(navigateIntent)
                             this@UserLoginActivity.finish()
                         }

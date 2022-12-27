@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -103,5 +104,6 @@ class ProfileActivity : AppCompatActivity() {
     fun refreshPage(view: View) {
         //TODO: Refresh functionality
         Log.i("Profile activity message", "Profile page refreshed")
+        Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
     }
 }

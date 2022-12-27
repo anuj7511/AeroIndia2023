@@ -9,10 +9,8 @@ data class LoginDataResponse(
     val email_id: String,
     @SerializedName("phone_no")
     val phone_no: String,
-    @SerializedName("id")
-    val id: Int,
-    @SerializedName("pin")
-    val pin: String,
     @SerializedName("user_type")
     val user_type: Int,
+    @SerializedName("foreign_key_id")
+    val foreign_key_id: Int,
     )

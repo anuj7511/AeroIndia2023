@@ -71,7 +71,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="50dp"
         android:layout_marginStart="25dp"
-        android:textSize="28sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/profile_img"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -83,7 +83,7 @@
         android:textColor="#6A6667"
         android:layout_marginTop="5dp"
         android:layout_marginStart="25dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/profile_img"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -94,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/designation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:layout_marginHorizontal="15dp"
         android:orientation="vertical">
 
@@ -252,12 +252,12 @@
 
     <ImageView
         android:id="@+id/refreshIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
         android:onClick="refreshPage"
         android:layout_marginEnd="27dp"
         android:layout_marginStart="73dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"

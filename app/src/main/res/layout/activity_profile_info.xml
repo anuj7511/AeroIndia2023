@@ -85,36 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:text="Salutation"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/salutation"
-                android:layout_width="match_parent"
-                android:text=""
-                android:layout_height="match_parent"
-                android:background="#D9D9D9"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="3sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,6 +108,35 @@
                 android:background="#D9D9D9"
                 android:ems="10"
                 android:inputType="textPersonName"
+                android:padding="3sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:text="Phone number"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:text=""
+                android:layout_height="match_parent"
+                android:background="#D9D9D9"
+                android:ems="10"
+                android:inputType="numberSigned"
                 android:padding="3sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -185,11 +184,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
-                android:text="Company Name"
+                android:text="User ID"
                 android:textColor="@color/black" />
 
             <EditText
-                android:id="@+id/userCompanyName"
+                android:id="@+id/userId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#D9D9D9"
+                android:text=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="3sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:text="User type"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/userType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#D9D9D9"

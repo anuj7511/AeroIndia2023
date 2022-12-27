@@ -1,5 +1,6 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.agendas
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -15,6 +17,12 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
+import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.speakers.SpeakerModel
+import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
+import universal.appfactory.aeroindia2023.speakers.SpeakersAdapter
 import java.util.*
 
 class AgendaActivity : AppCompatActivity() {
@@ -25,6 +33,7 @@ class AgendaActivity : AppCompatActivity() {
     private lateinit var data: ArrayList<AgendaModel>
     private lateinit var recyclerview: RecyclerView
     private lateinit var checkedItem: IntArray
+    private lateinit var viewModel: AgendaViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +50,8 @@ class AgendaActivity : AppCompatActivity() {
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
         val bOpenAlertDialog = findViewById<ImageView>(R.id.sort)
+        viewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
+        viewModel.init((this as AppCompatActivity).applicationContext as Application)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
@@ -65,7 +76,7 @@ class AgendaActivity : AppCompatActivity() {
 
 
         refreshView.setOnRefreshListener{
-            fetchAgendaData()
+            viewModel.loadAllAgendas(true)
             refreshView.isRefreshing = false
         }
 
@@ -109,7 +120,7 @@ class AgendaActivity : AppCompatActivity() {
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getEvent().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+            if (item.getSession_name().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredList.add(item)
@@ -119,54 +130,27 @@ class AgendaActivity : AppCompatActivity() {
         adapter.filterList(filteredList)
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun fetchAgendaData () {
-        val agendaApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
-        // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+    private fun fetchAgendaData () {
+        viewModel.allagenda.observe(this) {
+            data = it as ArrayList<AgendaModel>
+            adapter = AgendaAdapter(data,this@AgendaActivity)
 
-            agendaApi.getAgendas("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
-                Callback<AgendaResponse?> {
-                override fun onResponse(
-                    call: Call<AgendaResponse?>,
-                    response: Response<AgendaResponse?>
-                ) {
+            recyclerview.adapter = adapter
 
-                    Log.d("Response: ", response.body().toString())
-                    data = response.body()?.data as ArrayList<AgendaModel>
-                    // This will pass the ArrayList to our Adapter
-                    adapter = AgendaAdapter(data, this@AgendaActivity)
-                    // Setting the Adapter with the recyclerview
-                    recyclerview.adapter = adapter
-
-                    if(checkedItem[0]==1)
-                    {
-                        Collections.sort(data, SortByTime())
-                    }
-                    else if(checkedItem[0]==2)
-                    {
-                        Collections.sort(data, SortByLocation())
-                    }
-                    else
-                    {
-                        Collections.sort(data, SortByCategory())
-                    }
-
-                }
-
-                override fun onFailure(call: Call<AgendaResponse?>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message,
-                        Toast.LENGTH_SHORT).show()
-                    Log.d("Failure Response: ", t.message.toString())
-                }
-            })
-
+            if(checkedItem[0]==1)
+            {
+                Collections.sort(data, SortByTime())
+            }
+            else if(checkedItem[0]==2)
+            {
+                Collections.sort(data, SortByLocation())
+            }
+            else
+            {
+                Collections.sort(data, SortByCategory())
+            }
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 
 
@@ -186,8 +170,8 @@ class AgendaActivity : AppCompatActivity() {
             object1: AgendaModel,
             object2: AgendaModel
         ): Int {
-            val name1: String = object1.getStartTime().lowercase(Locale.ROOT).trim()
-            val name2: String = object2.getStartTime().lowercase(Locale.ROOT).trim()
+            val name1: String = object1.getStart_date_time().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getStart_date_time().lowercase(Locale.ROOT).trim()
             return name1.compareTo(name2)
         }
     }
@@ -197,8 +181,8 @@ class AgendaActivity : AppCompatActivity() {
             object1: AgendaModel,
             object2: AgendaModel
         ): Int {
-            val name1: String = object1.getLocationName().lowercase(Locale.ROOT).trim()
-            val name2: String = object2.getLocationName().lowercase(Locale.ROOT).trim()
+            val name1: String = object1.getLocation_name().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getLocation_name().lowercase(Locale.ROOT).trim()
             return name1.compareTo(name2)
         }
     }

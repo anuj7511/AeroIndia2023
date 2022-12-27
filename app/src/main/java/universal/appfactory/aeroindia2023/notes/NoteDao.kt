@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.notes
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

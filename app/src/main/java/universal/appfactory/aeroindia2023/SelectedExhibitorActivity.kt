@@ -1,11 +1,9 @@
 package universal.appfactory.aeroindia2023
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,10 +11,8 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import universal.appfactory.aeroindia2023.products.ProductAdapter
+import universal.appfactory.aeroindia2023.products.ProductModel
 
 
 class SelectedExhibitorActivity : AppCompatActivity() {

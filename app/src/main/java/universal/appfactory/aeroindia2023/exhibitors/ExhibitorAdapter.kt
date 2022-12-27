@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.exhibitors
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.SelectedExhibitorActivity
 
 
 class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: Context) : RecyclerView.Adapter<ExhibitorAdapter.ViewHolder>() {
@@ -42,32 +44,32 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
 
         // setting data to our views of recycler view.
         val itemsViewModel = exhibitorModelArrayList[position]
-        val name = itemsViewModel.getFirstName() + " " + itemsViewModel.getLastName()
+        val name = itemsViewModel.getFirstname() + " " + itemsViewModel.getLastname()
 
         // sets the text to the textview from our itemHolder class
         holder.nameText.text = name
         holder.countryText.text = itemsViewModel.getAddress()
-        holder.locationText.text = itemsViewModel.getHallStallNo()
+        holder.locationText.text = itemsViewModel.getHall_and_Stall_Number()
 
-        if(itemsViewModel.getExhibitorLogo() != "")
+        if(itemsViewModel.getLogo() != "")
         {
-            Glide.with(mContext).load(itemsViewModel.getExhibitorLogo()).into(holder.image)
+            Glide.with(mContext).load(itemsViewModel.getLogo()).into(holder.image)
         }
 
         holder.exhibitorCard.setOnClickListener{
-            val intent = Intent(mContext,SelectedExhibitorActivity::class.java)
+            val intent = Intent(mContext, SelectedExhibitorActivity::class.java)
 //            intent.putExtra("Id",itemsViewModel.getId())
             intent.putExtra("Name",name)
-            intent.putExtra("Image",itemsViewModel.getExhibitorLogo())
+            intent.putExtra("Image",itemsViewModel.getLogo())
             intent.putExtra("Country",itemsViewModel.getCountry())
             intent.putExtra("Email",itemsViewModel.getEmail())
             intent.putExtra("Address",itemsViewModel.getAddress())
             intent.putExtra("Mobile",itemsViewModel.getMobile())
-            intent.putExtra("Website",itemsViewModel.getCompanyWebsite())
-            intent.putExtra("Company",itemsViewModel.getCompanyName())
-            intent.putExtra("Location",itemsViewModel.getHallStallNo())
-            intent.putExtra("Description",itemsViewModel.getDescription())
-            intent.putExtra("Company Email",itemsViewModel.getCompanyEmail())
+            intent.putExtra("Website",itemsViewModel.getWebsite())
+            intent.putExtra("Company",itemsViewModel.getComp_Name())
+            intent.putExtra("Location",itemsViewModel.getHall_and_Stall_Number())
+            intent.putExtra("Description",itemsViewModel.getCompany_Brief())
+            intent.putExtra("Company Email",itemsViewModel.getCompany_Head_Email())
             mContext.startActivity(intent)
         }
 

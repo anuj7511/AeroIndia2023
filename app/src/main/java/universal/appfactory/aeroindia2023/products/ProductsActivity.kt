@@ -1,11 +1,13 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.products
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -13,6 +15,9 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
+import universal.appfactory.aeroindia2023.R
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,6 +28,7 @@ class ProductsActivity : AppCompatActivity() {
     private lateinit var adapter: ProductAdapter
     private lateinit var data: ArrayList<ProductModel>
     private lateinit var recyclerview: RecyclerView
+    private lateinit var viewModel: ProductViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +44,22 @@ class ProductsActivity : AppCompatActivity() {
         // getting searchview by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
+        viewModel.init((this as AppCompatActivity).applicationContext as Application)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         // ArrayList of class ItemsViewModel
         data = ArrayList()
-        fetchProductData()
+
+        viewModel.allproduct.observe(this) {
+            data = it as ArrayList<ProductModel>
+            // This will pass the ArrayList to our Adapter
+            adapter = ProductAdapter(data,this@ProductsActivity)
+            // Setting the Adapter with the recyclerview
+            recyclerview.adapter = adapter
+        }
 
 
         // below line is to call set on query text listener method.
@@ -62,7 +77,7 @@ class ProductsActivity : AppCompatActivity() {
         })
 
         refreshView.setOnRefreshListener{
-            fetchProductData()
+            viewModel.loadAllProducts(true)
             refreshView.isRefreshing = false
         }
     }
@@ -74,7 +89,7 @@ class ProductsActivity : AppCompatActivity() {
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getProductTitle().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+            if (item.getProduct_title().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredList.add(item)
@@ -82,42 +97,5 @@ class ProductsActivity : AppCompatActivity() {
         }
 
         adapter.filterList(filteredList)
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun fetchProductData () {
-        val productApi = ApiClient.getInstance().create(ApiInterface::class.java)
-
-        // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-
-            productApi.getProducts("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
-                Callback<ProductResponse?> {
-                override fun onResponse(
-                    call: Call<ProductResponse?>,
-                    response: Response<ProductResponse?>
-                ) {
-
-                    Log.d("Response: ", response.body().toString())
-                    data = response.body()?.data as ArrayList<ProductModel>
-                    // This will pass the ArrayList to our Adapter
-                    adapter = ProductAdapter(data,this@ProductsActivity)
-                    // Setting the Adapter with the recyclerview
-                    recyclerview.adapter = adapter
-
-                }
-
-                override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message,
-                        Toast.LENGTH_SHORT).show()
-                    Log.d("Failure Response: ", t.message.toString())
-                }
-            })
-
-        }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 }

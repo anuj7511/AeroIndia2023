@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.agendas
 
 import com.google.gson.annotations.SerializedName
 

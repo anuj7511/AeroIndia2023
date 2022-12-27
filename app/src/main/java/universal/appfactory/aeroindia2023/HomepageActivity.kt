@@ -1,6 +1,7 @@
 package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,12 +9,22 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
+import androidx.lifecycle.ViewModelProvider
+import universal.appfactory.aeroindia2023.agendas.AgendaActivity
+import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
+import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
+import universal.appfactory.aeroindia2023.products.ProductViewModel
+import universal.appfactory.aeroindia2023.products.ProductsActivity
+import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
+import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
 
 
 class HomepageActivity : AppCompatActivity() {
 
     var backpress: Int = 0
+    private lateinit var agendaViewModel: AgendaViewModel
+    private lateinit var productViewModel: ProductViewModel
+    private lateinit var speakerViewModel: SpeakerViewModel
 
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +36,17 @@ class HomepageActivity : AppCompatActivity() {
         val navigableBundle = intent.extras!!
         findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
 
+        agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
+        agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        agendaViewModel.loadAllAgendas(true)
+
+        productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
+        productViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        productViewModel.loadAllProducts(true)
+
+        speakerViewModel = ViewModelProvider(this)[SpeakerViewModel::class.java]
+        speakerViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        speakerViewModel.loadAllSpeakers(true)
     }
 
     fun iconClicked(view: View) {
@@ -67,7 +89,10 @@ class HomepageActivity : AppCompatActivity() {
     }
 
     fun refreshPage(view: View) {
-        //TODO: Refresh functionality
+        agendaViewModel.loadAllAgendas(true)
+        productViewModel.loadAllProducts(true)
+        speakerViewModel.loadAllSpeakers(true)
+
         Log.i("Homepage activity message", "Home page refreshed")
     }
 

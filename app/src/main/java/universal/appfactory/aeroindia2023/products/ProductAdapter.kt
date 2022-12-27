@@ -1,14 +1,15 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.products
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.SelectedProductActivity
 
 
 class ProductAdapter(mList: ArrayList<ProductModel>, private val mContext: Context) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
@@ -43,15 +44,15 @@ class ProductAdapter(mList: ArrayList<ProductModel>, private val mContext: Conte
         val itemsViewModel = productModelArrayList[position]
 
         // sets the text to the textview from our itemHolder class
-        holder.nameText.text = itemsViewModel.getProductTitle()
+        holder.nameText.text = itemsViewModel.getProduct_title()
 
         holder.nextCard.setOnClickListener{
-            val intent = Intent(mContext,SelectedProductActivity::class.java)
-            intent.putExtra("Name",itemsViewModel.getProductTitle())
-            intent.putExtra("Category",itemsViewModel.getFirstCategory())
-            intent.putExtra("Exhibitor",itemsViewModel.getExhibitorName())
+            val intent = Intent(mContext, SelectedProductActivity::class.java)
+            intent.putExtra("Name",itemsViewModel.getProduct_title())
+            intent.putExtra("Category",itemsViewModel.getFirst_category())
+            intent.putExtra("Exhibitor",itemsViewModel.getExhibitor_name())
             intent.putExtra("Description",itemsViewModel.getDescription())
-            intent.putExtra("Image",itemsViewModel.getProductImage())
+            intent.putExtra("Image",itemsViewModel.getProduct_image())
             mContext.startActivity(intent)
         }
 

@@ -1,6 +1,10 @@
 package universal.appfactory.aeroindia2023
 import retrofit2.Call
 import retrofit2.http.*
+import universal.appfactory.aeroindia2023.agendas.AgendaResponse
+import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse
+import universal.appfactory.aeroindia2023.products.ProductResponse
+import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 
 interface ApiInterface {
 

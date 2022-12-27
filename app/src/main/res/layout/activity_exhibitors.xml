@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_img_exhibitors"
-    tools:context=".ExhibitorsActivity">
+    tools:context=".exhibitors.ExhibitorsActivity">
 
     <SearchView
         android:id="@+id/search_bar"

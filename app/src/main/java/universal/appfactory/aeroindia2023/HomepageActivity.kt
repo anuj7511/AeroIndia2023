@@ -21,10 +21,12 @@ import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
 
 class HomepageActivity : AppCompatActivity() {
 
-    var backpress: Int = 0
+    private var backpress: Int = 0
+    var navigableBundle = Bundle()
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var speakerViewModel: SpeakerViewModel
+
 
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +35,7 @@ class HomepageActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val navigableBundle = intent.extras!!
+        navigableBundle = intent.extras!!
         findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
 
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
@@ -51,8 +53,6 @@ class HomepageActivity : AppCompatActivity() {
 
     fun iconClicked(view: View) {
         val tag = view.tag.toString()
-        val navigableBundle = intent.extras
-
         Log.i("Clicked Button tag", tag)
 
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
@@ -83,7 +83,7 @@ class HomepageActivity : AppCompatActivity() {
             }
         }
 
-        navigateIntent.putExtras(navigableBundle!!)
+        navigateIntent.putExtras(navigableBundle)
         startActivity(navigateIntent)
 
     }
@@ -94,6 +94,7 @@ class HomepageActivity : AppCompatActivity() {
         speakerViewModel.loadAllSpeakers(true)
 
         Log.i("Homepage activity message", "Home page refreshed")
+        Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed(){

@@ -8,6 +8,8 @@ data class UserVerifyResponseModel(
     val status: String,
     @SerializedName("message")
     val message: UserVerificationMessage,
+    @SerializedName("data")
+    val data: LoginDataResponse,
     @SerializedName("error")
     val errors: VerifyErrorResponse
 )

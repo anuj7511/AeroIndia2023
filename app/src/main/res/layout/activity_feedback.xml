@@ -10,8 +10,7 @@
         android:id="@+id/agendaHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/agenda_background"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
@@ -29,7 +28,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:orientation="horizontal"
         android:paddingHorizontal="7dp"
@@ -70,15 +69,21 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white"
         android:padding="10dp"
-        android:background="@drawable/backgroung_image"
         app:cardCornerRadius="15dp"
+        android:layout_marginTop="10dp"
         app:cardElevation="5dp"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:strokeColor="@color/black"
         app:strokeWidth=".8dp">
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
         <LinearLayout
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
@@ -175,6 +180,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
+        </ScrollView>
 
      </androidx.cardview.widget.CardView>
 

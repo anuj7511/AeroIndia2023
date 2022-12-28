@@ -49,33 +49,18 @@ tools:context=".agendas.AgendaActivity">
         android:src="@drawable/above_line"
         android:contentDescription="@string/line" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/all_exhibit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#D9D9D9"
-        android:orientation="horizontal">
+        android:text="@string/all_events"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:background="#D9D9D9" />
 
-        <TextView
-            android:id="@+id/all_exhibit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/all_events"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginStart="60dp"
-            android:layout_weight="0.5"/>
-
-        <ImageView
-            android:id="@+id/sort"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_sort"
-            android:layout_marginHorizontal="10dp"/>
-
-    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"

@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.SelectedSpeakerActivity
 
 
 class SpeakersAdapter(mList: ArrayList<SpeakerModel>, private val mContext: Context) : RecyclerView.Adapter<SpeakersAdapter.ViewHolder>() {

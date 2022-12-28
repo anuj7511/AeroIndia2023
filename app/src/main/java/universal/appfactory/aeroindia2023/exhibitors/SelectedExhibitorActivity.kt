@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.exhibitors
 
 import android.os.Bundle
 import android.view.View
@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.products.ProductAdapter
 import universal.appfactory.aeroindia2023.products.ProductModel
 

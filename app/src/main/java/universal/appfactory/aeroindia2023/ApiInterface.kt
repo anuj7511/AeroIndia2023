@@ -2,6 +2,9 @@ package universal.appfactory.aeroindia2023
 import retrofit2.Call
 import retrofit2.http.*
 import universal.appfactory.aeroindia2023.agendas.AgendaResponse
+import universal.appfactory.aeroindia2023.agendas.CategoryResponse
+import universal.appfactory.aeroindia2023.agendas.LocationResponse
+import universal.appfactory.aeroindia2023.agendas.TimeResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
@@ -46,4 +49,14 @@ interface ApiInterface {
 
     @GET("api/get-speaker/{id}")
     fun getSpeakerAgenda(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<AgendaResponse?>?
+
+    @GET("api/get-agenda-classification/category")
+    fun getAgendaClassificationCategory(@Header("Authorization") bearerToken: String) : Call<CategoryResponse?>?
+
+    @GET("api/get-agenda-classification/time")
+    fun getAgendaClassificationTime(@Header("Authorization") bearerToken: String) : Call<TimeResponse?>?
+
+    @GET("api/get-agenda-classification/location")
+    fun getAgendaClassificationLocation(@Header("Authorization") bearerToken: String) : Call<LocationResponse?>?
+
 }

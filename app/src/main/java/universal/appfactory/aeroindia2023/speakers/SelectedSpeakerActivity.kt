@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.speakers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +17,9 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
+import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.agendas.AgendaAdapter
 import universal.appfactory.aeroindia2023.agendas.AgendaModel
 import universal.appfactory.aeroindia2023.agendas.AgendaResponse

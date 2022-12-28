@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.SelectedProductActivity
 
 
 class ProductAdapter(mList: ArrayList<ProductModel>, private val mContext: Context) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {

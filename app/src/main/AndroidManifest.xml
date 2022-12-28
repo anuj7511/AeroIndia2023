@@ -15,8 +15,17 @@
         tools:targetApi="31">
 
         <activity
+            android:name=".agendas.AgendaSortActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddNoteActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -57,22 +66,25 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SelectedAgendaActivity"
-            android:exported="false">
+            android:name=".agendas.SelectedAgendaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SelectedSpeakerActivity"
-            android:exported="false">
+            android:name=".speakers.SelectedSpeakerActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SelectedExhibitorActivity"
-            android:exported="false">
+            android:name=".exhibitors.SelectedExhibitorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -106,15 +118,17 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SelectedProductActivity"
-            android:exported="false">
+            android:name=".products.SelectedProductActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".products.ProductsActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

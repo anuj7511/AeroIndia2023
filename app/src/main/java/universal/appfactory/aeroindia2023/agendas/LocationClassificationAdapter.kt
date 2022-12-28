@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import universal.appfactory.aeroindia2023.R
 
 
-class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context) : RecyclerView.Adapter<AgendaAdapter.ViewHolder>() {
+class LocationClassificationAdapter(mList: ArrayList<Location>, private val mContext: Context) : RecyclerView.Adapter<LocationClassificationAdapter.ViewHolder>() {
 
     // creating a variable for array list and context.
-    private var agendaModelArrayList: ArrayList<AgendaModel>
+    private var agendaModelArrayList: ArrayList<Location>
 
     // method for filtering our recyclerview items.
-    fun filterList(filterList: ArrayList<AgendaModel>) {
+    fun filterList(filterList: ArrayList<Location>) {
         // below line is to add our filtered
         // list in our course array list.
         agendaModelArrayList = filterList
@@ -31,7 +31,7 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.agenda_card, parent, false)
+            .inflate(R.layout.agenda_card2, parent, false)
 
         return ViewHolder(view)
     }
@@ -41,24 +41,14 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
 
         // setting data to our views of recycler view.
         val itemsViewModel = agendaModelArrayList[position]
-        val date = itemsViewModel.getStart_date_time().subSequence(0,11)
 
         // sets the text to the textview from our itemHolder class
-        holder.startTime.text = itemsViewModel.getStart_date_time().trim().drop(10)
-        holder.endTime.text = itemsViewModel.getEnd_date_time().trim().drop(10)
-        holder.eventName.text = itemsViewModel.getSession_name().trim()
-        holder.date.text = date
+        holder.name.text = itemsViewModel.getLocation_name().trim()
 
         holder.agendaCard.setOnClickListener{
-            val intent = Intent(mContext, SelectedAgendaActivity::class.java)
-            intent.putExtra("Id",itemsViewModel.getId())
-            intent.putExtra("Name",itemsViewModel.getSession_name().trim())
-            intent.putExtra("Start Time",itemsViewModel.getStart_date_time().trim().drop(10))
-            intent.putExtra("End Time",itemsViewModel.getEnd_date_time().trim().drop(10))
-            intent.putExtra("Date",date)
-            intent.putExtra("Location",itemsViewModel.getLocation_name().trim())
-            intent.putExtra("Category",itemsViewModel.getCategories().trim())
-            intent.putExtra("Description",itemsViewModel.getDescription().trim())
+            val intent = Intent(mContext, AgendaActivity::class.java)
+            intent.putExtra("Classification","Location")
+            intent.putExtra("Location",itemsViewModel.getLocation_name())
             mContext.startActivity(intent)
         }
 
@@ -73,10 +63,7 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
         // creating variables for our views.
-        var startTime: TextView = itemView.findViewById(R.id.start_time)
-        var endTime: TextView = itemView.findViewById(R.id.end_time)
-        var eventName: TextView = itemView.findViewById(R.id.event_name)
-        var date: TextView = itemView.findViewById(R.id.date)
+        var name: TextView = itemView.findViewById(R.id.name)
         var agendaCard: CardView = itemView.findViewById(R.id.agenda_card)
 
     }

@@ -11,7 +11,6 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.SelectedExhibitorActivity
 
 
 class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: Context) : RecyclerView.Adapter<ExhibitorAdapter.ViewHolder>() {

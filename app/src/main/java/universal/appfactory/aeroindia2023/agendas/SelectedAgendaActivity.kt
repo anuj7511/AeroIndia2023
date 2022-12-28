@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.agendas
 
 import android.app.Activity
 import android.content.Intent
@@ -21,6 +21,10 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import universal.appfactory.aeroindia2023.AddNoteActivity
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
+import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.notes.Note
 import universal.appfactory.aeroindia2023.notes.NoteDatabase
 import universal.appfactory.aeroindia2023.notes.NotesRVAdapter

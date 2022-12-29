@@ -49,7 +49,7 @@ class ProductAdapter(mList: ArrayList<ProductModel>, private val mContext: Conte
             val intent = Intent(mContext, SelectedProductActivity::class.java)
             intent.putExtra("Name",itemsViewModel.getProduct_title())
             intent.putExtra("Category",itemsViewModel.getFirst_category())
-            intent.putExtra("Exhibitor",itemsViewModel.getExhibitor_name())
+            intent.putExtra("Exhibitor",itemsViewModel.getExhibitor_id())
             intent.putExtra("Description",itemsViewModel.getDescription())
             intent.putExtra("Image",itemsViewModel.getProduct_image())
             mContext.startActivity(intent)

@@ -17,9 +17,9 @@ data class ProductModel(
     @ColumnInfo(name = "product_title")
     @SerializedName("product_title")
     private var product_title: String,
-    @ColumnInfo(name = "exhibitor_name")
-    @SerializedName("exhibitor_name")
-    private var exhibitor_name: String,
+    @ColumnInfo(name = "exhibitor_id")
+    @SerializedName("exhibitor_id")
+    private var exhibitor_id: String,
     @ColumnInfo(name = "product_image")
     @SerializedName("product_image")
     private var product_image: String,
@@ -61,8 +61,8 @@ data class ProductModel(
         return product_title
     }
 
-    fun getExhibitor_name(): String {
-        return exhibitor_name
+    fun getExhibitor_id(): String {
+        return exhibitor_id
     }
 
     fun getProduct_image(): String {

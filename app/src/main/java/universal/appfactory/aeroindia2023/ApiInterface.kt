@@ -6,6 +6,7 @@ import universal.appfactory.aeroindia2023.agendas.CategoryResponse
 import universal.appfactory.aeroindia2023.agendas.LocationResponse
 import universal.appfactory.aeroindia2023.agendas.TimeResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse
+import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse2
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 
@@ -58,5 +59,11 @@ interface ApiInterface {
 
     @GET("api/get-agenda-classification/location")
     fun getAgendaClassificationLocation(@Header("Authorization") bearerToken: String) : Call<LocationResponse?>?
+
+    @GET("api/get-exhibitor-product/{id}")
+    fun getExhibitorProduct(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<ProductResponse?>?
+
+    @GET("api/get-exhibitor/{id}")
+    fun getProductExhibitor(@Header("Authorization") bearerToken: String, @Path("id") id: String) : Call<ExhibitorResponse2?>?
 
 }

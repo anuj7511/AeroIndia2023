@@ -91,10 +91,10 @@
             android:src="@drawable/profile_line"/>
 
         <TextView
-            android:id="@+id/event"
+            android:id="@+id/exhibitors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/events"
+            android:text="@string/exhibitors"
             android:textAllCaps="true"
             android:textColor="#6A6667"
             android:textSize="18sp"

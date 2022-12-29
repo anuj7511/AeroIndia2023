@@ -77,6 +77,7 @@
     <string name="add_update_note">Add/Update Note</string>
     <string name="note">Note</string>
     <string name="events">Events</string>
+    <string name="exhibitors">Exhibitors</string>
     <string-array name="user_types">
         <item>None</item>
         <item>Delegate</item>

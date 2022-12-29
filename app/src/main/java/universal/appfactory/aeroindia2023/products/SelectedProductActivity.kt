@@ -1,21 +1,32 @@
 package universal.appfactory.aeroindia2023.products
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.exhibitors.*
 
 
 class SelectedProductActivity : AppCompatActivity() {
 
+    private lateinit var adapter: ExhibitorAdapter2
+    private lateinit var data: ArrayList<ExhibitorModel2>
     private lateinit var recyclerview: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +36,7 @@ class SelectedProductActivity : AppCompatActivity() {
         val set = ConstraintSet()
         val parent = findViewById<ConstraintLayout>(R.id.parent)
         val information = findViewById<TextView>(R.id.information)
-        val event = findViewById<TextView>(R.id.event)
+        val exhibitors = findViewById<TextView>(R.id.exhibitors)
         val underLine = findViewById<ImageView>(R.id.under_line)
         val scrollView = findViewById<CardView>(R.id.scrollView)
         val nameText = findViewById<TextView>(R.id.name)
@@ -50,7 +61,13 @@ class SelectedProductActivity : AppCompatActivity() {
 
         Glide.with(this@SelectedProductActivity).load(image).into(productImage)
 
-        event.setOnClickListener {
+        recyclerview.layoutManager = LinearLayoutManager(this)
+        data = ArrayList()
+        if (exhibitor != null) {
+            fetchExhibitorData(exhibitor)
+        }
+
+        exhibitors.setOnClickListener {
             set.clear(underLine.id, ConstraintSet.START)
             set.connect(underLine.id, ConstraintSet.END, parent.id, ConstraintSet.END)
             set.applyTo(parent)
@@ -67,5 +84,40 @@ class SelectedProductActivity : AppCompatActivity() {
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
+    fun fetchExhibitorData (id: String) {
+        val exhibitorApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
+        // launching a new coroutine
+        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+
+            exhibitorApi.getProductExhibitor("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)?.enqueue(object :
+                Callback<ExhibitorResponse2?> {
+                override fun onResponse(
+                    call: Call<ExhibitorResponse2?>,
+                    response: Response<ExhibitorResponse2?>
+                ) {
+
+                    Log.d("Response: ", response.body().toString())
+                    data = response.body()?.data as java.util.ArrayList<ExhibitorModel2>
+                    // This will pass the ArrayList to our Adapter
+                    adapter = ExhibitorAdapter2(data, this@SelectedProductActivity)
+                    // Setting the Adapter with the recyclerview
+                    recyclerview.adapter = adapter
+
+                }
+
+                override fun onFailure(call: Call<ExhibitorResponse2?>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("Failure Response: ", t.message.toString())
+                }
+            })
+
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
+    }
 }

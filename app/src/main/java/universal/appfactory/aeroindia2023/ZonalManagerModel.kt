@@ -15,7 +15,7 @@ data class ZonalManagerModel(
     private var date_time:String,
     @SerializedName("action_taken")
     private var action_taken:Int,
-    @SerializedName("complained_user")
+    @SerializedName("complained_by")
     private var complained_user:String,
     @SerializedName("washroom")
     private var washroom_id:String

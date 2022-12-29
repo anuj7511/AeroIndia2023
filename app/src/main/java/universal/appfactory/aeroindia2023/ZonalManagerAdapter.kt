@@ -24,6 +24,7 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
         // setting data to our views of recycler view.
         val itemsViewModel = ZList[position]
         // sets the text to the textview from our itemHolder class
+        holder.washId.text=itemsViewModel.getwashId().trim()
         holder.nameText.text = itemsViewModel.getName().trim()
         holder.remarks.text = itemsViewModel.getremarks().trim()
         holder.date_Time.text = itemsViewModel.getdate_time().trim()
@@ -43,10 +44,11 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
         // creating variables for our views.
+        var washId:TextView=itemView.findViewById(R.id.BId)
         var nameText: TextView = itemView.findViewById(R.id.user)
-        var remarks: TextView = itemView.findViewById(R.id.remark)
+        var remarks: TextView = itemView.findViewById(R.id.r)
         var date_Time: TextView = itemView.findViewById(R.id.date_time)
-        var status: TextView = itemView.findViewById(R.id.status)
+        var status: TextView = itemView.findViewById(R.id.Rstatus)
 
 
     }

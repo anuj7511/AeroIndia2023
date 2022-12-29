@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.activity_profile_info.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaSortActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
@@ -27,6 +30,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var speakerViewModel: SpeakerViewModel
+    private lateinit var userId: String
 
 
     @SuppressLint("MissingInflatedId", "SetTextI18n")
@@ -37,7 +41,17 @@ class HomepageActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         navigableBundle = intent.extras!!
+        userId = navigableBundle.getString("userId", "0")
         findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
+
+        Log.i("Homepage activity msg", "User ID: $userId")
+
+        if(userId == "4")
+            findViewById<ImageView>(R.id.complaint).setImageResource(R.drawable.icon_manager)
+        else if(userId =="5")
+            findViewById<ImageView>(R.id.complaint).setImageResource(R.drawable.icon_manager)
+        else
+            Log.i("Homepage activity msg", "No icon changed")
 
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
         agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
@@ -75,8 +89,19 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}     // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaSortActivity::class.java)
                     backpress=0}       // FAQ
-            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)
-                    backpress=0}             // Lodging complaints
+            8 -> {
+                if(userId == "4"){
+                    navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 1
+                }
+                else if(userId =="5"){
+                    navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 2
+                }
+                else
+                    navigateIntent = Intent(this@HomepageActivity, Feedback::class.java) // Lodging complaints
+
+                backpress=0
+                }
+
             9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
                     backpress=0}      // Profile view
             else -> {
@@ -99,7 +124,7 @@ class HomepageActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed(){
-        backpress = backpress + 1
+        backpress += 1
         if(backpress > 1){
             finishAffinity()
         }

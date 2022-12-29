@@ -47,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/light_navy_blue"
                 android:layout_margin="5sp"
                 tools:ignore="UselessParent">
 

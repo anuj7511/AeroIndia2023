@@ -1,0 +1,334 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "552a013c9eb9951ad2869f686e8eda59",
+    "entities": [
+      {
+        "tableName": "exhibitors",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `Type` TEXT NOT NULL, `Firstname` TEXT NOT NULL, `Lastname` TEXT NOT NULL, `Comp_Name` TEXT NOT NULL, `Country` TEXT NOT NULL, `Email` TEXT NOT NULL, `Password` TEXT NOT NULL, `Mobile` TEXT NOT NULL, `Comp_ReferenceNo` TEXT NOT NULL, `GST` TEXT NOT NULL, `PAN` TEXT NOT NULL, `Website` TEXT NOT NULL, `Address` TEXT NOT NULL, `Token_Key` TEXT NOT NULL, `ExhibitorType` TEXT NOT NULL, `Badge_Quota` INTEGER NOT NULL, `Area` TEXT NOT NULL, `HallNo` TEXT NOT NULL, `StallNo` TEXT NOT NULL, `CatalogueFlag` INTEGER NOT NULL, `short_company_name` TEXT NOT NULL, `fax_country_code` TEXT NOT NULL, `exhibitor_fax` TEXT NOT NULL, `Nodal_Officer_Name` TEXT NOT NULL, `Nodal_Officer_Email` TEXT NOT NULL, `Nodal_Designation` TEXT NOT NULL, `Nodal_Country_Code` TEXT NOT NULL, `Nodal_Phone` TEXT NOT NULL, `Company_Head_Name` TEXT NOT NULL, `Company_Head_Email` TEXT NOT NULL, `Company_Head_Designation` TEXT NOT NULL, `Company_Head_Country_Code` TEXT NOT NULL, `Company_Head_Phone` TEXT NOT NULL, `Login_Email` TEXT NOT NULL, `Address_Line_1` TEXT NOT NULL, `Address_Line_2` TEXT NOT NULL, `City` TEXT NOT NULL, `State` TEXT NOT NULL, `Pin_Zip_Code` TEXT NOT NULL, `Category` TEXT NOT NULL, `Sub_Category` TEXT NOT NULL, `Sub_Sub_Category` TEXT NOT NULL, `Logo` TEXT NOT NULL, `Hall_and_Stall_Number` TEXT NOT NULL, `Twitter` TEXT NOT NULL, `LinkedIn` TEXT NOT NULL, `Instagram` TEXT NOT NULL, `Facebook` TEXT NOT NULL, `Company_Brief` TEXT NOT NULL, `Submit_additional_150_words` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Type",
+            "columnName": "Type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Firstname",
+            "columnName": "Firstname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Lastname",
+            "columnName": "Lastname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Comp_Name",
+            "columnName": "Comp_Name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Country",
+            "columnName": "Country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Email",
+            "columnName": "Email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Password",
+            "columnName": "Password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Mobile",
+            "columnName": "Mobile",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Comp_ReferenceNo",
+            "columnName": "Comp_ReferenceNo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "GST",
+            "columnName": "GST",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "PAN",
+            "columnName": "PAN",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Website",
+            "columnName": "Website",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Address",
+            "columnName": "Address",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Token_Key",
+            "columnName": "Token_Key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ExhibitorType",
+            "columnName": "ExhibitorType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Badge_Quota",
+            "columnName": "Badge_Quota",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Area",
+            "columnName": "Area",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "HallNo",
+            "columnName": "HallNo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "StallNo",
+            "columnName": "StallNo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "CatalogueFlag",
+            "columnName": "CatalogueFlag",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "short_company_name",
+            "columnName": "short_company_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fax_country_code",
+            "columnName": "fax_country_code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exhibitor_fax",
+            "columnName": "exhibitor_fax",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Nodal_Officer_Name",
+            "columnName": "Nodal_Officer_Name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Nodal_Officer_Email",
+            "columnName": "Nodal_Officer_Email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Nodal_Designation",
+            "columnName": "Nodal_Designation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Nodal_Country_Code",
+            "columnName": "Nodal_Country_Code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Nodal_Phone",
+            "columnName": "Nodal_Phone",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Company_Head_Name",
+            "columnName": "Company_Head_Name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Company_Head_Email",
+            "columnName": "Company_Head_Email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Company_Head_Designation",
+            "columnName": "Company_Head_Designation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Company_Head_Country_Code",
+            "columnName": "Company_Head_Country_Code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Company_Head_Phone",
+            "columnName": "Company_Head_Phone",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Login_Email",
+            "columnName": "Login_Email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Address_Line_1",
+            "columnName": "Address_Line_1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Address_Line_2",
+            "columnName": "Address_Line_2",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "City",
+            "columnName": "City",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "State",
+            "columnName": "State",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Pin_Zip_Code",
+            "columnName": "Pin_Zip_Code",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Category",
+            "columnName": "Category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Sub_Category",
+            "columnName": "Sub_Category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Sub_Sub_Category",
+            "columnName": "Sub_Sub_Category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Logo",
+            "columnName": "Logo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Hall_and_Stall_Number",
+            "columnName": "Hall_and_Stall_Number",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Twitter",
+            "columnName": "Twitter",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LinkedIn",
+            "columnName": "LinkedIn",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Instagram",
+            "columnName": "Instagram",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Facebook",
+            "columnName": "Facebook",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Company_Brief",
+            "columnName": "Company_Brief",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "Submit_additional_150_words",
+            "columnName": "Submit_additional_150_words",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '552a013c9eb9951ad2869f686e8eda59')"
+    ]
+  }
+}

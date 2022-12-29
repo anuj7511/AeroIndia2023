@@ -1,9 +1,11 @@
 package universal.appfactory.aeroindia2023.exhibitors
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,9 +13,19 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.agendas.AgendaAdapter
+import universal.appfactory.aeroindia2023.agendas.AgendaModel
+import universal.appfactory.aeroindia2023.agendas.AgendaResponse
 import universal.appfactory.aeroindia2023.products.ProductAdapter
 import universal.appfactory.aeroindia2023.products.ProductModel
+import universal.appfactory.aeroindia2023.products.ProductResponse
 
 
 class SelectedExhibitorActivity : AppCompatActivity() {
@@ -75,6 +87,7 @@ class SelectedExhibitorActivity : AppCompatActivity() {
 
         recyclerview.layoutManager = LinearLayoutManager(this)
         data = ArrayList()
+        fetchProductData(53)
 
         products.setOnClickListener {
             set.clear(underLine.id, ConstraintSet.START)
@@ -91,5 +104,42 @@ class SelectedExhibitorActivity : AppCompatActivity() {
             cardView.visibility = View.VISIBLE
             recyclerview.visibility = View.INVISIBLE
         }
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun fetchProductData (id: Int) {
+        val productApi = ApiClient.getInstance().create(ApiInterface::class.java)
+
+        // launching a new coroutine
+        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+
+            productApi.getExhibitorProduct("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)?.enqueue(object :
+                Callback<ProductResponse?> {
+                override fun onResponse(
+                    call: Call<ProductResponse?>,
+                    response: Response<ProductResponse?>
+                ) {
+
+                    Log.d("Response: ", response.body().toString())
+                    data = response.body()?.data as java.util.ArrayList<ProductModel>
+                    // This will pass the ArrayList to our Adapter
+                    adapter = ProductAdapter(data, this@SelectedExhibitorActivity)
+                    // Setting the Adapter with the recyclerview
+                    recyclerview.adapter = adapter
+
+                }
+
+                override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("Failure Response: ", t.message.toString())
+                }
+            })
+
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
     }
 }

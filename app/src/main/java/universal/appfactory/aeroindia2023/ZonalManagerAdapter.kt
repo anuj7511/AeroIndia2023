@@ -25,10 +25,12 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
         val itemsViewModel = ZList[position]
         // sets the text to the textview from our itemHolder class
         holder.nameText.text = itemsViewModel.getName().trim()
-        holder.Mname.text= itemsViewModel.getMname().trim()
         holder.remarks.text = itemsViewModel.getremarks().trim()
         holder.date_Time.text = itemsViewModel.getdate_time().trim()
-        holder.status.text = itemsViewModel.getstatus().trim()
+        if(itemsViewModel.getstatus()==0)
+            holder.status.text="Pending"
+        else
+            holder.status.text="Resolved"
 
     }
 
@@ -42,7 +44,6 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
 
         // creating variables for our views.
         var nameText: TextView = itemView.findViewById(R.id.user)
-        var Mname: TextView = itemView.findViewById(R.id.Mname)
         var remarks: TextView = itemView.findViewById(R.id.remark)
         var date_Time: TextView = itemView.findViewById(R.id.date_time)
         var status: TextView = itemView.findViewById(R.id.status)

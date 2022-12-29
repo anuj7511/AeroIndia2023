@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class UserHistoryModel(
     @SerializedName("id")
-    private var id:String,
+    private var id:Int,
     @SerializedName("name")
     private var name:String,
     @SerializedName("phone")
     private var phone:String,
     @SerializedName("email_id")
-    private var email_id:Int,
+    private var email_id:String,
     @SerializedName("password")
     private var password:String,
     @SerializedName("verified_status")

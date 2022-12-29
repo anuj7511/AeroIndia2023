@@ -14,7 +14,7 @@ import retrofit2.Response
 
 class ZonalManagerActivity : AppCompatActivity() {
     private lateinit var adapter: ZonalManagerAdapter
-    private lateinit var data: ArrayList<ZonalManagerModel>
+    private  var data: ArrayList<ZonalManagerModel>?=null
     private lateinit var recyclerview: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +29,7 @@ class ZonalManagerActivity : AppCompatActivity() {
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.setHasFixedSize(true)
 
         // ArrayList of class ItemsViewModel
         data = ArrayList()
@@ -42,19 +43,26 @@ class ZonalManagerActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            ZApi.getmanagers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+            ZApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                 Callback<ZonalManagerResponse?> {
                 override fun onResponse(
                     call: Call<ZonalManagerResponse?>,
                     response: Response<ZonalManagerResponse?>,
                 ) {
-
-                    Log.d("Response: ", response.body().toString())
+                    if (response.isSuccessful() && response.body()!=null)
+                    { Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<ZonalManagerModel>
                     // This will pass the ArrayList to our Adapter
-                    adapter = ZonalManagerAdapter(data)
+                    adapter = ZonalManagerAdapter(data!!)
                     // Setting the Adapter with the recyclerview
-                    recyclerview.adapter = adapter
+                        recyclerview.adapter = adapter
+                        adapter.notifyDataSetChanged()
+                    }
+                    else
+                    {
+                        response.body()?.status?.let { Toast.makeText(applicationContext, it,Toast.LENGTH_SHORT).show() }
+                        response.body()?.message?.let { Log.i("response error", it) }
+                    }
 
                 }
 

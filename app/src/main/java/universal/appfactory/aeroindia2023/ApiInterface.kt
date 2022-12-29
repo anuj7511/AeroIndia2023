@@ -36,13 +36,13 @@ interface ApiInterface {
     fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserLoginDataResponseModel>
 
     @GET("api/get-complaint/1")
-    fun getproblem(@Header("Authorization") bearerToken: String) :Call<ManagerResponse?>?
+    fun getproblem(@Header("Authorization") bearerToken: String) :Call<ZonalManagerResponse?>?
 
     @GET("api/get-complaint")
-    fun getmanagers(@Header ("Authorisation") bearerToken: String) :Call<ZonalManagerResponse?>?
+    fun getmanagers(@Header ("Authorization") bearerToken: String) :Call<ManagerResponse?>?
 
     @GET("api/get-users")
-    fun gethistory(@Header("Authorisation") bearerToken: String) :Call<UserHistoryResponse?>?
+    fun gethistory(@Header("Authorization") bearerToken: String) :Call<UserHistoryResponse?>?
 
     @GET("api/get-agenda/{id}")
     fun getAgendaSpeaker(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<SpeakerResponse?>?

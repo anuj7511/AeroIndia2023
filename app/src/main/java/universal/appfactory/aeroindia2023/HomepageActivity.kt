@@ -31,6 +31,16 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var userId: String
 
 
+//    0 -> "Unknown role"
+//    1 -> "Attendee"
+//    2 -> "Delegates"
+//    3 -> "Liaison officer"
+//    4 -> "Washroom zonal manager"
+//    5 -> "Washroom super manager"
+//    6 -> "Exhibitor"
+//    7 -> "Media"
+
+
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,11 +98,10 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}       // FAQ
             8 -> {
                 navigateIntent = when (userId) {
-                    "4" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 1
-                    "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 2
-                    else -> Intent(this@HomepageActivity, Feedback::class.java)
-                } // Lodging complaints
-
+                    "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java) // Viewing complaints - zonal mgr
+                    "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints - super mgr
+                    else -> Intent(this@HomepageActivity, Feedback::class.java) // Lodging complaints
+                }
                 backpress=0
                 }
 

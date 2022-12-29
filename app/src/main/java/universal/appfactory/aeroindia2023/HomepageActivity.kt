@@ -15,6 +15,8 @@ import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaSortActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
+import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
+import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
 import universal.appfactory.aeroindia2023.products.ProductViewModel
 import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
@@ -28,6 +30,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var speakerViewModel: SpeakerViewModel
+    private lateinit var questionsViewModel : FaqsViewModel
     private lateinit var userId: String
 
 
@@ -71,6 +74,10 @@ class HomepageActivity : AppCompatActivity() {
         speakerViewModel = ViewModelProvider(this)[SpeakerViewModel::class.java]
         speakerViewModel.init((this as AppCompatActivity).applicationContext as Application)
         speakerViewModel.loadAllSpeakers(true)
+
+        questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
+        questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        questionsViewModel.loadAllFaqs(true)
     }
 
     fun iconClicked(view: View) {
@@ -90,7 +97,7 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}         // Driving directions
             4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
                     backpress=0}   // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
+            5 -> {navigateIntent = Intent(this@HomepageActivity, QuestionsActivity::class.java)
                     backpress=0}      // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)
                     backpress=0}     // Twitter or products
@@ -121,6 +128,7 @@ class HomepageActivity : AppCompatActivity() {
         agendaViewModel.loadAllAgendas(true)
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
+        questionsViewModel.loadAllFaqs(true)
 
         Log.i("Homepage activity message", "Home page refreshed")
         Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()

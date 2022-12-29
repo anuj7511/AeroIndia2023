@@ -10,9 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.activity_profile_info.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaSortActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
@@ -46,12 +44,11 @@ class HomepageActivity : AppCompatActivity() {
 
         Log.i("Homepage activity msg", "User ID: $userId")
 
-        if(userId == "4")
-            findViewById<ImageView>(R.id.complaint).setImageResource(R.drawable.icon_manager)
-        else if(userId =="5")
-            findViewById<ImageView>(R.id.complaint).setImageResource(R.drawable.icon_manager)
-        else
-            Log.i("Homepage activity msg", "No icon changed")
+        when (userId) {
+            "4" -> findViewById<ImageView>(R.id.complaint).setImageResource(R.drawable.icon_manager)
+            "5" -> findViewById<ImageView>(R.id.complaint).setImageResource(R.drawable.icon_manager)
+            else -> Log.i("Homepage activity msg", "No icon changed")
+        }
 
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
         agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
@@ -90,14 +87,11 @@ class HomepageActivity : AppCompatActivity() {
             7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaSortActivity::class.java)
                     backpress=0}       // FAQ
             8 -> {
-                if(userId == "4"){
-                    navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 1
-                }
-                else if(userId =="5"){
-                    navigateIntent = Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 2
-                }
-                else
-                    navigateIntent = Intent(this@HomepageActivity, Feedback::class.java) // Lodging complaints
+                navigateIntent = when (userId) {
+                    "4" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 1
+                    "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints 2
+                    else -> Intent(this@HomepageActivity, Feedback::class.java)
+                } // Lodging complaints
 
                 backpress=0
                 }

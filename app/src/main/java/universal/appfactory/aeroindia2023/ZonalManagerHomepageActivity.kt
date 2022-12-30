@@ -25,7 +25,8 @@ import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
 import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
 
-class HomepageActivity : AppCompatActivity() {
+
+class ZonalManagerHomepageActivity : AppCompatActivity() {
 
     private var backpress: Int = 0
     var navigableBundle = Bundle()
@@ -47,7 +48,7 @@ class HomepageActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_homepage)
+        setContentView(R.layout.activity_zonal_manager_homepage)
 
         supportActionBar?.hide()
 
@@ -78,35 +79,29 @@ class HomepageActivity : AppCompatActivity() {
         val tag = view.tag.toString()
         Log.i("Clicked Button tag", tag)
 
-        var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
+        var navigateIntent = Intent(this@ZonalManagerHomepageActivity,  DummyActivity::class.java)
 
         when(tag.toInt()){
-            0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
-                    backpress=0}       // Agenda
-            1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
-                    backpress=0}     // Speakers
-            2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
-                    backpress=0}        // Venue maps
-            3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)
-                    backpress=0}         // Driving directions
-            4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
-                    backpress=0}        // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, QuestionsActivity::class.java)
-                    backpress=0}      // Videos
-            6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)
-                    backpress=0}     // Twitter or products
-            7 -> {navigateIntent = Intent(this@HomepageActivity, FAQsAnswerActivity::class.java)
-                    backpress=0}       // FAQ
-            8 -> {
-                    navigateIntent = when(userType.toString()) {
-                        "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java) // Viewing complaints - zonal mgr
-                        "1" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints - super mgr
-                        else -> Intent(this@HomepageActivity, Feedback::class.java) // Lodging complaints
-                    }
-                    backpress=0
-                }
-            9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
-                    backpress=0}      // Profile view
+            0 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, AgendaActivity::class.java)
+                backpress=0}       // Agenda
+            1 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, SpeakersActivity::class.java)
+                backpress=0}     // Speakers
+            2 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, DummyActivity::class.java)
+                backpress=0}        // Venue maps
+            3 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, MapsActivity::class.java)
+                backpress=0}         // Driving directions
+            4 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, ExhibitorsActivity::class.java)
+                backpress=0}        // Resources
+            5 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, QuestionsActivity::class.java)
+                backpress=0}      // Videos
+            6 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, ProductsActivity::class.java)
+                backpress=0}     // Twitter or products
+            7 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, FAQsAnswerActivity::class.java)
+                backpress=0}       // FAQ
+            8 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, ZonalManagerActivity::class.java)
+                backpress=0}       // Manager
+            9 -> {navigateIntent = Intent(this@ZonalManagerHomepageActivity, ProfileActivity::class.java)
+                backpress=0}      // Profile view
             else -> {
                 Log.i("Homepage msg", "Nothing was clicked")
             }

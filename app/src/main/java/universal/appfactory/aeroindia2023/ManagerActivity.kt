@@ -15,7 +15,7 @@ import retrofit2.Response
 class ManagerActivity : AppCompatActivity() {
 
     private lateinit var adapter: ManagerAdapter
-    private  var data: ArrayList<ManagerModel>?=null
+    private var data: ArrayList<ManagerModel>?=null
     private lateinit var recyclerview: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,7 @@ class ManagerActivity : AppCompatActivity() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
-        adapter.notifyDataSetChanged()
+         adapter.notifyDataSetChanged()
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         fetchPData()

@@ -118,7 +118,12 @@ class OtpActivity : AppCompatActivity() {
 
                                 editPreferences.apply()
 
-                                val intent = Intent(this@OtpActivity, HomepageActivity::class.java)
+                                intent = when(userType){
+                                    "4" -> Intent(this@OtpActivity, ManagerHomepageActivity::class.java)
+                                    "5" -> Intent(this@OtpActivity, ZonalManagerHomepageActivity::class.java)
+                                    else -> Intent(this@OtpActivity, HomepageActivity::class.java)
+                                }
+
                                 intent.putExtras(navigableBundle)
                                 Toast.makeText(this@OtpActivity, "Logged in successfully", Toast.LENGTH_SHORT).show()
                                 startActivity(intent)

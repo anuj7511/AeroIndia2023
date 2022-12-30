@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
-    tools:context=".HomepageActivity" >
+    tools:context=".ManagerHomepageActivity" >
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/iconGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foregroundGravity="center_horizontal"
         android:layout_marginBottom="30dp"
+        android:foregroundGravity="center_horizontal"
         app:columnCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,16 +117,17 @@
             app:srcCompat="@drawable/faq" />
 
         <ImageView
-            android:id="@+id/complaint"
-            android:layout_width="120dp"
-            android:layout_height="125dp"
+            android:id="@+id/manager"
+            android:layout_width="60sp"
+            android:layout_height="60dp"
+            android:layout_margin="25sp"
             android:onClick="iconClicked"
             android:paddingBottom="20sp"
             android:paddingStart="10sp"
             android:tag="8"
             app:layout_column="2"
             app:layout_row="2"
-            app:srcCompat="@drawable/complaint" />
+            app:srcCompat="@drawable/icon_manager" />
 
     </androidx.gridlayout.widget.GridLayout>
 
@@ -188,7 +189,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="254dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/iconGrid"

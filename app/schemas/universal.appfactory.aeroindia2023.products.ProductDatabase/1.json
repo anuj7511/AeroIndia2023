@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0f371ff2d9522e1aa0c66d0997b02fdd",
+    "identityHash": "64a285347c3da63e73f2e85d6557be69",
     "entities": [
       {
         "tableName": "products",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `event_id` TEXT NOT NULL, `product_title` TEXT NOT NULL, `exhibitor_name` TEXT NOT NULL, `product_image` TEXT NOT NULL, `hall_stall` TEXT NOT NULL, `weight` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `first_category` TEXT NOT NULL, `second_categoy` TEXT NOT NULL, `third_categoy` TEXT NOT NULL, `updated` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `event_id` TEXT NOT NULL, `product_title` TEXT NOT NULL, `exhibitor_id` TEXT NOT NULL, `product_image` TEXT NOT NULL, `hall_stall` TEXT NOT NULL, `weight` TEXT NOT NULL, `description` TEXT NOT NULL, `created` TEXT NOT NULL, `first_category` TEXT NOT NULL, `second_categoy` TEXT NOT NULL, `third_categoy` TEXT NOT NULL, `updated` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -27,8 +27,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "exhibitor_name",
-            "columnName": "exhibitor_name",
+            "fieldPath": "exhibitor_id",
+            "columnName": "exhibitor_id",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -100,7 +100,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0f371ff2d9522e1aa0c66d0997b02fdd')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '64a285347c3da63e73f2e85d6557be69')"
     ]
   }
 }

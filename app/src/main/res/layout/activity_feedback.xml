@@ -49,6 +49,11 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:contentDescription="@string/line"
+            android:src="@drawable/profile_line"/>
 
         <TextView
             android:id="@+id/History"

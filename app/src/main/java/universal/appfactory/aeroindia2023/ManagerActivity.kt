@@ -31,7 +31,6 @@ class ManagerActivity : AppCompatActivity() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
-         adapter.notifyDataSetChanged()
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         fetchPData()

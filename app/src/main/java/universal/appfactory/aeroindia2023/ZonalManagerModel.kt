@@ -8,7 +8,7 @@ data class ZonalManagerModel(
     @SerializedName("manager")
     private var manager:String,
     @SerializedName("event_id")
-    private var event_id:Int,
+    private var event_id:String,
     @SerializedName("remarks")
     private var remarks:String,
     @SerializedName("date_time")

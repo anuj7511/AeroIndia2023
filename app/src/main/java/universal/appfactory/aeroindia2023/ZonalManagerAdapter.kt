@@ -27,7 +27,11 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
         holder.washId.text=itemsViewModel.getwashId().trim()
         holder.nameText.text = itemsViewModel.getName().trim()
         holder.remarks.text = itemsViewModel.getremarks().trim()
-        holder.date_Time.text = itemsViewModel.getdate_time().trim()
+        var DT:String= itemsViewModel.getdate_time().trim()
+        var date:CharSequence=DT.subSequence(0,11)
+        var time:String=DT.substring(11)
+        holder.date.text=date
+        holder.time.text=time
         if(itemsViewModel.getstatus()==0)
             holder.status.text="Pending"
         else
@@ -47,7 +51,8 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
         var washId:TextView=itemView.findViewById(R.id.BId)
         var nameText: TextView = itemView.findViewById(R.id.user)
         var remarks: TextView = itemView.findViewById(R.id.r)
-        var date_Time: TextView = itemView.findViewById(R.id.date_time)
+        var date: TextView = itemView.findViewById(R.id.date)
+        var time:TextView=itemView.findViewById(R.id.time)
         var status: TextView = itemView.findViewById(R.id.Rstatus)
 
 

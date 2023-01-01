@@ -77,6 +77,7 @@ class HomepageActivity : AppCompatActivity() {
 
     fun iconClicked(view: View) {
         val tag = view.tag.toString()
+
         Log.i("Clicked Button tag", tag)
 
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)

@@ -25,7 +25,6 @@ import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
 import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
 
-
 class ManagerHomepageActivity : AppCompatActivity() {
 
     private var backpress: Int = 0
@@ -36,7 +35,6 @@ class ManagerHomepageActivity : AppCompatActivity() {
     private lateinit var questionsViewModel : FaqsViewModel
     private lateinit var userType: String
 
-
 //    0 -> "Unknown role"
 //    1 -> "Attendee"
 //    2 -> "Delegates"
@@ -45,7 +43,6 @@ class ManagerHomepageActivity : AppCompatActivity() {
 //    5 -> "Washroom super manager"
 //    6 -> "Exhibitor"
 //    7 -> "Media"
-
 
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,9 +101,7 @@ class ManagerHomepageActivity : AppCompatActivity() {
                 backpress=0}       // Manager
             9 -> {navigateIntent = Intent(this@ManagerHomepageActivity, ProfileActivity::class.java)
                 backpress=0}      // Profile view
-            else -> {
-                Log.i("Homepage msg", "Nothing was clicked")
-            }
+            else -> { Log.i("Homepage msg", "Nothing was clicked") }
         }
 
         navigateIntent.putExtras(navigableBundle)

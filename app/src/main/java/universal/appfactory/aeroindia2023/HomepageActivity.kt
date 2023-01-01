@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_profile_info.*
@@ -82,34 +83,26 @@ class HomepageActivity : AppCompatActivity() {
 
         when(tag.toInt()){
             0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
-                    backpress=0}       // Agenda
+                    backpress=0}         // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
-                    backpress=0}     // Speakers
+                    backpress=0}         // Speakers
             2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
-                    backpress=0}        // Venue maps
+                    backpress=0}         // Venue maps
             3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)
                     backpress=0}         // Driving directions
             4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
-                    backpress=0}        // Resources
+                    backpress=0}         // Resources
             5 -> {navigateIntent = Intent(this@HomepageActivity, QuestionsActivity::class.java)
-                    backpress=0}      // Videos
+                    backpress=0}         // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)
-                    backpress=0}     // Twitter or products
+                    backpress=0}         // Twitter or products
             7 -> {navigateIntent = Intent(this@HomepageActivity, FAQsAnswerActivity::class.java)
-                    backpress=0}       // FAQ
-            8 -> {
-                    navigateIntent = when(userType.toString()) {
-                        "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java) // Viewing complaints - zonal mgr
-                        "1" -> Intent(this@HomepageActivity, ManagerActivity::class.java) // Viewing complaints - super mgr
-                        else -> Intent(this@HomepageActivity, Feedback::class.java) // Lodging complaints
-                    }
-                    backpress=0
-                }
+                    backpress=0}         // FAQ
+            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)
+                    backpress=0 }        // Lodging complaints
             9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
-                    backpress=0}      // Profile view
-            else -> {
-                Log.i("Homepage msg", "Nothing was clicked")
-            }
+                    backpress=0}         // Profile view
+            else -> { Log.i("Homepage msg", "Nothing was clicked") }
         }
 
         navigateIntent.putExtras(navigableBundle)

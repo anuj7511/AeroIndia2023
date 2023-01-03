@@ -3,12 +3,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.*
 
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.coroutines.*
 
@@ -42,13 +42,25 @@ class Feedback : AppCompatActivity() {
             complaint_id= bundle.getString("userId")!!
         }
         setContentView(view)
+
+        val set = ConstraintSet()
+        val parent = findViewById<ConstraintLayout>(R.id.parent)
+        val information = findViewById<TextView>(R.id.information)
+        val underLine = findViewById<ImageView>(R.id.under_line)
+        val cardView = findViewById<CardView>(R.id.scrollView)
         val btn = findViewById<TextView>(R.id.submit)
         val history= findViewById<TextView>(R.id.History)
         val feedback = findViewById<EditText>(R.id.writeText)
+
         setOnClickListener()
+        set.clone(parent)
         setupScanner()
 
-        history.setOnClickListener {  val intent = Intent(this, UserHistoryActivity::class.java)
+        history.setOnClickListener {   set.clear(underLine.id, ConstraintSet.START)
+            set.connect(underLine.id, ConstraintSet.END, parent.id, ConstraintSet.END)
+            set.applyTo(parent)
+            val intent = Intent(this, UserHistoryActivity::class.java)
+            intent.putExtra("Name", complaint_id)
             startActivity(intent) }
         btn.setOnClickListener { submitFeedback(feedback.text.toString(),washroom_Id,complaint_id) }
 
@@ -61,6 +73,7 @@ class Feedback : AppCompatActivity() {
     }
 
     private fun setOnClickListener() {
+
         binding.scanQrButton.setOnClickListener { performAction() }
     }
     private fun performAction() {
@@ -88,7 +101,7 @@ class Feedback : AppCompatActivity() {
 
     @OptIn(DelicateCoroutinesApi::class)
     fun submitFeedback(feedback:String, washroomId:String,complaintId:String) {
-        val requestModel = RequestModel(washroomId, "dikshabharti106@gmail.com",complaintId, feedback)
+        val requestModel = RequestModel(washroomId,complaintId, feedback)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {

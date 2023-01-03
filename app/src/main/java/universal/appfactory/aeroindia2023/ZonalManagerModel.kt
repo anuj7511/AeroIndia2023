@@ -21,6 +21,12 @@ data class ZonalManagerModel(
     private var washroom_id:String
 
     ) {
+    fun getComplaintId():Int{
+        return complaint_id
+    }
+    fun getM():String{
+        return manager
+    }
     fun getName(): String {
         return complained_user
     }

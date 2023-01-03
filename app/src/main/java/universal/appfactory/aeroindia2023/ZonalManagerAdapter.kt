@@ -1,12 +1,14 @@
 package universal.appfactory.aeroindia2023
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : RecyclerView.Adapter<ZonalManagerAdapter.ViewHolder>() {
+class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,private val mContext: Context) : RecyclerView.Adapter<ZonalManagerAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,10 +34,17 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>) : Rec
         var time:String=DT.substring(11)
         holder.date.text=date
         holder.time.text=time
-        if(itemsViewModel.getstatus()==0)
+        if(itemsViewModel.getstatus()==1)
             holder.status.text="Pending"
         else
             holder.status.text="Resolved"
+        holder.status.setOnClickListener{
+            val intent=Intent(mContext,ResolvedRemarksActivity::class.java)
+            intent.putExtra("CompId",itemsViewModel.getComplaintId())
+            intent.putExtra("Manager",itemsViewModel.getM())
+            mContext.startActivity(intent)
+        }
+
 
     }
 

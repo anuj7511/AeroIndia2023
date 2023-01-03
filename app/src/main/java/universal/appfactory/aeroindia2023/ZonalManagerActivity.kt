@@ -18,17 +18,22 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
+import universal.appfactory.aeroindia2023.databinding.ActivityZonalManagerBinding
+import kotlin.properties.Delegates
 
 class ZonalManagerActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityZonalManagerBinding
     private lateinit var adapter: ZonalManagerAdapter
     private  var data: ArrayList<ZonalManagerModel>?=null
     private lateinit var recyclerview: RecyclerView
-    private lateinit var arrow: ImageButton
-    private lateinit var hiddenView: TextView
-    private lateinit var cardView: CardView
+    private lateinit var zonalmanagerid:String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zonal_manager)
+
 
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setDisplayShowCustomEnabled(true)
@@ -41,32 +46,17 @@ class ZonalManagerActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
         // ArrayList of class ItemsViewModel
-        data = ArrayList()
-        fetchPData()
-        val view = layoutInflater.inflate(R.layout.zonal_manager_user_card, null)
-        cardView = view.findViewById(R.id.remarkCard)
-        arrow = view.findViewById(R.id.arrow_button)
-        hiddenView = view.findViewById(R.id.r)
-        arrow.setOnClickListener {
-            // If the CardView is already expanded, set its visibility
-            // to gone and change the expand less icon to expand more.
-            if (hiddenView.visibility == View.VISIBLE) {
-                // The transition of the hiddenView is carried out by the TransitionManager class.
-                // Here we use an object of the AutoTransition Class to create a default transition
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    TransitionManager.beginDelayedTransition(cardView, AutoTransition())
-                }
-                hiddenView.visibility = View.GONE
-                arrow.setImageResource(R.drawable.ic_baseline_expand_more_24)
-            } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    TransitionManager.beginDelayedTransition(cardView, AutoTransition())
-                }
-                hiddenView.visibility = View.VISIBLE
-                arrow.setImageResource(R.drawable.ic_baseline_expand_less_24)
-            }
 
+        binding = ActivityZonalManagerBinding.inflate(layoutInflater)
+        val view = binding.root
+        val bundle=intent.extras
+        if(bundle!=null)
+        {
+            zonalmanagerid= bundle.getString("userId")!!
         }
+        data = ArrayList()
+     fetchPData()
+
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -76,7 +66,7 @@ class ZonalManagerActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            ZApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+            ZApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",zonalmanagerid)?.enqueue(object :
                 Callback<ZonalManagerResponse?> {
                 override fun onResponse(
                     call: Call<ZonalManagerResponse?>,
@@ -85,8 +75,10 @@ class ZonalManagerActivity : AppCompatActivity() {
                     if (response.isSuccessful() && response.body()!=null)
                     { Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<ZonalManagerModel>
+
+
                     // This will pass the ArrayList to our Adapter
-                    adapter = ZonalManagerAdapter(data!!)
+                    adapter = ZonalManagerAdapter(data!!,this@ZonalManagerActivity)
                     // Setting the Adapter with the recyclerview
                         recyclerview.adapter = adapter
                         adapter.notifyDataSetChanged()

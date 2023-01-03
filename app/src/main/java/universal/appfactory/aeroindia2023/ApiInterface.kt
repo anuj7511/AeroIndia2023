@@ -37,14 +37,17 @@ interface ApiInterface {
     @POST("api/login-user")
     fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserLoginDataResponseModel>
 
-    @GET("api/get-complaint/1")
-    fun getproblem(@Header("Authorization") bearerToken: String) :Call<ZonalManagerResponse?>?
+    @POST("api/complaint-resolve-save")
+    fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorisation") bearerToken:String):Call<ResolvedResponseModel>
+
+    @GET("api/get-complaint/{id}")
+    fun getproblem(@Header("Authorization") bearerToken: String,@Path("id") id: String) :Call<ZonalManagerResponse?>?
 
     @GET("api/get-complaint")
     fun getmanagers(@Header ("Authorization") bearerToken: String) :Call<ManagerResponse?>?
 
-    @GET("api/get-users")
-    fun gethistory(@Header("Authorization") bearerToken: String) :Call<UserHistoryResponse?>?
+    @GET("api/get-user-complaint-history/{id}")
+    fun gethistory(@Header("Authorization") bearerToken: String,@Path("id") id: String) :Call<UserHistoryResponse?>?
 
     @GET("api/get-agenda/{id}")
     fun getAgendaSpeaker(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<SpeakerResponse?>?

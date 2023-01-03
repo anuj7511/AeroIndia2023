@@ -20,6 +20,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ResolvedRemarksActivity"
+            android:exported="false"
+            android:label="@string/title_activity_resolved_remarks"
+            android:theme="@style/Theme.AeroIndia2023.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ZonalManagerHomepageActivity"
             android:exported="true">
             <meta-data

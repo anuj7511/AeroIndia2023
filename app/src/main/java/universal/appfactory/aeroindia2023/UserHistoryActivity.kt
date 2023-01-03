@@ -17,6 +17,7 @@ class UserHistoryActivity : AppCompatActivity() {
     private lateinit var adapter: UserHistoryAdapter
     private  var data: ArrayList<UserHistoryModel>? = null
     private lateinit var recyclerview: RecyclerView
+    lateinit var user_id:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_history)
@@ -34,6 +35,8 @@ class UserHistoryActivity : AppCompatActivity() {
 
         // ArrayList of class ItemsViewModel
         data = ArrayList()
+        val intent = intent
+         user_id = intent.getStringExtra("Name")!!
         fetchPData()   }
 
 
@@ -44,7 +47,7 @@ class UserHistoryActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            UApi.gethistory("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(
+            UApi.gethistory("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",user_id)?.enqueue(
                 object :
                     Callback<UserHistoryResponse?> {
                     override fun onResponse(

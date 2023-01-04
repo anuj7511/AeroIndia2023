@@ -175,7 +175,7 @@ class DelegateModel(
         return driver_name
     }
 
-    fun getDiver_mobile_number(): String {
+    fun getDriver_mobile_number(): String {
         return driver_mobile_number
     }
 

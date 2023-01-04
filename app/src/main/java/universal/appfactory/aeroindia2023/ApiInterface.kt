@@ -5,9 +5,11 @@ import universal.appfactory.aeroindia2023.agendas.AgendaResponse
 import universal.appfactory.aeroindia2023.agendas.CategoryResponse
 import universal.appfactory.aeroindia2023.agendas.LocationResponse
 import universal.appfactory.aeroindia2023.agendas.TimeResponse
+import universal.appfactory.aeroindia2023.delegate.DelegateResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse2
 import universal.appfactory.aeroindia2023.faqs.FaqsResponse
+import universal.appfactory.aeroindia2023.liaison_officer.LiaisonResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 
@@ -72,5 +74,11 @@ interface ApiInterface {
 
     @GET("api/get-faq/{id}")
     fun getFaqs(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<FaqsResponse?>?
+
+    @GET("api/get-delegate/{id}")
+    fun getDelegates(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<DelegateResponse?>?
+
+    @GET("api/get-delegate/{id}")
+    fun getLiaisonOfficers(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<LiaisonResponse?>?
 
 }

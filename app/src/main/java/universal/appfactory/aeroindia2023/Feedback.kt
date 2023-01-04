@@ -23,7 +23,7 @@ class Feedback : AppCompatActivity() {
 
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
-    lateinit var washroom_Id:String
+    var washroom_Id:Int =0
     lateinit var complaint_id:String// Previously lateinit washroomId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,22 +43,16 @@ class Feedback : AppCompatActivity() {
         }
         setContentView(view)
 
-        val set = ConstraintSet()
-        val parent = findViewById<ConstraintLayout>(R.id.parent)
-        val information = findViewById<TextView>(R.id.information)
-        val underLine = findViewById<ImageView>(R.id.under_line)
-        val cardView = findViewById<CardView>(R.id.scrollView)
+
         val btn = findViewById<TextView>(R.id.submit)
         val history= findViewById<TextView>(R.id.History)
         val feedback = findViewById<EditText>(R.id.writeText)
 
         setOnClickListener()
-        set.clone(parent)
+
         setupScanner()
 
-        history.setOnClickListener {   set.clear(underLine.id, ConstraintSet.START)
-            set.connect(underLine.id, ConstraintSet.END, parent.id, ConstraintSet.END)
-            set.applyTo(parent)
+        history.setOnClickListener {
             val intent = Intent(this, UserHistoryActivity::class.java)
             intent.putExtra("Name", complaint_id)
             startActivity(intent) }
@@ -87,7 +81,7 @@ class Feedback : AppCompatActivity() {
             if (result.contents == null) {
                 Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show()
             } else {
-                   washroom_Id=result.contents
+                   washroom_Id=result.contents.toInt()
 
                     // Data not in the expected format. So, whole object as toast message.
                     Toast.makeText(this, result.contents, Toast.LENGTH_LONG).show()
@@ -100,7 +94,7 @@ class Feedback : AppCompatActivity() {
 
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun submitFeedback(feedback:String, washroomId:String,complaintId:String) {
+    fun submitFeedback(feedback:String, washroomId:Int,complaintId:String) {
         val requestModel = RequestModel(washroomId,complaintId, feedback)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)

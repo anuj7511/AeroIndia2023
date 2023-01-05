@@ -3,28 +3,45 @@ package universal.appfactory.aeroindia2023
 import com.google.gson.annotations.SerializedName
 
 data class UserHistoryModel(
-    @SerializedName("id")
-    private var id:String,
-    @SerializedName("name")
-    private var name:String,
-    @SerializedName("phone")
-    private var phone:String,
-    @SerializedName("email_id")
-    private var email_id:Int,
-    @SerializedName("password")
-    private var password:String,
-    @SerializedName("verified_status")
-    private var verifiedStatus:String,
+    @SerializedName("complaint_id")
+    private var Cid:Int,
+    @SerializedName("washroom_id")
+    private var Wid:Int,
+    @SerializedName("washroom")
+    private var washroom:String,
+    @SerializedName("event_id")
+    private var event_id:String,
+    @SerializedName("date_time")
+    private var createdate:String,
+    @SerializedName("action_taken")
+    private var verifiedStatus:Int,
+    @SerializedName("complained_by")
+    private var complained_by:String,
+    @SerializedName("remarks")
+    private var remarks:String,
+    @SerializedName("manager_id")
+    private var manager_id:Int,
+    @SerializedName("manager")
+    private var manager:String,
+    @SerializedName("resolved_remarks")
+    private var resolved_remarks:String,
     @SerializedName("updated_at")
     private var updatedate:String,
-    @SerializedName("created_at")
-    private var createdate:String,
+
 
     ) {
-    fun getverifiedstatus(): String {
+    fun getStatus(): Int{
         return verifiedStatus
     }
-
+    fun getremarks():String{
+        return remarks
+    }
+    fun getresolvedremarks():String{
+        return resolved_remarks
+    }
+    fun getmanager():String{
+        return manager
+    }
     fun getupdateDate(): String {
         return updatedate
     }

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import kotlinx.android.synthetic.main.activity_profile_info.*
 import kotlinx.android.synthetic.main.zonal_manager_user_card.*
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -60,8 +61,15 @@ class UserLoginActivity : AppCompatActivity() {
             navigableBundle.putString("foreignKeyId", sharedPreferences.getString("foreignKeyId", "-"))
             navigableBundle.putString("userType", sharedPreferences.getString("userType", "-"))
 
+            val userType: String = sharedPreferences.getString("userType", "-").toString()
+
             backpress=0
-            intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)
+            intent = when(userType){
+                "4" -> Intent(this@UserLoginActivity, ManagerHomepageActivity::class.java)
+                "5" -> Intent(this@UserLoginActivity, ZonalManagerHomepageActivity::class.java)
+                else -> Intent(this@UserLoginActivity, HomepageActivity::class.java)
+            }
+
             intent.putExtras(navigableBundle)
             startActivity(intent)
             this@UserLoginActivity.finishAffinity()

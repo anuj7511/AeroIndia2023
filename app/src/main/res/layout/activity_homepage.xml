@@ -9,8 +9,9 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/iconGrid"
-        android:layout_width="350dp"
-        android:layout_height="355dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center_horizontal"
         android:layout_marginBottom="30dp"
         app:columnCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -116,16 +117,16 @@
             app:srcCompat="@drawable/faq" />
 
         <ImageView
-            android:id="@+id/complaint"
+            android:id="@+id/lodging_complaint"
             android:layout_width="120dp"
             android:layout_height="125dp"
             android:onClick="iconClicked"
             android:paddingBottom="20sp"
-            android:paddingLeft="10sp"
+            android:paddingStart="10sp"
             android:tag="8"
             app:layout_column="2"
             app:layout_row="2"
-            app:srcCompat="@drawable/complaint" />
+            app:srcCompat="@drawable/lodging_complaint" />
 
     </androidx.gridlayout.widget.GridLayout>
 
@@ -143,10 +144,11 @@
         <ImageView
             android:id="@+id/refreshIcon"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="25sp"
             android:onClick="refreshPage"
             android:layout_marginEnd="20sp"
-            android:layout_height="match_parent"
+            android:padding="10sp"
             app:srcCompat="@drawable/refresh" />
 
         <View
@@ -158,8 +160,8 @@
             android:id="@+id/userIcon"
             android:tag="9"
             android:onClick="iconClicked"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
             android:layout_margin="3sp"
             app:srcCompat="@drawable/ic_profile" />
 
@@ -186,7 +188,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="254dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/iconGrid"

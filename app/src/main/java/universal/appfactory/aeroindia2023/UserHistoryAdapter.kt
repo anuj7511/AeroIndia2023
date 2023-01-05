@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel>) : RecyclerView.Adapter<UserHistoryAdapter.ViewHolder>() {
+class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel> ) : RecyclerView.Adapter<UserHistoryAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,9 +24,22 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel>) : Recyc
         // setting data to our views of recycler view.
         val itemsViewModel = UList[position]
         // sets the text to the textview from our itemHolder class
-        holder.cdate.text= itemsViewModel.getcreateDate().trim()
-        holder.udate.text = itemsViewModel.getupdateDate().trim()
-        holder.vstatus.text = itemsViewModel.getverifiedstatus().trim()
+
+        holder.manager.text= itemsViewModel.getmanager().trim()
+        var x:Int=itemsViewModel.getStatus()
+
+        var DT:String= itemsViewModel.getupdateDate().trim()
+        var date:CharSequence=DT.subSequence(0,11)
+        var time:String=DT.substring(11)
+        holder.Updateddate.text=date
+        holder.Updatedtime.text=time
+        var CDT:String= itemsViewModel.getcreateDate().trim()
+        var Cdate:CharSequence=CDT.subSequence(0,11)
+        var Ctime:String=DT.substring(11)
+        holder.Createddate.text=Cdate
+        holder.Createdtime.text=Ctime
+        holder.resolvedRemarks.text = itemsViewModel.getresolvedremarks().trim()
+
 
 
     }
@@ -40,9 +53,13 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel>) : Recyc
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
         // creating variables for our views.
-        var udate:TextView = itemView.findViewById(R.id.udatetime)
-        var cdate: TextView = itemView.findViewById(R.id.cdatetime)
-        var vstatus: TextView = itemView.findViewById(R.id.vstatus)
+        var manager:TextView = itemView.findViewById(R.id.Mgr)
+        var Createddate:TextView = itemView.findViewById(R.id.Cdate)
+        var Createdtime:TextView = itemView.findViewById(R.id.Ctime)
+        var Updateddate:TextView = itemView.findViewById(R.id.Udate)
+        var Updatedtime: TextView = itemView.findViewById(R.id.Utime)
+        var resolvedRemarks: TextView = itemView.findViewById(R.id.ResolvedRemarks)
+
 
 
     }

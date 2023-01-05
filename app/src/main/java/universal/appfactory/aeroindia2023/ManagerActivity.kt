@@ -15,7 +15,7 @@ import retrofit2.Response
 class ManagerActivity : AppCompatActivity() {
 
     private lateinit var adapter: ManagerAdapter
-    private lateinit var data: ArrayList<ManagerModel>
+    private var data: ArrayList<ManagerModel>?=null
     private lateinit var recyclerview: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class ManagerActivity : AppCompatActivity() {
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
-
+        recyclerview.setHasFixedSize(true)
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         fetchPData()
@@ -44,19 +44,25 @@ class ManagerActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
 
-            PApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+            PApi.getmanagers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                     Callback<ManagerResponse?> {
                     override fun onResponse(
                         call: Call<ManagerResponse?>,
                         response: Response<ManagerResponse?>,
                     ) {
-
-                        Log.d("Response: ", response.body().toString())
-                        data = response.body()?.data as ArrayList<ManagerModel>
-                        // This will pass the ArrayList to our Adapter
-                        adapter = ManagerAdapter(data)
-                        // Setting the Adapter with the recyclerview
-                        recyclerview.adapter = adapter
+                        if (response.isSuccessful() && response.body()!=null) {
+                            Log.d("Response: ", response.body().toString())
+                            data = response.body()?.data as ArrayList<ManagerModel>
+                            // This will pass the ArrayList to our Adapter
+                            adapter = ManagerAdapter(data!!)
+                            // Setting the Adapter with the recyclerview
+                            recyclerview.adapter = adapter
+                        }
+                        else
+                        {
+                            response.body()?.status?.let { Toast.makeText(applicationContext, it,Toast.LENGTH_SHORT).show() }
+                            response.body()?.message?.let { Log.i("response error", it) }
+                        }
 
                     }
 

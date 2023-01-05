@@ -4,28 +4,35 @@ import com.google.gson.annotations.SerializedName
 
 data class ZonalManagerModel(
     @SerializedName("complaint_id")
-    private var complaint_id:String,
-    @SerializedName("manager_id")
-    private var manager_id:String,
+    private var complaint_id:Int,
     @SerializedName("manager")
     private var manager:String,
     @SerializedName("event_id")
-    private var event_id:Int,
+    private var event_id:String,
     @SerializedName("remarks")
     private var remarks:String,
     @SerializedName("date_time")
     private var date_time:String,
     @SerializedName("action_taken")
-    private var action_taken:String,
-    @SerializedName("complained_user")
+    private var action_taken:Int,
+    @SerializedName("complained_by")
     private var complained_user:String,
+    @SerializedName("washroom")
+    private var washroom_id:String
 
     ) {
+    fun getComplaintId():Int{
+        return complaint_id
+    }
+    fun getM():String{
+        return manager
+    }
     fun getName(): String {
         return complained_user
     }
-    fun getMname(): String{
-        return  manager
+    fun getwashId():String
+    {
+        return washroom_id
     }
     fun getremarks(): String {
         return remarks
@@ -35,7 +42,7 @@ data class ZonalManagerModel(
         return date_time
     }
 
-    fun getstatus(): String {
+    fun getstatus(): Int {
         return action_taken
     }
 }

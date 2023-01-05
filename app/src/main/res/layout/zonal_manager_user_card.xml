@@ -10,57 +10,152 @@
     app:cardBackgroundColor="@color/white"
     android:layout_margin="5dp">
     <LinearLayout
-        android:layout_width="0dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="10dp"
         android:layout_marginTop="5dp"
         android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/date_time"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Date"
-            android:textSize="20sp"/>
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/BathroomId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_margin="3dp"
+                android:text="Bathroom Id :"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/BId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="Id"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/user"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="user"
-            android:textSize="16sp"
-            android:layout_marginTop="15dp"/>
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/Cuser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Registered User :"
+                android:textSize="16sp"
+                android:layout_margin="3dp"/>
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="User"
+                android:textSize="16sp"
+                android:layout_margin="3dp"/>
+        </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/white">
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/calendar" />
 
-        <TextView
-            android:id="@+id/Mname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="Mname"
-            android:textSize="14sp"
-            android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/date_background"
+                    android:text="DateTime"
+                    android:padding="3dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/remark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="remark"
-            android:textSize="14sp"
-            android:layout_marginBottom="3dp"/>
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:background="@drawable/time_background"
+                    android:layout_marginStart="110dp"
+                    android:text="@string/_3_30pm"
+                    android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+         <TextView
+             android:id="@+id/remarks"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_margin="3dp"
+             android:text="Remarks :"
+             android:textColor="@color/black"
+             android:textSize="20sp"
+             android:textStyle="bold"/>
+         <EditText
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textSize= "16dp"
+             android:background="@drawable/edit_text_bottom_border"
+             android:layout_margin="3dp"
+             android:textColor="@color/black"/>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="status"
-            android:textSize="14sp"
-            android:layout_marginBottom="3dp"/>
+            android:orientation="horizontal"
+            android:layout_margin="3dp">
+
+            <TextView
+                android:id="@+id/Pstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Rstatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Pending"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:layout_weight="1"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
+
+
 </com.google.android.material.card.MaterialCardView>

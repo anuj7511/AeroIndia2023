@@ -5,8 +5,11 @@ import universal.appfactory.aeroindia2023.agendas.AgendaResponse
 import universal.appfactory.aeroindia2023.agendas.CategoryResponse
 import universal.appfactory.aeroindia2023.agendas.LocationResponse
 import universal.appfactory.aeroindia2023.agendas.TimeResponse
+import universal.appfactory.aeroindia2023.delegate.DelegateResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse2
+import universal.appfactory.aeroindia2023.faqs.FaqsResponse
+import universal.appfactory.aeroindia2023.liaison_officer.LiaisonResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 
@@ -36,14 +39,17 @@ interface ApiInterface {
     @POST("api/login-user")
     fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserLoginDataResponseModel>
 
-    @GET("api/get-complaint/1")
-    fun getproblem(@Header("Authorization") bearerToken: String) :Call<ManagerResponse?>?
+    @POST("api/complaint-resolve-save")
+    fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorisation") bearerToken:String):Call<ResolvedResponseModel>
+
+    @GET("api/get-complaint/{id}")
+    fun getproblem(@Header("Authorization") bearerToken: String,@Path("id") id: String) :Call<ZonalManagerResponse?>?
 
     @GET("api/get-complaint")
-    fun getmanagers(@Header ("Authorisation") bearerToken: String) :Call<ZonalManagerResponse?>?
+    fun getmanagers(@Header ("Authorization") bearerToken: String) :Call<ManagerResponse?>?
 
-    @GET("api/get-users")
-    fun gethistory(@Header("Authorisation") bearerToken: String) :Call<UserHistoryResponse?>?
+    @GET("api/get-user-complaint-history/{id}")
+    fun gethistory(@Header("Authorization") bearerToken: String,@Path("id") id: String) :Call<UserHistoryResponse?>?
 
     @GET("api/get-agenda/{id}")
     fun getAgendaSpeaker(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<SpeakerResponse?>?
@@ -65,5 +71,14 @@ interface ApiInterface {
 
     @GET("api/get-exhibitor/{id}")
     fun getProductExhibitor(@Header("Authorization") bearerToken: String, @Path("id") id: String) : Call<ExhibitorResponse2?>?
+
+    @GET("api/get-faq/{id}")
+    fun getFaqs(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<FaqsResponse?>?
+
+    @GET("api/get-delegate/{id}")
+    fun getDelegates(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<DelegateResponse?>?
+
+    @GET("api/get-delegate/{id}")
+    fun getLiaisonOfficers(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<LiaisonResponse?>?
 
 }

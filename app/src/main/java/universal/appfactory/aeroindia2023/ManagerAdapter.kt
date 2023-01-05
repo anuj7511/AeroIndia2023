@@ -24,10 +24,14 @@ class ManagerAdapter (private val pList: ArrayList<ManagerModel>) : RecyclerView
         // setting data to our views of recycler view.
         val itemsViewModel = pList[position]
         // sets the text to the textview from our itemHolder class
+        holder.manager.text=itemsViewModel.getManager().trim()
         holder.nameText.text = itemsViewModel.getName().trim()
         holder.remarks.text = itemsViewModel.getremarks().trim()
         holder.date_Time.text = itemsViewModel.getdate_time().trim()
-        holder.status.text=itemsViewModel.getstatus().trim()
+        if(itemsViewModel.getstatus()==0)
+            holder.status.text="Pending"
+        else
+            holder.status.text="Resolved"
 
     }
 
@@ -40,10 +44,11 @@ class ManagerAdapter (private val pList: ArrayList<ManagerModel>) : RecyclerView
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
 
         // creating variables for our views.
+        var manager:TextView=itemView.findViewById(R.id.mgr)
         var nameText: TextView = itemView.findViewById(R.id.user)
-        var remarks: TextView = itemView.findViewById(R.id.remark)
+        var remarks: TextView = itemView.findViewById(R.id.r)
         var date_Time: TextView = itemView.findViewById(R.id.date_time)
-        var status:TextView=itemView.findViewById(R.id.status)
+        var status:TextView=itemView.findViewById(R.id.Rstatus)
 
 
     }

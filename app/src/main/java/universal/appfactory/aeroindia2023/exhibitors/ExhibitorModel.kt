@@ -7,9 +7,8 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "exhibitors")
 data class ExhibitorModel(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    @SerializedName("id")
     private var id: Int,
     @ColumnInfo(name = "Type")
     @SerializedName("Type")

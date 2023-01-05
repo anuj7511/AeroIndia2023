@@ -120,14 +120,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".agendas.AgendaSortActivity"
-            android:exported="false"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".AddNoteActivity"
             android:exported="false"
             android:screenOrientation="portrait">

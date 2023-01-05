@@ -23,7 +23,7 @@ class DelegateVehicleActivity : AppCompatActivity() {
             Vehicle_number.text = item.getVehicle_number()
             vehical_color.text = item.getVehicle_colour()
             drive_name.text = item.getDriver_name()
-            driver_contact_number.text = item.getDiver_mobile_number()
+            driver_contact_number.text = item.getDriver_mobile_number()
         }
 
 

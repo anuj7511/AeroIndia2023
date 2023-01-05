@@ -20,21 +20,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".DelegateTravelActivity"
+            android:name=".delegate.DelegateTravelActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DelegateHotelActivity"
+            android:name=".delegate.DelegateHotelActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AssignedLOActivity"
+            android:name=".delegate.AssignedLOActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

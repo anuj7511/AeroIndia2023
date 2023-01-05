@@ -5,15 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
-    tools:context=".liaison_officer.HotelActivity">
+    tools:context=".liaison_officer.VehicleActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/hotel_recycler"
+        android:id="@+id/Vehicle_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/category_bg"
-        tools:listitem="@layout/hotel_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="10dp"
         android:padding="10dp"
-        android:layout_marginBottom="10dp"/>
+        tools:listitem="@layout/vehicle_view" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

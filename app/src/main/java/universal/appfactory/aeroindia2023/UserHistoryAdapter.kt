@@ -28,14 +28,14 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel> ) : Recy
         holder.manager.text= itemsViewModel.getmanager().trim()
         var x:Int=itemsViewModel.getStatus()
 
-        var DT:String= itemsViewModel.getupdateDate().trim()
-        var date:CharSequence=DT.subSequence(0,11)
-        var time:String=DT.substring(11)
+        val DT:String= itemsViewModel.getupdateDate().trim()
+        val date:CharSequence=DT.subSequence(0,11)
+        val time:String=DT.substring(11)
         holder.Updateddate.text=date
         holder.Updatedtime.text=time
-        var CDT:String= itemsViewModel.getcreateDate().trim()
-        var Cdate:CharSequence=CDT.subSequence(0,11)
-        var Ctime:String=DT.substring(11)
+        val CDT:String= itemsViewModel.getcreateDate().trim()
+        val Cdate:CharSequence=CDT.subSequence(0,11)
+        val Ctime:String=DT.substring(11)
         holder.Createddate.text=Cdate
         holder.Createdtime.text=Ctime
         holder.resolvedRemarks.text = itemsViewModel.getresolvedremarks().trim()

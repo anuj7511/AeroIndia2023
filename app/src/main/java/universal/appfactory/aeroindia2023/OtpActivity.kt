@@ -54,7 +54,7 @@ class OtpActivity : AppCompatActivity() {
         otpButton.setOnClickListener {
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
             if(OTP.length == 4)
-                submitRegisterOTP(OTP, userId)
+                submitOTP(OTP, userId)
             else
                 Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
         }
@@ -62,7 +62,7 @@ class OtpActivity : AppCompatActivity() {
 
     @OptIn(DelicateCoroutinesApi::class)
     // register-verify API
-    fun submitRegisterOTP(otp: String, userId: String){
+    fun submitOTP(otp: String, userId: String){
 
         val userVerifyRequestModel = UserVerifyRequestModel(otp, userId)
         Log.i("OTP Activity msg", "User ID obtained: $userId\nOTP obtained: $otp")
@@ -118,17 +118,18 @@ class OtpActivity : AppCompatActivity() {
 
                                 editPreferences.apply()
 
-                                intent = when(userType){
-                                    "4" -> Intent(this@OtpActivity, ManagerHomepageActivity::class.java)
-                                    "5" -> Intent(this@OtpActivity, ZonalManagerHomepageActivity::class.java)
-                                    else -> Intent(this@OtpActivity, HomepageActivity::class.java)
-                                }
+//                                intent = when(userType){
+//                                    "4" -> Intent(this@OtpActivity, ManagerHomepageActivity::class.java)
+//                                    "5" -> Intent(this@OtpActivity, ZonalManagerHomepageActivity::class.java)
+//                                    else -> Intent(this@OtpActivity, HomepageActivity::class.java)
+//                                }
 
+                                intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                                 intent.putExtras(navigableBundle)
                                 Toast.makeText(this@OtpActivity, "Logged in successfully", Toast.LENGTH_SHORT).show()
                                 startActivity(intent)
                                 this@OtpActivity.finishAffinity()
-                                }
+                            }
 
                             Log.i("Status", status)
                             Log.i("OTP Verification Msg", verificationMessage)

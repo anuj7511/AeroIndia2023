@@ -1,0 +1,154 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "3aed1436b9d7394026465487a5f22c41",
+    "entities": [
+      {
+        "tableName": "delegate",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `delegation_name` TEXT NOT NULL, `delegate_first_name` TEXT NOT NULL, `delegate_last_name` TEXT NOT NULL, `ddelegate_email` TEXT NOT NULL, `delegate_mobile` TEXT NOT NULL, `hotel_name` TEXT NOT NULL, `star_rating` TEXT NOT NULL, `hotel_contact` TEXT NOT NULL, `hotel_address` TEXT NOT NULL, `hotel_city` TEXT NOT NULL, `liason_ooficer` TEXT NOT NULL, `LO_organisation` TEXT NOT NULL, `LO_designation` TEXT NOT NULL, `LO_mobile` TEXT NOT NULL, `LO_gender` TEXT NOT NULL, `LO_email` TEXT NOT NULL, `vehicle_number` TEXT NOT NULL, `vehicle_colour` TEXT NOT NULL, `driver_name` TEXT NOT NULL, `driver_mobile_number` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegation_name",
+            "columnName": "delegation_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegate_first_name",
+            "columnName": "delegate_first_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegate_last_name",
+            "columnName": "delegate_last_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ddelegate_email",
+            "columnName": "ddelegate_email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegate_mobile",
+            "columnName": "delegate_mobile",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hotel_name",
+            "columnName": "hotel_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "star_rating",
+            "columnName": "star_rating",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hotel_contact",
+            "columnName": "hotel_contact",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hotel_address",
+            "columnName": "hotel_address",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hotel_city",
+            "columnName": "hotel_city",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "liason_ooficer",
+            "columnName": "liason_ooficer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LO_organisation",
+            "columnName": "LO_organisation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LO_designation",
+            "columnName": "LO_designation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LO_mobile",
+            "columnName": "LO_mobile",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LO_gender",
+            "columnName": "LO_gender",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "LO_email",
+            "columnName": "LO_email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle_number",
+            "columnName": "vehicle_number",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vehicle_colour",
+            "columnName": "vehicle_colour",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "driver_name",
+            "columnName": "driver_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "driver_mobile_number",
+            "columnName": "driver_mobile_number",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3aed1436b9d7394026465487a5f22c41')"
+    ]
+  }
+}

@@ -9,7 +9,9 @@ import androidx.appcompat.app.ActionBar
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.integration.android.IntentIntegrator
+import kotlinx.android.synthetic.main.activity_feedback.*
 import kotlinx.coroutines.*
 
 import retrofit2.Call
@@ -74,6 +76,39 @@ class Feedback : AppCompatActivity() {
         // Code to perform action when button is clicked.
         qrScanIntegrator?.initiateScan()
     }
+
+//    val feedbackTexts = arrayOf("Washroom is nice and clean, great job!",
+//                                "Washroom needs cleaning",
+//                                "Washroom drain is clogged",
+//                                "Washroom has foul smell",
+//                                "Refill paper towels",
+//                                "Water is leaking",
+//                                "Door lock is broken",
+//                                "Washroom light does not work",
+//                                "Refill hand soap",
+//                                "Washroom is locked")
+//    val checkedTexts = booleanArrayOf(false,false,false,false,false,false,false,false,false,false)
+
+    // Dialog box for feedback
+//    private fun submitFeedback(){
+//        MaterialAlertDialogBuilder(this)
+//            .setTitle("Washroom ID: $washroom_Id")
+//            .setMessage("Please select action required for these restrooms")
+//            .setMultiChoiceItems(feedbackTexts, checkedTexts){
+//                dialog, which, isChecked ->
+//                checkedTexts[which] = isChecked
+//                Log.i("Feedback activity msg", "Current item checked: $feedbackTexts[which]")
+//
+//            }
+//            .setPositiveButton("SUBMIT") { dialog, which ->
+//                //TODO: Feedback needs to be submitted
+//            }
+//            .setNegativeButton("No") { dialog, which ->
+//                dialog.cancel()
+//            }
+//            .show()
+//    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
@@ -87,7 +122,8 @@ class Feedback : AppCompatActivity() {
                     Toast.makeText(this, result.contents, Toast.LENGTH_LONG).show()
 
             }
-        } else {
+        }
+        else {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
@@ -105,20 +141,13 @@ class Feedback : AppCompatActivity() {
                         call: Call<ResponseModel>,
                         response: Response<ResponseModel>
                     ) {
-
                         val responseMsg = response.message().toString()
-                        Toast.makeText(
-
-                            this@Feedback,
-                            responseMsg,
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@Feedback, responseMsg, Toast.LENGTH_LONG).show()
                         Log.i("Feedback Activity response", "Feedback sent successfully, Response msg: $responseMsg")
                     }
 
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable ) {
                         Toast.makeText(this@Feedback, t.toString(), Toast.LENGTH_LONG).show()
-
 
                     }
                 }

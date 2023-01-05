@@ -58,6 +58,13 @@ class HomepageActivity : AppCompatActivity() {
 
         Log.i("Homepage activity msg", "User type: $userType")
 
+        when(userType){
+            "4" -> findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints)
+            "5" -> findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints)
+            else -> Log.i("Homepage activity msg", "No changes done")
+        }
+
+
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
         agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
         agendaViewModel.loadAllAgendas(true)
@@ -93,14 +100,20 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}         // Driving directions
             4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
                     backpress=0}         // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, QuestionsActivity::class.java)
+            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
                     backpress=0}         // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)
                     backpress=0}         // Twitter or products
-            7 -> {navigateIntent = Intent(this@HomepageActivity, FAQsAnswerActivity::class.java)
+            7 -> {navigateIntent = Intent(this@HomepageActivity, QuestionsActivity::class.java)
                     backpress=0}         // FAQ
-            8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)
-                    backpress=0 }        // Lodging complaints
+            8 -> {
+                    navigateIntent = when(userType){
+                        "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
+                        "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
+                        else -> Intent(this@HomepageActivity, Feedback::class.java)
+                    }
+                    backpress=0
+                }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
             9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
                     backpress=0}         // Profile view
             else -> { Log.i("Homepage msg", "Nothing was clicked") }

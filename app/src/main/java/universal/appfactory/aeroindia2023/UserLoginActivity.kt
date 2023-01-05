@@ -18,7 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 // API_1: http://aeroindia.gov.in/api/register-user
 // API_2: http://aeroindia.gov.in/api/register-verify
 // Bearer token: 61b25a411a2dad66bb7b6ff145db3c2f
@@ -61,15 +60,16 @@ class UserLoginActivity : AppCompatActivity() {
             navigableBundle.putString("foreignKeyId", sharedPreferences.getString("foreignKeyId", "-"))
             navigableBundle.putString("userType", sharedPreferences.getString("userType", "-"))
 
-            val userType: String = sharedPreferences.getString("userType", "-").toString()
+//            val userType: String = sharedPreferences.getString("userType", "0").toString()
+
+//            intent = when(userType){
+//                "4" -> Intent(this@UserLoginActivity, ManagerHomepageActivity::class.java)
+//                "5" -> Intent(this@UserLoginActivity, ZonalManagerHomepageActivity::class.java)
+//                else -> Intent(this@UserLoginActivity, HomepageActivity::class.java)
+//            }
 
             backpress=0
-            intent = when(userType){
-                "4" -> Intent(this@UserLoginActivity, ManagerHomepageActivity::class.java)
-                "5" -> Intent(this@UserLoginActivity, ZonalManagerHomepageActivity::class.java)
-                else -> Intent(this@UserLoginActivity, HomepageActivity::class.java)
-            }
-
+            intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)
             intent.putExtras(navigableBundle)
             startActivity(intent)
             this@UserLoginActivity.finishAffinity()
@@ -82,7 +82,6 @@ class UserLoginActivity : AppCompatActivity() {
                 if(!email.equals("")) {
                     Log.i("Email", email)
                     navigableBundle.putString("type", "1")
-
                     submitUserLoginData(email)
                 }
                 else{

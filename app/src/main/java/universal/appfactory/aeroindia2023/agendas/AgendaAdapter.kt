@@ -2,6 +2,7 @@ package universal.appfactory.aeroindia2023.agendas
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,6 @@ class AgendaAdapter(mList: ArrayList<AgendaModel>, private val mContext: Context
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.agenda_card, parent, false)
-
         return ViewHolder(view)
     }
 

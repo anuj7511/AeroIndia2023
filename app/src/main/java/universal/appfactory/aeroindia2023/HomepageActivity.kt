@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_profile_info.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
-import universal.appfactory.aeroindia2023.agendas.AgendaSortActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FAQsAnswerActivity

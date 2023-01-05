@@ -17,7 +17,7 @@ import universal.appfactory.aeroindia2023.faqs.FaqsDatabase
 
 class EventsRepository(application: Application) {
     private var eventsDao : EventsDao
-    private var faqs: LiveData<List<FAQsModel>>
+    private var faqs: LiveData<List<EventsModel>>
 
     init {
         eventsDao = application.let { EventsDatabase.getDatabase(it).eventsDao() }
@@ -25,7 +25,7 @@ class EventsRepository(application: Application) {
         Log.d(ContentValues.TAG, "New instance created")
     }
 
-    fun getAllEventsFaqs(): LiveData<List<FAQsModel>> {
+    fun getAllEventsFaqs(): LiveData<List<EventsModel>> {
         return eventsDao.getEventsFaqs()
     }
 
@@ -38,7 +38,7 @@ class EventsRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = faqApi.getFaqs("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",1)
                     ?.awaitResponse()
-                val data = value?.body()?.data as List<FAQsModel>
+                val data = value?.body()?.data as List<EventsModel>
                 Log.d("Response :", data.toString())
                 eventsDao.insertAll(data)
             }

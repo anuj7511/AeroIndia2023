@@ -11,7 +11,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
-import universal.appfactory.aeroindia2023.agendas.AgendaSortActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.products.ProductViewModel
@@ -73,7 +72,7 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}      // Videos
             6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)
                     backpress=0}     // Twitter or products
-            7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaSortActivity::class.java)
+            7 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
                     backpress=0}       // FAQ
             8 -> {navigateIntent = Intent(this@HomepageActivity, Feedback::class.java)
                     backpress=0}             // Lodging complaints

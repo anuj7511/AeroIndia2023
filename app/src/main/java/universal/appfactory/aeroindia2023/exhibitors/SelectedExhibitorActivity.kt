@@ -60,6 +60,7 @@ class SelectedExhibitorActivity : AppCompatActivity() {
         val websiteText = findViewById<TextView>(R.id.website)
         val companyText = findViewById<TextView>(R.id.company)
 
+        val id = intent.getIntExtra("Id",53)
         val name = intent.getStringExtra("Name")
         val image = intent.getStringExtra("Image")
         val country = intent.getStringExtra("Country")
@@ -72,7 +73,7 @@ class SelectedExhibitorActivity : AppCompatActivity() {
         val location = intent.getStringExtra("Location")
         val description = intent.getStringExtra("Description")
 
-        nameText.text = name
+        nameText.text = company
         locationText.text = location
         countryText.text = country
         descriptionText.text = description
@@ -87,7 +88,7 @@ class SelectedExhibitorActivity : AppCompatActivity() {
 
         recyclerview.layoutManager = LinearLayoutManager(this)
         data = ArrayList()
-        fetchProductData(53)
+        fetchProductData(id)
 
         products.setOnClickListener {
             set.clear(underLine.id, ConstraintSet.START)

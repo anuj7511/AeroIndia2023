@@ -46,7 +46,7 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
         val name = itemsViewModel.getFirstname() + " " + itemsViewModel.getLastname()
 
         // sets the text to the textview from our itemHolder class
-        holder.nameText.text = name
+        holder.nameText.text = itemsViewModel.getComp_Name()
         holder.countryText.text = itemsViewModel.getAddress()
         holder.locationText.text = itemsViewModel.getHall_and_Stall_Number()
 
@@ -57,7 +57,7 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
 
         holder.exhibitorCard.setOnClickListener{
             val intent = Intent(mContext, SelectedExhibitorActivity::class.java)
-//            intent.putExtra("Id",itemsViewModel.getId())
+            intent.putExtra("Id",itemsViewModel.getId())
             intent.putExtra("Name",name)
             intent.putExtra("Image",itemsViewModel.getLogo())
             intent.putExtra("Country",itemsViewModel.getCountry())

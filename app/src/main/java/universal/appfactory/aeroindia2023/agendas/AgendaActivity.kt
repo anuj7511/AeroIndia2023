@@ -1,28 +1,36 @@
 package universal.appfactory.aeroindia2023.agendas
 
-import android.app.Application
 import android.os.Bundle
-import android.widget.SearchView
-import android.widget.TextView
+import android.util.Log
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import universal.appfactory.aeroindia2023.ApiClient
+import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
-import java.util.*
+
 
 class AgendaActivity : AppCompatActivity() {
 
     // variable for our adapter
     // class and array list
-    private lateinit var adapter: AgendaAdapter
-    private lateinit var data: ArrayList<AgendaModel>
-    private lateinit var recyclerview: RecyclerView
-    private lateinit var viewModel: AgendaViewModel
-    private lateinit var classification: String
-    private lateinit var name: String
+    private var viewPager: ViewPager2? = null
+    private var mTabLayout: TabLayout? = null
+    private lateinit var dataCategory: ArrayList<Categories>
+    private lateinit var dataTime: ArrayList<Time>
+    private lateinit var dataLocation: ArrayList<Location>
+    private lateinit var checkedItem: IntArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,105 +41,201 @@ class AgendaActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
-        // getting the recyclerview by its id
-        recyclerview = findViewById(R.id.recycler_view)
-        // getting searchview by its id
-        val searchView = findViewById<SearchView>(R.id.search_bar)
-        val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
-        val heading = findViewById<TextView>(R.id.all_exhibit)
-        viewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
-        viewModel.init((this as AppCompatActivity).applicationContext as Application)
+        // initialise the layout
+        viewPager = findViewById(R.id.viewpager)
+        mTabLayout = findViewById(R.id.tabLayout)
+        val bOpenAlertDialog = findViewById<ImageButton>(R.id.sort)
+        checkedItem = intArrayOf(0)
 
-        // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        dataCategory = ArrayList()
+        dataTime = ArrayList()
+        dataLocation = ArrayList()
 
-        classification = intent.getStringExtra("Classification").toString()
-        name = if (classification == "Category") {
-            intent.getStringExtra("Category").toString()
-        } else if (classification == "Time") {
-            intent.getStringExtra("Time").toString()
-        } else {
-            intent.getStringExtra("Location").toString()
+        fetchAgendaData()
+        alertDialog()
+        initViews()
+
+        // handle the button to open the alert dialog with the single item selection when clicked
+        bOpenAlertDialog.setOnClickListener {
+            alertDialog()
         }
 
-        heading.text = name.trim()
+    }
 
-        // ArrayList of class ItemsViewModel
-        data = ArrayList()
-        fetchAgendaData()
+    private fun alertDialog() {
+        val alertDialog = AlertDialog.Builder(this)
 
-        // below line is to call set on query text listener method.
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                return false
+        // title of the alert dialog
+        alertDialog.setTitle("Choose an Item")
+
+        val listItems = arrayOf("Category", "Time", "Location")
+
+
+        alertDialog.setSingleChoiceItems(listItems, checkedItem[0]) { dialog, which ->
+            checkedItem[0] = which
+
+            // when selected an item the dialog should be closed with the dismiss method
+            dialog.dismiss()
+            setDynamicFragmentToTabLayout()
+        }
+
+        // set the negative button if the user is not interested to select or change already selected item
+        alertDialog.setNegativeButton("Cancel") { dialog, which -> setDynamicFragmentToTabLayout()}
+
+        val customAlertDialog = alertDialog.create()
+        customAlertDialog.show()
+    }
+
+
+    private fun initViews() {
+
+        viewPager?.offscreenPageLimit = 5
+        mTabLayout?.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                viewPager?.currentItem = tab.position
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                // inside on query text change method we are
-                // calling a method to filter our recycler view.
-                filter(newText)
-                return false
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
-
-        refreshView.setOnRefreshListener {
-            viewModel.loadAllAgendas(true)
-            refreshView.isRefreshing = false
-        }
-
+        setDynamicFragmentToTabLayout()
     }
 
-    private fun filter(text: String) {
-        // creating a new array list to filter our data.
-        val filteredList = ArrayList<AgendaModel>()
+    private fun setDynamicFragmentToTabLayout() {
 
-        // running a for loop to compare elements.
-        for (item in data) {
-            // checking if the entered string matched with any item of our recycler view.
-            if (item.getSession_name().lowercase(Locale.ROOT)
-                    .contains(text.lowercase(Locale.getDefault()))
-            ) {
-                // if the item is matched we are
-                // adding it to our filtered list.
-                filteredList.add(item)
+        val size: Int = if(checkedItem[0]==1)
+            dataTime.size
+        else if(checkedItem[0]==2)
+            dataLocation.size
+        else
+            dataCategory.size
+
+        val classification: String = if(checkedItem[0]==1)
+            "Time"
+        else if(checkedItem[0]==2)
+            "Location"
+        else
+            "Category"
+
+        mTabLayout?.removeAllTabs()
+
+        for (i in 1..size) {
+            if(checkedItem[0]==1)
+                mTabLayout!!.addTab(mTabLayout!!.newTab().setText(dataTime[i-1].getStart_date_time().trim()))
+            else if(checkedItem[0]==2)
+                mTabLayout!!.addTab(mTabLayout!!.newTab().setText(dataLocation[i-1].getLocation_name().trim()))
+            else if(dataCategory.isNotEmpty())
+                mTabLayout!!.addTab(mTabLayout!!.newTab().setText(dataCategory[i-1].getCategories().trim()))
+            else
+                mTabLayout!!.addTab(mTabLayout!!.newTab().setText("Page: $i"))
+
+        }
+
+        val name: List<String> = if(checkedItem[0]==1)
+            dataTime.map { it.getStart_date_time() }
+        else if(checkedItem[0]==2)
+            dataLocation.map { it.getLocation_name() }
+        else
+            dataCategory.map { it.getCategories() }
+
+        val mDynamicFragmentAdapter = mTabLayout?.let {
+            DynamicFragmentAdapter(
+                supportFragmentManager,
+                lifecycle,
+                this@AgendaActivity,
+                it.tabCount,
+                classification,
+                name
+            )
+        }
+
+        // set the adapter
+        viewPager!!.adapter = mDynamicFragmentAdapter
+
+        viewPager!!.currentItem = 0
+        mTabLayout?.let {
+            TabLayoutMediator(
+                it, viewPager!!, true, true
+            ) { tab, position ->
+                if(checkedItem[0]==1)
+                    tab.text = dataTime[position].getStart_date_time().trim()
+                else if(checkedItem[0]==2)
+                    tab.text = dataLocation[position].getLocation_name().trim()
+                else if(dataCategory.isNotEmpty())
+                    tab.text = dataCategory[position].getCategories().trim()
+                else
+                    tab.text = "Tab $position"
             }
-        }
+        }?.attach()
+    }
 
-        adapter.filterList(filteredList)
+    private fun fetchAgendaData () {
+        val agendaApi = ApiClient.getInstance().create(ApiInterface::class.java)
+
+        // launching a new coroutine
+        lifecycleScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+
+            agendaApi.getAgendaClassificationTime("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+                Callback<TimeResponse?> {
+                override fun onResponse(
+                    call: Call<TimeResponse?>,
+                    response: Response<TimeResponse?>
+                ) {
+
+                    Log.d("Response: ", response.body().toString())
+                    dataTime = response.body()?.data as ArrayList<Time>
+
+                }
+
+                override fun onFailure(call: Call<TimeResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("Failure Response: ", t.message.toString())
+                }
+            })
+            agendaApi.getAgendaClassificationLocation("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+                Callback<LocationResponse?> {
+                override fun onResponse(
+                    call: Call<LocationResponse?>,
+                    response: Response<LocationResponse?>
+                ) {
+
+                    Log.d("Response: ", response.body().toString())
+                    dataLocation = response.body()?.data as ArrayList<Location>
+                }
+
+                override fun onFailure(call: Call<LocationResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("Failure Response: ", t.message.toString())
+                }
+            })
+            agendaApi.getAgendaClassificationCategory("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
+                Callback<CategoryResponse?> {
+                override fun onResponse(
+                    call: Call<CategoryResponse?>,
+                    response: Response<CategoryResponse?>
+                ) {
+
+                    Log.d("Response: ", response.body().toString())
+                    dataCategory = response.body()?.data as ArrayList<Categories>
+
+                }
+
+                override fun onFailure(call: Call<CategoryResponse?>, t: Throwable) {
+                    Toast.makeText(applicationContext, t.message,
+                        Toast.LENGTH_SHORT).show()
+                    Log.d("Failure Response: ", t.message.toString())
+                }
+            })
+
+        }
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
     }
 
 
-    private fun fetchAgendaData() {
-        viewModel.allagenda.observe(this) {
-            data = it as ArrayList<AgendaModel>
-            val classifiedList = ArrayList<AgendaModel>()
-
-            if (classification == "Category") {
-                for (item in data) {
-                    if (item.getCategories() == name) {
-                        classifiedList.add(item)
-                    }
-                }
-
-            } else if (classification == "Time") {
-                for (item in data) {
-                    if (item.getStart_date_time() == name) {
-                        classifiedList.add(item)
-                    }
-                }
-
-            } else {
-                for (item in data) {
-                    if (item.getLocation_name() == name) {
-                        classifiedList.add(item)
-                    }
-                }
-
-            }
-            adapter = AgendaAdapter(classifiedList, this@AgendaActivity)
-            recyclerview.adapter = adapter
-
-        }
-    }
 }

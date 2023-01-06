@@ -10,7 +10,7 @@ import universal.appfactory.aeroindia2023.delegate.DelegateModel
 @Dao
 interface LiaisonDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(faqs : List<LiaisonModel?>?)
+    suspend fun insertAll(data : List<LiaisonModel?>?)
 
     @Query("SELECT * FROM liaison")
     fun getLiaisonOfficers() : LiveData<List<LiaisonModel>>

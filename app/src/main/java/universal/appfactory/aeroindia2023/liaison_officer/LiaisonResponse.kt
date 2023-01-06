@@ -9,5 +9,5 @@ class LiaisonResponse (
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: List<DelegateModel>
+    val data: List<LiaisonModel>
 )

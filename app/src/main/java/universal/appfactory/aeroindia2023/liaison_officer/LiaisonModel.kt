@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "liaison")
 class LiaisonModel (
 
+    @PrimaryKey()
     @ColumnInfo(name = "liason_ooficer")
     @SerializedName("liason_ooficer")
     private var liason_ooficer: String,

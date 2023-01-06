@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_feedback.*
+import kotlinx.android.synthetic.main.zonal_manager_user_card.*
 import kotlinx.coroutines.*
 
 import retrofit2.Call
@@ -26,7 +27,7 @@ class Feedback : AppCompatActivity() {
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
     var washroom_Id:Int =0
-    lateinit var complaint_id:String// Previously lateinit washroomId: String
+    var user_id:Int=0// Previously lateinit washroomId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ class Feedback : AppCompatActivity() {
         val bundle=intent.extras
         if(bundle!=null)
         {
-            complaint_id= bundle.getString("userId")!!
+            user_id= bundle.getString("userId")!!.toInt()
         }
         setContentView(view)
 
@@ -56,9 +57,9 @@ class Feedback : AppCompatActivity() {
 
         history.setOnClickListener {
             val intent = Intent(this, UserHistoryActivity::class.java)
-            intent.putExtra("Name", complaint_id)
+            intent.putExtra("Name", user_id)
             startActivity(intent) }
-        btn.setOnClickListener { submitFeedback(feedback.text.toString(),washroom_Id,complaint_id) }
+        btn.setOnClickListener { submitFeedback(feedback.text.toString(),washroom_Id,user_id) }
 
     }
 
@@ -130,8 +131,8 @@ class Feedback : AppCompatActivity() {
 
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun submitFeedback(feedback:String, washroomId:Int,complaintId:String) {
-        val requestModel = RequestModel(washroomId,complaintId, feedback)
+    fun submitFeedback(feedback:String, washroomId:Int,userId:Int) {
+        val requestModel = RequestModel(washroomId,userId, feedback)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
@@ -143,13 +144,16 @@ class Feedback : AppCompatActivity() {
                     ) {
                         val responseMsg = response.message().toString()
                         Toast.makeText(this@Feedback, responseMsg, Toast.LENGTH_LONG).show()
-                        Log.i("Feedback Activity response", "Feedback sent successfully, Response msg: $responseMsg")
+                        Log.i("Feedback Activity response", "Feedback sent successfully, Response msg: $responseMsg variables are   remark: $feedback washroom_id:$washroomId user_id:$user_id")
+
                     }
 
                     override fun onFailure(call: Call<ResponseModel>, t: Throwable ) {
                         Toast.makeText(this@Feedback, t.toString(), Toast.LENGTH_LONG).show()
-
+                        Log.i("Submit error","t.toString()")
+                        print("error are $t.toString()")
                     }
+
                 }
             )
         }

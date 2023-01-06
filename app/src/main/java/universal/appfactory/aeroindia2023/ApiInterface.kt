@@ -49,7 +49,7 @@ interface ApiInterface {
     fun getmanagers(@Header ("Authorization") bearerToken: String) :Call<ManagerResponse?>?
 
     @GET("api/get-user-complaint-history/{id}")
-    fun gethistory(@Header("Authorization") bearerToken: String,@Path("id") id: String) :Call<UserHistoryResponse?>?
+    fun gethistory(@Header("Authorization") bearerToken: String,@Path("id") id: Int) :Call<UserHistoryResponse?>?
 
     @GET("api/get-agenda/{id}")
     fun getAgendaSpeaker(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<SpeakerResponse?>?

@@ -159,7 +159,7 @@ class DelegateModel(
         return departure_time
     }
 
-    fun getFight_info (): String{
+    fun getFlight_info (): String{
         return flight_info
     }
 

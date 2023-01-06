@@ -78,7 +78,7 @@ interface ApiInterface {
     @GET("api/get-delegate/{id}")
     fun getDelegates(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<DelegateResponse?>?
 
-    @GET("api/get-delegate/{id}")
+    @GET("api/get-liaison-officer/{id}")
     fun getLiaisonOfficers(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<LiaisonResponse?>?
 
 }

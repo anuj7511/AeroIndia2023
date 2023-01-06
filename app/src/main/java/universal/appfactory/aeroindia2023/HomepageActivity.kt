@@ -16,12 +16,15 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_profile_info.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
+import universal.appfactory.aeroindia2023.delegate.DelegateHotelActivity
+import universal.appfactory.aeroindia2023.delegate.DelegateViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FAQsAnswerActivity
 import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
 import universal.appfactory.aeroindia2023.liaison_officer.HotelActivity
 import universal.appfactory.aeroindia2023.liaison_officer.LiaisonViewModel
+import universal.appfactory.aeroindia2023.liaison_officer.VehicleActivity
 import universal.appfactory.aeroindia2023.products.ProductViewModel
 import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
@@ -36,6 +39,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var speakerViewModel: SpeakerViewModel
     private lateinit var questionsViewModel : FaqsViewModel
     private lateinit var liaisonViewModel: LiaisonViewModel
+    private lateinit var delegateViewModel: DelegateViewModel
     private lateinit var userType: String
 
 //    0 -> "Unknown role"
@@ -86,6 +90,10 @@ class HomepageActivity : AppCompatActivity() {
         liaisonViewModel = ViewModelProvider(this)[LiaisonViewModel::class.java]
         liaisonViewModel.init((this as AppCompatActivity).applicationContext as Application)
         liaisonViewModel.loadAllLiaisonOfficers(true)
+
+        delegateViewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
+        delegateViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        delegateViewModel.loadAllDelegates(true)
     }
 
     fun iconClicked(view: View) {
@@ -136,6 +144,7 @@ class HomepageActivity : AppCompatActivity() {
         speakerViewModel.loadAllSpeakers(true)
         questionsViewModel.loadAllFaqs(true)
         liaisonViewModel.loadAllLiaisonOfficers(true)
+        delegateViewModel.loadAllDelegates(true)
 
         Log.i("Homepage activity message", "Home page refreshed")
         Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()

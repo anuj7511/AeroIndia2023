@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.content.ContextCompat.startActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.activity_profile_info.*
 import kotlinx.android.synthetic.main.activity_selected_exhibitor.*
@@ -25,6 +26,7 @@ class OtpActivity : AppCompatActivity() {
 
     var otpFlag: Boolean = true
     var navigableBundle = Bundle()
+    var otpAttempts: Int = 1
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,19 +66,21 @@ class OtpActivity : AppCompatActivity() {
     // register-verify API
     fun submitOTP(otp: String, userId: String){
 
-        val userVerifyRequestModel = UserVerifyRequestModel(otp, userId)
-        Log.i("OTP Activity msg", "User ID obtained: $userId\nOTP obtained: $otp")
+        otpAttempts += 1
+        if(otpAttempts < 4){
+            val userVerifyRequestModel = UserVerifyRequestModel(otp, userId)
+            Log.i("OTP Activity msg", "User ID obtained: $userId\nOTP obtained: $otp")
 
-        //Accessing API Interface for pushing user data
-        val response = ServiceBuilder.buildService(ApiInterface::class.java)
+            //Accessing API Interface for pushing user data
+            val response = ServiceBuilder.buildService(ApiInterface::class.java)
 
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
-                object : Callback<UserVerifyResponseModel> {
-                    override fun onResponse(
-                        call: Call<UserVerifyResponseModel>,
-                        response: Response<UserVerifyResponseModel>
-                    ) {
+            GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+                response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
+                    object : Callback<UserVerifyResponseModel> {
+                        override fun onResponse(
+                            call: Call<UserVerifyResponseModel>,
+                            response: Response<UserVerifyResponseModel>
+                        ) {
                             val status = response.body()?.status.toString()
                             val verificationMessage = response.body()?.message?.verification_code.toString()
 
@@ -133,16 +137,27 @@ class OtpActivity : AppCompatActivity() {
 
                             Log.i("Status", status)
                             Log.i("OTP Verification Msg", verificationMessage)
-                    }
+                        }
 
-                    override fun onFailure(call: Call<UserVerifyResponseModel>, text: Throwable ) {
-                        Toast.makeText(this@OtpActivity, "Error", Toast.LENGTH_LONG)
-                            .show()
-                        Log.i("User registration failure", text.toString())
+                        override fun onFailure(call: Call<UserVerifyResponseModel>, text: Throwable ) {
+                            Toast.makeText(this@OtpActivity, "Error", Toast.LENGTH_LONG)
+                                .show()
+                            Log.i("User registration failure", text.toString())
+                        }
                     }
-                }
-            )
+                )
+            }
         }
+        else{
+            MaterialAlertDialogBuilder(this@OtpActivity)
+                .setTitle("WARNING !")
+                .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
+                .setNeutralButton("OK") { dialog, which ->
+                    this@OtpActivity.finishAffinity()
+                }
+                .show()
+        }
+
     }
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->

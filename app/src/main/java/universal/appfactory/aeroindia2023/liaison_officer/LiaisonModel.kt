@@ -8,51 +8,6 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "liaison")
 class LiaisonModel (
 
-    @PrimaryKey
-    @ColumnInfo(name = "id")
-    @SerializedName("id")
-    private var id: Int,
-
-    @ColumnInfo(name = "delegation_name")
-    @SerializedName("delegation_name")
-    private var delegation_name: String,
-
-    @ColumnInfo(name = "delegate_first_name")
-    @SerializedName("delegate_first_name")
-    private var delegate_first_name: String,
-
-    @ColumnInfo(name = "delegate_last_name")
-    @SerializedName("delegate_last_name")
-    private var delegate_last_name: String,
-
-    @ColumnInfo(name = "ddelegate_email")
-    @SerializedName("ddelegate_email")
-    private var ddelegate_email: String,
-
-    @ColumnInfo(name = "delegate_mobile")
-    @SerializedName("delegate_mobile")
-    private var delegate_mobile: String,
-
-    @ColumnInfo(name = "hotel_name")
-    @SerializedName("hotel_name")
-    private var hotel_name: String,
-
-    @ColumnInfo(name = "star_rating")
-    @SerializedName("star_rating")
-    private var star_rating: String,
-
-    @ColumnInfo(name = "hotel_contact")
-    @SerializedName("hotel_contact")
-    private var hotel_contact: String,
-
-    @ColumnInfo(name = "hotel_address")
-    @SerializedName("hotel_address")
-    private var hotel_address: String,
-
-    @ColumnInfo(name = "hotel_city")
-    @SerializedName("hotel_city")
-    private var hotel_city: String,
-
     @ColumnInfo(name = "liason_ooficer")
     @SerializedName("liason_ooficer")
     private var liason_ooficer: String,
@@ -77,6 +32,70 @@ class LiaisonModel (
     @SerializedName("LO_email")
     private var LO_email: String,
 
+    @ColumnInfo(name = "delegation_name")
+    @SerializedName("delegation_name")
+    private var delegation_name: String,
+
+    @ColumnInfo(name = "delegate_first_name")
+    @SerializedName("delegate_first_name")
+    private var delegate_first_name: String,
+
+    @ColumnInfo(name = "delegate_last_name")
+    @SerializedName("delegate_last_name")
+    private var delegate_last_name: String,
+
+    @ColumnInfo(name = "delegate_email")
+    @SerializedName("delegate_email")
+    private var delegate_email: String,
+
+    @ColumnInfo(name = "delegate_mobile")
+    @SerializedName("delegate_mobile")
+    private var delegate_mobile: String,
+
+    @ColumnInfo(name = "arrival_date")
+    @SerializedName("arrival_date")
+    private var arrival_date: String,
+
+    @ColumnInfo(name = "arrival_time")
+    @SerializedName("arrival_time")
+    private var arrival_time: String,
+
+    @ColumnInfo(name = "departure_date")
+    @SerializedName("departure_date")
+    private var departure_date: String,
+
+    @ColumnInfo(name = "departure_time")
+    @SerializedName("departure_time")
+    private var departure_time : String,
+
+    @ColumnInfo(name = "flight_info")
+    @SerializedName("flight_info")
+    private var flight_info: String,
+
+    @ColumnInfo(name = "departure_terminal")
+    @SerializedName("departure_terminal")
+    private var departure_terminal : String,
+
+    @ColumnInfo(name = "hotel_name")
+    @SerializedName("hotel_name")
+    private var hotel_name: String,
+
+    @ColumnInfo(name = "star_rating")
+    @SerializedName("star_rating")
+    private var star_rating: String,
+
+    @ColumnInfo(name = "hotel_contact")
+    @SerializedName("hotel_contact")
+    private var hotel_contact: String,
+
+    @ColumnInfo(name = "hotel_address")
+    @SerializedName("hotel_address")
+    private var hotel_address: String,
+
+    @ColumnInfo(name = "hotel_city")
+    @SerializedName("hotel_city")
+    private var hotel_city: String,
+
     @ColumnInfo(name = "vehicle_number")
     @SerializedName("vehicle_number")
     private var vehicle_number: String,
@@ -95,10 +114,6 @@ class LiaisonModel (
 
     ) {
 
-    fun getId(): Int {
-        return id
-    }
-
     fun getDelegation_name(): String {
         return delegation_name
     }
@@ -111,12 +126,36 @@ class LiaisonModel (
         return delegate_last_name
     }
 
-    fun getDdelegate_email(): String {
-        return ddelegate_email
+    fun getDelegate_email(): String {
+        return delegate_email
     }
 
     fun getDelegate_mobile(): String {
         return delegate_mobile
+    }
+
+    fun getArrival_date(): String{
+        return arrival_date
+    }
+
+    fun getArrival_time(): String{
+        return arrival_time
+    }
+
+    fun getDeparture_date(): String{
+        return departure_date
+    }
+
+    fun getDeparture_time(): String{
+        return departure_time
+    }
+
+    fun getFlight_info(): String{
+        return flight_info
+    }
+
+    fun getDeparture_terminal(): String{
+        return departure_terminal
     }
 
     fun getHotel_name(): String {

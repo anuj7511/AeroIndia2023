@@ -25,6 +25,8 @@ import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
 import universal.appfactory.aeroindia2023.liaison_officer.HotelActivity
 import universal.appfactory.aeroindia2023.liaison_officer.LiaisonViewModel
 import universal.appfactory.aeroindia2023.liaison_officer.VehicleActivity
+import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailActivity
+import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailViewModel
 import universal.appfactory.aeroindia2023.products.ProductViewModel
 import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
@@ -40,6 +42,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var questionsViewModel : FaqsViewModel
     private lateinit var liaisonViewModel: LiaisonViewModel
     private lateinit var delegateViewModel: DelegateViewModel
+    private lateinit var trailViewModel: TrailViewModel
     private lateinit var userType: String
 
 //    0 -> "Unknown role"
@@ -94,6 +97,10 @@ class HomepageActivity : AppCompatActivity() {
         delegateViewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
         delegateViewModel.init((this as AppCompatActivity).applicationContext as Application)
         delegateViewModel.loadAllDelegates(true)
+
+        trailViewModel = ViewModelProvider(this)[TrailViewModel::class.java]
+        trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        trailViewModel.loadAllTrail(true)
     }
 
     fun iconClicked(view: View) {
@@ -108,7 +115,7 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}         // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
                     backpress=0}         // Speakers
-            2 -> {navigateIntent = Intent(this@HomepageActivity, HotelActivity::class.java)
+            2 -> {navigateIntent = Intent(this@HomepageActivity, TrailActivity::class.java)
                     backpress=0}         // Venue maps
             3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)
                     backpress=0}         // Driving directions
@@ -145,6 +152,7 @@ class HomepageActivity : AppCompatActivity() {
         questionsViewModel.loadAllFaqs(true)
         liaisonViewModel.loadAllLiaisonOfficers(true)
         delegateViewModel.loadAllDelegates(true)
+        trailViewModel.loadAllTrail(true)
 
         Log.i("Homepage activity message", "Home page refreshed")
         Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()

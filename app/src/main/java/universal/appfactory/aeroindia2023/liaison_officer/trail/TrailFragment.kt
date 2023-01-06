@@ -1,6 +1,7 @@
 package universal.appfactory.aeroindia2023.liaison_officer.trail
 
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,14 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_delegate.view.*
 import kotlinx.android.synthetic.main.fragment_trail.view.*
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.liaison_officer.DelegationAdapter
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonModel
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonViewModel
 
-class TrailFragment : Fragment() {
+class TrailFragment(private val mContext : Context): Fragment() {
 
 
     private lateinit var adapter: TrailAdapter
@@ -32,11 +29,11 @@ class TrailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this)[TrailViewModel::class.java]
-        viewModel.init((this as AppCompatActivity).applicationContext as Application)
+        viewModel.init((mContext as AppCompatActivity).applicationContext as Application)
 
         val binding =  inflater.inflate(R.layout.fragment_trail, container, false)
         recyclerView = binding.trail_recycler
-        recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        recyclerView.layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.VERTICAL,false)
 
         data = ArrayList()
 

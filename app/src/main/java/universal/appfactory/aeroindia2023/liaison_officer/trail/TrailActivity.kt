@@ -10,7 +10,7 @@ class TrailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trail)
 
-//        replaceFragment(TrailFragment())
+        replaceFragment(TrailFragment(this@TrailActivity))
     }
 
     private fun replaceFragment(fragment: Fragment) {

@@ -10,6 +10,7 @@ import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse2
 import universal.appfactory.aeroindia2023.faqs.FaqsResponse
 import universal.appfactory.aeroindia2023.liaison_officer.LiaisonResponse
+import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 
@@ -80,5 +81,8 @@ interface ApiInterface {
 
     @GET("api/get-liaison-officer/{id}")
     fun getLiaisonOfficers(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<LiaisonResponse?>?
+
+    @GET("api/get-trail")
+    fun getTrail(@Header("Authorization") bearerToken: String): Call<TrailResponse?>?
 
 }

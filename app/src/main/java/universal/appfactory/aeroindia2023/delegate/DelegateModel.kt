@@ -25,13 +25,37 @@ class DelegateModel(
     @SerializedName("delegate_last_name")
     private var delegate_last_name: String,
 
-    @ColumnInfo(name = "ddelegate_email")
-    @SerializedName("ddelegate_email")
-    private var ddelegate_email: String,
+    @ColumnInfo(name = "delegate_email")
+    @SerializedName("delegate_email")
+    private var delegate_email: String,
 
     @ColumnInfo(name = "delegate_mobile")
     @SerializedName("delegate_mobile")
     private var delegate_mobile: String,
+
+    @ColumnInfo(name = "arrival_date")
+    @SerializedName("arrival_date")
+    private var arrival_date : String,
+
+    @ColumnInfo(name = "arrival_time")
+    @SerializedName("arrival_time")
+    private var arrival_time : String,
+
+    @ColumnInfo(name = "departure_date")
+    @SerializedName("departure_date")
+    private var departure_date : String,
+
+    @ColumnInfo(name = "departure_time")
+    @SerializedName("departure_time")
+    private var departure_time : String,
+
+    @ColumnInfo(name = "flight_info")
+    @SerializedName("flight_info")
+    private var flight_info : String,
+
+    @ColumnInfo(name = "departure_terminal")
+    @SerializedName("departure_terminal")
+    private var departure_terminal : String,
 
     @ColumnInfo(name = "hotel_name")
     @SerializedName("hotel_name")
@@ -111,12 +135,36 @@ class DelegateModel(
         return delegate_last_name
     }
 
-    fun getDdelegate_email(): String {
-        return ddelegate_email
+    fun getDelegate_email(): String {
+        return delegate_email
     }
 
     fun getDelegate_mobile(): String {
         return delegate_mobile
+    }
+
+    fun getArrival_date (): String{
+        return arrival_date
+    }
+
+    fun getArrival_time(): String{
+        return arrival_time
+    }
+
+    fun getDeparture_date (): String{
+        return departure_date
+    }
+
+    fun getDeparture_time (): String{
+        return departure_time
+    }
+
+    fun getFight_info (): String{
+        return flight_info
+    }
+
+    fun getDeparture_terminal(): String{
+        return departure_terminal
     }
 
     fun getHotel_name(): String {

@@ -51,16 +51,16 @@ class OtpActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email\n\nEmail: $sharedEmailID"
 
         val otpButton = findViewById<Button>(R.id.otpButton)
+        findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
 
         // Homepage activity is popped after OTP validation
         otpButton.setOnClickListener {
+            otpAttempts -= 1
+            findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
             if(OTP.length == 4){
-                otpAttempts -= 1
-                if(otpAttempts >=0 ){
+                if(otpAttempts > 0 )
                     submitOTP(OTP, userId)
-                    findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
-                }
                 else{
                     MaterialAlertDialogBuilder(this@OtpActivity)
                         .setTitle("WARNING !")

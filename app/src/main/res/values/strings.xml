@@ -26,6 +26,7 @@
     <string name="edit_text">Tap to edit profile photo</string>
     <string name="all_exhibitors">All Exhibitors</string>
     <string name="designation">Designation</string>
+    <string name="intro_welcome_text">Welcome to Aero India 2023 event! Enter your email address below to get started.</string>
 
     // Usertype strings
     <string name="Api_key">AIzaSyDUk-YDNCE5c7UdnlQX5JY3Tz16rRGEH-8</string>

@@ -26,7 +26,7 @@ class OtpActivity : AppCompatActivity() {
 
     var otpFlag: Boolean = true
     var navigableBundle = Bundle()
-    var otpAttempts: Int = 1
+    var otpAttempts: Int = 5
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +74,7 @@ class OtpActivity : AppCompatActivity() {
             //Accessing API Interface for pushing user data
             val response = ServiceBuilder.buildService(ApiInterface::class.java)
 
-            GlobalScope.launch(Dispatchers.IO) {
+            GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
                 response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
                     object : Callback<UserVerifyResponseModel> {
                         override fun onResponse(
@@ -158,6 +158,10 @@ class OtpActivity : AppCompatActivity() {
                 .show()
         }
 
+    }
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        throwable.printStackTrace()
     }
 
     private fun checkDesignation(userId: Int): String{

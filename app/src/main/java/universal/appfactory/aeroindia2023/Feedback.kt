@@ -135,7 +135,7 @@ class Feedback : AppCompatActivity() {
         val requestModel = RequestModel(washroomId,userId, feedback)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
             response.sendReq(requestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
                 object : Callback<ResponseModel> {
                     override fun onResponse(
@@ -144,7 +144,7 @@ class Feedback : AppCompatActivity() {
                     ) {
                         val responseMsg = response.message().toString()
                         Toast.makeText(this@Feedback, responseMsg, Toast.LENGTH_LONG).show()
-                        Log.i("Feedback Activity response", "Feedback sent successfully, Response msg: $responseMsg variables are   remark: $feedback washroom_id:$washroomId user_id:$user_id")
+                        Log.i("Feedback Activity response", "Feedback sent successfully, Response msg: $responseMsg variables are   remark: $feedback washroom_id:$washroomId user_id:$userId")
 
                     }
 
@@ -157,9 +157,5 @@ class Feedback : AppCompatActivity() {
                 }
             )
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 }

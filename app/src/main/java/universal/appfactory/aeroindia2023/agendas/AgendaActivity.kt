@@ -174,7 +174,7 @@ class AgendaActivity : AppCompatActivity() {
         val agendaApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
-        lifecycleScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        lifecycleScope.launch(Dispatchers.IO) {
 
             agendaApi.getAgendaClassificationTime("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                 Callback<TimeResponse?> {
@@ -232,10 +232,4 @@ class AgendaActivity : AppCompatActivity() {
 
         }
     }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
-    }
-
-
 }

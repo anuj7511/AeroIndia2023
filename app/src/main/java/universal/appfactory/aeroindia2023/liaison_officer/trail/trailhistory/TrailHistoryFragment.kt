@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023.liaison_officer.trail
+package universal.appfactory.aeroindia2023.liaison_officer.trail.trailhistory
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

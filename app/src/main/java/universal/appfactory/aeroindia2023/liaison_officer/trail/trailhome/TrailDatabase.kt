@@ -1,12 +1,9 @@
-package universal.appfactory.aeroindia2023.liaison_officer.trail
+package universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonDao
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonDatabase
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonModel
 
 @Database(
     entities = [TrailModel::class],
@@ -25,7 +22,7 @@ abstract class TrailDatabase : RoomDatabase() {
 
             if (INSTANCE == null) {
                 synchronized(this) {
-                    INSTANCE = TrailDatabase.buildDatabase(context)
+                    INSTANCE = buildDatabase(context)
                 }
             }
 

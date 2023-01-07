@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023.liaison_officer.trail
+package universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -6,10 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonDao
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonDatabase
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonModel
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonRepository
 
 class TrailViewModel : ViewModel() {
     lateinit var allTrail : LiveData<List<TrailModel>>

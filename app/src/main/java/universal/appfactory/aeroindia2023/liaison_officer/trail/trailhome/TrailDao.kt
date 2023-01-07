@@ -1,11 +1,10 @@
-package universal.appfactory.aeroindia2023.liaison_officer.trail
+package universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonModel
 
 @Dao
 interface TrailDao {

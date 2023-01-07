@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023.liaison_officer.trail
+package universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome
 
 import android.app.Application
 import android.content.ContentValues
@@ -11,9 +11,6 @@ import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 import universal.appfactory.aeroindia2023.ApiClient
 import universal.appfactory.aeroindia2023.ApiInterface
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonDao
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonDatabase
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonModel
 
 class TrailRepository(application: Application) {
     private var trailDao : TrailDao

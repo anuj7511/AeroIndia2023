@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/category_bg"
-    tools:context=".liaison_officer.trail.TrailFragment">
+    tools:context=".liaison_officer.trail.trailhome.TrailFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout

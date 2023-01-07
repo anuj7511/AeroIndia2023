@@ -37,7 +37,7 @@ class DelegateRepository(application: Application) {
                 val value = delegateApi.getDelegates("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",1)
                     ?.awaitResponse()
                 val data = value?.body()?.data as List<DelegateModel>
-                Log.d("Response :", data.toString())
+                Log.d("DelegateResponse:", data.toString())
                 delegateDao.insertAll(data)
             }
         }

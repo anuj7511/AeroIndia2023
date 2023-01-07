@@ -3,6 +3,7 @@ package universal.appfactory.aeroindia2023.delegate
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_delegate_hotel.*
 import universal.appfactory.aeroindia2023.R
@@ -18,13 +19,13 @@ class DelegateHotelActivity : AppCompatActivity() {
         viewModel.init((this as  AppCompatActivity).applicationContext as Application)
 
         viewModel.allDelegates.observe(this){
-            data = it as ArrayList<DelegateModel>
-            var item = data[0]
-            delegate_hotel_name.text = item.getHotel_name()
-            delegate_hotel_address.text = item.getHotel_address()
-            delegate_hotel_city.text = item.getHotel_city()
-            delegate_hotel_contact_number.text = item.getHotel_contact()
-            delegate_hotel_rating.text = item.getStar_rating()
+
+            Log.d("sizeOfData:",it.size.toString())
+            delegate_hotel_name.text = it[0].getHotel_name()
+            delegate_hotel_address.text = it[0].getHotel_address()
+            delegate_hotel_city.text = it[0].getHotel_city()
+            delegate_hotel_contact_number.text = it[0].getHotel_contact()
+            delegate_hotel_rating.text = it[0].getStar_rating()
         }
     }
 }

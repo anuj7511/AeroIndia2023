@@ -19,6 +19,15 @@
         android:theme="@style/Theme.AeroIndia2023"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".liaison_officer.trail.TrailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <activity
             android:name=".delegate.DelegateTravelActivity"
             android:exported="false">

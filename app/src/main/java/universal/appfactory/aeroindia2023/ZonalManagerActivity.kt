@@ -64,7 +64,7 @@ class ZonalManagerActivity : AppCompatActivity() {
         val ZApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
 
             ZApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",zonalmanagerid)?.enqueue(object :
                 Callback<ZonalManagerResponse?> {
@@ -103,10 +103,6 @@ class ZonalManagerActivity : AppCompatActivity() {
 
 
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 
 }

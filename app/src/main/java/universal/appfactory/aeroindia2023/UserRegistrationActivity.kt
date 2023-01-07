@@ -78,7 +78,7 @@ class UserRegistrationActivity : AppCompatActivity() {
         //Accessing API Interface for pushing user data
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
 
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
             response.sendUserData(userDataRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
                 object : Callback<UserRegisterResponseModel> {
                     override fun onResponse(
@@ -135,9 +135,4 @@ class UserRegistrationActivity : AppCompatActivity() {
             )
         }
     }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
-    }
-
 }

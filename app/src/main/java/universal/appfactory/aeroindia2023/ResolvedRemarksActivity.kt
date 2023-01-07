@@ -31,7 +31,7 @@ class ResolvedRemarksActivity : AppCompatActivity() {
         val resolveRequestModel=ResolvedRequestModel(complaintId,manager,remarks)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
             response.resolved(resolveRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
                 object : Callback<ResolvedResponseModel> {
                     override fun onResponse(
@@ -57,10 +57,6 @@ class ResolvedRemarksActivity : AppCompatActivity() {
                 }
             )
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 }
 

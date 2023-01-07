@@ -55,8 +55,22 @@ class OtpActivity : AppCompatActivity() {
         // Homepage activity is popped after OTP validation
         otpButton.setOnClickListener {
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
-            if(OTP.length == 4)
-                submitOTP(OTP, userId)
+            if(OTP.length == 4){
+                otpAttempts -= 1
+                if(otpAttempts >=0 ){
+                    submitOTP(OTP, userId)
+                    findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
+                }
+                else{
+                    MaterialAlertDialogBuilder(this@OtpActivity)
+                        .setTitle("WARNING !")
+                        .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
+                        .setNeutralButton("OK") { dialog, which ->
+                            this@OtpActivity.finishAffinity()
+                        }
+                        .show()
+                }
+            }
             else
                 Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
         }
@@ -66,61 +80,59 @@ class OtpActivity : AppCompatActivity() {
     // register-verify API
     fun submitOTP(otp: String, userId: String){
 
-        otpAttempts += 1
-        if(otpAttempts < 4){
-            val userVerifyRequestModel = UserVerifyRequestModel(otp, userId)
-            Log.i("OTP Activity msg", "User ID obtained: $userId\nOTP obtained: $otp")
+        val userVerifyRequestModel = UserVerifyRequestModel(otp, userId)
+        Log.i("OTP Activity msg", "User ID obtained: $userId\nOTP obtained: $otp")
 
-            //Accessing API Interface for pushing user data
-            val response = ServiceBuilder.buildService(ApiInterface::class.java)
+        //Accessing API Interface for pushing user data
+        val response = ServiceBuilder.buildService(ApiInterface::class.java)
 
-            GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-                response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
-                    object : Callback<UserVerifyResponseModel> {
-                        override fun onResponse(
-                            call: Call<UserVerifyResponseModel>,
-                            response: Response<UserVerifyResponseModel>
-                        ) {
-                            val status = response.body()?.status.toString()
-                            val verificationMessage = response.body()?.message?.verification_code.toString()
+        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
+                object : Callback<UserVerifyResponseModel> {
+                    override fun onResponse(
+                        call: Call<UserVerifyResponseModel>,
+                        response: Response<UserVerifyResponseModel>
+                    ) {
+                        val status = response.body()?.status.toString()
+                        val verificationMessage = response.body()?.message?.verification_code.toString()
 
-                            if(status == "fail") {
-                                otpFlag = false
-                                Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
-                                val pinError = response.body()?.errors?.pin.toString()
-                                val idError = response.body()?.errors?.id.toString()
-                                Log.i("OTP Verification errors", "Pin error: $pinError[0]\nID error: $idError")
-                            }
-                            else{
-                                otpFlag = true
-                                val name = response.body()?.data?.name.toString()
-                                val email = response.body()?.data?.email_id.toString()
-                                val phoneNo = response.body()?.data?.phone_no.toString()
-                                val userType = response.body()?.data?.user_type.toString()
-                                val foreignKeyId = response.body()?.data?.foreign_key_id.toString()
+                        if(status == "fail") {
+                            otpFlag = false
+                            Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
+                            val pinError = response.body()?.errors?.pin.toString()
+                            val idError = response.body()?.errors?.id.toString()
+                            Log.i("OTP Verification errors", "Pin error: $pinError[0]\nID error: $idError")
+                        }
+                        else{
+                            otpFlag = true
+                            val name = response.body()?.data?.name.toString()
+                            val email = response.body()?.data?.email_id.toString()
+                            val phoneNo = response.body()?.data?.phone_no.toString()
+                            val userType = response.body()?.data?.user_type.toString()
+                            val foreignKeyId = response.body()?.data?.foreign_key_id.toString()
 
-                                navigableBundle.putString("name", name)
-                                navigableBundle.putString("email", email)
-                                navigableBundle.putString("phoneNo", phoneNo)
-                                navigableBundle.putString("designation", checkDesignation(userType.toInt()))
-                                navigableBundle.putString("userId", userId)
-                                navigableBundle.putString("userType", userType)
-                                navigableBundle.putString("foreignKeyId", foreignKeyId)
-                                navigableBundle.putBoolean("loginStatus", true)
+                            navigableBundle.putString("name", name)
+                            navigableBundle.putString("email", email)
+                            navigableBundle.putString("phoneNo", phoneNo)
+                            navigableBundle.putString("designation", checkDesignation(userType.toInt()))
+                            navigableBundle.putString("userId", userId)
+                            navigableBundle.putString("userType", userType)
+                            navigableBundle.putString("foreignKeyId", foreignKeyId)
+                            navigableBundle.putBoolean("loginStatus", true)
 
-                                val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
-                                val editPreferences: SharedPreferences.Editor = sharedPreferences.edit()
+                            val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+                            val editPreferences: SharedPreferences.Editor = sharedPreferences.edit()
 
-                                editPreferences.putString("name", name)
-                                editPreferences.putString("email", email)
-                                editPreferences.putString("phoneNo", phoneNo)
-                                editPreferences.putString("designation", checkDesignation(userType.toInt()))
-                                editPreferences.putString("userId", userId)
-                                editPreferences.putString("userType", userType)
-                                editPreferences.putString("foreignKeyId", foreignKeyId)
-                                editPreferences.putBoolean("loginStatus", true)
+                            editPreferences.putString("name", name)
+                            editPreferences.putString("email", email)
+                            editPreferences.putString("phoneNo", phoneNo)
+                            editPreferences.putString("designation", checkDesignation(userType.toInt()))
+                            editPreferences.putString("userId", userId)
+                            editPreferences.putString("userType", userType)
+                            editPreferences.putString("foreignKeyId", foreignKeyId)
+                            editPreferences.putBoolean("loginStatus", true)
 
-                                editPreferences.apply()
+                            editPreferences.apply()
 
 //                                intent = when(userType){
 //                                    "4" -> Intent(this@OtpActivity, ManagerHomepageActivity::class.java)
@@ -128,36 +140,25 @@ class OtpActivity : AppCompatActivity() {
 //                                    else -> Intent(this@OtpActivity, HomepageActivity::class.java)
 //                                }
 
-                                intent = Intent(this@OtpActivity, HomepageActivity::class.java)
-                                intent.putExtras(navigableBundle)
-                                Toast.makeText(this@OtpActivity, "Logged in successfully", Toast.LENGTH_SHORT).show()
-                                startActivity(intent)
-                                this@OtpActivity.finishAffinity()
-                            }
-
-                            Log.i("Status", status)
-                            Log.i("OTP Verification Msg", verificationMessage)
+                            intent = Intent(this@OtpActivity, HomepageActivity::class.java)
+                            intent.putExtras(navigableBundle)
+                            Toast.makeText(this@OtpActivity, "Logged in successfully", Toast.LENGTH_SHORT).show()
+                            startActivity(intent)
+                            this@OtpActivity.finishAffinity()
                         }
 
-                        override fun onFailure(call: Call<UserVerifyResponseModel>, text: Throwable ) {
-                            Toast.makeText(this@OtpActivity, "Error", Toast.LENGTH_LONG)
-                                .show()
-                            Log.i("User registration failure", text.toString())
-                        }
+                        Log.i("Status", status)
+                        Log.i("OTP Verification Msg", verificationMessage)
                     }
-                )
-            }
-        }
-        else{
-            MaterialAlertDialogBuilder(this@OtpActivity)
-                .setTitle("WARNING !")
-                .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
-                .setNeutralButton("OK") { dialog, which ->
-                    this@OtpActivity.finishAffinity()
-                }
-                .show()
-        }
 
+                    override fun onFailure(call: Call<UserVerifyResponseModel>, text: Throwable ) {
+                        Toast.makeText(this@OtpActivity, "Error", Toast.LENGTH_LONG)
+                            .show()
+                        Log.i("User registration failure", text.toString())
+                    }
+                }
+            )
+        }
     }
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->

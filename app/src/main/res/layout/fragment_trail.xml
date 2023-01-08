@@ -21,6 +21,7 @@
             tools:listitem="@layout/trail_view" />
 
         <TextView
+            android:id="@+id/submit_trial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

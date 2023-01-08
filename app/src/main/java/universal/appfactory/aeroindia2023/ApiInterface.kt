@@ -15,6 +15,8 @@ import universal.appfactory.aeroindia2023.exhibitors.ExhibitorResponse2
 import universal.appfactory.aeroindia2023.faqs.FaqsResponse
 import universal.appfactory.aeroindia2023.liaison_officer.LiaisonResponse
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhistory.TrailHistoryResponse
+import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.SaveTrailFeedbackModel
+import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.SaveTrailFeedbackResponse
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
@@ -92,5 +94,8 @@ interface ApiInterface {
 
     @GET("api/get-trail-history/{id}/{type}")
     fun getTrailHistory(@Header("Authorization") bearerToken: String,@Path("id") id: Int,@Path("type") type: String) : Call<TrailHistoryResponse?>?
+
+    @POST("api/save-trail-feedback")
+    fun saveTrailFeedback(@Body saveTrailFeedbackModel: SaveTrailFeedbackModel, @Header("Authorization") bearerToken: String): Call<SaveTrailFeedbackResponse>
 
 }

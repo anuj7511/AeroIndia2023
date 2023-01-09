@@ -52,4 +52,8 @@ class TrailAdapter(list_of_trail : ArrayList<TrailModel>): RecyclerView.Adapter<
         this.listOfTrail =list_of_trail
     }
 
+    fun getTrailResponse() : TrailModel{
+        return listOfTrail[lastCheckedPosition]
+    }
+
 }

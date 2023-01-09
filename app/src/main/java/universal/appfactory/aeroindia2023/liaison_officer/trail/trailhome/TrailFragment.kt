@@ -57,19 +57,21 @@ class TrailFragment(private val mContext : Context): Fragment() {
         }
 
         binding.submit_trial.setOnClickListener {
+            var trailResponse = adapter.getTrailResponse()
             var liaisonId = 1
-            var delegateId=1
+            var delegateId = 1
             var status = "reached bengalore"
             var remarks = ""
-            sendTrail(liaisonId,delegateId,status,remarks)
+            var enteredBy = " "
+            sendTrail(liaisonId,delegateId,status,remarks,enteredBy)
         }
 
         return binding.rootView
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private fun sendTrail(liaisonId: Int, delegateId: Int, status: String, remarks: String) {
-        val sendTrailData = SaveTrailFeedbackModel(liaisonId,delegateId,status,remarks)
+    private fun sendTrail(liaisonId: Int, delegateId: Int, status: String, remarks: String,enterBy : String) {
+        val sendTrailData = SaveTrailFeedbackModel(liaisonId,delegateId,status,remarks,enterBy)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
         GlobalScope.launch (Dispatchers.IO){

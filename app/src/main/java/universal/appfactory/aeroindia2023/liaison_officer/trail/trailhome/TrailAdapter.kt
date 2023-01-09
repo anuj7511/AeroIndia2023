@@ -12,8 +12,14 @@ class TrailAdapter(list_of_trail : ArrayList<TrailModel>): RecyclerView.Adapter<
 
     private var listOfTrail : ArrayList<TrailModel>
     private lateinit var context : Context
-    class MyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
+    private var lastCheckedPosition = -1
+
+    inner class MyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
         var trialInfo = itemView.trail_info
+        var radioButton = itemView.trail_radio_btn
+        var mIsChecked = false
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -23,7 +29,19 @@ class TrailAdapter(list_of_trail : ArrayList<TrailModel>): RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.trialInfo.text = listOfTrail[position].getStatus().toString()
+        var holderPosition = position
+        holder.trialInfo.text = listOfTrail[holderPosition].getStatus().toString()
+
+        holder.radioButton.isChecked = holderPosition == lastCheckedPosition
+
+        holder.radioButton.setOnClickListener {
+            lastCheckedPosition = holderPosition
+            notifyDataSetChanged()
+
+        }
+
+
+
     }
 
     override fun getItemCount(): Int {

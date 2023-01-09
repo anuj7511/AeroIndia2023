@@ -33,6 +33,10 @@ class LiaisonModel (
     @SerializedName("LO_email")
     private var LO_email: String,
 
+    @ColumnInfo(name = "delegate_id")
+    @SerializedName("delegate_id")
+    private var delegate_id : Int,
+
     @ColumnInfo(name = "delegation_name")
     @SerializedName("delegation_name")
     private var delegation_name: String,
@@ -114,6 +118,10 @@ class LiaisonModel (
     private var driver_mobile_number: String,
 
     ) {
+
+    fun getDelegate_id() : Int{
+        return delegate_id
+    }
 
     fun getDelegation_name(): String {
         return delegation_name

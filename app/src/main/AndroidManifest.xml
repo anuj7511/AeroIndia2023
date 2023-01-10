@@ -28,6 +28,15 @@
                 android:value="" />
         </activity>
 
+
+        <activity
+            android:name=".liaison_officer.DelegationInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <activity
             android:name=".delegate.DelegateTravelActivity"
             android:exported="false">

@@ -26,7 +26,7 @@ class OtpActivity : AppCompatActivity() {
 
     var otpFlag: Boolean = true
     var navigableBundle = Bundle()
-    var otpAttempts: Int = 5
+    var otpAttempts: Int = 3
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {

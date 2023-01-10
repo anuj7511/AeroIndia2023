@@ -1,4 +1,5 @@
 package universal.appfactory.aeroindia2023
+
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -44,8 +45,9 @@ interface ApiInterface {
     @POST("api/register-verify")
     fun verifyUserData(@Body userVerifyRequestModel: UserVerifyRequestModel,@Header("Authorization") bearerToken: String): Call<UserVerifyResponseModel>
 
+//    @Header("Authorization") refreshToken: String can be added to verifyUserLogin
     @POST("api/login-user")
-    fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserLoginDataResponseModel>
+    fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String, @Header("referrer") referrer: String = "origin"): Call<UserLoginDataResponseModel>
 
     @POST("api/complaint-resolve-save")
     fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorisation") bearerToken:String):Call<ResolvedResponseModel>

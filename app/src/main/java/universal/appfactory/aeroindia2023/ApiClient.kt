@@ -18,10 +18,10 @@ object ApiClient {
 
     fun getInstance(): Retrofit {
         return Retrofit.Builder().baseUrl(baseUrl).client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create()).build()
             // we need to add converter factory to
             // convert JSON object to Java object
-            .build()
+
     }
 
 }

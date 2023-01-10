@@ -1,15 +1,14 @@
 package universal.appfactory.aeroindia2023
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 
 import androidx.appcompat.app.ActionBar
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import androidx.appcompat.app.AlertDialog
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_feedback.*
 import kotlinx.android.synthetic.main.zonal_manager_user_card.*
@@ -19,7 +18,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
-import kotlin.properties.Delegates
 
 
 class Feedback : AppCompatActivity() {
@@ -27,7 +25,7 @@ class Feedback : AppCompatActivity() {
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
     var washroom_Id:Int =0
-    var user_id:Int=0// Previously lateinit washroomId: String
+    var user_id:Int=0 // Previously lateinit washroomId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,37 +76,38 @@ class Feedback : AppCompatActivity() {
         qrScanIntegrator?.initiateScan()
     }
 
-//    val feedbackTexts = arrayOf("Washroom is nice and clean, great job!",
-//                                "Washroom needs cleaning",
-//                                "Washroom drain is clogged",
-//                                "Washroom has foul smell",
-//                                "Refill paper towels",
-//                                "Water is leaking",
-//                                "Door lock is broken",
-//                                "Washroom light does not work",
-//                                "Refill hand soap",
-//                                "Washroom is locked")
-//    val checkedTexts = booleanArrayOf(false,false,false,false,false,false,false,false,false,false)
+//    Texts for feedback dialog box
+    val feedbackTexts = arrayOf("Washroom is nice and clean, great job!",
+                                "Washroom needs cleaning",
+                                "Washroom drain is clogged",
+                                "Washroom has foul smell",
+                                "Refill paper towels",
+                                "Water is leaking",
+                                "Door lock is broken",
+                                "Washroom light does not work",
+                                "Refill hand soap",
+                                "Washroom is locked")
+    val checkedTexts = booleanArrayOf(false,false,false,false,false,false,false,false,false,false)
 
-    // Dialog box for feedback
-//    private fun submitFeedback(){
-//        MaterialAlertDialogBuilder(this)
-//            .setTitle("Washroom ID: $washroom_Id")
-//            .setMessage("Please select action required for these restrooms")
-//            .setMultiChoiceItems(feedbackTexts, checkedTexts){
-//                dialog, which, isChecked ->
-//                checkedTexts[which] = isChecked
-//                Log.i("Feedback activity msg", "Current item checked: $feedbackTexts[which]")
-//
-//            }
-//            .setPositiveButton("SUBMIT") { dialog, which ->
-//                //TODO: Feedback needs to be submitted
-//            }
-//            .setNegativeButton("No") { dialog, which ->
-//                dialog.cancel()
-//            }
-//            .show()
-//    }
+//     Dialog box for feedback
+    fun checkFeedbacks(view: View){
+        val builder = AlertDialog.Builder(this@Feedback)
+        builder
+            .setTitle("Washroom ID: $washroom_Id")
+            .setMessage("Please select action required for these restrooms")
+            .setMultiChoiceItems(feedbackTexts, checkedTexts){
+                dialog, which, isChecked ->
+                checkedTexts[which] = isChecked
+                Log.i("Feedback activity msg", "Current item checked: $feedbackTexts[which]")
+            }
+            .setPositiveButton("SUBMIT") { dialog, which ->
+                //TODO: Feedback needs to be submitted
+            }
+            .setNegativeButton("No") { dialog, which ->
+                dialog.cancel()
+            }
+            .show()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)

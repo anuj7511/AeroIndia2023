@@ -8,18 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import universal.appfactory.aeroindia2023.databinding.ActivityMainBinding
 
 // Main Activity
 class MainActivity : AppCompatActivity() {
@@ -36,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFinish() {
                 if(isOnline(this@MainActivity)){
                     Log.i("Internet connections", "Valid and fine to start")
+
                     // Starts Login Activity
                     val intent = Intent(this@MainActivity, UserLoginActivity::class.java)
                     startActivity(intent)

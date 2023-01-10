@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b2d260498550a5194e7dd893e4f06cbe",
+    "identityHash": "98ae40d9835470297b1bcc140542b1b5",
     "entities": [
       {
         "tableName": "liaison",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liason_ooficer` TEXT NOT NULL, `LO_organisation` TEXT NOT NULL, `LO_designation` TEXT NOT NULL, `LO_mobile` TEXT NOT NULL, `LO_gender` TEXT NOT NULL, `LO_email` TEXT NOT NULL, `delegation_name` TEXT NOT NULL, `delegate_first_name` TEXT NOT NULL, `delegate_last_name` TEXT NOT NULL, `delegate_email` TEXT NOT NULL, `delegate_mobile` TEXT NOT NULL, `arrival_date` TEXT NOT NULL, `arrival_time` TEXT NOT NULL, `departure_date` TEXT NOT NULL, `departure_time` TEXT NOT NULL, `flight_info` TEXT NOT NULL, `departure_terminal` TEXT NOT NULL, `hotel_name` TEXT NOT NULL, `star_rating` TEXT NOT NULL, `hotel_contact` TEXT NOT NULL, `hotel_address` TEXT NOT NULL, `hotel_city` TEXT NOT NULL, `vehicle_number` TEXT NOT NULL, `vehicle_colour` TEXT NOT NULL, `driver_name` TEXT NOT NULL, `driver_mobile_number` TEXT NOT NULL, PRIMARY KEY(`liason_ooficer`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`liason_ooficer` TEXT NOT NULL, `LO_organisation` TEXT NOT NULL, `LO_designation` TEXT NOT NULL, `LO_mobile` TEXT NOT NULL, `LO_gender` TEXT NOT NULL, `LO_email` TEXT NOT NULL, `delegate_id` INTEGER NOT NULL, `delegation_name` TEXT NOT NULL, `delegate_first_name` TEXT NOT NULL, `delegate_last_name` TEXT NOT NULL, `delegate_email` TEXT NOT NULL, `delegate_mobile` TEXT NOT NULL, `arrival_date` TEXT NOT NULL, `arrival_time` TEXT NOT NULL, `departure_date` TEXT NOT NULL, `departure_time` TEXT NOT NULL, `flight_info` TEXT NOT NULL, `departure_terminal` TEXT NOT NULL, `hotel_name` TEXT NOT NULL, `star_rating` TEXT NOT NULL, `hotel_contact` TEXT NOT NULL, `hotel_address` TEXT NOT NULL, `hotel_city` TEXT NOT NULL, `vehicle_number` TEXT NOT NULL, `vehicle_colour` TEXT NOT NULL, `driver_name` TEXT NOT NULL, `driver_mobile_number` TEXT NOT NULL, PRIMARY KEY(`liason_ooficer`))",
         "fields": [
           {
             "fieldPath": "liason_ooficer",
@@ -42,6 +42,12 @@
             "fieldPath": "LO_email",
             "columnName": "LO_email",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegate_id",
+            "columnName": "delegate_id",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -178,7 +184,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b2d260498550a5194e7dd893e4f06cbe')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '98ae40d9835470297b1bcc140542b1b5')"
     ]
   }
 }

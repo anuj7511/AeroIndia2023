@@ -39,14 +39,14 @@ class UserRegistrationActivity : AppCompatActivity() {
         val buttonId: Button = findViewById(R.id.registerButton)
 
         // ArrayAdapter for user types
-        val spinner = findViewById<Spinner>(R.id.spinner)
-
-        val userTypes = resources.getStringArray(R.array.user_types)
-        val arrayAdapter = ArrayAdapter(this@UserRegistrationActivity, android.R.layout.simple_list_item_1, userTypes)
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = arrayAdapter
-
-        val designation = spinner.selectedItem.toString()
+//        val spinner = findViewById<Spinner>(R.id.spinner)
+//
+//        val userTypes = resources.getStringArray(R.array.user_types)
+//        val arrayAdapter = ArrayAdapter(this@UserRegistrationActivity, android.R.layout.simple_list_item_1, userTypes)
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//        spinner.adapter = arrayAdapter
+//
+//        val designation = spinner.selectedItem.toString()
 
         buttonId.setOnClickListener{
             val email = findViewById<EditText>(R.id.emailAddress).text.toString()
@@ -58,7 +58,6 @@ class UserRegistrationActivity : AppCompatActivity() {
             navigableBundle.putString("email", email)
             navigableBundle.putString("username", username)
             navigableBundle.putString("mobileNo", mobileNo)
-            navigableBundle.putString("designation", designation)
 
             if((email == "")||(username == "")||(mobileNo == "")){
                 Toast.makeText(this@UserRegistrationActivity, "Fill all the columns", Toast.LENGTH_SHORT).show()

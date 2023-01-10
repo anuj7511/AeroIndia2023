@@ -85,7 +85,7 @@ class SelectedSpeakerActivity : AppCompatActivity() {
         val agendaApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
 
             agendaApi.getSpeakerAgenda("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)?.enqueue(object :
                 Callback<AgendaResponse?> {
@@ -111,9 +111,5 @@ class SelectedSpeakerActivity : AppCompatActivity() {
             })
 
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 }

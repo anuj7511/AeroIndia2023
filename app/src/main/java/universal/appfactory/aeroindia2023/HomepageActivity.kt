@@ -17,6 +17,7 @@ import universal.appfactory.aeroindia2023.delegate.DelegateViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
+import universal.appfactory.aeroindia2023.liaison_officer.HotelActivity
 import universal.appfactory.aeroindia2023.liaison_officer.LiaisonViewModel
 import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailActivity
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailViewModel
@@ -108,7 +109,7 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}         // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
                     backpress=0}         // Speakers
-            2 -> {navigateIntent = Intent(this@HomepageActivity, TrailActivity::class.java)
+            2 -> {navigateIntent = Intent(this@HomepageActivity, HotelActivity::class.java)
                     backpress=0}         // Venue maps
             3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)
                     backpress=0}         // Driving directions

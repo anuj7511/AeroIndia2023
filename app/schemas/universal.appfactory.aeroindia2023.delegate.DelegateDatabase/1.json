@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3aed1436b9d7394026465487a5f22c41",
+    "identityHash": "cf8c20926f073ec19aa785ed3dc21305",
     "entities": [
       {
         "tableName": "delegate",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `delegation_name` TEXT NOT NULL, `delegate_first_name` TEXT NOT NULL, `delegate_last_name` TEXT NOT NULL, `ddelegate_email` TEXT NOT NULL, `delegate_mobile` TEXT NOT NULL, `hotel_name` TEXT NOT NULL, `star_rating` TEXT NOT NULL, `hotel_contact` TEXT NOT NULL, `hotel_address` TEXT NOT NULL, `hotel_city` TEXT NOT NULL, `liason_ooficer` TEXT NOT NULL, `LO_organisation` TEXT NOT NULL, `LO_designation` TEXT NOT NULL, `LO_mobile` TEXT NOT NULL, `LO_gender` TEXT NOT NULL, `LO_email` TEXT NOT NULL, `vehicle_number` TEXT NOT NULL, `vehicle_colour` TEXT NOT NULL, `driver_name` TEXT NOT NULL, `driver_mobile_number` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `delegation_name` TEXT NOT NULL, `delegate_first_name` TEXT NOT NULL, `delegate_last_name` TEXT NOT NULL, `delegate_email` TEXT NOT NULL, `delegate_mobile` TEXT NOT NULL, `arrival_date` TEXT NOT NULL, `arrival_time` TEXT NOT NULL, `departure_date` TEXT NOT NULL, `departure_time` TEXT NOT NULL, `flight_info` TEXT NOT NULL, `departure_terminal` TEXT NOT NULL, `hotel_name` TEXT NOT NULL, `star_rating` TEXT NOT NULL, `hotel_contact` TEXT NOT NULL, `hotel_address` TEXT NOT NULL, `hotel_city` TEXT NOT NULL, `liason_ooficer` TEXT NOT NULL, `LO_organisation` TEXT NOT NULL, `LO_designation` TEXT NOT NULL, `LO_mobile` TEXT NOT NULL, `LO_gender` TEXT NOT NULL, `LO_email` TEXT NOT NULL, `vehicle_number` TEXT NOT NULL, `vehicle_colour` TEXT NOT NULL, `driver_name` TEXT NOT NULL, `driver_mobile_number` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -33,14 +33,50 @@
             "notNull": true
           },
           {
-            "fieldPath": "ddelegate_email",
-            "columnName": "ddelegate_email",
+            "fieldPath": "delegate_email",
+            "columnName": "delegate_email",
             "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "delegate_mobile",
             "columnName": "delegate_mobile",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "arrival_date",
+            "columnName": "arrival_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "arrival_time",
+            "columnName": "arrival_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departure_date",
+            "columnName": "departure_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departure_time",
+            "columnName": "departure_time",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "flight_info",
+            "columnName": "flight_info",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "departure_terminal",
+            "columnName": "departure_terminal",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -148,7 +184,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3aed1436b9d7394026465487a5f22c41')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cf8c20926f073ec19aa785ed3dc21305')"
     ]
   }
 }

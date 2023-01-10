@@ -114,7 +114,7 @@ class ExhibitorsActivity : AppCompatActivity() {
         val exhibitorApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
 
             exhibitorApi.getExhibitors("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                 Callback<ExhibitorResponse?> {
@@ -140,9 +140,5 @@ class ExhibitorsActivity : AppCompatActivity() {
             })
 
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 }

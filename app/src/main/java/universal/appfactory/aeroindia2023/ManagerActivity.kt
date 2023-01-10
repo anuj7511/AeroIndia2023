@@ -42,7 +42,7 @@ class ManagerActivity : AppCompatActivity() {
         val PApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+        GlobalScope.launch(Dispatchers.IO) {
 
             PApi.getmanagers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                     Callback<ManagerResponse?> {
@@ -78,10 +78,6 @@ class ManagerActivity : AppCompatActivity() {
 
 
         }
-    }
-
-    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        throwable.printStackTrace()
     }
 
 }

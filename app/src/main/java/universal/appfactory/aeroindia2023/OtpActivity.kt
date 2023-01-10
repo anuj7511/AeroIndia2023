@@ -56,7 +56,6 @@ class OtpActivity : AppCompatActivity() {
         // Homepage activity is popped after OTP validation
         otpButton.setOnClickListener {
             otpAttempts -= 1
-            findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
             if(OTP.length == 4){
                 if(otpAttempts > 0 )
@@ -89,6 +88,7 @@ class OtpActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             response.verifyUserData(userVerifyRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
                 object : Callback<UserVerifyResponseModel> {
+                    @SuppressLint("SetTextI18n")
                     override fun onResponse(
                         call: Call<UserVerifyResponseModel>,
                         response: Response<UserVerifyResponseModel>
@@ -98,6 +98,7 @@ class OtpActivity : AppCompatActivity() {
 
                         if(status == "fail") {
                             otpFlag = false
+                            findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
                             Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
                             val pinError = response.body()?.errors?.pin.toString()
                             val idError = response.body()?.errors?.id.toString()

@@ -17,7 +17,7 @@ class UserHistoryActivity : AppCompatActivity() {
     private lateinit var adapter: UserHistoryAdapter
     private  var data: ArrayList<UserHistoryModel>? = null
     private lateinit var recyclerview: RecyclerView
-     var user_id:Int=0
+     private var user_id:Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_history)

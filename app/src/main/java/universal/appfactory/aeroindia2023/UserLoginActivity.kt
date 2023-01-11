@@ -134,10 +134,10 @@ class UserLoginActivity : AppCompatActivity() {
                         // Login errors
                         val emailError = response.body()?.errors?.email_id.toString()
 
-                        // saving authentication token
-                        sessionManager = SessionManager(this@UserLoginActivity)
-                        sessionManager.saveAuthToken(response.body()?.authToken.toString())
-                        Log.i("Authentication token", response.body()?.authToken.toString())
+//                        // saving authentication token
+//                        sessionManager = SessionManager(this@UserLoginActivity)
+//                        sessionManager.saveAuthToken(response.body()?.authToken.toString())
+//                        Log.i("Authentication token", response.body()?.authToken.toString())
 
                         Log.i("Verification code", verificationCode)
 

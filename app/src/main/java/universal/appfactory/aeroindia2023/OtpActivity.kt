@@ -58,8 +58,10 @@ class OtpActivity : AppCompatActivity() {
             otpAttempts -= 1
             val OTP = findViewById<EditText>(R.id.otp).text.toString()
             if(OTP.length == 4){
-                if(otpAttempts > 0 )
+                findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
+                if(otpAttempts > 0 ) {
                     submitOTP(OTP, userId)
+                }
                 else{
                     MaterialAlertDialogBuilder(this@OtpActivity)
                         .setTitle("WARNING !")
@@ -96,21 +98,14 @@ class OtpActivity : AppCompatActivity() {
                         val status = response.body()?.status.toString()
                         val verificationMessage = response.body()?.message?.verification_code.toString()
 
-                        if(status == "fail") {
-                            otpFlag = false
-                            findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
-                            Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
-                            val pinError = response.body()?.errors?.pin.toString()
-                            val idError = response.body()?.errors?.id.toString()
-                            Log.i("OTP Verification errors", "Pin error: $pinError[0]\nID error: $idError")
-                        }
-                        else{
+                        if(status == "success") {
                             otpFlag = true
                             val name = response.body()?.data?.name.toString()
                             val email = response.body()?.data?.email_id.toString()
                             val phoneNo = response.body()?.data?.phone_no.toString()
                             val userType = response.body()?.data?.user_type.toString()
                             val foreignKeyId = response.body()?.data?.foreign_key_id.toString()
+                            val verifiedToken = response.body()?.data?.verified_token.toString()
 
                             navigableBundle.putString("name", name)
                             navigableBundle.putString("email", email)
@@ -146,6 +141,13 @@ class OtpActivity : AppCompatActivity() {
                             Toast.makeText(this@OtpActivity, "Logged in successfully", Toast.LENGTH_SHORT).show()
                             startActivity(intent)
                             this@OtpActivity.finishAffinity()
+                        }
+                        else{
+                            otpFlag = false
+                            Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
+                            val pinError = response.body()?.errors?.pin.toString()
+                            val idError = response.body()?.errors?.id.toString()
+                            Log.i("OTP Verification errors", "Pin error: $pinError[0]\nID error: $idError")
                         }
 
                         Log.i("Status", status)

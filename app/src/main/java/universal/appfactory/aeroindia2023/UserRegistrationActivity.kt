@@ -58,6 +58,7 @@ class UserRegistrationActivity : AppCompatActivity() {
             navigableBundle.putString("email", email)
             navigableBundle.putString("username", username)
             navigableBundle.putString("mobileNo", mobileNo)
+            navigableBundle.putString("designation", "-")
 
             if((email == "")||(username == "")||(mobileNo == "")){
                 Toast.makeText(this@UserRegistrationActivity, "Fill all the columns", Toast.LENGTH_SHORT).show()

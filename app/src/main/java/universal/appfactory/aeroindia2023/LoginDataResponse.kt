@@ -13,4 +13,6 @@ data class LoginDataResponse(
     val user_type: Int,
     @SerializedName("foreign_key_id")
     val foreign_key_id: Int,
+    @SerializedName("verified_token")
+    val verified_token: String
     )

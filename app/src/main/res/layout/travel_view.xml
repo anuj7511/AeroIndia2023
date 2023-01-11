@@ -14,6 +14,16 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
+        android:id="@+id/travel_delegate_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delegate name"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -40,7 +50,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/del_arrival_date"
+                    android:id="@+id/delegate_arrival_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -61,7 +71,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/del_arrival_time"
+                    android:id="@+id/delegate_arrival_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -82,7 +92,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/del_flight_info"
+                    android:id="@+id/delegate_flight_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -122,7 +132,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/del_departure_date"
+                    android:id="@+id/delegate_departure_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -143,7 +153,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/del_departure_time"
+                    android:id="@+id/delegate_departure_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -165,7 +175,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/del_departure_terminal"
+                    android:id="@+id/delegate_departure_terminal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

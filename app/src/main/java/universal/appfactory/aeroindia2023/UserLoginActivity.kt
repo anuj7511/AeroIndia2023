@@ -1,22 +1,25 @@
 package universal.appfactory.aeroindia2023
 
+import android.accounts.AccountManager
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_profile_info.*
+import kotlinx.android.synthetic.main.activity_user_login.*
 import kotlinx.android.synthetic.main.zonal_manager_user_card.*
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+
 
 // API_1: http://aeroindia.gov.in/api/register-user
 // API_2: http://aeroindia.gov.in/api/register-verify
@@ -26,6 +29,7 @@ class UserLoginActivity : AppCompatActivity() {
 
     var backpress: Int = 0
     var navigableBundle = Bundle()
+    private lateinit var sessionManager: SessionManager
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +45,22 @@ class UserLoginActivity : AppCompatActivity() {
         val signUpButtonId = findViewById<Button>(R.id.signUpButton)
         val emailEditViewId = findViewById<EditText>(R.id.emailAddress)
 
-        var intent = Intent(this@UserLoginActivity, DummyActivity::class.java)
+        var intent: Intent
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
 
-        Log.i("Status of cache", sharedPreferences.getBoolean("loginStatus", false).toString())
-        Log.i("Username", sharedPreferences.getString("name", "N/A").toString())
-        Log.i("Designation", sharedPreferences.getString("designation", "N/A").toString())
-        Log.i("Phone number", sharedPreferences.getString("phoneNo", "N/A").toString())
+        // Authentication token generation code
+        val am: AccountManager = AccountManager.get(this@UserLoginActivity)
+        val options = Bundle()
+
+//        am.getAuthToken(
+//            myAccount_,                     // Account retrieved using getAccountsByType()
+//            "Manage your tasks",            // Auth scope
+//            options,                        // Authenticator-specific options
+//            this,                           // Your activity
+//            OnTokenAcquired(),              // Callback called when a token is successfully acquired
+//            Handler(onError())              // Callback called if an error occurs
+//        )
 
         if(sharedPreferences.getBoolean("loginStatus", false)) {
 
@@ -76,10 +88,11 @@ class UserLoginActivity : AppCompatActivity() {
         }
 
         else {
-
             loginButtonId.setOnClickListener {
+                val imm = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(loginButtonId.windowToken, 0)
                 val email = emailEditViewId.text.toString()
-                if(!email.equals("")) {
+                if(email != "") {
                     Log.i("Email", email)
                     navigableBundle.putString("type", "1")
                     submitUserLoginData(email)
@@ -121,11 +134,25 @@ class UserLoginActivity : AppCompatActivity() {
                         // Login errors
                         val emailError = response.body()?.errors?.email_id.toString()
 
+//                        // saving authentication token
+//                        sessionManager = SessionManager(this@UserLoginActivity)
+//                        sessionManager.saveAuthToken(response.body()?.authToken.toString())
+//                        Log.i("Authentication token", response.body()?.authToken.toString())
+
                         Log.i("Verification code", verificationCode)
 
                         if(status == "fail"){
                             Toast.makeText(this@UserLoginActivity, "Status: $status", Toast.LENGTH_SHORT).show()
                             Log.i("Login Activity email error", emailError)
+                            if(emailError.subSequence(0, 7) == "Account"){
+                                MaterialAlertDialogBuilder(this@UserLoginActivity)
+                                    .setTitle("ALERT !")
+                                    .setMessage("Your $emailError due to multiple incorrect login attempts. Kindly try after the locking time.")
+                                    .setNeutralButton("OK") { dialog, which ->
+                                        this@UserLoginActivity.finishAffinity()
+                                    }
+                                    .show()
+                            }
                         }
                         else{
                             navigableBundle.putString("email", email)
@@ -152,7 +179,7 @@ class UserLoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed(){
-        backpress = backpress + 1
+        backpress += 1
         if(backpress > 1){
             finishAffinity()
         }

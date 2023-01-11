@@ -95,35 +95,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal|center_vertical"
-                android:layout_margin="8sp"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:text="@string/designation"
-                android:contentDescription="@string/icon"
-                android:textColor="@color/black"
-                android:src="@drawable/ic_profile" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:backgroundTint="@color/white"
-                android:padding="10sp"
-                android:layout_margin="8sp" />
-
-        </LinearLayout>
-
-
         <Button
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
@@ -155,8 +126,9 @@
         <TextView
             android:id="@+id/loginHeading"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10sp"
+            android:textStyle="bold"
             android:gravity="center_vertical|center_horizontal"
             android:text="@string/register_heading"
             android:textColor="#000000"

@@ -1,14 +1,17 @@
 package universal.appfactory.aeroindia2023
+
+import android.app.ProgressDialog.show
+import android.content.DialogInterface
 import android.content.Intent
+import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 
 import androidx.appcompat.app.ActionBar
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_feedback.*
@@ -19,15 +22,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
-import kotlin.properties.Delegates
+import java.util.Arrays.asList
 
 
 class Feedback : AppCompatActivity() {
 
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
-    var washroom_Id:Int =0
-    var user_id:Int=0// Previously lateinit washroomId: String
+    var washroom_Id: Int =0
+    var user_id: Int=0 // Previously late init washroomId: String
+    private lateinit var feedback: EditText
+    private lateinit var checkedFeedbacks: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +54,7 @@ class Feedback : AppCompatActivity() {
 
         val btn = findViewById<TextView>(R.id.submit)
         val history= findViewById<TextView>(R.id.History)
-        val feedback = findViewById<EditText>(R.id.writeText)
+        feedback = findViewById<EditText>(R.id.writeText)
 
         setOnClickListener()
 
@@ -59,7 +64,11 @@ class Feedback : AppCompatActivity() {
             val intent = Intent(this, UserHistoryActivity::class.java)
             intent.putExtra("Name", user_id)
             startActivity(intent) }
-        btn.setOnClickListener { submitFeedback(feedback.text.toString(),washroom_Id,user_id) }
+
+        btn.setOnClickListener{
+            checkedFeedbacks += feedback.text
+            submitFeedback(checkedFeedbacks,washroom_Id, user_id)
+        }
 
     }
 
@@ -78,37 +87,34 @@ class Feedback : AppCompatActivity() {
         qrScanIntegrator?.initiateScan()
     }
 
-//    val feedbackTexts = arrayOf("Washroom is nice and clean, great job!",
-//                                "Washroom needs cleaning",
-//                                "Washroom drain is clogged",
-//                                "Washroom has foul smell",
-//                                "Refill paper towels",
-//                                "Water is leaking",
-//                                "Door lock is broken",
-//                                "Washroom light does not work",
-//                                "Refill hand soap",
-//                                "Washroom is locked")
-//    val checkedTexts = booleanArrayOf(false,false,false,false,false,false,false,false,false,false)
+//    Texts for feedback dialog box
+    private val feedbackTexts = arrayOf("Washroom is nice and clean, great job!", "Washroom needs cleaning", "Washroom drain is clogged", "Washroom has foul smell", "Refill paper towels", "Water is leaking", "Door lock is broken", "Washroom light does not work", "Refill hand soap", "Washroom is locked")
 
-    // Dialog box for feedback
-//    private fun submitFeedback(){
-//        MaterialAlertDialogBuilder(this)
-//            .setTitle("Washroom ID: $washroom_Id")
-//            .setMessage("Please select action required for these restrooms")
-//            .setMultiChoiceItems(feedbackTexts, checkedTexts){
-//                dialog, which, isChecked ->
-//                checkedTexts[which] = isChecked
-//                Log.i("Feedback activity msg", "Current item checked: $feedbackTexts[which]")
-//
-//            }
-//            .setPositiveButton("SUBMIT") { dialog, which ->
-//                //TODO: Feedback needs to be submitted
-//            }
-//            .setNegativeButton("No") { dialog, which ->
-//                dialog.cancel()
-//            }
-//            .show()
-//    }
+//     Dialog box for feedback
+    fun checkFeedbacks(view: View){
+    // Set up the alert builder
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle("Please select desired options")
+
+    val checkedItems = booleanArrayOf(false, false, false, false, false, false, false, false, false, false)
+    builder.setMultiChoiceItems(feedbackTexts, checkedItems) { dialog, which, isChecked ->
+        checkedItems[which] = isChecked
+    }
+
+    builder.setPositiveButton("SUBMIT") { dialog, which ->
+        // TODO: Redirection to submitFeedback
+        for(i in 0..9){
+            if(checkedItems[i]){
+                checkedFeedbacks += feedbackTexts[i]+", "
+            }
+        }
+    }
+    builder.setNegativeButton("CANCEL", null)
+
+    val dialog = builder.create()
+    dialog.show()
+
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -159,3 +165,26 @@ class Feedback : AppCompatActivity() {
         }
     }
 }
+
+//        val checkBoxView: View = View.inflate(this, R.layout.dialog_fragment, null)
+//        val checkBox = checkBoxView.findViewById<CheckBox>(androidx.appcompat.R.id.checkbox)
+//        checkBox.setText("Sample ")
+
+//        val builder = MaterialAlertDialogBuilder(this@Feedback)
+//        builder
+//            .setTitle("Washroom ID: $washroom_Id")
+//            .setMessage("Please select action required for these restrooms")
+//            .setMultiChoiceItems(sampleTextArray, checkedTexts){ dialog, which, isChecked ->
+////                checkedTexts[which] = isChecked
+////                Log.i("Feedback activity msg", "Current item checked: $feedbackTexts[which]")
+//            }
+//            .setPositiveButton("SUBMIT") { dialog, which ->
+//                //TODO: Feedback needs to be submitted
+////                submitFeedback(washroomId = washroom_Id, userId = user_id, feedback = "")
+//            }
+//            .setNegativeButton("CANCEL") { dialog, which ->
+//                dialog.cancel()
+//            }
+//
+//            val dialog = builder.create()
+//            dialog.show()

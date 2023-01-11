@@ -91,6 +91,7 @@ class UserLoginActivity : AppCompatActivity() {
             loginButtonId.setOnClickListener {
                 val imm = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(loginButtonId.windowToken, 0)
+
                 val email = emailEditViewId.text.toString()
                 if(email != "") {
                     Log.i("Email", email)

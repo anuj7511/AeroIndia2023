@@ -138,6 +138,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -145,26 +146,20 @@
             android:id="@+id/refreshIcon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="20sp"
             android:layout_marginStart="25sp"
             android:onClick="refreshPage"
-            android:layout_marginEnd="20sp"
             android:padding="10sp"
             app:srcCompat="@drawable/refresh" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
         <ImageView
             android:id="@+id/userIcon"
-            android:tag="9"
-            android:onClick="iconClicked"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_margin="3sp"
+            android:onClick="iconClicked"
+            android:tag="9"
             app:srcCompat="@drawable/ic_profile" />
-
 
         <TextView
             android:id="@+id/userNameView"
@@ -173,14 +168,20 @@
             android:layout_margin="3sp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical|end"
+            android:onClick="iconClicked"
             android:paddingEnd="30sp"
             android:paddingStart="5sp"
-            android:text="User"
             android:tag="9"
-            android:onClick="iconClicked"
+            android:text="User"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
 
     </LinearLayout>
@@ -189,10 +190,10 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/iconGrid"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 

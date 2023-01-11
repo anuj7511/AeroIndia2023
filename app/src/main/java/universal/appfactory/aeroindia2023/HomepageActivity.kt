@@ -13,12 +13,11 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
-import universal.appfactory.aeroindia2023.delegate.DelegateViewModel
+import universal.appfactory.aeroindia2023.delegate.*
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
-import universal.appfactory.aeroindia2023.liaison_officer.HotelActivity
-import universal.appfactory.aeroindia2023.liaison_officer.LiaisonViewModel
+import universal.appfactory.aeroindia2023.liaison_officer.*
 import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailActivity
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailViewModel
 import universal.appfactory.aeroindia2023.products.ProductViewModel
@@ -61,12 +60,30 @@ class HomepageActivity : AppCompatActivity() {
 
         Log.i("Homepage activity msg", "User type: $userType")
 
+        // Icons changed according to usertype
         when(userType){
-            "4" -> findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints)
-            "5" -> findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints)
+            "2" -> {
+                    findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.check_complaints) //DelegateActivity
+                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.check_complaints) //DelegateVehicleActivity
+                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.check_complaints) // DelegateHotelActivity
+                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.check_complaints) // DelegateTravelActivity
+                    findViewById<ImageView>(R.id.faq).setImageResource(R.drawable.check_complaints) // AssignedLOActivity
+                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ETicketActivity
+                    }
+            "3" -> {
+                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.check_complaints) // VehicleActivity
+                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.check_complaints) // HotelActivity
+                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.check_complaints) // TravelActivity
+                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // TrailActivity
+                    }
+            "4" -> {
+                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ZonalManagerActivity
+                    }
+            "5" -> {
+                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ManagerActivity
+                    }
             else -> Log.i("Homepage activity msg", "No changes done")
         }
-
 
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
         agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
@@ -95,13 +112,11 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel = ViewModelProvider(this)[TrailViewModel::class.java]
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
+
     }
 
     fun iconClicked(view: View) {
         val tag = view.tag.toString()
-
-        Log.i("Clicked Button tag", tag)
-
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
 
         when(tag.toInt()){
@@ -109,26 +124,57 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}         // Agenda
             1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
                     backpress=0}         // Speakers
-            2 -> {navigateIntent = Intent(this@HomepageActivity, HotelActivity::class.java)
+            2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
                     backpress=0}         // Venue maps
-            3 -> {navigateIntent = Intent(this@HomepageActivity, MapsActivity::class.java)
-                    backpress=0}         // Driving directions
-            4 -> {navigateIntent = Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
-                    backpress=0}         // Resources
-            5 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
-                    backpress=0}         // Videos
-            6 -> {navigateIntent = Intent(this@HomepageActivity, ProductsActivity::class.java)
-                    backpress=0}         // Twitter or products
-            7 -> {navigateIntent = Intent(this@HomepageActivity, QuestionsActivity::class.java)
-                    backpress=0}         // FAQ
+            3 -> {
+                    navigateIntent = when(userType){
+                    "2" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
+                    else -> Intent(this@HomepageActivity, MapsActivity::class.java)
+                    }
+                    backpress=0
+                }         // Driving directions
+            4 -> {
+                    navigateIntent = when(userType){
+                    "2" -> Intent(this@HomepageActivity, DelegateVehicleActivity::class.java)
+                    "3" -> Intent(this@HomepageActivity, VehicleActivity::class.java)
+                    else -> Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
+                    }
+                    backpress=0
+                }                        // Resources
+            5 -> {
+                    navigateIntent = when(userType){
+                    "2" -> Intent(this@HomepageActivity, DelegateHotelActivity::class.java)
+                    "3" -> Intent(this@HomepageActivity, HotelActivity::class.java)
+                    else -> Intent(this@HomepageActivity, DummyActivity::class.java)
+                    }
+                    backpress=0
+                }                       // Videos
+            6 -> {
+                    navigateIntent = when(userType){
+                    "2" -> Intent(this@HomepageActivity, DelegateTravelActivity::class.java)
+                    "3" -> Intent(this@HomepageActivity, TravelActivity::class.java)
+                    else -> Intent(this@HomepageActivity, ProductsActivity::class.java)
+                    }
+                    backpress=0
+                }         // Twitter or products
+            7 -> {
+                    navigateIntent = when(userType){
+                    "2" -> Intent(this@HomepageActivity, AssignedLOActivity::class.java)
+                    else -> Intent(this@HomepageActivity, QuestionsActivity::class.java)
+                    }
+                    backpress=0
+                }         // FAQ
             8 -> {
                     navigateIntent = when(userType){
+                        "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
+                        "3" -> Intent(this@HomepageActivity, TrailActivity::class.java)
                         "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
                         "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
                         else -> Intent(this@HomepageActivity, Feedback::class.java)
                     }
                     backpress=0
                 }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
+
             9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
                     backpress=0}         // Profile view
             else -> { Log.i("Homepage msg", "Nothing was clicked") }

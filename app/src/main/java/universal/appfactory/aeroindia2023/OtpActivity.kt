@@ -49,31 +49,30 @@ class OtpActivity : AppCompatActivity() {
         Log.i("Shared user information", "Email: $sharedEmailID\nType: $type\nUser ID: $userId")
 
         findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email\n\nEmail: $sharedEmailID"
-
-        val otpButton = findViewById<Button>(R.id.otpButton)
         findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
 
+        val otpButton = findViewById<Button>(R.id.otpButton)
+
         // Homepage activity is popped after OTP validation
-        otpButton.setOnClickListener {
-            otpAttempts -= 1
-            val OTP = findViewById<EditText>(R.id.otp).text.toString()
-            if(OTP.length == 4){
+        if(otpAttempts > 0) {
+            otpButton.setOnClickListener {
                 findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
-                if(otpAttempts > 0 ) {
+                otpAttempts -= 1
+                val OTP = findViewById<EditText>(R.id.otp).text.toString()
+                if (OTP.length == 4) {
                     submitOTP(OTP, userId)
-                }
-                else{
-                    MaterialAlertDialogBuilder(this@OtpActivity)
-                        .setTitle("WARNING !")
-                        .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
-                        .setNeutralButton("OK") { dialog, which ->
-                            this@OtpActivity.finishAffinity()
-                        }
-                        .show()
-                }
+                } else
+                    Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
             }
-            else
-                Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
+        }
+        else{
+            MaterialAlertDialogBuilder(this@OtpActivity)
+                .setTitle("WARNING !")
+                .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
+                .setNeutralButton("OK") { dialog, which ->
+                    this@OtpActivity.finishAffinity()
+                }
+                .show()
         }
     }
 

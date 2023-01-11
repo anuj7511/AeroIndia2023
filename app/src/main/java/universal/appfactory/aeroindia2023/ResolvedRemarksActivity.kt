@@ -18,7 +18,7 @@ class ResolvedRemarksActivity : AppCompatActivity() {
         val submit = findViewById<Button>(R.id.submit)
         val remarks = findViewById<EditText>(R.id.resolvation)
         val complaintId = intent.getIntExtra("CompId", 1)
-        val manager = intent.getStringExtra("manager")!!
+        val manager = intent.getIntExtra("manager",1)
         submit.setOnClickListener {
            val rR=remarks.text.toString()
             rRemarks(rR, manager, complaintId)
@@ -27,7 +27,7 @@ class ResolvedRemarksActivity : AppCompatActivity() {
         }
     }
     @OptIn(DelicateCoroutinesApi::class)
-   private fun rRemarks(remarks: String, manager: String,complaintId: Int) {
+   private fun rRemarks(remarks: String, manager: Int,complaintId: Int) {
         val resolveRequestModel=ResolvedRequestModel(complaintId,manager,remarks)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)

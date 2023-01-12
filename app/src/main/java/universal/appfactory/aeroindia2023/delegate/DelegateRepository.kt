@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.room.RoomOpenHelper.Delegate
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -36,7 +37,7 @@ class DelegateRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = delegateApi.getDelegates("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",1)
                     ?.awaitResponse()
-                val data = value?.body()?.data as List<DelegateModel>
+                val data: List<DelegateModel>? = value?.body()?.data as List<DelegateModel>
                 Log.d("DelegateResponse:", data.toString())
                 delegateDao.insertAll(data)
             }

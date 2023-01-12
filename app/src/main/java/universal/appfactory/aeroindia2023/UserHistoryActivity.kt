@@ -36,7 +36,7 @@ class UserHistoryActivity : AppCompatActivity() {
         // ArrayList of class ItemsViewModel
         data = ArrayList()
         val intent = intent
-         user_id = intent.getIntExtra("Name",0)
+         user_id = intent.getStringExtra("Name")!!.toInt()
         fetchPData()   }
 
 

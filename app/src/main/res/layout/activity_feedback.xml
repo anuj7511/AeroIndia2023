@@ -92,6 +92,8 @@
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:strokeColor="@color/black"
         app:strokeWidth="3dp">
@@ -138,29 +140,12 @@
                     app:srcCompat="@drawable/feedback" />
 
                 <TextView
-                    android:id="@+id/feedback"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:onClick="checkFeedbacks"
-                    android:text="Give Your Feedback"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/writeText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/scanQrButton"
-                    tools:layout_editor_absoluteY="480dp" />
-
-                <TextView
                     android:id="@+id/scanQrButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:background="@color/white"
-                    android:text="Scan Qr"
+                    android:text="Scan QR"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -170,33 +155,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
-                <EditText
-                    android:id="@+id/writeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:autofillHints="feedback"
-                    android:background="@drawable/edit_text_bottom_border"
-                    android:ems="20"
-                    android:maxLength="200"
-                    android:textColor="@color/black"></EditText>
-
                 <TextView
-                    android:id="@+id/submit"
+                    android:id="@+id/feedback"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/white"
-                    android:padding="5dp"
-                    android:text="SUBMIT"
+                    android:onClick="checkFeedbacks"
+                    android:text="Give Your Feedback"
+                    android:layout_marginVertical="10sp"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/writeText" />
+                    app:layout_constraintTop_toBottomOf="@id/scanQrButton"
+                    tools:layout_editor_absoluteY="480dp" />
+
             </LinearLayout>
         </ScrollView>
 

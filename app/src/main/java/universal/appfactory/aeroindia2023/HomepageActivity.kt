@@ -65,7 +65,6 @@ class HomepageActivity : AppCompatActivity() {
         // Icons changed according to usertype
         when(userType){
             "2" -> {
-                    findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.check_complaints) //DelegateActivity
                     findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.check_complaints) //DelegateVehicleActivity
                     findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.check_complaints) // DelegateHotelActivity
                     findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.check_complaints) // DelegateTravelActivity
@@ -76,6 +75,7 @@ class HomepageActivity : AppCompatActivity() {
                     findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.check_complaints) // VehicleActivity
                     findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.check_complaints) // HotelActivity
                     findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.check_complaints) // TravelActivity
+                    findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.check_complaints) //DelegationActivity
                     findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // TrailActivity
                     }
             "4" -> {

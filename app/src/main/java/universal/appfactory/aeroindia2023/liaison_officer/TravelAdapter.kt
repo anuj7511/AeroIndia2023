@@ -21,7 +21,7 @@ class TravelAdapter(list_of_travel : ArrayList<LiaisonModel>): RecyclerView.Adap
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.vehicle_view,parent,false)
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.travel_view,parent,false)
         return MyViewHolder(view)
     }
 

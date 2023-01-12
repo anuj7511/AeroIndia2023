@@ -1,16 +1,15 @@
 package universal.appfactory.aeroindia2023.agendas
 
+import android.R.attr.*
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.lifecycleScope
@@ -29,11 +28,11 @@ import universal.appfactory.aeroindia2023.notes.Note
 import universal.appfactory.aeroindia2023.notes.NoteDatabase
 import universal.appfactory.aeroindia2023.notes.NotesRVAdapter
 import universal.appfactory.aeroindia2023.notes.RecyclerClickListener
-import java.util.*
-import kotlin.collections.ArrayList
 import universal.appfactory.aeroindia2023.speakers.SpeakerModel
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 import universal.appfactory.aeroindia2023.speakers.SpeakersAdapter
+import java.util.*
+
 
 class SelectedAgendaActivity : AppCompatActivity() {
 
@@ -56,7 +55,6 @@ class SelectedAgendaActivity : AppCompatActivity() {
         val information = findViewById<TextView>(R.id.information)
         val speakers = findViewById<TextView>(R.id.speakers)
         val notes = findViewById<TextView>(R.id.notes)
-        val underLine = findViewById<ImageView>(R.id.under_line)
         val scrollView = findViewById<ScrollView>(R.id.scrollView)
         val addButton = findViewById<FloatingActionButton>(R.id.add_button)
         recyclerview = findViewById(R.id.recycler_view)
@@ -85,6 +83,7 @@ class SelectedAgendaActivity : AppCompatActivity() {
         locationText.text = location
         categoryText.text = category
         descriptionText.text = description
+        information.paintFlags = information.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         recyclerview.layoutManager = LinearLayoutManager(this)
         data = ArrayList()
@@ -94,9 +93,9 @@ class SelectedAgendaActivity : AppCompatActivity() {
 
 
         speakers.setOnClickListener {
-            set.connect(underLine.id, ConstraintSet.END, parent.id, ConstraintSet.END)
-            set.connect(underLine.id, ConstraintSet.START, parent.id, ConstraintSet.START)
-            set.applyTo(parent)
+            speakers.paintFlags = speakers.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            information.paintFlags = 0
+            notes.paintFlags = 0
             scrollView.visibility = View.INVISIBLE
             recyclerview.visibility = View.VISIBLE
             notesRecyclerview.visibility = View.INVISIBLE
@@ -104,9 +103,9 @@ class SelectedAgendaActivity : AppCompatActivity() {
         }
 
         information.setOnClickListener {
-            set.clear(underLine.id, ConstraintSet.END)
-            set.connect(underLine.id, ConstraintSet.START, parent.id, ConstraintSet.START)
-            set.applyTo(parent)
+            information.paintFlags = information.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            speakers.paintFlags = 0
+            notes.paintFlags = 0
             scrollView.visibility = View.VISIBLE
             recyclerview.visibility = View.INVISIBLE
             notesRecyclerview.visibility = View.INVISIBLE
@@ -114,9 +113,9 @@ class SelectedAgendaActivity : AppCompatActivity() {
         }
 
         notes.setOnClickListener {
-            set.clear(underLine.id, ConstraintSet.START)
-            set.connect(underLine.id, ConstraintSet.END, parent.id, ConstraintSet.END)
-            set.applyTo(parent)
+            notes.paintFlags = notes.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            information.paintFlags = 0
+            speakers.paintFlags = 0
             scrollView.visibility = View.INVISIBLE
             recyclerview.visibility = View.INVISIBLE
             notesRecyclerview.visibility = View.VISIBLE

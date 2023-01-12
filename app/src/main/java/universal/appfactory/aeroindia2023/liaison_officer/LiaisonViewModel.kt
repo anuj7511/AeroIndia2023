@@ -24,9 +24,9 @@ class LiaisonViewModel : ViewModel() {
 
     }
 
-    fun loadAllLiaisonOfficers(reload : Boolean){
+    fun loadAllLiaisonOfficers(reload : Boolean,id: Int){
         viewModelScope.launch (Dispatchers.IO){
-            repository.loadAllLiaisonOfficers(reload)
+            repository.loadAllLiaisonOfficers(reload,id)
         }
     }
 }

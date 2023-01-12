@@ -37,6 +37,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var delegateViewModel: DelegateViewModel
     private lateinit var trailViewModel: TrailViewModel
     private lateinit var userType: String
+    private lateinit var foreignKeyId : String
 
 //    0 -> "Unknown role"
 //    1 -> "Attendee"
@@ -56,6 +57,7 @@ class HomepageActivity : AppCompatActivity() {
 
         navigableBundle = intent.extras!!
         userType = navigableBundle.getString("userType", "0")
+        foreignKeyId = navigableBundle.getString("foreignKeyId","0")
         findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
 
         Log.i("Homepage activity msg", "User type: $userType")
@@ -101,9 +103,11 @@ class HomepageActivity : AppCompatActivity() {
         questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
         questionsViewModel.loadAllFaqs(true)
 
-        liaisonViewModel = ViewModelProvider(this)[LiaisonViewModel::class.java]
-        liaisonViewModel.init((this as AppCompatActivity).applicationContext as Application)
-        liaisonViewModel.loadAllLiaisonOfficers(true)
+        if(userType=="3"){
+            liaisonViewModel = ViewModelProvider(this)[LiaisonViewModel::class.java]
+            liaisonViewModel.init((this as AppCompatActivity).applicationContext as Application)
+            liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
+        }
 
         delegateViewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
         delegateViewModel.init((this as AppCompatActivity).applicationContext as Application)
@@ -190,7 +194,9 @@ class HomepageActivity : AppCompatActivity() {
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
         questionsViewModel.loadAllFaqs(true)
-        liaisonViewModel.loadAllLiaisonOfficers(true)
+        if(userType=="3"){
+            liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
+        }
         delegateViewModel.loadAllDelegates(true)
         trailViewModel.loadAllTrail(true)
 

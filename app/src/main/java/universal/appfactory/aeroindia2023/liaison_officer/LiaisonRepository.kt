@@ -30,13 +30,13 @@ class LiaisonRepository (application: Application){
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    suspend fun loadAllLiaisonOfficers(reload: Boolean,id : Int = 1) {
+    suspend fun loadAllLiaisonOfficers(reload: Boolean,id : Int ) {
         if (reload) {
             liaisonDao.deleteAll()
             val liaisonApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
             GlobalScope.launch(Dispatchers.IO) {
-                val value = liaisonApi.getLiaisonOfficers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",1)
+                val value = liaisonApi.getLiaisonOfficers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",id)
                     ?.awaitResponse()
                 val data = value?.body()?.data as List<LiaisonModel>
                 Log.d("LiaisonResponse:", data.toString())

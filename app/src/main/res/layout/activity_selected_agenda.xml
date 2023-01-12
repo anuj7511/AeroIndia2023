@@ -138,7 +138,8 @@
             android:textColor="#6A6667"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_weight="0.3"/>
+            android:layout_weight="0.3"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/speakers"
@@ -149,7 +150,8 @@
             android:textColor="#6A6667"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_weight="0.3"/>
+            android:layout_weight="0.3"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/notes"
@@ -157,22 +159,14 @@
             android:layout_height="wrap_content"
             android:text="@string/notes"
             android:textAllCaps="true"
+            android:textColorHighlight="#FD7E14"
             android:textColor="#6A6667"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_weight="0.3"/>
+            android:layout_weight="0.3"
+            android:clickable="true"/>
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/under_line"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/line"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/profile_underline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -180,7 +174,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/under_line">
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
@@ -287,7 +281,7 @@
         tools:listitem="@layout/speaker_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/under_line"/>
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_recyclerview"
@@ -298,7 +292,7 @@
         tools:listitem="@layout/notes_row"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/under_line"/>
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_button"

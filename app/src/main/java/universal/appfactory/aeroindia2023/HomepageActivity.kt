@@ -128,7 +128,7 @@ class HomepageActivity : AppCompatActivity() {
                     backpress=0}         // Venue maps
             3 -> {
                     navigateIntent = when(userType){
-                    "2" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
+                    "3" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
                     else -> Intent(this@HomepageActivity, MapsActivity::class.java)
                     }
                     backpress=0

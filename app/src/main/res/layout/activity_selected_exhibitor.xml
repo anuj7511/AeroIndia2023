@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parent"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:background="@drawable/background_img_agenda"
     tools:context=".exhibitors.SelectedExhibitorActivity">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/above_line"
@@ -133,14 +138,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/under_line">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="10dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -170,8 +170,9 @@
                         android:id="@+id/location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textColor="@color/light_navy_blue"
+                        android:textSize="18sp"
+                        android:linksClickable="true"
                         android:text="@string/hall_12_12s_34" />
 
                 </LinearLayout>
@@ -295,9 +296,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_tick"
+                        android:src="@drawable/ic_email"
                         android:contentDescription="@string/logo"/>
-                        <!--    ic_email-->
 
                     <TextView
                         android:id="@+id/emailAddress"
@@ -326,9 +326,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_tick"
+                        android:src="@drawable/ic_phone"
                         android:contentDescription="@string/logo"/>
-                        <!--    ic_phone-->
 
                     <TextView
                         android:id="@+id/mobile"
@@ -357,9 +356,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_tick"
+                        android:src="@drawable/ic_link"
                         android:contentDescription="@string/logo"/>
-                        <!--    ic_link-->
 
                     <TextView
                         android:id="@+id/website"
@@ -388,9 +386,8 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icon_tick"
+                        android:src="@drawable/ic_company"
                         android:contentDescription="@string/logo"/>
-                        <!--    ic_company-->
 
                     <TextView
                         android:id="@+id/company"
@@ -404,7 +401,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-            </ScrollView>
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -418,6 +414,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/under_line"/>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,25 +1,18 @@
 package universal.appfactory.aeroindia2023.speakers
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import universal.appfactory.aeroindia2023.ApiClient
-import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
 import java.util.*
-import kotlin.collections.ArrayList
 
 class SpeakersActivity : AppCompatActivity() {
 
@@ -29,6 +22,7 @@ class SpeakersActivity : AppCompatActivity() {
     private lateinit var data: ArrayList<SpeakerModel>
     private lateinit var recyclerview: RecyclerView
     private lateinit var viewModel: SpeakerViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +38,7 @@ class SpeakersActivity : AppCompatActivity() {
         // getting searchview by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        progressBar = findViewById(R.id.progressBar)
         viewModel = ViewModelProvider(this)[SpeakerViewModel::class.java]
         viewModel.init((this as AppCompatActivity).applicationContext as Application)
 
@@ -55,9 +50,10 @@ class SpeakersActivity : AppCompatActivity() {
         viewModel.allspeaker.observe(this) {
             data = it as ArrayList<SpeakerModel>
             // This will pass the ArrayList to our Adapter
-            adapter = SpeakersAdapter(data,this@SpeakersActivity)
+            adapter = SpeakersAdapter(data, this@SpeakersActivity)
             // Setting the Adapter with the recyclerview
             recyclerview.adapter = adapter
+            progressBar.visibility = View.INVISIBLE
         }
 
         // below line is to call set on query text listener method.
@@ -74,7 +70,7 @@ class SpeakersActivity : AppCompatActivity() {
             }
         })
 
-        refreshView.setOnRefreshListener{
+        refreshView.setOnRefreshListener {
             viewModel.loadAllSpeakers(true)
             refreshView.isRefreshing = false
         }

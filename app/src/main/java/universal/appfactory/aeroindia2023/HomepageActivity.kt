@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*
+import universal.appfactory.aeroindia2023.exhibitors.ExhibitorViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
@@ -36,6 +37,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var liaisonViewModel: LiaisonViewModel
     private lateinit var delegateViewModel: DelegateViewModel
     private lateinit var trailViewModel: TrailViewModel
+    private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var userType: String
     private lateinit var foreignKeyId : String
 
@@ -98,6 +100,10 @@ class HomepageActivity : AppCompatActivity() {
         speakerViewModel = ViewModelProvider(this)[SpeakerViewModel::class.java]
         speakerViewModel.init((this as AppCompatActivity).applicationContext as Application)
         speakerViewModel.loadAllSpeakers(true)
+
+        exhibitorViewModel = ViewModelProvider(this)[ExhibitorViewModel::class.java]
+        exhibitorViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        exhibitorViewModel.loadAllExhibitors(true)
 
         questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
         questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
@@ -193,6 +199,7 @@ class HomepageActivity : AppCompatActivity() {
         agendaViewModel.loadAllAgendas(true)
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
+        exhibitorViewModel.loadAllExhibitors(true)
         questionsViewModel.loadAllFaqs(true)
         if(userType=="3"){
             liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())

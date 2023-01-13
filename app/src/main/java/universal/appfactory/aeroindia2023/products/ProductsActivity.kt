@@ -1,25 +1,18 @@
 package universal.appfactory.aeroindia2023.products
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import universal.appfactory.aeroindia2023.ApiClient
-import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ProductsActivity : AppCompatActivity() {
 
@@ -29,6 +22,7 @@ class ProductsActivity : AppCompatActivity() {
     private lateinit var data: ArrayList<ProductModel>
     private lateinit var recyclerview: RecyclerView
     private lateinit var viewModel: ProductViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +38,7 @@ class ProductsActivity : AppCompatActivity() {
         // getting searchview by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        progressBar = findViewById(R.id.progressBar)
         viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
         viewModel.init((this as AppCompatActivity).applicationContext as Application)
 
@@ -56,9 +51,10 @@ class ProductsActivity : AppCompatActivity() {
         viewModel.allproduct.observe(this) {
             data = it as ArrayList<ProductModel>
             // This will pass the ArrayList to our Adapter
-            adapter = ProductAdapter(data,this@ProductsActivity)
+            adapter = ProductAdapter(data, this@ProductsActivity)
             // Setting the Adapter with the recyclerview
             recyclerview.adapter = adapter
+            progressBar.visibility = View.INVISIBLE
         }
 
 
@@ -76,7 +72,7 @@ class ProductsActivity : AppCompatActivity() {
             }
         })
 
-        refreshView.setOnRefreshListener{
+        refreshView.setOnRefreshListener {
             viewModel.loadAllProducts(true)
             refreshView.isRefreshing = false
         }
@@ -89,7 +85,9 @@ class ProductsActivity : AppCompatActivity() {
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getProduct_title().lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+            if (item.getProduct_title().lowercase(Locale.ROOT)
+                    .contains(text.lowercase(Locale.getDefault()))
+            ) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredList.add(item)

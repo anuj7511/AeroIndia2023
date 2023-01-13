@@ -1,8 +1,10 @@
 package universal.appfactory.aeroindia2023.agendas
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
@@ -65,8 +67,15 @@ class AgendaActivity : AppCompatActivity() {
     private fun alertDialog() {
         val alertDialog = AlertDialog.Builder(this)
 
+        val textView = TextView(applicationContext)
+        textView.text = getText(R.string.alert_dialog_text)
+        textView.setPadding(20, 30, 20, 30)
+        textView.textSize = 20f
+        textView.setBackgroundColor(Color.GRAY)
+        textView.setTextColor(Color.WHITE)
+
         // title of the alert dialog
-        alertDialog.setTitle("Choose an Item")
+        alertDialog.setCustomTitle(textView)
 
         val listItems = arrayOf("Category", "Time", "Location")
 
@@ -80,7 +89,7 @@ class AgendaActivity : AppCompatActivity() {
         }
 
         // set the negative button if the user is not interested to select or change already selected item
-        alertDialog.setNegativeButton("Cancel") { dialog, which -> setDynamicFragmentToTabLayout()}
+        alertDialog.setNegativeButton("Cancel") { _, _ -> setDynamicFragmentToTabLayout()}
 
         val customAlertDialog = alertDialog.create()
         customAlertDialog.show()

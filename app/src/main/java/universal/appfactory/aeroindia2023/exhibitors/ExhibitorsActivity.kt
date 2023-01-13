@@ -1,14 +1,14 @@
 package universal.appfactory.aeroindia2023.exhibitors
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.SearchView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -19,11 +19,8 @@ import retrofit2.Response
 import universal.appfactory.aeroindia2023.ApiClient
 import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.speakers.SpeakerModel
-import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
-import universal.appfactory.aeroindia2023.speakers.SpeakersAdapter
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class ExhibitorsActivity : AppCompatActivity() {
 
@@ -33,6 +30,7 @@ class ExhibitorsActivity : AppCompatActivity() {
     private lateinit var data: ArrayList<ExhibitorModel>
     private lateinit var recyclerview: RecyclerView
     private lateinit var viewModel: ExhibitorViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +46,7 @@ class ExhibitorsActivity : AppCompatActivity() {
         // getting searchview by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
+        progressBar = findViewById(R.id.progressBar)
         viewModel = ViewModelProvider(this)[ExhibitorViewModel::class.java]
         viewModel.init((this as AppCompatActivity).applicationContext as Application)
 
@@ -57,16 +56,16 @@ class ExhibitorsActivity : AppCompatActivity() {
         // ArrayList of class ItemsViewModel
         data = ArrayList()
 
-//        viewModel.allexhibitor.observe(this) {
-//            data = it as ArrayList<ExhibitorModel>
-//            Log.d("Data: ", data.toString())
-//            // This will pass the ArrayList to our Adapter
-//            adapter = ExhibitorAdapter(data,this@ExhibitorsActivity)
-//            // Setting the Adapter with the recyclerview
-//            recyclerview.adapter = adapter
-//        }
-        fetchExhibitorData()
-
+        viewModel.allexhibitor.observe(this) {
+            data = it as ArrayList<ExhibitorModel>
+            Log.d("Data: ", data.toString())
+            // This will pass the ArrayList to our Adapter
+            adapter = ExhibitorAdapter(data,this@ExhibitorsActivity)
+            // Setting the Adapter with the recyclerview
+            recyclerview.adapter = adapter
+        }
+        if(data.isEmpty())
+            fetchExhibitorData()
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -83,7 +82,8 @@ class ExhibitorsActivity : AppCompatActivity() {
         })
 
         refreshView.setOnRefreshListener{
-//            viewModel.loadAllExhibitors(true)
+            progressBar.visibility = View.VISIBLE
+            viewModel.loadAllExhibitors(true)
             fetchExhibitorData()
             refreshView.isRefreshing = false
         }
@@ -109,12 +109,11 @@ class ExhibitorsActivity : AppCompatActivity() {
         adapter.filterList(filteredList)
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
     fun fetchExhibitorData () {
         val exhibitorApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
 
             exhibitorApi.getExhibitors("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")?.enqueue(object :
                 Callback<ExhibitorResponse?> {
@@ -129,7 +128,7 @@ class ExhibitorsActivity : AppCompatActivity() {
                     adapter = ExhibitorAdapter(data, this@ExhibitorsActivity)
                     // Setting the Adapter with the recyclerview
                     recyclerview.adapter = adapter
-
+                    progressBar.visibility = View.INVISIBLE
                 }
 
                 override fun onFailure(call: Call<ExhibitorResponse?>, t: Throwable) {

@@ -1,5 +1,6 @@
 package universal.appfactory.aeroindia2023.exhibitors
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,9 +21,6 @@ import retrofit2.Response
 import universal.appfactory.aeroindia2023.ApiClient
 import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.agendas.AgendaAdapter
-import universal.appfactory.aeroindia2023.agendas.AgendaModel
-import universal.appfactory.aeroindia2023.agendas.AgendaResponse
 import universal.appfactory.aeroindia2023.products.ProductAdapter
 import universal.appfactory.aeroindia2023.products.ProductModel
 import universal.appfactory.aeroindia2023.products.ProductResponse
@@ -60,8 +58,7 @@ class SelectedExhibitorActivity : AppCompatActivity() {
         val websiteText = findViewById<TextView>(R.id.website)
         val companyText = findViewById<TextView>(R.id.company)
 
-        val id = intent.getIntExtra("Id",53)
-        val name = intent.getStringExtra("Name")
+        val id = intent.getIntExtra("Id", 53)
         val image = intent.getStringExtra("Image")
         val country = intent.getStringExtra("Country")
         val email = intent.getStringExtra("Email")
@@ -72,6 +69,7 @@ class SelectedExhibitorActivity : AppCompatActivity() {
         val company = intent.getStringExtra("Company")
         val location = intent.getStringExtra("Location")
         val description = intent.getStringExtra("Description")
+        val hall = intent.getStringExtra("Hall")
 
         nameText.text = company
         locationText.text = location
@@ -83,6 +81,9 @@ class SelectedExhibitorActivity : AppCompatActivity() {
         mobileText.text = mobile
         websiteText.text = website
         companyText.text = company
+
+        if (location.isNullOrEmpty())
+            locationText.text = hall
 
         Glide.with(this@SelectedExhibitorActivity).load(image).into(exhibitorImage)
 
@@ -105,37 +106,47 @@ class SelectedExhibitorActivity : AppCompatActivity() {
             cardView.visibility = View.VISIBLE
             recyclerview.visibility = View.INVISIBLE
         }
+
+        locationText.setOnClickListener {
+            val intent = Intent(this@SelectedExhibitorActivity, HallStallActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.putExtra("Hall", hall)
+            applicationContext.startActivity(intent)
+        }
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun fetchProductData (id: Int) {
+    fun fetchProductData(id: Int) {
         val productApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO) {
 
-            productApi.getExhibitorProduct("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)?.enqueue(object :
-                Callback<ProductResponse?> {
-                override fun onResponse(
-                    call: Call<ProductResponse?>,
-                    response: Response<ProductResponse?>
-                ) {
+            productApi.getExhibitorProduct("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)
+                ?.enqueue(object :
+                    Callback<ProductResponse?> {
+                    override fun onResponse(
+                        call: Call<ProductResponse?>,
+                        response: Response<ProductResponse?>
+                    ) {
 
-                    Log.d("Response: ", response.body().toString())
-                    data = response.body()?.data as java.util.ArrayList<ProductModel>
-                    // This will pass the ArrayList to our Adapter
-                    adapter = ProductAdapter(data, this@SelectedExhibitorActivity)
-                    // Setting the Adapter with the recyclerview
-                    recyclerview.adapter = adapter
+                        Log.d("Response: ", response.body().toString())
+                        data = response.body()?.data as java.util.ArrayList<ProductModel>
+                        // This will pass the ArrayList to our Adapter
+                        adapter = ProductAdapter(data, this@SelectedExhibitorActivity)
+                        // Setting the Adapter with the recyclerview
+                        recyclerview.adapter = adapter
 
-                }
+                    }
 
-                override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message,
-                        Toast.LENGTH_SHORT).show()
-                    Log.d("Failure Response: ", t.message.toString())
-                }
-            })
+                    override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
+                        Toast.makeText(
+                            applicationContext, t.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.d("Failure Response: ", t.message.toString())
+                    }
+                })
 
         }
     }

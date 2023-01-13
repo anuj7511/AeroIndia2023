@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.*
 
@@ -78,20 +79,24 @@ class Feedback : AppCompatActivity() {
 
 //     Dialog box for feedback
     fun checkFeedbacks(view: View){
-    // Set up the alert builder
-    val builder = AlertDialog.Builder(this)
-    builder.setTitle("Please select desired options")
+
+    val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogCustom))
+    builder.setTitle("SELECT YOUR DESIRED OPTIONS")
+    builder.setView(android.R.layout.activity_list_item)
 
     val checkedItems = booleanArrayOf(true, false, false, false, false, false, false, false, false, false)
 
     input = EditText(this@Feedback)
-    input.setPadding(40, 30, 30, 30)
+    input.setPadding(40, 40, 40, 40)
     input.setSingleLine()
+    input.textSize = 15F
+    input.hint = "Enter your feedback here.."
 
     val lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.MATCH_PARENT,
         LinearLayout.LayoutParams.MATCH_PARENT,)
     input.layoutParams = lp
+
     builder.setView(input)
 
     builder.setMultiChoiceItems(feedbackTexts, checkedItems) { dialog, which, isChecked ->

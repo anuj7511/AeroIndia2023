@@ -34,16 +34,18 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,privat
         var time:String=DT.substring(11)
         holder.date.text=date
         holder.time.text=time
-
-
-            holder.status.text="Pending"
+        if(itemsViewModel.getstatus()==1)
+        {holder.status.text="Pending"
             holder.status.setOnClickListener{
                 val intent=Intent(mContext,ResolvedRemarksActivity::class.java)
                 intent.putExtra("CompId",itemsViewModel.getComplaintId())
                 intent.putExtra("Manager",itemsViewModel.getM())
                 mContext.startActivity(intent)
-            }
-
+            }}
+        else
+        {
+            holder.status.text="Resolved"
+        }
 
 
 

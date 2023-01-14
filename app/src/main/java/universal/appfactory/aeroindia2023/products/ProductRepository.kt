@@ -39,12 +39,10 @@ class ProductRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = productApi.getProducts("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")
                     ?.awaitResponse()
-                val data = value?.body()?.data as List<ProductModel>
+                val data: List<ProductModel>? = value?.body()?.data as List<ProductModel>
                 Log.d("Response: ", data.toString())
                 productDao.insertAll(data)
-
             }
         }
     }
-
 }

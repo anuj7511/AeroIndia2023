@@ -54,26 +54,27 @@ class OtpActivity : AppCompatActivity() {
         val otpButton = findViewById<Button>(R.id.otpButton)
 
         // Homepage activity is popped after OTP validation
-        if(otpAttempts > 0) {
             otpButton.setOnClickListener {
-                findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
-                otpAttempts -= 1
-                val OTP = findViewById<EditText>(R.id.otp).text.toString()
-                if (OTP.length == 4) {
-                    submitOTP(OTP, userId)
-                } else
-                    Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
-            }
-        }
-        else{
-            MaterialAlertDialogBuilder(this@OtpActivity)
-                .setTitle("WARNING !")
-                .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
-                .setNeutralButton("OK") { dialog, which ->
-                    this@OtpActivity.finishAffinity()
+                if(otpAttempts > 0) {
+                    otpAttempts -= 1
+                    findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
+                    val OTP = findViewById<EditText>(R.id.otp).text.toString()
+                    if (OTP.length == 4)
+                        submitOTP(OTP, userId)
+                     else
+                        Toast.makeText(this, "Enter 4 digit correct OTP", Toast.LENGTH_LONG).show()
                 }
-                .show()
-        }
+                else{
+                    MaterialAlertDialogBuilder(this@OtpActivity)
+                        .setTitle("WARNING !")
+                        .setMessage("You have entered incorrect OTPs beyond the given limit, which is three. Kindly try after sometime.")
+                        .setNeutralButton("OK") { dialog, which ->
+                            this@OtpActivity.finishAffinity()
+                        }
+                        .show()
+                }
+            }
+
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -128,12 +129,6 @@ class OtpActivity : AppCompatActivity() {
                             editPreferences.putBoolean("loginStatus", true)
 
                             editPreferences.apply()
-
-//                                intent = when(userType){
-//                                    "4" -> Intent(this@OtpActivity, ManagerHomepageActivity::class.java)
-//                                    "5" -> Intent(this@OtpActivity, ZonalManagerHomepageActivity::class.java)
-//                                    else -> Intent(this@OtpActivity, HomepageActivity::class.java)
-//                                }
 
                             intent = Intent(this@OtpActivity, HomepageActivity::class.java)
                             intent.putExtras(navigableBundle)

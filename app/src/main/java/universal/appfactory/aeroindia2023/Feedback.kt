@@ -1,18 +1,15 @@
 package universal.appfactory.aeroindia2023
 
-import android.app.ProgressDialog.show
-import android.content.DialogInterface
 import android.content.Intent
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.*
 
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_feedback.*
 import kotlinx.android.synthetic.main.zonal_manager_user_card.*
@@ -22,8 +19,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.databinding.ActivityFeedbackBinding
-import java.util.Arrays.asList
-
 
 class Feedback : AppCompatActivity() {
 
@@ -31,8 +26,8 @@ class Feedback : AppCompatActivity() {
     private var qrScanIntegrator: IntentIntegrator? = null
     var washroom_Id: Int =0
     var user_id: Int=0 // Previously late init washroomId: String
-    private lateinit var feedback: EditText
-    private lateinit var checkedFeedbacks: String
+    private var checkedFeedbacks: String = ""
+    private lateinit var input: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +46,7 @@ class Feedback : AppCompatActivity() {
         }
         setContentView(view)
 
-
-        val btn = findViewById<TextView>(R.id.submit)
         val history= findViewById<TextView>(R.id.History)
-        feedback = findViewById<EditText>(R.id.writeText)
 
         setOnClickListener()
 
@@ -64,11 +56,6 @@ class Feedback : AppCompatActivity() {
             val intent = Intent(this, UserHistoryActivity::class.java)
             intent.putExtra("Name", user_id)
             startActivity(intent) }
-
-        btn.setOnClickListener{
-            checkedFeedbacks += feedback.text
-            submitFeedback(checkedFeedbacks,washroom_Id, user_id)
-        }
 
     }
 
@@ -92,14 +79,30 @@ class Feedback : AppCompatActivity() {
 
 //     Dialog box for feedback
     fun checkFeedbacks(view: View){
-    // Set up the alert builder
-    val builder = AlertDialog.Builder(this)
-    builder.setTitle("Please select desired options")
 
-    val checkedItems = booleanArrayOf(false, false, false, false, false, false, false, false, false, false)
+    val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogCustom))
+    builder.setTitle("SELECT YOUR DESIRED OPTIONS")
+    builder.setView(android.R.layout.activity_list_item)
+
+    val checkedItems = booleanArrayOf(true, false, false, false, false, false, false, false, false, false)
+
+    input = EditText(this@Feedback)
+    input.setPadding(40, 40, 40, 40)
+    input.setSingleLine()
+    input.textSize = 15F
+    input.hint = "Enter your feedback here.."
+
+    val lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.MATCH_PARENT,)
+    input.layoutParams = lp
+
+    builder.setView(input)
+
     builder.setMultiChoiceItems(feedbackTexts, checkedItems) { dialog, which, isChecked ->
         checkedItems[which] = isChecked
     }
+
 
     builder.setPositiveButton("SUBMIT") { dialog, which ->
         // TODO: Redirection to submitFeedback
@@ -108,6 +111,8 @@ class Feedback : AppCompatActivity() {
                 checkedFeedbacks += feedbackTexts[i]+", "
             }
         }
+        checkedFeedbacks += input.text
+        submitFeedback(checkedFeedbacks,washroom_Id, user_id)
     }
     builder.setNegativeButton("CANCEL", null)
 

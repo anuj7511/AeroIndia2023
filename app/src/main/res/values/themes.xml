@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.AeroIndia2023" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -11,6 +12,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorOnSecondary</item>
+        <item name="android:textColor">@android:color/black</item>
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/ThemeActionBar</item>
         <item name="android:windowActionBarOverlay">true</item>
@@ -18,7 +20,7 @@
         <item name="actionBarStyle">@style/ThemeActionBar</item>
         <item name="windowActionBarOverlay">false</item>
         <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
-        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:editTextColor">@android:color/black</item>
     </style>
 
     <style name="MyTheme.AeroAppMapsLocation" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -61,11 +63,26 @@
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
     </style>
 
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyleFeedback</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyleFeedback</item>
+    </style>
+
     <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">#3da35d</item>
     </style>
 
     <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">#f00</item>
+    </style>
+
+    <style name="NegativeButtonStyleFeedback" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#f00</item>
+    </style>
+
+    <style name="PositiveButtonStyleFeedback" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#3da35d</item>
     </style>
 </resources>

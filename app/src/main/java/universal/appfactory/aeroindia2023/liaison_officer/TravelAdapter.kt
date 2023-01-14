@@ -1,5 +1,6 @@
 package universal.appfactory.aeroindia2023.liaison_officer
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class TravelAdapter(list_of_travel : ArrayList<LiaisonModel>): RecyclerView.Adap
         return MyViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var itemViewHolder = listOfTravel[position]
 

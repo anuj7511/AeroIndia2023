@@ -69,6 +69,7 @@ class ExhibitorAdapter(mList: ArrayList<ExhibitorModel>, private val mContext: C
             intent.putExtra("Location",itemsViewModel.getHall_and_Stall_Number())
             intent.putExtra("Description",itemsViewModel.getCompany_Brief())
             intent.putExtra("Company Email",itemsViewModel.getCompany_Head_Email())
+            intent.putExtra("Hall",itemsViewModel.getHallNo())
             mContext.startActivity(intent)
         }
 

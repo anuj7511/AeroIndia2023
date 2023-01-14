@@ -7,13 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.marginTop
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.manager_user_card.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*
+import universal.appfactory.aeroindia2023.exhibitors.ExhibitorViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
@@ -36,6 +41,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var liaisonViewModel: LiaisonViewModel
     private lateinit var delegateViewModel: DelegateViewModel
     private lateinit var trailViewModel: TrailViewModel
+    private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var userType: String
     private lateinit var foreignKeyId : String
 
@@ -65,17 +71,17 @@ class HomepageActivity : AppCompatActivity() {
         // Icons changed according to usertype
         when(userType){
             "2" -> {
-                    findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.check_complaints) //DelegateActivity
-                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.check_complaints) //DelegateVehicleActivity
-                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.check_complaints) // DelegateHotelActivity
-                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.check_complaints) // DelegateTravelActivity
-                    findViewById<ImageView>(R.id.faq).setImageResource(R.drawable.check_complaints) // AssignedLOActivity
+                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.vehicles) //DelegateVehicleActivity
+                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.hotels) // DelegateHotelActivity
+                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.travel) // DelegateTravelActivity
+                    findViewById<ImageView>(R.id.faq).setImageResource(R.drawable.assigned_lo) // AssignedLOActivity
                     findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ETicketActivity
                     }
             "3" -> {
-                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.check_complaints) // VehicleActivity
-                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.check_complaints) // HotelActivity
-                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.check_complaints) // TravelActivity
+                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.vehicles) // VehicleActivity
+                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.hotels) // HotelActivity
+                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.travel) // TravelActivity
+                    findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.check_complaints) //DelegationActivity
                     findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // TrailActivity
                     }
             "4" -> {
@@ -99,6 +105,10 @@ class HomepageActivity : AppCompatActivity() {
         speakerViewModel.init((this as AppCompatActivity).applicationContext as Application)
         speakerViewModel.loadAllSpeakers(true)
 
+        exhibitorViewModel = ViewModelProvider(this)[ExhibitorViewModel::class.java]
+        exhibitorViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        exhibitorViewModel.loadAllExhibitors(true)
+
         questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
         questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
         questionsViewModel.loadAllFaqs(true)
@@ -117,6 +127,16 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
 
+        // Dynamic Icon allocation to the gridView
+        for(i in 10..16){
+            val image = ImageView(this)
+            image.tag = i
+            image.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+            image.setPadding(10, 10, 10, 10)
+            image.setImageResource(R.drawable.hotels)
+            findViewById<GridLayout>(R.id.iconGrid2)?.addView(image)
+        }
+
     }
 
     fun iconClicked(view: View) {
@@ -124,20 +144,22 @@ class HomepageActivity : AppCompatActivity() {
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
 
         when(tag.toInt()){
-            0 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
+            0 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
+                backpress=0}            // Profile view
+            1 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
                     backpress=0}         // Agenda
-            1 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
+            2 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
                     backpress=0}         // Speakers
-            2 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
+            3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
                     backpress=0}         // Venue maps
-            3 -> {
+            4 -> {
                     navigateIntent = when(userType){
                     "3" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
                     else -> Intent(this@HomepageActivity, MapsActivity::class.java)
                     }
                     backpress=0
-                }         // Driving directions
-            4 -> {
+                }                        // Driving directions
+            5 -> {
                     navigateIntent = when(userType){
                     "2" -> Intent(this@HomepageActivity, DelegateVehicleActivity::class.java)
                     "3" -> Intent(this@HomepageActivity, VehicleActivity::class.java)
@@ -145,7 +167,7 @@ class HomepageActivity : AppCompatActivity() {
                     }
                     backpress=0
                 }                        // Resources
-            5 -> {
+            6 -> {
                     navigateIntent = when(userType){
                     "2" -> Intent(this@HomepageActivity, DelegateHotelActivity::class.java)
                     "3" -> Intent(this@HomepageActivity, HotelActivity::class.java)
@@ -153,22 +175,22 @@ class HomepageActivity : AppCompatActivity() {
                     }
                     backpress=0
                 }                       // Videos
-            6 -> {
+            7 -> {
                     navigateIntent = when(userType){
                     "2" -> Intent(this@HomepageActivity, DelegateTravelActivity::class.java)
                     "3" -> Intent(this@HomepageActivity, TravelActivity::class.java)
                     else -> Intent(this@HomepageActivity, ProductsActivity::class.java)
                     }
                     backpress=0
-                }         // Twitter or products
-            7 -> {
+                }                       // Twitter or products
+            8 -> {
                     navigateIntent = when(userType){
                     "2" -> Intent(this@HomepageActivity, AssignedLOActivity::class.java)
                     else -> Intent(this@HomepageActivity, QuestionsActivity::class.java)
                     }
                     backpress=0
-                }         // FAQ
-            8 -> {
+                }                       // FAQ
+            9 -> {
                     navigateIntent = when(userType){
                         "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
                         "3" -> Intent(this@HomepageActivity, TrailActivity::class.java)
@@ -178,9 +200,6 @@ class HomepageActivity : AppCompatActivity() {
                     }
                     backpress=0
                 }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
-
-            9 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
-                    backpress=0}         // Profile view
             else -> { Log.i("Homepage msg", "Nothing was clicked") }
         }
 
@@ -193,6 +212,7 @@ class HomepageActivity : AppCompatActivity() {
         agendaViewModel.loadAllAgendas(true)
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
+        exhibitorViewModel.loadAllExhibitors(true)
         questionsViewModel.loadAllFaqs(true)
         if(userType=="3"){
             liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())

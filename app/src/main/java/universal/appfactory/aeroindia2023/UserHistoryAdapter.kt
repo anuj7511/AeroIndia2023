@@ -2,7 +2,9 @@ package universal.appfactory.aeroindia2023
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -27,18 +29,28 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel> ) : Recy
 
         holder.manager.text= itemsViewModel.getmanager().trim()
         var x:Int=itemsViewModel.getStatus()
+        if(x>1){
+         holder.linearLayout3.setVisibility(View.VISIBLE)
+         holder.resolvedRemarks.setVisibility(View.VISIBLE)
+         holder.rRemarks.setVisibility(View.VISIBLE)
+         holder.remarks.setVisibility(View.GONE)
+         holder.Remark.setVisibility(View.GONE)
 
         val DT:String= itemsViewModel.getupdateDate().trim()
         val date:CharSequence=DT.subSequence(0,11)
         val time:String=DT.substring(11)
         holder.Updateddate.text=date
         holder.Updatedtime.text=time
+            holder.resolvedRemarks.text = itemsViewModel.getresolvedremarks().trim()
+        }
+
         val CDT:String= itemsViewModel.getcreateDate().trim()
         val Cdate:CharSequence=CDT.subSequence(0,11)
-        val Ctime:String=DT.substring(11)
+        val Ctime:String=CDT.substring(11)
         holder.Createddate.text=Cdate
         holder.Createdtime.text=Ctime
-        holder.resolvedRemarks.text = itemsViewModel.getresolvedremarks().trim()
+        holder.remarks.text=itemsViewModel.getremarks().trim()
+
 
 
 
@@ -59,8 +71,10 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel> ) : Recy
         var Updateddate:TextView = itemView.findViewById(R.id.Udate)
         var Updatedtime: TextView = itemView.findViewById(R.id.Utime)
         var resolvedRemarks: TextView = itemView.findViewById(R.id.ResolvedRemarks)
-
-
+        var linearLayout3: LinearLayout=itemView.findViewById(R.id.linearLayout3)
+        var rRemarks:TextView=itemView.findViewById(R.id.rRemarks)
+        var remarks:TextView=itemView.findViewById(R.id.feedback)
+        var Remark:TextView=itemView.findViewById(R.id.Remarks)
 
     }
 }

@@ -9,13 +9,13 @@
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
-        android:scrollbars="horizontal"
-        android:fadeScrollbars="true"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
         android:layout_marginBottom="10dp"
+        android:fadeScrollbars="true"
         android:fillViewport="true"
         android:padding="10sp"
+        android:scrollbars="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

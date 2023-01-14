@@ -42,6 +42,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var trailViewModel: TrailViewModel
     private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var userType: String
+    private lateinit var image: ImageView
     private lateinit var foreignKeyId : String
 
 //    0 -> "Unknown role"
@@ -125,8 +126,6 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel = ViewModelProvider(this)[TrailViewModel::class.java]
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
-
-        var image: ImageView
 
 //         Dynamic icons addition to the gridLayout
         for(i in 10..13){
@@ -303,7 +302,7 @@ class HomepageActivity : AppCompatActivity() {
         }
     }
 
-    fun spToPx(sp: Float): Int {
+    private fun spToPx(sp: Float): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, applicationContext.resources.displayMetrics)
             .toInt()
     }

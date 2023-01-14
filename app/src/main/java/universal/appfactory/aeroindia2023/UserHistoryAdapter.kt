@@ -31,18 +31,19 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel> ) : Recy
         var x:Int=itemsViewModel.getStatus()
 
         if(x>1){
+
          holder.linearLayout3.setVisibility(View.VISIBLE)
          holder.resolvedRemarks.setVisibility(View.VISIBLE)
          holder.rRemarks.setVisibility(View.VISIBLE)
          holder.remarks.setVisibility(View.GONE)
          holder.Remark.setVisibility(View.GONE)
-
-        val DT:String= itemsViewModel.getupdateDate().trim()
-        val date:CharSequence=DT.subSequence(0,11)
-        val time:String=DT.substring(11)
-        holder.Updateddate.text=date
-        holder.Updatedtime.text=time
+         val DT=itemsViewModel.getupdateDate().trim()
+            val date:CharSequence=DT.subSequence(0,11)
+         val time:String=DT.substring(11)
+         holder.Updateddate.text=date
+         holder.Updatedtime.text=time
             holder.resolvedRemarks.text = itemsViewModel.getresolvedremarks().trim()
+
         }
 
         val CDT:String= itemsViewModel.getcreateDate().trim()

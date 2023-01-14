@@ -23,6 +23,7 @@ import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
 import universal.appfactory.aeroindia2023.liaison_officer.*
 import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailActivity
+import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailPageActivity
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailViewModel
 import universal.appfactory.aeroindia2023.products.ProductViewModel
 import universal.appfactory.aeroindia2023.products.ProductsActivity
@@ -189,7 +190,7 @@ class HomepageActivity : AppCompatActivity() {
                     9 -> {
                         navigateIntent = when(userType){
                             "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
-                            "3" -> Intent(this@HomepageActivity, TrailActivity::class.java)
+                            "3" -> {Intent(this@HomepageActivity, TrailPageActivity::class.java)}
                             "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
                             "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
                             else -> Intent(this@HomepageActivity, Feedback::class.java)

@@ -22,9 +22,9 @@ class DelegateViewModel : ViewModel(){
 
     }
 
-    fun loadAllDelegates(reload : Boolean){
+    fun loadAllDelegates(reload : Boolean,id: Int){
         viewModelScope.launch (Dispatchers.IO){
-            repository.loadAllDelegates(reload)
+            repository.loadAllDelegates(reload,id)
         }
     }
 

@@ -29,13 +29,13 @@ class DelegateRepository(application: Application) {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    suspend fun loadAllDelegates(reload: Boolean) {
+    suspend fun loadAllDelegates(reload: Boolean,id : Int) {
         if (reload) {
             delegateDao.deleteAll()
             val delegateApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
             GlobalScope.launch(Dispatchers.IO) {
-                val value = delegateApi.getDelegates("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",1)
+                val value = delegateApi.getDelegates("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",id)
                     ?.awaitResponse()
                 val data: List<DelegateModel>? = value?.body()?.data as List<DelegateModel>
                 Log.d("DelegateResponse:", data.toString())

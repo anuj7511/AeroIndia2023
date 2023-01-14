@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/category_bg"
+
     tools:context=".liaison_officer.trail.trailhome.TrailFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:background="@drawable/category_bg"
             android:id="@+id/trail_recycler"
             android:padding="25dp"
             android:layout_width="match_parent"
@@ -20,17 +21,40 @@
             android:layout_weight="1"
             tools:listitem="@layout/trail_view" />
 
-        <TextView
-            android:id="@+id/submit_trial"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/vehicle_number_bg"
-            android:text="Submit"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"/>
+            android:orientation="vertical"
+
+            android:padding="10dp"
+            android:background="@drawable/category_bg">
+
+            <EditText
+                android:id="@+id/trail_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="remarks"
+                android:textSize="22sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+
+
+            <TextView
+                android:id="@+id/submit_trial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/vehicle_number_bg"
+                android:text="Submit"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:textSize="22sp"
+                android:paddingVertical="5dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+
 
     </LinearLayout>
 </FrameLayout>

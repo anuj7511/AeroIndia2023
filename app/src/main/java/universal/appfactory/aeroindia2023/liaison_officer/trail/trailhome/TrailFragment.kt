@@ -26,7 +26,7 @@ import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.ServiceBuilder
 
-class TrailFragment(private val mContext : Context): Fragment() {
+class TrailFragment(private val mContext : Context,private var enteredBy: String,private var delegateId: Int,private var liaisonId: Int): Fragment() {
 
 
     private lateinit var adapter: TrailAdapter
@@ -58,11 +58,8 @@ class TrailFragment(private val mContext : Context): Fragment() {
 
         binding.submit_trial.setOnClickListener {
             var trailResponse = adapter.getTrailResponse()
-            var liaisonId = 1
-            var delegateId = 1
-            var status = "reached bengalore"
-            var remarks = ""
-            var enteredBy = " "
+            var status = trailResponse.getStatus()
+            var remarks = binding.trail_remarks.toString()
             sendTrail(liaisonId,delegateId,status,remarks,enteredBy)
         }
 

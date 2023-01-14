@@ -29,6 +29,7 @@ class UserHistoryAdapter(private val UList: ArrayList<UserHistoryModel> ) : Recy
 
         holder.manager.text= itemsViewModel.getmanager().trim()
         var x:Int=itemsViewModel.getStatus()
+
         if(x>1){
          holder.linearLayout3.setVisibility(View.VISIBLE)
          holder.resolvedRemarks.setVisibility(View.VISIBLE)

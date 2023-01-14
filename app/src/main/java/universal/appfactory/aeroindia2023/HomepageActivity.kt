@@ -270,7 +270,7 @@ class HomepageActivity : AppCompatActivity() {
             9 -> {
                     navigateIntent = when(userType){
                         "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
-                        "3" -> Intent(this@HomepageActivity, TrailActivity::class.java)
+                        "3" -> Intent(this@HomepageActivity, TrailPageActivity::class.java)
                         "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
                         "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
                         else -> Intent(this@HomepageActivity, Feedback::class.java)

@@ -24,9 +24,9 @@ class TrailHistoryViewModel : ViewModel() {
 
     }
 
-    fun loadAllTrailHistory(reload : Boolean){
+    fun loadAllTrailHistory(reload : Boolean,id : Int, type: String){
         viewModelScope.launch (Dispatchers.IO){
-            repository.loadAllTrailHistory(reload)
+            repository.loadAllTrailHistory(reload,id,type)
         }
     }
 }

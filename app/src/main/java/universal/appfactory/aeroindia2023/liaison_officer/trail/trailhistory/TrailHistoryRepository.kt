@@ -30,7 +30,7 @@ class TrailHistoryRepository(application: Application) {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    suspend fun loadAllTrailHistory(reload: Boolean,id : Int = 1,type: String = "liaison") {
+    suspend fun loadAllTrailHistory(reload: Boolean,id : Int ,type: String ) {
         if (reload) {
             trailHistoryDao.deleteAll()
             val trailHistoryApi = ApiClient.getInstance().create(ApiInterface::class.java)

@@ -34,7 +34,7 @@ class TrailHistoryFragment(private val mContext : Context) : Fragment() {
         viewModel = ViewModelProvider(this)[TrailHistoryViewModel::class.java]
         viewModel.init((mContext as AppCompatActivity).applicationContext as Application)
 
-        val binding =  inflater.inflate(R.layout.fragment_trail, container, false)
+        val binding =  inflater.inflate(R.layout.fragment_trail_history, container, false)
         recyclerView = binding.trail_history_recycler
         recyclerView.layoutManager = LinearLayoutManager(mContext,
             LinearLayoutManager.VERTICAL,false)

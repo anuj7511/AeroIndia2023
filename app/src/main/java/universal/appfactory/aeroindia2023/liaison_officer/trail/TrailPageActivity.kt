@@ -3,6 +3,7 @@ package universal.appfactory.aeroindia2023.liaison_officer.trail
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,8 @@ class TrailPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trail_page)
+
+        Toast.makeText(this,"trailPage",Toast.LENGTH_SHORT).show()
 
         navigableBundle = intent.extras!!
         var liaisonId = navigableBundle.getString("foreignKeyId","0")

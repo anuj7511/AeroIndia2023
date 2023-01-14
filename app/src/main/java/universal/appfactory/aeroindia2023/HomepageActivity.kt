@@ -44,6 +44,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var userType: String
     private lateinit var image: ImageView
+    private lateinit var gridLayout: GridLayout
     private lateinit var foreignKeyId : String
 
 //    0 -> "Unknown role"
@@ -128,6 +129,13 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
 
+        gridLayout = GridLayout(this)
+        gridLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        gridLayout.columnCount = 3
+        gridLayout.rowCount = 3
+
+        findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout)
+
 //         Dynamic icons addition to the gridLayout
         for(i in 10..13){
             image = ImageView(this)
@@ -204,7 +212,7 @@ class HomepageActivity : AppCompatActivity() {
                 startActivity(navigateIntent)
 
             }
-            findViewById<GridLayout>(R.id.iconGrid2)?.addView(image)
+            gridLayout.addView(image)
         }
     }
 

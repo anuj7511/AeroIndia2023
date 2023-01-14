@@ -19,7 +19,7 @@ class TrailHistoryAdapter(list_of_trail_history : ArrayList<TrailHistoryModel>):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.trail_view,parent,false)
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.trail_history_view,parent,false)
         context = parent.context
         return MyViewHolder(view)
     }

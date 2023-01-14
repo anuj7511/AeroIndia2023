@@ -3,12 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".liaison_officer.trail.trailhistory.TrailHistoryFragment">
+
+    tools:context=".liaison_officer.trail.trailhome.TrailFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello History" />
+        android:orientation="vertical">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="@drawable/category_bg"
+            android:id="@+id/trail_history_recycler"
+            android:padding="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/trail_history_view" />
+
+    </LinearLayout>
 </FrameLayout>

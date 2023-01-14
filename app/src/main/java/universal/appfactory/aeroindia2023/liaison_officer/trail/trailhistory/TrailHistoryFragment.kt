@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_trail.view.*
+import kotlinx.android.synthetic.main.fragment_trail_history.view.*
 import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailAdapter
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailModel
@@ -34,7 +35,7 @@ class TrailHistoryFragment(private val mContext : Context) : Fragment() {
         viewModel.init((mContext as AppCompatActivity).applicationContext as Application)
 
         val binding =  inflater.inflate(R.layout.fragment_trail, container, false)
-        recyclerView = binding.trail_recycler
+        recyclerView = binding.trail_history_recycler
         recyclerView.layoutManager = LinearLayoutManager(mContext,
             LinearLayoutManager.VERTICAL,false)
 

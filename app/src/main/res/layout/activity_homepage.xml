@@ -23,6 +23,7 @@
         tools:ignore="MissingConstraints">
 
         <LinearLayout
+            android:id="@+id/hsvLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -141,16 +142,6 @@
                     app:layout_gravity="bottom|right|top|left"
                     app:layout_row="2"
                     app:srcCompat="@drawable/complaints" />
-            </androidx.gridlayout.widget.GridLayout>
-
-            <androidx.gridlayout.widget.GridLayout
-                android:id="@+id/iconGrid2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5sp"
-                app:columnCount="3"
-                app:rowCount="3">
-
             </androidx.gridlayout.widget.GridLayout>
 
         </LinearLayout>

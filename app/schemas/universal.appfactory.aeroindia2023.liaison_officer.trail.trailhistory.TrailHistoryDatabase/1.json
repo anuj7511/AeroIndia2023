@@ -2,15 +2,81 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a0e521e49444f3416bf22992252a6679",
+    "identityHash": "9f9cb6bac52b6e9d2d79b5d453f58466",
     "entities": [
       {
         "tableName": "trailHistory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `liaison_officer_id` INTEGER NOT NULL, `delegate_id` INTEGER NOT NULL, `trail_status` TEXT NOT NULL, `remarks` TEXT NOT NULL, `entered_by` INTEGER NOT NULL, `createdAt` TEXT NOT NULL, `updatedAt` TEXT NOT NULL, `remark_user` TEXT NOT NULL, `delegation_name` TEXT NOT NULL, `liaison_officer_firstname` TEXT NOT NULL, `liaison_officer_lastname` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "liaison_officer_id",
+            "columnName": "liaison_officer_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegate_id",
+            "columnName": "delegate_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "trail_status",
+            "columnName": "trail_status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remarks",
+            "columnName": "remarks",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entered_by",
+            "columnName": "entered_by",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remark_user",
+            "columnName": "remark_user",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "delegation_name",
+            "columnName": "delegation_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "liaison_officer_firstname",
+            "columnName": "liaison_officer_firstname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "liaison_officer_lastname",
+            "columnName": "liaison_officer_lastname",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -28,7 +94,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a0e521e49444f3416bf22992252a6679')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9f9cb6bac52b6e9d2d79b5d453f58466')"
     ]
   }
 }

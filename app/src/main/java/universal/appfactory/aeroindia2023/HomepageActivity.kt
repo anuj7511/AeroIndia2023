@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.manager_user_card.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*
@@ -111,9 +112,11 @@ class HomepageActivity : AppCompatActivity() {
         exhibitorViewModel.init((this as AppCompatActivity).applicationContext as Application)
         exhibitorViewModel.loadAllExhibitors(true)
 
-        questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
-        questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
-        questionsViewModel.loadAllFaqs(true)
+        if(userType == "3" || userType =="2") {
+            questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
+            questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
+            questionsViewModel.loadAllFaqs(true,userType)
+        }
 
         if(userType=="3"){
             liaisonViewModel = ViewModelProvider(this)[LiaisonViewModel::class.java]
@@ -290,7 +293,7 @@ class HomepageActivity : AppCompatActivity() {
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
         exhibitorViewModel.loadAllExhibitors(true)
-        questionsViewModel.loadAllFaqs(true)
+        questionsViewModel.loadAllFaqs(true,userType)
         if(userType=="3"){
             liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
         }

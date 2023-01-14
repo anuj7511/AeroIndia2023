@@ -21,9 +21,9 @@ class FaqsViewModel : ViewModel(){
 
     }
 
-    fun loadAllFaqs(reload : Boolean){
+    fun loadAllFaqs(reload : Boolean,userType : String){
         viewModelScope.launch (Dispatchers.IO){
-            repository.loadAllFaqs(reload)
+            repository.loadAllFaqs(reload,userType)
         }
     }
 

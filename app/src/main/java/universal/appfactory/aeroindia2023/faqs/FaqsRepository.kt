@@ -30,13 +30,13 @@ class FaqsRepository(application: Application) {
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    suspend fun loadAllFaqs(reload: Boolean) {
+    suspend fun loadAllFaqs(reload: Boolean,userType : String) {
         if (reload) {
             faqDao.deleteAll()
             val faqApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
             GlobalScope.launch(Dispatchers.IO) {
-                val value = faqApi.getFaqs("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",1)
+                val value = faqApi.getFaqs("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",userType.toInt())
                     ?.awaitResponse()
                 val data: List<FAQsModel>? = value?.body()?.data as List<FAQsModel>
                 Log.d("Response :", data.toString())

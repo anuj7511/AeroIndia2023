@@ -70,7 +70,7 @@ class ManagerHomepageActivity : AppCompatActivity() {
 
         questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
         questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
-        questionsViewModel.loadAllFaqs(true)
+        questionsViewModel.loadAllFaqs(true,userType)
     }
 
     fun iconClicked(view: View) {
@@ -112,7 +112,7 @@ class ManagerHomepageActivity : AppCompatActivity() {
         agendaViewModel.loadAllAgendas(true)
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
-        questionsViewModel.loadAllFaqs(true)
+        questionsViewModel.loadAllFaqs(true,userType)
 
         Log.i("Homepage activity message", "Home page refreshed")
         Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()

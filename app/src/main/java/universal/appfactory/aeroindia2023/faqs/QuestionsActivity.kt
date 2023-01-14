@@ -9,10 +9,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile_info.*
 import kotlinx.android.synthetic.main.activity_questions.*
 import kotlinx.android.synthetic.main.activity_questions.categoryTitle
 import kotlinx.android.synthetic.main.activity_questions.refreshLayout
 import universal.appfactory.aeroindia2023.R
+import universal.appfactory.aeroindia2023.navigableBundle
 
 
 class QuestionsActivity : AppCompatActivity() {
@@ -26,6 +28,8 @@ class QuestionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
 
+        navigableBundle = intent.extras!!
+        var userType = navigableBundle.getString("userType","0")
         reach_out_questions.setOnClickListener {
             var intent = Intent(this, ReachOutActivity::class.java)
             startActivity(intent)
@@ -46,7 +50,7 @@ class QuestionsActivity : AppCompatActivity() {
         }
 
         refreshLayout.setOnRefreshListener {
-            viewModel.loadAllFaqs(true)
+            viewModel.loadAllFaqs(true, userType)
             refreshLayout.isRefreshing = false
         }
     }

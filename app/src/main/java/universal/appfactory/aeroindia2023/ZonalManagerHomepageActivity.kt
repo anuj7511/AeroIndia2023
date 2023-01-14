@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_profile_info.*
+import kotlinx.android.synthetic.main.manager_user_card.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
@@ -71,7 +72,7 @@ class ZonalManagerHomepageActivity : AppCompatActivity() {
 
         questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
         questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
-        questionsViewModel.loadAllFaqs(true)
+        questionsViewModel.loadAllFaqs(true,userType)
     }
 
     fun iconClicked(view: View) {
@@ -113,7 +114,7 @@ class ZonalManagerHomepageActivity : AppCompatActivity() {
         agendaViewModel.loadAllAgendas(true)
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)
-        questionsViewModel.loadAllFaqs(true)
+        questionsViewModel.loadAllFaqs(true,userType)
 
         Log.i("Homepage activity message", "Home page refreshed")
         Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()

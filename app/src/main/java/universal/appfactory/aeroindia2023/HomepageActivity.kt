@@ -6,15 +6,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.marginTop
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.manager_user_card.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*
@@ -54,7 +53,7 @@ class HomepageActivity : AppCompatActivity() {
 //    6 -> "Exhibitor"
 //    7 -> "Media"
 
-    @SuppressLint("MissingInflatedId", "SetTextI18n")
+    @SuppressLint("MissingInflatedId", "SetTextI18n", "ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
@@ -71,16 +70,16 @@ class HomepageActivity : AppCompatActivity() {
         // Icons changed according to usertype
         when(userType){
             "2" -> {
-                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.vehicles) //DelegateVehicleActivity
-                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.hotels) // DelegateHotelActivity
-                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.travel) // DelegateTravelActivity
-                    findViewById<ImageView>(R.id.faq).setImageResource(R.drawable.assigned_lo) // AssignedLOActivity
+                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.do_1) //DelegateVehicleActivity
+                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.do_2) // DelegateHotelActivity
+                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.do_3) // DelegateTravelActivity
+                    findViewById<ImageView>(R.id.faq).setImageResource(R.drawable.do_4) // AssignedLOActivity
                     findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ETicketActivity
                     }
             "3" -> {
-                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.vehicles) // VehicleActivity
-                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.hotels) // HotelActivity
-                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.travel) // TravelActivity
+                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.lo_1) // VehicleActivity
+                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.lo_2) // HotelActivity
+                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.lo_3) // TravelActivity
                     findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.check_complaints) //DelegationActivity
                     findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // TrailActivity
                     }
@@ -127,20 +126,90 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
 
-        // Dynamic Icon allocation to the gridView
-        for(i in 10..16){
-            val image = ImageView(this)
+        var image: ImageView
+
+//         Dynamic icons addition to the gridLayout
+        for(i in 10..13){
+            image = ImageView(this)
             image.tag = i
-            image.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-            image.setPadding(10, 10, 10, 10)
-            image.setImageResource(R.drawable.hotels)
+            image.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+            image.setImageResource(resources.getIdentifier("do_"+(i-9).toString(), "drawable", packageName))
+            image.setOnClickListener {
+
+                val tag: String = image.tag.toString()
+                var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
+
+                when(tag.toInt()){
+                    0 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
+                        backpress=0}            // Profile view
+                    1 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
+                        backpress=0}         // Agenda
+                    2 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
+                        backpress=0}         // Speakers
+                    3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
+                        backpress=0}         // Venue maps
+                    4 -> {
+                        navigateIntent = when(userType){
+                            "3" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
+                            else -> Intent(this@HomepageActivity, MapsActivity::class.java)
+                        }
+                        backpress=0
+                    }                        // Driving directions
+                    5 -> {
+                        navigateIntent = when(userType){
+                            "2" -> Intent(this@HomepageActivity, DelegateVehicleActivity::class.java)
+                            "3" -> Intent(this@HomepageActivity, VehicleActivity::class.java)
+                            else -> Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
+                        }
+                        backpress=0
+                    }                        // Resources
+                    6 -> {
+                        navigateIntent = when(userType){
+                            "2" -> Intent(this@HomepageActivity, DelegateHotelActivity::class.java)
+                            "3" -> Intent(this@HomepageActivity, HotelActivity::class.java)
+                            else -> Intent(this@HomepageActivity, DummyActivity::class.java)
+                        }
+                        backpress=0
+                    }                       // Videos
+                    7 -> {
+                        navigateIntent = when(userType){
+                            "2" -> Intent(this@HomepageActivity, DelegateTravelActivity::class.java)
+                            "3" -> Intent(this@HomepageActivity, TravelActivity::class.java)
+                            else -> Intent(this@HomepageActivity, ProductsActivity::class.java)
+                        }
+                        backpress=0
+                    }                       // Twitter or products
+                    8 -> {
+                        navigateIntent = when(userType){
+                            "2" -> Intent(this@HomepageActivity, AssignedLOActivity::class.java)
+                            else -> Intent(this@HomepageActivity, QuestionsActivity::class.java)
+                        }
+                        backpress=0
+                    }                       // FAQ
+                    9 -> {
+                        navigateIntent = when(userType){
+                            "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
+                            "3" -> Intent(this@HomepageActivity, TrailActivity::class.java)
+                            "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
+                            "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
+                            else -> Intent(this@HomepageActivity, Feedback::class.java)
+                        }
+                        backpress=0
+                    }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
+                    else -> { Intent(this@HomepageActivity, DummyActivity::class.java) }
+                }
+
+                navigateIntent.putExtras(navigableBundle)
+                startActivity(navigateIntent)
+
+            }
             findViewById<GridLayout>(R.id.iconGrid2)?.addView(image)
         }
-
     }
 
-    fun iconClicked(view: View) {
-        val tag = view.tag.toString()
+    fun iconClicked(view: View = View(this)){
+        val tag: String = view.tag.toString()
         var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
 
         when(tag.toInt()){
@@ -200,7 +269,7 @@ class HomepageActivity : AppCompatActivity() {
                     }
                     backpress=0
                 }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
-            else -> { Log.i("Homepage msg", "Nothing was clicked") }
+            else -> { Intent(this@HomepageActivity, DummyActivity::class.java) }
         }
 
         navigateIntent.putExtras(navigableBundle)
@@ -232,5 +301,10 @@ class HomepageActivity : AppCompatActivity() {
         else{
             Toast.makeText(this, "Press back once again to exit", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun spToPx(sp: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, applicationContext.resources.displayMetrics)
+            .toInt()
     }
 }

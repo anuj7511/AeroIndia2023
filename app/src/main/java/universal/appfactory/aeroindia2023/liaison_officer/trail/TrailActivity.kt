@@ -22,11 +22,11 @@ class TrailActivity : AppCompatActivity() {
 
         var liaisonId= intent.getStringExtra("liaisonId")!!
         var userName : String = intent.getStringExtra("userName")!!
-        var delegateId = intent.getStringExtra("delegateId")!!
+        var delegateId = intent.getIntExtra("delegateId",0)!!
 
         trailHistoryViewModel = ViewModelProvider(this)[TrailHistoryViewModel::class.java]
         trailHistoryViewModel.init((this as AppCompatActivity).applicationContext as Application)
-        trailHistoryViewModel.loadAllTrailHistory(true,delegateId.toInt(),"delegate")
+        trailHistoryViewModel.loadAllTrailHistory(true,delegateId,"delegate")
 
         replaceFragment(TrailFragment(this@TrailActivity,userName,delegateId.toInt(),liaisonId.toInt()))
         trail.setOnClickListener {

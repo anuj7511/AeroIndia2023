@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.trail_history_view.view.*
 import kotlinx.android.synthetic.main.trail_view.view.*
 import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailAdapter
@@ -15,7 +16,8 @@ class TrailHistoryAdapter(list_of_trail_history : ArrayList<TrailHistoryModel>):
     private var listOfTrailHistory : ArrayList<TrailHistoryModel>
     private lateinit var context : Context
     class MyViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
-        var trialInfo = itemView
+        var trialInfo = itemView.trail_save_time
+        var trialHistoryStatus = itemView.trail_history_status
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -25,7 +27,10 @@ class TrailHistoryAdapter(list_of_trail_history : ArrayList<TrailHistoryModel>):
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        TODO("connect adapter after getting parameters for api")
+        var itemViewModel = listOfTrailHistory[position]
+        holder.trialInfo.text = itemViewModel.getCreatedAt().toString()
+        holder.trialHistoryStatus.text = itemViewModel.getTrail_status().toString()
+
     }
 
     override fun getItemCount(): Int {

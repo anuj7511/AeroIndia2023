@@ -38,7 +38,7 @@ class LiaisonRepository (application: Application){
             GlobalScope.launch(Dispatchers.IO) {
                 val value = liaisonApi.getLiaisonOfficers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",id)
                     ?.awaitResponse()
-                val data = value?.body()?.data as List<LiaisonModel>
+                val data: List<LiaisonModel>? = value?.body()?.data as List<LiaisonModel>
                 Log.d("LiaisonResponse:", data.toString())
                 liaisonDao.insertAll(data)
             }

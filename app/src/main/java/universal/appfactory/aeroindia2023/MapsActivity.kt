@@ -128,7 +128,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback , GoogleMap.OnInfoW
     var LOCATION_PERMISSION_REQUEST_CODE = 1234
 
     //vars
-    private var mLocationPermissionGranted : Boolean = false
+    private var mLocationPermissionGranted: Boolean = false
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private var DEFAULT_ZOOM = 14f
 

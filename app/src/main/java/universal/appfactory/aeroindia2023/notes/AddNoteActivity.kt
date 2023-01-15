@@ -1,4 +1,4 @@
-package universal.appfactory.aeroindia2023
+package universal.appfactory.aeroindia2023.notes
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
+import universal.appfactory.aeroindia2023.R
 import java.util.*
 
 @SuppressLint("RestrictedApi")

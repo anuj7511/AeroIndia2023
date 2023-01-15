@@ -31,8 +31,7 @@ class ExhibitorRepository(application: Application) {
 
     @OptIn(DelicateCoroutinesApi::class)
     suspend fun loadAllExhibitors(reload: Boolean) {
-        if(reload)
-        {
+        if (reload) {
             exhibitorDao.deleteAll()
             val exhibitorApi = ApiClient.getInstance().create(ApiInterface::class.java)
 

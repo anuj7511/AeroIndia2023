@@ -3,7 +3,6 @@ package universal.appfactory.aeroindia2023.agendas
 import android.app.Application
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import universal.appfactory.aeroindia2023.R
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 class DynamicFragment(private val classification: String, private val name: String, private val mContext: Context) : Fragment() {
 
@@ -64,30 +66,67 @@ class DynamicFragment(private val classification: String, private val name: Stri
             data = it as ArrayList<AgendaModel>
             val classifiedList = ArrayList<AgendaModel>()
 
-            if (classification == "Category") {
-                for (item in data) {
-                    if (item.getCategories() == name) {
-                        classifiedList.add(item)
+            when (classification) {
+                "Category" -> {
+                    for (item in data) {
+                        if (item.getCategories() == name) {
+                            classifiedList.add(item)
+                        }
                     }
+                    Collections.sort(classifiedList, SortByCategory())
                 }
-
-            } else if (classification == "Time") {
-                for (item in data) {
-                    if (item.getStart_date_time() == name) {
-                        classifiedList.add(item)
+                "Time" -> {
+                    for (item in data) {
+                        if (item.getStart_date_time() == name) {
+                            classifiedList.add(item)
+                        }
                     }
+                    Collections.sort(classifiedList, SortByTime())
                 }
-
-            } else {
-                for (item in data) {
-                    if (item.getLocation_name() == name) {
-                        classifiedList.add(item)
+                else -> {
+                    for (item in data) {
+                        if (item.getLocation_name() == name) {
+                            classifiedList.add(item)
+                        }
                     }
+                    Collections.sort(classifiedList, SortByLocation())
                 }
-
             }
             adapter = AgendaAdapter(classifiedList, mContext)
             recyclerview.adapter = adapter
+        }
+    }
+
+    private class SortByCategory : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getCategories().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getCategories().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
+    }
+
+    private class SortByTime : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getStart_date_time().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getStart_date_time().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
+    }
+
+    private class SortByLocation : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getLocation_name().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getLocation_name().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
         }
     }
 

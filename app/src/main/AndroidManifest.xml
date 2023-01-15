@@ -134,7 +134,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddNoteActivity"
+            android:name=".notes.AddNoteActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data

@@ -15,6 +15,8 @@ class HallStallActivity : AppCompatActivity() {
         val webView = findViewById<WebView>(R.id.webView)
 
         webView.webViewClient = WebViewClient()
+        webView.setInitialScale(130)
+        webView.settings.builtInZoomControls = true
         webView.settings.setSupportZoom(true)
 
         val url = when (hall) {
@@ -24,7 +26,10 @@ class HallStallActivity : AppCompatActivity() {
             "Hall D" -> "https://aeroindia.gov.in/booked-category/hall-D"
             "Hall E" -> "https://aeroindia.gov.in/booked-category/hall-E"
             "Hall F" -> "https://aeroindia.gov.in/booked-category/hall-F"
-            else -> "https://aeroindia.gov.in/booked-category/hall-G"
+            "Hall G" -> "https://aeroindia.gov.in/booked-category/hall-G"
+            "CHALET" -> "https://aeroindia.gov.in/booked-category/chalet"
+            "Outdoor" -> "https://aeroindia.gov.in/booked-category/Outdoor"
+            else -> "https://aeroindia.gov.in/booked-category/Outdoor"
         }
         webView.loadUrl(url)
 

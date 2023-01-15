@@ -1,24 +1,29 @@
 package universal.appfactory.aeroindia2023.exhibitors
 
-import android.app.Application
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.ProgressBar
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlinx.coroutines.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import universal.appfactory.aeroindia2023.ApiClient
 import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
+import java.lang.reflect.Type
 import java.util.*
 
 
@@ -29,8 +34,8 @@ class ExhibitorsActivity : AppCompatActivity() {
     private lateinit var adapter: ExhibitorAdapter
     private lateinit var data: ArrayList<ExhibitorModel>
     private lateinit var recyclerview: RecyclerView
-    private lateinit var viewModel: ExhibitorViewModel
     private lateinit var progressBar: ProgressBar
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,28 +48,31 @@ class ExhibitorsActivity : AppCompatActivity() {
 
         // getting the recyclerview by its id
         recyclerview = findViewById(R.id.recycler_view)
-        // getting searchview by its id
+        // getting searchView by its id
         val searchView = findViewById<SearchView>(R.id.search_bar)
         val refreshView = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
         progressBar = findViewById(R.id.progressBar)
-        viewModel = ViewModelProvider(this)[ExhibitorViewModel::class.java]
-        viewModel.init((this as AppCompatActivity).applicationContext as Application)
 
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
-
-        // ArrayList of class ItemsViewModel
         data = ArrayList()
 
-        viewModel.allexhibitor.observe(this) {
-            data = it as ArrayList<ExhibitorModel>
-            Log.d("Data: ", data.toString())
-            // This will pass the ArrayList to our Adapter
-            adapter = ExhibitorAdapter(data,this@ExhibitorsActivity)
-            // Setting the Adapter with the recyclerview
+        sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("exhibitors", "")
+        val type: Type = object : TypeToken<ArrayList<ExhibitorModel?>?>() {}.type
+        if (json != "")
+            data = gson.fromJson<Any>(json, type) as ArrayList<ExhibitorModel>
+
+        if (data.isNotEmpty()) {
+            Collections.sort(data, SortByName())
+            adapter = ExhibitorAdapter(data, this@ExhibitorsActivity)
             recyclerview.adapter = adapter
-        }
-        if(data.isEmpty())
+            progressBar.visibility = View.INVISIBLE
+        } else
+            data = ArrayList()
+
+        if (data.isEmpty())
             fetchExhibitorData()
 
         // below line is to call set on query text listener method.
@@ -81,9 +89,8 @@ class ExhibitorsActivity : AppCompatActivity() {
             }
         })
 
-        refreshView.setOnRefreshListener{
+        refreshView.setOnRefreshListener {
             progressBar.visibility = View.VISIBLE
-            viewModel.loadAllExhibitors(true)
             fetchExhibitorData()
             refreshView.isRefreshing = false
         }
@@ -98,18 +105,18 @@ class ExhibitorsActivity : AppCompatActivity() {
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            val name = item.getFirstname() + " " + item.getLastname()
-            if (name.lowercase(Locale.ROOT).contains(text.lowercase(Locale.getDefault()))) {
+            if (item.getComp_Name().lowercase(Locale.ROOT)
+                    .contains(text.lowercase(Locale.getDefault()))
+            ) {
                 // if the item is matched we are
                 // adding it to our filtered list.
                 filteredList.add(item)
             }
         }
-
         adapter.filterList(filteredList)
     }
 
-    fun fetchExhibitorData () {
+    private fun fetchExhibitorData() {
         val exhibitorApi = ApiClient.getInstance().create(ApiInterface::class.java)
 
         // launching a new coroutine
@@ -124,6 +131,8 @@ class ExhibitorsActivity : AppCompatActivity() {
 
                     Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<ExhibitorModel>
+                    Collections.sort(data, SortByName())
+                    saveToSharedPreferences(data)
                     // This will pass the ArrayList to our Adapter
                     adapter = ExhibitorAdapter(data, this@ExhibitorsActivity)
                     // Setting the Adapter with the recyclerview
@@ -132,12 +141,37 @@ class ExhibitorsActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ExhibitorResponse?>, t: Throwable) {
-                    Toast.makeText(applicationContext, t.message,
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        applicationContext, t.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.d("Failure Response: ", t.message.toString())
                 }
             })
-
         }
+    }
+
+    private class SortByName : Comparator<ExhibitorModel> {
+        override fun compare(
+            object1: ExhibitorModel,
+            object2: ExhibitorModel
+        ): Int {
+            var name1 = ""
+            var name2 = ""
+            if (!object1.getComp_Name().isNullOrEmpty())
+                name1 = object1.getComp_Name().lowercase(Locale.ROOT).trim()
+            if (!object2.getComp_Name().isNullOrEmpty())
+                name2 = object2.getComp_Name().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
+    }
+
+    private fun saveToSharedPreferences(exhibitorsList: ArrayList<ExhibitorModel>) {
+
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json: String = gson.toJson(exhibitorsList)
+        editor.putString("exhibitors", json)
+        editor.apply()
     }
 }

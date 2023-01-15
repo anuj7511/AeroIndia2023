@@ -50,6 +50,7 @@ class ProductsActivity : AppCompatActivity() {
 
         viewModel.allproduct.observe(this) {
             data = it as ArrayList<ProductModel>
+            Collections.sort(data, SortByName())
             // This will pass the ArrayList to our Adapter
             adapter = ProductAdapter(data, this@ProductsActivity)
             // Setting the Adapter with the recyclerview
@@ -95,5 +96,16 @@ class ProductsActivity : AppCompatActivity() {
         }
 
         adapter.filterList(filteredList)
+    }
+
+    private class SortByName : Comparator<ProductModel> {
+        override fun compare(
+            object1: ProductModel,
+            object2: ProductModel
+        ): Int {
+            val name1: String = object1.getProduct_title().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getProduct_title().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
     }
 }

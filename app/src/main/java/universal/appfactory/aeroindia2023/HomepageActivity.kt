@@ -123,9 +123,11 @@ class HomepageActivity : AppCompatActivity() {
             liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
         }
 
-        delegateViewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
-        delegateViewModel.init((this as AppCompatActivity).applicationContext as Application)
-        delegateViewModel.loadAllDelegates(true)
+        if(userType=="2") {
+            delegateViewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
+            delegateViewModel.init((this as AppCompatActivity).applicationContext as Application)
+            delegateViewModel.loadAllDelegates(true,foreignKeyId.toInt())
+        }
 
         trailViewModel = ViewModelProvider(this)[TrailViewModel::class.java]
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
@@ -298,7 +300,9 @@ class HomepageActivity : AppCompatActivity() {
         if(userType=="3"){
             liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
         }
-        delegateViewModel.loadAllDelegates(true)
+        if(userType=="2") {
+            delegateViewModel.loadAllDelegates(true,foreignKeyId.toInt())
+        }
         trailViewModel.loadAllTrail(true)
 
         Log.i("Homepage activity message", "Home page refreshed")

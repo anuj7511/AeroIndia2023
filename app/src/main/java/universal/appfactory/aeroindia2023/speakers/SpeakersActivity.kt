@@ -49,6 +49,7 @@ class SpeakersActivity : AppCompatActivity() {
         data = ArrayList()
         viewModel.allspeaker.observe(this) {
             data = it as ArrayList<SpeakerModel>
+            Collections.sort(data, SortByName())
             // This will pass the ArrayList to our Adapter
             adapter = SpeakersAdapter(data, this@SpeakersActivity)
             // Setting the Adapter with the recyclerview
@@ -92,5 +93,16 @@ class SpeakersActivity : AppCompatActivity() {
         }
 
         adapter.filterList(filteredList)
+    }
+
+    private class SortByName : Comparator<SpeakerModel> {
+        override fun compare(
+            object1: SpeakerModel,
+            object2: SpeakerModel
+        ): Int {
+            val name1: String = object1.getFirst_name().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getFirst_name().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
+        }
     }
 }

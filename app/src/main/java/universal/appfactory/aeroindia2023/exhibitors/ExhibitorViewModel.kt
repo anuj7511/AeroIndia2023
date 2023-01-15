@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class ExhibitorViewModel : ViewModel() {
 
-    lateinit var allexhibitor: LiveData<List<ExhibitorModel>>
+    private lateinit var allexhibitor: LiveData<List<ExhibitorModel>>
     private lateinit var exhibitorDao: ExhibitorDao
     private lateinit var repository: ExhibitorRepository
 

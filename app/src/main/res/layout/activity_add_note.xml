@@ -5,7 +5,7 @@
     android:id="@+id/add_note_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNoteActivity">
+    tools:context=".notes.AddNoteActivity">
 
 
     <LinearLayout

@@ -1,5 +1,6 @@
 package universal.appfactory.aeroindia2023
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,privat
     }
 
     // binds the list items to a view
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         // setting data to our views of recycler view.
@@ -35,16 +37,17 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,privat
         holder.date.text=date
         holder.time.text=time
 
-        holder.status.text="Pending"
-            holder.status.setOnClickListener{
-                val intent=Intent(mContext,ResolvedRemarksActivity::class.java)
-                intent.putExtra("CompId",itemsViewModel.getComplaintId())
-                intent.putExtra("Manager",itemsViewModel.getM())
-                mContext.startActivity(intent)
-            }
+        if(itemsViewModel.getstatus() == 1)
+            holder.status.text = "Pending"
+        else
+            holder.status.text = "Resolved"
 
-
-
+        holder.status.setOnClickListener{
+            val intent=Intent(mContext,ResolvedRemarksActivity::class.java)
+            intent.putExtra("CompId",itemsViewModel.getComplaintId())
+            intent.putExtra("Manager",itemsViewModel.getM())
+            mContext.startActivity(intent)
+        }
 
     }
 

@@ -1,5 +1,6 @@
 package universal.appfactory.aeroindia2023
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class ManagerAdapter (private val pList: ArrayList<ManagerModel>) : RecyclerView
     }
 
     // binds the list items to a view
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         // setting data to our views of recycler view.
@@ -28,10 +30,11 @@ class ManagerAdapter (private val pList: ArrayList<ManagerModel>) : RecyclerView
         holder.nameText.text = itemsViewModel.getName().trim()
         holder.remarks.text = itemsViewModel.getremarks().trim()
         holder.date_Time.text = itemsViewModel.getdate_time().trim()
-        if(itemsViewModel.getstatus()==0)
-            holder.status.text="Pending"
+
+        if(itemsViewModel.getstatus() == 1)
+            holder.status.text = "Pending"
         else
-            holder.status.text="Resolved"
+            holder.status.text = "Resolved"
 
     }
 

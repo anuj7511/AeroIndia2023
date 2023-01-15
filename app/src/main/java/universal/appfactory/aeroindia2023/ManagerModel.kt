@@ -37,7 +37,7 @@ data class ManagerModel(
     fun getdate_time():String{
         return date_time
     }
-    fun getstatus():Int{
+    fun getstatus(): Int{
         return action_taken
     }
 }

@@ -105,12 +105,13 @@ class ExhibitorsActivity : AppCompatActivity() {
         // running a for loop to compare elements.
         for (item in data) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.getComp_Name().lowercase(Locale.ROOT)
-                    .contains(text.lowercase(Locale.getDefault()))
-            ) {
-                // if the item is matched we are
-                // adding it to our filtered list.
-                filteredList.add(item)
+            if(!item.getComp_Name().isNullOrEmpty())
+            {
+                if (item.getComp_Name().lowercase(Locale.ROOT)
+                        .contains(text.lowercase(Locale.getDefault()))
+                ) {
+                    filteredList.add(item)
+                }
             }
         }
         adapter.filterList(filteredList)

@@ -24,6 +24,8 @@ import universal.appfactory.aeroindia2023.R
 import universal.appfactory.aeroindia2023.products.ProductAdapter
 import universal.appfactory.aeroindia2023.products.ProductModel
 import universal.appfactory.aeroindia2023.products.ProductResponse
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SelectedExhibitorActivity : AppCompatActivity() {
@@ -132,8 +134,9 @@ class SelectedExhibitorActivity : AppCompatActivity() {
 
                         Log.d("Response: ", response.body().toString())
                         data = response.body()?.data as java.util.ArrayList<ProductModel>
+                        Collections.sort(data, SortByName())
                         // This will pass the ArrayList to our Adapter
-                        adapter = ProductAdapter(data, this@SelectedExhibitorActivity)
+                        adapter = ProductAdapter(data, this@SelectedExhibitorActivity, "last")
                         // Setting the Adapter with the recyclerview
                         recyclerview.adapter = adapter
 
@@ -148,6 +151,17 @@ class SelectedExhibitorActivity : AppCompatActivity() {
                     }
                 })
 
+        }
+    }
+
+    private class SortByName : Comparator<ProductModel> {
+        override fun compare(
+            object1: ProductModel,
+            object2: ProductModel
+        ): Int {
+            val name1: String = object1.getProduct_title().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getProduct_title().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
         }
     }
 }

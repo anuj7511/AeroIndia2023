@@ -96,6 +96,7 @@ class SelectedSpeakerActivity : AppCompatActivity() {
 
                     Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<AgendaModel>
+                    Collections.sort(data, SortByName())
                     // This will pass the ArrayList to our Adapter
                     adapter = AgendaAdapter(data, this@SelectedSpeakerActivity)
                     // Setting the Adapter with the recyclerview
@@ -110,6 +111,17 @@ class SelectedSpeakerActivity : AppCompatActivity() {
                 }
             })
 
+        }
+    }
+
+    private class SortByName : Comparator<AgendaModel> {
+        override fun compare(
+            object1: AgendaModel,
+            object2: AgendaModel
+        ): Int {
+            val name1: String = object1.getSession_name().lowercase(Locale.ROOT).trim()
+            val name2: String = object2.getSession_name().lowercase(Locale.ROOT).trim()
+            return name1.compareTo(name2)
         }
     }
 }

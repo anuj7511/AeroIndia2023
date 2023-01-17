@@ -1,3 +1,5 @@
+@file:Suppress("SameParameterValue")
+
 package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
@@ -10,10 +12,11 @@ import android.util.TypedValue
 import android.view.View
 import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.setPadding
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.manager_user_card.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*
@@ -22,7 +25,6 @@ import universal.appfactory.aeroindia2023.exhibitors.ExhibitorsActivity
 import universal.appfactory.aeroindia2023.faqs.FaqsViewModel
 import universal.appfactory.aeroindia2023.faqs.QuestionsActivity
 import universal.appfactory.aeroindia2023.liaison_officer.*
-import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailActivity
 import universal.appfactory.aeroindia2023.liaison_officer.trail.TrailPageActivity
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailViewModel
 import universal.appfactory.aeroindia2023.products.ProductViewModel
@@ -33,7 +35,7 @@ import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
 class HomepageActivity : AppCompatActivity() {
 
     private var backpress: Int = 0
-    var navigableBundle = Bundle()
+    private var navigableBundle = Bundle()
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var speakerViewModel: SpeakerViewModel
@@ -44,7 +46,9 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var userType: String
     private lateinit var image: ImageView
-    private lateinit var gridLayout: GridLayout
+    private lateinit var gridLayout1: GridLayout
+    private lateinit var gridLayout2: GridLayout
+    private lateinit var gridLayout3: GridLayout
     private lateinit var foreignKeyId : String
 
 //    0 -> "Unknown role"
@@ -64,37 +68,280 @@ class HomepageActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         navigableBundle = intent.extras!!
+        lateinit var intent: Intent
         userType = navigableBundle.getString("userType", "0")
         foreignKeyId = navigableBundle.getString("foreignKeyId","0")
+        val hashMap : HashMap<String, Class<*>> = HashMap()
+
         findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
 
         Log.i("Homepage activity msg", "User type: $userType")
 
-        // Icons changed according to usertype
+        //Dynamic gridLayout generated
+
+        gridLayout1 = GridLayout(this)
+        gridLayout1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        gridLayout1.setPadding(15)
+        gridLayout1.columnCount = 3
+        gridLayout1.rowCount = 3
+
+        gridLayout2 = GridLayout(this)
+        gridLayout2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        gridLayout2.setPadding(15)
+        gridLayout2.columnCount = 3
+        gridLayout2.rowCount = 3
+
+        gridLayout3 = GridLayout(this)
+        gridLayout3.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        gridLayout3.setPadding(15)
+        gridLayout3.columnCount = 3
+        gridLayout3.rowCount = 3
+
         when(userType){
+            "1" -> {
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+
+                hashMap["1"] = AgendaActivity::class.java
+                hashMap["2"] = SpeakersActivity::class.java
+                hashMap["3"] = DummyActivity::class.java
+                hashMap["4"] = MapsActivity::class.java
+                hashMap["5"] = ExhibitorsActivity::class.java
+                hashMap["6"] = DummyActivity::class.java
+                hashMap["7"] = ProductsActivity::class.java
+                hashMap["8"] = QuestionsActivity::class.java
+                hashMap["9"] = Feedback::class.java
+
+                for (i in hashMap.keys) {
+                    image = ImageView(this)
+                    image.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+                    image.setImageResource(
+                        resources.getIdentifier(
+                            "gen_$i",
+                            "drawable",
+                            packageName
+                        )
+                    )
+                    image.setOnClickListener {
+                        intent = Intent(applicationContext, hashMap[i])
+                        intent.putExtras(navigableBundle)
+                        this@HomepageActivity.startActivity(intent)
+                    }
+                    gridLayout1.addView(image)
+                }
+            }
+
             "2" -> {
-                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.do_1) //DelegateVehicleActivity
-                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.do_2) // DelegateHotelActivity
-                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.do_3) // DelegateTravelActivity
-                    findViewById<ImageView>(R.id.faq).setImageResource(R.drawable.do_4) // AssignedLOActivity
-                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.do_5) // ETicketActivity
+
+                    findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+                    findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+
+                    hashMap["1"] = DelegateVehicleActivity::class.java
+                    hashMap["2"] = DelegateHotelActivity::class.java
+                    hashMap["3"] = DelegateTravelActivity::class.java
+                    hashMap["4"] = AssignedLOActivity::class.java
+                    hashMap["5"] = DummyActivity::class.java
+                    hashMap["6"] = AgendaActivity::class.java
+                    hashMap["7"] = SpeakersActivity::class.java
+                    hashMap["8"] = DummyActivity::class.java
+                    hashMap["9"] = MapsActivity::class.java
+                    hashMap["10"] = ExhibitorsActivity::class.java
+                    hashMap["12"] = ProductsActivity::class.java
+                    hashMap["13"] = QuestionsActivity::class.java
+                    hashMap["14"] = Feedback::class.java
+
+                    for (i in hashMap.keys) {
+                        image = ImageView(this)
+                        image.layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+                        image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+                        image.setOnClickListener {
+                            intent = Intent(applicationContext, hashMap[i])
+                            intent.putExtras(navigableBundle)
+                            this@HomepageActivity.startActivity(intent)
+                        }
+                        if (i.toInt() <= 5)
+                            image.setImageResource(
+                                resources.getIdentifier(
+                                    "do_$i",
+                                    "drawable",
+                                    packageName
+                                )
+                            )
+                        else
+                            image.setImageResource(
+                                resources.getIdentifier(
+                                    "gen_" + (i.toInt() - 5).toString(),
+                                    "drawable",
+                                    packageName
+                                )
+                            )
+
+                        if(i.toInt() <= 9)
+                            gridLayout1.addView(image)
+                        else
+                            gridLayout2.addView(image)
+
                     }
+                }
+
             "3" -> {
-                    findViewById<ImageView>(R.id.resources).setImageResource(R.drawable.lo_1) // VehicleActivity
-                    findViewById<ImageView>(R.id.videos).setImageResource(R.drawable.lo_2) // HotelActivity
-                    findViewById<ImageView>(R.id.twitter).setImageResource(R.drawable.lo_3) // TravelActivity
-                    findViewById<ImageView>(R.id.driving).setImageResource(R.drawable.lo_4) //DelegationActivity
-                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.lo_5) // TrailActivity
+
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+
+                hashMap["1"] = VehicleActivity::class.java
+                hashMap["2"] = HotelActivity::class.java
+                hashMap["3"] = TravelActivity::class.java
+                hashMap["4"] = DelegationActivity::class.java
+                hashMap["5"] = TrailPageActivity::class.java
+                hashMap["6"] = AgendaActivity::class.java
+                hashMap["7"] = SpeakersActivity::class.java
+                hashMap["8"] = DummyActivity::class.java
+                hashMap["9"] = MapsActivity::class.java
+                hashMap["10"] = ExhibitorsActivity::class.java
+                hashMap["12"] = ProductsActivity::class.java
+                hashMap["13"] = QuestionsActivity::class.java
+                hashMap["14"] = Feedback::class.java
+
+                for (i in hashMap.keys) {
+                    image = ImageView(this)
+                    image.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+                    image.setOnClickListener {
+                        intent = Intent(applicationContext, hashMap[i])
+                        intent.putExtras(navigableBundle)
+                        this@HomepageActivity.startActivity(intent)
                     }
+                    if (i.toInt() <= 5)
+                        image.setImageResource(
+                            resources.getIdentifier(
+                                "lo_$i",
+                                "drawable",
+                                packageName
+                            )
+                        )
+                    else
+                        image.setImageResource(
+                            resources.getIdentifier(
+                                "gen_" + (i.toInt() - 5).toString(),
+                                "drawable",
+                                packageName
+                            )
+                        )
+
+                    if(i.toInt() <= 9)
+                        gridLayout1.addView(image)
+                    else
+                        gridLayout2.addView(image)
+
+                }
+            }
+
             "4" -> {
-                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ZonalManagerActivity
+
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+
+                hashMap["1"] = AgendaActivity::class.java
+                hashMap["2"] = SpeakersActivity::class.java
+                hashMap["3"] = DummyActivity::class.java
+                hashMap["4"] = MapsActivity::class.java
+                hashMap["5"] = ExhibitorsActivity::class.java
+                hashMap["6"] = DummyActivity::class.java
+                hashMap["7"] = ProductsActivity::class.java
+                hashMap["8"] = QuestionsActivity::class.java
+                hashMap["9"] = ZonalManagerActivity::class.java
+
+                for (i in hashMap.keys) {
+                    image = ImageView(this)
+                    image.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+                    image.setOnClickListener {
+                        intent = Intent(applicationContext, hashMap[i])
+                        intent.putExtras(navigableBundle)
+                        this@HomepageActivity.startActivity(intent)
                     }
+                    if (i.toInt() != 9)
+                        image.setImageResource(
+                            resources.getIdentifier(
+                                "gen_$i",
+                                "drawable",
+                                packageName
+                            )
+                        )
+                    else
+                        image.setImageResource(R.drawable.check_complaints)
+
+                    gridLayout1.addView(image)
+                }
+            }
+
             "5" -> {
-                    findViewById<ImageView>(R.id.lodging_complaint).setImageResource(R.drawable.check_complaints) // ManagerActivity
+
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+
+                hashMap["1"] = AgendaActivity::class.java
+                hashMap["2"] = SpeakersActivity::class.java
+                hashMap["3"] = DummyActivity::class.java
+                hashMap["4"] = MapsActivity::class.java
+                hashMap["5"] = ExhibitorsActivity::class.java
+                hashMap["6"] = DummyActivity::class.java
+                hashMap["7"] = ProductsActivity::class.java
+                hashMap["8"] = QuestionsActivity::class.java
+                hashMap["9"] = ManagerActivity::class.java
+
+                for (i in hashMap.keys) {
+                    image = ImageView(this)
+                    image.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+                    image.setOnClickListener {
+                        intent = Intent(applicationContext, hashMap[i])
+                        intent.putExtras(navigableBundle)
+                        this@HomepageActivity.startActivity(intent)
                     }
-            else -> Log.i("Homepage activity msg", "No changes done")
+                    if (i.toInt() != 9)
+                        image.setImageResource(
+                            resources.getIdentifier(
+                                "gen_$i",
+                                "drawable",
+                                packageName
+                            )
+                        )
+                    else
+                        image.setImageResource(R.drawable.check_complaints)
+
+                    gridLayout1.addView(image)
+                }
+            }
+
+            else -> Log.i("Homepage Activity", "User type not defined")
         }
 
+        findViewById<LinearLayout>(R.id.profileView).setOnClickListener{
+            intent = Intent(this@HomepageActivity, ProfileActivity::class.java)
+            intent.putExtras(navigableBundle)
+            backpress = 0
+            this.startActivity(intent)
+        }
+
+        loadAllActivites()
+    }
+
+    private fun loadAllActivites() {
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
         agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
         agendaViewModel.loadAllAgendas(true)
@@ -132,166 +379,11 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel = ViewModelProvider(this)[TrailViewModel::class.java]
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
-
-
-////          Dynamic gridLayout creation
-//        gridLayout = GridLayout(this)
-//        gridLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-//        gridLayout.columnCount = 3
-//        gridLayout.rowCount = 3
-//
-//        findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout)
-//
-////         Dynamic icons addition to the gridLayout
-//        for(i in 10..13){
-//            image = ImageView(this)
-//            image.tag = i
-//            image.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-//            image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
-//            image.setImageResource(resources.getIdentifier("do_"+(i-9).toString(), "drawable", packageName))
-//            image.setOnClickListener {
-//
-//                val tag: String = image.tag.toString()
-//                var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
-//
-//                when(tag.toInt()){
-//                    0 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
-//                        backpress=0}            // Profile view
-//                    1 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
-//                        backpress=0}         // Agenda
-//                    2 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
-//                        backpress=0}         // Speakers
-//                    3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
-//                        backpress=0}         // Venue maps
-//                    4 -> {
-//                        navigateIntent = when(userType){
-//                            "3" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
-//                            else -> Intent(this@HomepageActivity, MapsActivity::class.java)
-//                        }
-//                        backpress=0
-//                    }                        // Driving directions
-//                    5 -> {
-//                        navigateIntent = when(userType){
-//                            "2" -> Intent(this@HomepageActivity, DelegateVehicleActivity::class.java)
-//                            "3" -> Intent(this@HomepageActivity, VehicleActivity::class.java)
-//                            else -> Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
-//                        }
-//                        backpress=0
-//                    }                        // Resources
-//                    6 -> {
-//                        navigateIntent = when(userType){
-//                            "2" -> Intent(this@HomepageActivity, DelegateHotelActivity::class.java)
-//                            "3" -> Intent(this@HomepageActivity, HotelActivity::class.java)
-//                            else -> Intent(this@HomepageActivity, DummyActivity::class.java)
-//                        }
-//                        backpress=0
-//                    }                       // Videos
-//                    7 -> {
-//                        navigateIntent = when(userType){
-//                            "2" -> Intent(this@HomepageActivity, DelegateTravelActivity::class.java)
-//                            "3" -> Intent(this@HomepageActivity, TravelActivity::class.java)
-//                            else -> Intent(this@HomepageActivity, ProductsActivity::class.java)
-//                        }
-//                        backpress=0
-//                    }                       // Twitter or products
-//                    8 -> {
-//                        navigateIntent = when(userType){
-//                            "2" -> Intent(this@HomepageActivity, AssignedLOActivity::class.java)
-//                            else -> Intent(this@HomepageActivity, QuestionsActivity::class.java)
-//                        }
-//                        backpress=0
-//                    }                       // FAQ
-//                    9 -> {
-//                        navigateIntent = when(userType){
-//                            "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
-//                            "3" -> {Intent(this@HomepageActivity, TrailPageActivity::class.java)}
-//                            "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
-//                            "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
-//                            else -> Intent(this@HomepageActivity, Feedback::class.java)
-//                        }
-//                        backpress=0
-//                    }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
-//                    else -> { Intent(this@HomepageActivity, DummyActivity::class.java) }
-//                }
-//
-//                navigateIntent.putExtras(navigableBundle)
-//                startActivity(navigateIntent)
-//
-//            }
-//            gridLayout.addView(image)
-//        }
     }
 
-    fun iconClicked(view: View = View(this)){
-        val tag: String = view.tag.toString()
-        var navigateIntent = Intent(this@HomepageActivity,  DummyActivity::class.java)
+    fun refreshPage(view: View = View(this)) {
+        view.visibility = View.VISIBLE
 
-        when(tag.toInt()){
-            0 -> {navigateIntent = Intent(this@HomepageActivity, ProfileActivity::class.java)
-                backpress=0}            // Profile view
-            1 -> {navigateIntent = Intent(this@HomepageActivity, AgendaActivity::class.java)
-                    backpress=0}         // Agenda
-            2 -> {navigateIntent = Intent(this@HomepageActivity, SpeakersActivity::class.java)
-                    backpress=0}         // Speakers
-            3 -> {navigateIntent = Intent(this@HomepageActivity, DummyActivity::class.java)
-                    backpress=0}         // Venue maps
-            4 -> {
-                    navigateIntent = when(userType){
-                    "3" -> Intent(this@HomepageActivity, DelegationActivity::class.java)
-                    else -> Intent(this@HomepageActivity, MapsActivity::class.java)
-                    }
-                    backpress=0
-                }                        // Driving directions
-            5 -> {
-                    navigateIntent = when(userType){
-                    "2" -> Intent(this@HomepageActivity, DelegateVehicleActivity::class.java)
-                    "3" -> Intent(this@HomepageActivity, VehicleActivity::class.java)
-                    else -> Intent(this@HomepageActivity, ExhibitorsActivity::class.java)
-                    }
-                    backpress=0
-                }                        // Resources
-            6 -> {
-                    navigateIntent = when(userType){
-                    "2" -> Intent(this@HomepageActivity, DelegateHotelActivity::class.java)
-                    "3" -> Intent(this@HomepageActivity, HotelActivity::class.java)
-                    else -> Intent(this@HomepageActivity, DummyActivity::class.java)
-                    }
-                    backpress=0
-                }                       // Videos
-            7 -> {
-                    navigateIntent = when(userType){
-                    "2" -> Intent(this@HomepageActivity, DelegateTravelActivity::class.java)
-                    "3" -> Intent(this@HomepageActivity, TravelActivity::class.java)
-                    else -> Intent(this@HomepageActivity, ProductsActivity::class.java)
-                    }
-                    backpress=0
-                }                       // Twitter or products
-            8 -> {
-                    navigateIntent = when(userType){
-                    "2" -> Intent(this@HomepageActivity, AssignedLOActivity::class.java)
-                    else -> Intent(this@HomepageActivity, QuestionsActivity::class.java)
-                    }
-                    backpress=0
-                }                       // FAQ
-            9 -> {
-                    navigateIntent = when(userType){
-                        "2" -> Intent(this@HomepageActivity, DummyActivity::class.java) // My ETicket
-                        "3" -> Intent(this@HomepageActivity, TrailPageActivity::class.java)
-                        "4" -> Intent(this@HomepageActivity, ZonalManagerActivity::class.java)
-                        "5" -> Intent(this@HomepageActivity, ManagerActivity::class.java)
-                        else -> Intent(this@HomepageActivity, Feedback::class.java)
-                    }
-                    backpress=0
-                }                        // Lodging complaints (or) View zonal complaints (or) View super complaints
-            else -> { Intent(this@HomepageActivity, DummyActivity::class.java) }
-        }
-
-        navigateIntent.putExtras(navigableBundle)
-        startActivity(navigateIntent)
-
-    }
-
-    fun refreshPage(view: View) {
         agendaViewModel.loadAllAgendas(true)
         productViewModel.loadAllProducts(true)
         speakerViewModel.loadAllSpeakers(true)

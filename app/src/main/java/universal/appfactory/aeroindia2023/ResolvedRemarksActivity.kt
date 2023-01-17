@@ -15,6 +15,7 @@ class ResolvedRemarksActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resolved_remarks)
+
         val submit = findViewById<Button>(R.id.submit)
         val remarks = findViewById<EditText>(R.id.resolvation)
         val complaintId = intent.getIntExtra("CompId", 1)
@@ -22,8 +23,6 @@ class ResolvedRemarksActivity : AppCompatActivity() {
         submit.setOnClickListener {
            val rR=remarks.text.toString()
             rRemarks(rR, manager, complaintId)
-
-
         }
     }
     @OptIn(DelicateCoroutinesApi::class)

@@ -43,9 +43,9 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,privat
             holder.status.text = "Resolved"
 
         holder.status.setOnClickListener{
-            val intent=Intent(mContext,ResolvedRemarksActivity::class.java)
-            intent.putExtra("CompId",itemsViewModel.getComplaintId())
-            intent.putExtra("Manager",itemsViewModel.getM())
+            val intent=Intent(mContext, ResolvedRemarksActivity::class.java)
+            intent.putExtra("CompId", itemsViewModel.getComplaintId())
+            intent.putExtra("Manager", itemsViewModel.getM())
             mContext.startActivity(intent)
         }
 

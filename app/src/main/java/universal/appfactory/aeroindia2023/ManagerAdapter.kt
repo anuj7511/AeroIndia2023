@@ -35,7 +35,6 @@ class ManagerAdapter (private val pList: ArrayList<ManagerModel>) : RecyclerView
             holder.status.text = "Pending"
         else
             holder.status.text = "Resolved"
-
     }
 
     // return the number of the items in the list
@@ -52,7 +51,6 @@ class ManagerAdapter (private val pList: ArrayList<ManagerModel>) : RecyclerView
         var remarks: TextView = itemView.findViewById(R.id.r)
         var date_Time: TextView = itemView.findViewById(R.id.date_time)
         var status:TextView=itemView.findViewById(R.id.Rstatus)
-
 
     }
 }

@@ -1,7 +1,6 @@
 package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +11,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
-import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.activity_profile_info.*
@@ -22,11 +20,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("LocalVariableName", "UNUSED_ANONYMOUS_PARAMETER", "UNUSED_VARIABLE")
 class OtpActivity : AppCompatActivity() {
 
     var otpFlag: Boolean = true
     var navigableBundle = Bundle()
-    var otpAttempts: Int = 3
+    private var otpAttempts: Int = 3
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +48,13 @@ class OtpActivity : AppCompatActivity() {
         Log.i("Shared user information", "Email: $sharedEmailID\nType: $type\nUser ID: $userId")
 
         findViewById<TextView>(R.id.otpMessage2).text = "Enter the 4 digit One Time Password (OTP) you have received in your registered email\n\nEmail: $sharedEmailID"
-        findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
+        findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: 3"
 
         val otpButton = findViewById<Button>(R.id.otpButton)
 
         // Homepage activity is popped after OTP validation
             otpButton.setOnClickListener {
                 if(otpAttempts > 0) {
-                    otpAttempts -= 1
                     findViewById<TextView>(R.id.otpAttempts).text = "Remaining attempts: $otpAttempts"
                     val OTP = findViewById<EditText>(R.id.otp).text.toString()
                     if (OTP.length == 4)
@@ -138,6 +136,7 @@ class OtpActivity : AppCompatActivity() {
                         }
                         else{
                             otpFlag = false
+                            otpAttempts -= 1
                             Toast.makeText(this@OtpActivity, "Incorrect OTP", Toast.LENGTH_SHORT).show()
                             val pinError = response.body()?.errors?.pin.toString()
                             val idError = response.body()?.errors?.id.toString()
@@ -164,15 +163,14 @@ class OtpActivity : AppCompatActivity() {
 
     private fun checkDesignation(userId: Int): String{
         return when(userId){
-            0 -> "Unknown role"
             1 -> "Attendee"
-            2 -> "Delegates"
+            2 -> "Delegate"
             3 -> "Liaison officer"
             4 -> "Washroom zonal manager"
             5 -> "Washroom super manager"
             6 -> "Exhibitor"
             7 -> "Media"
-            else -> "Unknown"
+            else -> "Unknown role"
         }
     }
 }

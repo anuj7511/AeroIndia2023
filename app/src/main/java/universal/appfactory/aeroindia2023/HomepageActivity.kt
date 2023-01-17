@@ -126,6 +126,7 @@ class HomepageActivity : AppCompatActivity() {
                         )
                     )
                     image.setOnClickListener {
+                        backpress = 0
                         intent = Intent(applicationContext, hashMap[i])
                         intent.putExtras(navigableBundle)
                         this@HomepageActivity.startActivity(intent)
@@ -161,6 +162,7 @@ class HomepageActivity : AppCompatActivity() {
                         )
                         image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
                         image.setOnClickListener {
+                            backpress = 0
                             intent = Intent(applicationContext, hashMap[i])
                             intent.putExtras(navigableBundle)
                             this@HomepageActivity.startActivity(intent)
@@ -217,6 +219,7 @@ class HomepageActivity : AppCompatActivity() {
                     )
                     image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
                     image.setOnClickListener {
+                        backpress = 0
                         intent = Intent(applicationContext, hashMap[i])
                         intent.putExtras(navigableBundle)
                         this@HomepageActivity.startActivity(intent)
@@ -268,6 +271,7 @@ class HomepageActivity : AppCompatActivity() {
                     )
                     image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
                     image.setOnClickListener {
+                        backpress = 0
                         intent = Intent(applicationContext, hashMap[i])
                         intent.putExtras(navigableBundle)
                         this@HomepageActivity.startActivity(intent)
@@ -309,6 +313,7 @@ class HomepageActivity : AppCompatActivity() {
                     )
                     image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
                     image.setOnClickListener {
+                        backpress = 0
                         intent = Intent(applicationContext, hashMap[i])
                         intent.putExtras(navigableBundle)
                         this@HomepageActivity.startActivity(intent)

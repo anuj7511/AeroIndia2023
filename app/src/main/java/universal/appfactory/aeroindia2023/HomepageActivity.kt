@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
-import android.view.View
 import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -39,11 +38,11 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var speakerViewModel: SpeakerViewModel
-    private lateinit var questionsViewModel : FaqsViewModel
     private lateinit var liaisonViewModel: LiaisonViewModel
     private lateinit var delegateViewModel: DelegateViewModel
     private lateinit var trailViewModel: TrailViewModel
     private lateinit var exhibitorViewModel: ExhibitorViewModel
+    private lateinit var questionsViewModel: FaqsViewModel
     private lateinit var userType: String
     private lateinit var image: ImageView
     private lateinit var gridLayout1: GridLayout
@@ -343,10 +342,28 @@ class HomepageActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
-        loadAllActivites()
+        loadAllActivities()
+
+        findViewById<ImageView>(R.id.refreshHomepage).setOnClickListener{
+            agendaViewModel.loadAllAgendas(true)
+            productViewModel.loadAllProducts(true)
+            speakerViewModel.loadAllSpeakers(true)
+            exhibitorViewModel.loadAllExhibitors(true)
+            questionsViewModel.loadAllFaqs(true,userType)
+            if(userType=="3"){
+                liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
+            }
+            if(userType=="2") {
+                delegateViewModel.loadAllDelegates(true,foreignKeyId.toInt())
+            }
+            trailViewModel.loadAllTrail(true)
+
+            Log.i("Homepage activity message", "Homepage refreshed")
+            Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun loadAllActivites() {
+    private fun loadAllActivities() {
         agendaViewModel = ViewModelProvider(this)[AgendaViewModel::class.java]
         agendaViewModel.init((this as AppCompatActivity).applicationContext as Application)
         agendaViewModel.loadAllAgendas(true)
@@ -362,6 +379,10 @@ class HomepageActivity : AppCompatActivity() {
         exhibitorViewModel = ViewModelProvider(this)[ExhibitorViewModel::class.java]
         exhibitorViewModel.init((this as AppCompatActivity).applicationContext as Application)
         exhibitorViewModel.loadAllExhibitors(true)
+
+        questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
+        questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        questionsViewModel.loadAllFaqs(true,userType)
 
         if(userType == "3" || userType =="2") {
             questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
@@ -386,34 +407,12 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel.loadAllTrail(true)
     }
 
-    fun refreshPage(view: View = View(this)) {
-        view.visibility = View.VISIBLE
-
-        agendaViewModel.loadAllAgendas(true)
-        productViewModel.loadAllProducts(true)
-        speakerViewModel.loadAllSpeakers(true)
-        exhibitorViewModel.loadAllExhibitors(true)
-        questionsViewModel.loadAllFaqs(true,userType)
-        if(userType=="3"){
-            liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
-        }
-        if(userType=="2") {
-            delegateViewModel.loadAllDelegates(true,foreignKeyId.toInt())
-        }
-        trailViewModel.loadAllTrail(true)
-
-        Log.i("Homepage activity message", "Home page refreshed")
-        Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
-    }
-
     override fun onBackPressed(){
         backpress += 1
-        if(backpress > 1){
+        if(backpress > 1)
             finishAffinity()
-        }
-        else{
+        else
             Toast.makeText(this, "Press back once again to exit", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun spToPx(sp: Float): Int {

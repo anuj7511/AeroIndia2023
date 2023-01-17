@@ -21,6 +21,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
+            android:id="@+id/updateProfileIcon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/icon_tick" />
@@ -38,6 +39,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/cancelUpdateIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_cross" />
@@ -56,9 +58,9 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/userProfileImage"
             android:layout_width="match_parent"
-            android:layout_height="131dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10sp"
             android:background="@null"
             android:backgroundTint="@color/black"
@@ -74,191 +76,263 @@
             android:textColor="@color/black" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="383dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:layout_marginTop="107dp"
-        android:orientation="vertical"
+    <ScrollView
+        android:id="@+id/profileScrollView"
+        android:layout_width="400dp"
+        android:layout_height="430dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginHorizontal="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayout10"
+            android:layout_width="383dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5sp"
+            android:layout_margin="10sp"
+            android:layout_marginTop="107dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
-                android:text="Name (Required)"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/userName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:background="#D9D9D9"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="3sp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:contentDescription=""
+                    android:text="Name (Required)"
+                    android:textColor="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <EditText
+                    android:id="@+id/userinfo_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5sp"
-                android:text="Phone number"
-                android:textColor="@color/black" />
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <EditText
-                android:id="@+id/phoneNumber"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="Phone number"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/userinfo_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="numberSigned"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:text=""
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="Job Title"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/userinfo_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="User ID"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/userinfo_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="User type"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/userinfo_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#D9D9D9"
-                android:ems="10"
-                android:inputType="numberSigned"
-                android:padding="3sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_margin="5sp"
-                android:text="Job Title"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/userJobTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#D9D9D9"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text=""
-                android:padding="3sp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="Email (Required)"
+                    android:textColor="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <EditText
+                    android:id="@+id/userinfo_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5sp"
-                android:text="User ID"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/userId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#D9D9D9"
-                android:text=""
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="3sp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="Residence address"
+                    android:textColor="@color/black" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5sp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+                <EditText
+                    android:id="@+id/userinfo_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5sp"
-                android:text="User type"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/userType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#D9D9D9"
-                android:text=""
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="3sp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:text="Organisation"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/userinfo_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#D9D9D9"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:padding="3sp"
+                    android:text=""
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5sp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:text="Email (Required)"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/userEmailAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#D9D9D9"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:padding="3sp"
-                android:text=""
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

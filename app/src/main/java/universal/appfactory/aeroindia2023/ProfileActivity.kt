@@ -56,23 +56,23 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun userSignOut(){
         val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
-            MaterialAlertDialogBuilder(this)
-                .setTitle("WARNING !")
-                .setMessage("Do you want to sign out for sure ? You'll be logged out of the application as well.")
-                .setPositiveButton("Yes") { dialog, which ->
-                    Log.i("Positive dialog message", "Entered positive dialog content")
-                    sharedPreferences.edit().clear().apply()
-                    Log.i(
-                        "Positive dialog msg",
-                        "Local user data cleared & exiting positive dialog message"
-                    )
-                    finishAffinity()
-                }
-                .setNegativeButton("No") { dialog, which ->
-                    dialog.cancel()
-                    Log.i("Negative dialog msg", "Exiting negative dialog message")
-                }
-                .show()
+        MaterialAlertDialogBuilder(this)
+            .setTitle("WARNING !")
+            .setMessage("Do you want to sign out for sure ? You'll be logged out of the application as well.")
+            .setPositiveButton("Yes") { dialog, which ->
+                Log.i("Positive dialog message", "Entered positive dialog content")
+                sharedPreferences.edit().clear().apply()
+                Log.i(
+                    "Positive dialog msg",
+                    "Local user data cleared & exiting positive dialog message"
+                )
+                finishAffinity()
+            }
+            .setNegativeButton("No") { dialog, which ->
+                dialog.cancel()
+                Log.i("Negative dialog msg", "Exiting negative dialog message")
+            }
+            .show()
     }
 
     fun refreshPage(view: View) {

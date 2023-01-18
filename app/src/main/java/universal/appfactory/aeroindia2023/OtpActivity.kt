@@ -105,6 +105,7 @@ class OtpActivity : AppCompatActivity() {
                             val foreignKeyId = response.body()?.data?.foreign_key_id.toString()
                             val verifiedToken = response.body()?.data?.verified_token.toString()
 
+                            //TODO: Updated for other parameters as well
                             navigableBundle.putString("name", name)
                             navigableBundle.putString("email", email)
                             navigableBundle.putString("phoneNo", phoneNo)
@@ -117,6 +118,7 @@ class OtpActivity : AppCompatActivity() {
                             val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
                             val editPreferences: SharedPreferences.Editor = sharedPreferences.edit()
 
+                            //TODO: Updated for other parameters as well
                             editPreferences.putString("name", name)
                             editPreferences.putString("email", email)
                             editPreferences.putString("phoneNo", phoneNo)

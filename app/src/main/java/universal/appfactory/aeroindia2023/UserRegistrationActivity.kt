@@ -52,16 +52,20 @@ class UserRegistrationActivity : AppCompatActivity() {
             val email = findViewById<EditText>(R.id.emailAddress).text.toString()
             val username = findViewById<EditText>(R.id.userName).text.toString()
             val mobileNo = findViewById<EditText>(R.id.mobileNumber).text.toString()
+            val address = findViewById<EditText>(R.id.address).text.toString()
+            val organisation = findViewById<EditText>(R.id.organisation).text.toString()
 
             Log.i("Unshared user information", "Name: $username\nMobile number: $mobileNo\nEmail: $email")
 
             navigableBundle.putString("email", email)
             navigableBundle.putString("username", username)
             navigableBundle.putString("mobileNo", mobileNo)
+            navigableBundle.putString("address", address)
+            navigableBundle.putString("organisation", organisation)
             navigableBundle.putString("designation", "-")
 
             if((email == "")||(username == "")||(mobileNo == "")){
-                Toast.makeText(this@UserRegistrationActivity, "Fill all the columns", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@UserRegistrationActivity, "Fill the required columns", Toast.LENGTH_SHORT).show()
             }
             else {
                 submitUserData(email, username, mobileNo)
@@ -94,7 +98,6 @@ class UserRegistrationActivity : AppCompatActivity() {
                         val nameError = response.body()?.errors?.name.toString()
                         val phoneNoError = response.body()?.errors?.phone_no.toString()
                         val emailError  = response.body()?.errors?.email_id.toString()
-
 
                         if(status == "fail") {
                             Log.i("Components", "User ID: $userId, Verify: $verify, Status: $status, Msg: $msg")

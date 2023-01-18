@@ -8,107 +8,158 @@
     tools:context="universal.appfactory.aeroindia2023.UserRegistrationActivity">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="346dp"
-        android:layout_height="400dp"
-        android:layout_marginTop="10dp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <LinearLayout
+            android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:contentDescription="@string/icon"
-                android:textColor="@color/black"
-                android:text="@string/username" />
-
-            <EditText
-                android:id="@+id/userName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="@color/black"
-                android:paddingLeft="10sp"
-                android:background="@drawable/rectangle_bg"
-                android:inputType="textPersonName" />
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:contentDescription="@string/icon"
+                    android:text="@string/username"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_bg"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="10sp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:contentDescription="@string/icon"
+                    android:text="@string/email_address"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/emailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/rectangle_bg"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="10sp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:contentDescription="@string/icon"
+                    android:text="@string/mobileNo"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/mobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:background="@drawable/rectangle_bg"
+                    android:inputType="numberSigned"
+                    android:paddingLeft="10sp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:contentDescription="@string/icon"
+                    android:text="Organization"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/organisation"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:text=""
+                    android:background="@drawable/rectangle_bg"
+                    android:inputType="numberSigned"
+                    android:paddingLeft="10sp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:contentDescription="@string/icon"
+                    android:text="Residence address"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
+                    android:text=""
+                    android:background="@drawable/rectangle_bg"
+                    android:inputType="numberSigned"
+                    android:paddingLeft="10sp"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:contentDescription="@string/icon"
-                android:textColor="@color/black"
-                android:text="@string/email_address" />
-
-            <EditText
-                android:id="@+id/emailAddress"
-                android:layout_width="match_parent"
-                android:paddingLeft="10sp"
-                android:textColor="@color/black"
-                android:layout_height="40dp"
-                android:background="@drawable/rectangle_bg"
-                android:inputType="textEmailAddress" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:contentDescription="@string/icon"
-                android:textColor="@color/black"
-                android:text="@string/mobileNo" />
-
-            <EditText
-                android:id="@+id/mobileNumber"
-                android:layout_width="match_parent"
-                android:paddingLeft="10sp"
-                android:layout_height="40sp"
-                android:textColor="@color/black"
-                android:background="@drawable/rectangle_bg"
-                android:inputType="numberSigned" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/registerButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:background="@null"
-            android:backgroundTint="#87C38F"
-            android:paddingBottom="3sp"
-            android:paddingTop="3sp"
-            android:text="@string/button_name"
-            android:textColor="@color/black"
-            app:cornerRadius="50sp" />
-
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -117,7 +168,6 @@
         android:layout_marginBottom="33dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,5 +186,26 @@
             android:typeface="sans" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8sp"
+        android:layout_marginBottom="263dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="136dp"
+        android:background="@null"
+        android:backgroundTint="#87C38F"
+        android:paddingBottom="3sp"
+        android:paddingTop="3sp"
+        android:text="@string/button_name"
+        android:textColor="@color/black"
+        app:cornerRadius="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

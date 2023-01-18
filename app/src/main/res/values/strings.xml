@@ -3,11 +3,11 @@
     <string name="button_name">Generate OTP</string>
     <string name="register_heading">USER REGISTRATION</string>
     <string name="login_heading">USER LOGIN</string>
-    <string name="email_address">Email address</string>
-    <string name="username">Name</string>
+    <string name="email_address">*Email address</string>
+    <string name="username">*Name</string>
     <string name="login">LOG IN</string>
     <string name="sign_up">SIGN UP</string>
-    <string name="mobileNo">Mobile number</string>
+    <string name="mobileNo">*Mobile number</string>
     <string name="otp_heading">OTP VERIFICATION</string>
     <string name="_3_30pm">3:30pm</string>
     <string name="_5_30pm">5:30pm</string>

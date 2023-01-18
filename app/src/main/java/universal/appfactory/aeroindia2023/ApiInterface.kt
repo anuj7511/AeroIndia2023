@@ -50,7 +50,7 @@ interface ApiInterface {
     fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String, @Header("referrer") referrer: String = "origin"): Call<UserLoginDataResponseModel>
 
     @POST("api/update-user-profile")
-    fun updateUserInfo(@Body userInfoUpdateRequestModel: UserInfoUpdateRequestModel?, @Header("Authorization") bearerToken: String): Call<UserInfoUpdateResponseModel>
+    fun updateUserInfo(@Body userInfoUpdateRequestModel: UserInfoUpdateRequestModel, @Header("Authorization") bearerToken: String): Call<UserInfoUpdateResponseModel>
 
     @POST("api/complaint-resolve-save")
     fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorisation") bearerToken:String):Call<ResolvedResponseModel>

@@ -53,7 +53,7 @@ interface ApiInterface {
     fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorisation") bearerToken:String):Call<ResolvedResponseModel>
 
     @GET("api/get-complaint/{id}")
-    fun getproblem(@Header("Authorization") bearerToken: String,@Path("id") id: String) :Call<ZonalManagerResponse?>?
+    fun getproblem(@Header("Authorization") bearerToken: String,@Path("id") id: Int) :Call<ZonalManagerResponse?>?
 
     @GET("api/get-complaint")
     fun getmanagers(@Header ("Authorization") bearerToken: String) :Call<ManagerResponse?>?

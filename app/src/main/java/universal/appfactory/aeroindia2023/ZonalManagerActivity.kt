@@ -27,7 +27,7 @@ class ZonalManagerActivity : AppCompatActivity() {
     private lateinit var adapter: ZonalManagerAdapter
     private  var data: ArrayList<ZonalManagerModel>?=null
     private lateinit var recyclerview: RecyclerView
-    private lateinit var zonalmanagerid:String
+    private  var zonalmanagerid:Int=0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,15 +46,13 @@ class ZonalManagerActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
         // ArrayList of class ItemsViewModel
-
+        data = ArrayList()
         binding = ActivityZonalManagerBinding.inflate(layoutInflater)
         val view = binding.root
         val bundle=intent.extras
-        if(bundle!=null)
-        {
-            zonalmanagerid= bundle.getString("userId")!!
-        }
-        data = ArrayList()
+        zonalmanagerid = bundle!!.getInt("Name",0)
+
+
      fetchPData()
 
     }
@@ -73,6 +71,7 @@ class ZonalManagerActivity : AppCompatActivity() {
                     response: Response<ZonalManagerResponse?>,
                 ) {
                     if (response.isSuccessful() && response.body()!=null)
+
                     { Log.d("Response: ", response.body().toString())
                     data = response.body()?.data as ArrayList<ZonalManagerModel>
 

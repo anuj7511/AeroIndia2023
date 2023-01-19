@@ -27,6 +27,7 @@ class ProfileInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_info)
+
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -116,7 +117,6 @@ class ProfileInfoActivity : AppCompatActivity() {
     }
 
     private fun assignOriginalValues(){
-
         findViewById<EditText>(R.id.userinfo_1).setText(navigableBundle.getString("name", "NA"))
         findViewById<EditText>(R.id.userinfo_2).setText(navigableBundle.getString("phoneNo", "NA"))
         findViewById<EditText>(R.id.userinfo_3).setText(navigableBundle.getString("address", "NA"))
@@ -125,9 +125,9 @@ class ProfileInfoActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.userinfo_6).setText(navigableBundle.getString("userId", "NA"))
         findViewById<EditText>(R.id.userinfo_7).setText(navigableBundle.getString("userType", "NA"))
         findViewById<EditText>(R.id.userinfo_8).setText(navigableBundle.getString("email", "NA"))
-
     }
 
+    // Codes should not be changed
     private fun decode(i: Int): String{
 
         return when(i){

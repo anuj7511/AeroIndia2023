@@ -8,5 +8,7 @@ data class UserInfoUpdateResponseModel(
     @SerializedName("message")
     val message: String,
     @SerializedName("data")
-    val data: UpdateDataResponse
+    val data: UpdateDataResponse,
+    @SerializedName("errors")
+    val errors: UpdateErrorResponse
 )

@@ -104,6 +104,10 @@ class OtpActivity : AppCompatActivity() {
                             val userType = response.body()?.data?.user_type.toString()
                             val foreignKeyId = response.body()?.data?.foreign_key_id.toString()
                             val verifiedToken = response.body()?.data?.verified_token.toString()
+                            val designation = response.body()?.data?.designation.toString()
+                            val organisation = response.body()?.data?.organisation.toString()
+                            val profileImage = response.body()?.data?.profile_image.toString()
+                            val address = response.body()?.data?.address.toString()
 
                             //TODO: Updated for other parameters as well
                             navigableBundle.putString("name", name)
@@ -112,6 +116,10 @@ class OtpActivity : AppCompatActivity() {
                             navigableBundle.putString("designation", checkDesignation(userType.toInt()))
                             navigableBundle.putString("userId", userId)
                             navigableBundle.putString("userType", userType)
+                            navigableBundle.putString("address", address)
+                            navigableBundle.putString("organisation", organisation)
+                            navigableBundle.putString("designation", designation)
+                            navigableBundle.putString("profileImage", profileImage)
                             navigableBundle.putString("foreignKeyId", foreignKeyId)
                             navigableBundle.putBoolean("loginStatus", true)
 
@@ -126,6 +134,10 @@ class OtpActivity : AppCompatActivity() {
                             editPreferences.putString("userId", userId)
                             editPreferences.putString("userType", userType)
                             editPreferences.putString("foreignKeyId", foreignKeyId)
+                            editPreferences.putString("address", address)
+                            editPreferences.putString("organisation", organisation)
+                            editPreferences.putString("designation", designation)
+                            editPreferences.putString("profileImage", profileImage)
                             editPreferences.putBoolean("loginStatus", true)
 
                             editPreferences.apply()
@@ -163,6 +175,7 @@ class OtpActivity : AppCompatActivity() {
         throwable.printStackTrace()
     }
 
+    // Should not be changed
     private fun checkDesignation(userId: Int): String{
         return when(userId){
             1 -> "Attendee"

@@ -54,6 +54,8 @@ class UserRegistrationActivity : AppCompatActivity() {
             val mobileNo = findViewById<EditText>(R.id.mobileNumber).text.toString()
             val address = findViewById<EditText>(R.id.address).text.toString()
             val organisation = findViewById<EditText>(R.id.organisation).text.toString()
+            val profileImage = "-"
+            val designation = "-"
 
             Log.i("Unshared user information", "Name: $username\nMobile number: $mobileNo\nEmail: $email")
 
@@ -62,7 +64,8 @@ class UserRegistrationActivity : AppCompatActivity() {
             navigableBundle.putString("mobileNo", mobileNo)
             navigableBundle.putString("address", address)
             navigableBundle.putString("organisation", organisation)
-            navigableBundle.putString("designation", "-")
+            navigableBundle.putString("designation", designation)
+            navigableBundle.putString("profileImage", profileImage)
 
             if((email == "")||(username == "")||(mobileNo == "")){
                 Toast.makeText(this@UserRegistrationActivity, "Fill the required columns", Toast.LENGTH_SHORT).show()

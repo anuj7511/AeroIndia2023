@@ -49,19 +49,6 @@ class UserLoginActivity : AppCompatActivity() {
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
 
-        // Authentication token generation code
-        val am: AccountManager = AccountManager.get(this@UserLoginActivity)
-        val options = Bundle()
-
-//        am.getAuthToken(
-//            myAccount_,                     // Account retrieved using getAccountsByType()
-//            "Manage your tasks",            // Auth scope
-//            options,                        // Authenticator-specific options
-//            this,                           // Your activity
-//            OnTokenAcquired(),              // Callback called when a token is successfully acquired
-//            Handler(onError())              // Callback called if an error occurs
-//        )
-
         if(sharedPreferences.getBoolean("loginStatus", false)) {
 
             navigableBundle.putString("name", sharedPreferences.getString("name", "-"))
@@ -71,14 +58,9 @@ class UserLoginActivity : AppCompatActivity() {
             navigableBundle.putString("userId", sharedPreferences.getString("userId", "-"))
             navigableBundle.putString("foreignKeyId", sharedPreferences.getString("foreignKeyId", "-"))
             navigableBundle.putString("userType", sharedPreferences.getString("userType", "-"))
-
-//            val userType: String = sharedPreferences.getString("userType", "0").toString()
-
-//            intent = when(userType){
-//                "4" -> Intent(this@UserLoginActivity, ManagerHomepageActivity::class.java)
-//                "5" -> Intent(this@UserLoginActivity, ZonalManagerHomepageActivity::class.java)
-//                else -> Intent(this@UserLoginActivity, HomepageActivity::class.java)
-//            }
+            navigableBundle.putString("organisation", sharedPreferences.getString("organisation", "-"))
+            navigableBundle.putString("profileImage", sharedPreferences.getString("profileImage", "-"))
+            navigableBundle.putString("address", sharedPreferences.getString("address", "-"))
 
             backpress=0
             intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)

@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.activity_agenda.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*

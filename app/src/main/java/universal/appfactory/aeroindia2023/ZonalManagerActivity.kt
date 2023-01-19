@@ -52,7 +52,6 @@ class ZonalManagerActivity : AppCompatActivity() {
         val bundle=intent.extras
         zonalmanagerid = bundle!!.getInt("Name",0)
 
-
      fetchPData()
 
     }
@@ -99,7 +98,6 @@ class ZonalManagerActivity : AppCompatActivity() {
                 }
             },
             )
-
 
         }
     }

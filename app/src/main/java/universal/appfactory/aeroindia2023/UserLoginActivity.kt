@@ -1,6 +1,5 @@
 package universal.appfactory.aeroindia2023
 
-import android.accounts.AccountManager
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -19,7 +18,6 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 
 // API_1: http://aeroindia.gov.in/api/register-user
 // API_2: http://aeroindia.gov.in/api/register-verify
@@ -116,11 +114,6 @@ class UserLoginActivity : AppCompatActivity() {
 
                         // Login errors
                         val emailError = response.body()?.errors?.email_id.toString()
-
-//                        // saving authentication token
-//                        sessionManager = SessionManager(this@UserLoginActivity)
-//                        sessionManager.saveAuthToken(response.body()?.authToken.toString())
-//                        Log.i("Authentication token", response.body()?.authToken.toString())
 
                         Log.i("Verification code", verificationCode)
 

@@ -22,7 +22,8 @@ import retrofit2.Response
 class ProfileInfoActivity : AppCompatActivity() {
 
     private lateinit var navigableBundle: Bundle
-    private var checkFlag: Boolean = true
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editPreferences: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,8 @@ class ProfileInfoActivity : AppCompatActivity() {
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         navigableBundle = intent.extras!!
+        sharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+        editPreferences = sharedPreferences.edit()
         assignOriginalValues()
 
         findViewById<ImageView>(R.id.updateProfileIcon).setOnClickListener{
@@ -85,11 +88,9 @@ class ProfileInfoActivity : AppCompatActivity() {
 
                             if(status == "success"){
 
-                                val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
-                                val editPreferences: SharedPreferences.Editor = sharedPreferences.edit()
-
                                 for(key in hashMap.keys){
                                     editPreferences.putString(key, hashMap[key])
+                                    navigableBundle.putString(key, hashMap[key])
                                 }
                                 editPreferences.apply()
 
@@ -117,14 +118,14 @@ class ProfileInfoActivity : AppCompatActivity() {
     }
 
     private fun assignOriginalValues(){
-        findViewById<EditText>(R.id.userinfo_1).setText(navigableBundle.getString("name", "NA"))
-        findViewById<EditText>(R.id.userinfo_2).setText(navigableBundle.getString("phoneNo", "NA"))
-        findViewById<EditText>(R.id.userinfo_3).setText(navigableBundle.getString("address", "NA"))
-        findViewById<EditText>(R.id.userinfo_4).setText(navigableBundle.getString("organisation", "NA"))
-        findViewById<EditText>(R.id.userinfo_5).setText(navigableBundle.getString("designation", "NA"))
-        findViewById<TextView>(R.id.userinfo_6).setText(navigableBundle.getString("userId", "NA"))
-        findViewById<EditText>(R.id.userinfo_7).setText(navigableBundle.getString("userType", "NA"))
-        findViewById<EditText>(R.id.userinfo_8).setText(navigableBundle.getString("email", "NA"))
+        findViewById<EditText>(R.id.userinfo_1).setText(sharedPreferences.getString("name", "NA"))
+        findViewById<EditText>(R.id.userinfo_2).setText(sharedPreferences.getString("phoneNo", "NA"))
+        findViewById<EditText>(R.id.userinfo_3).setText(sharedPreferences.getString("address", "NA"))
+        findViewById<EditText>(R.id.userinfo_4).setText(sharedPreferences.getString("organisation", "NA"))
+        findViewById<EditText>(R.id.userinfo_5).setText(sharedPreferences.getString("designation", "NA"))
+        findViewById<TextView>(R.id.userinfo_6).setText(sharedPreferences.getString("userId", "NA"))
+        findViewById<EditText>(R.id.userinfo_7).setText(sharedPreferences.getString("userType", "NA"))
+        findViewById<EditText>(R.id.userinfo_8).setText(sharedPreferences.getString("email", "NA"))
     }
 
     // Codes should not be changed

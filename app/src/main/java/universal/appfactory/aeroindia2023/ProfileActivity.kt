@@ -77,6 +77,9 @@ class ProfileActivity : AppCompatActivity() {
 
     fun refreshPage(view: View) {
         //TODO: Refresh functionality
+        val sharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+
+        findViewById<TextView>(R.id.name).text = sharedPreferences.getString("name", "DEFAULT USER")
         Log.i("Profile activity message", "Profile page refreshed")
         Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
     }

@@ -118,7 +118,6 @@ class OtpActivity : AppCompatActivity() {
                             navigableBundle.putString("userType", userType)
                             navigableBundle.putString("address", address)
                             navigableBundle.putString("organisation", organisation)
-                            navigableBundle.putString("designation", designation)
                             navigableBundle.putString("profileImage", profileImage)
                             navigableBundle.putString("foreignKeyId", foreignKeyId)
                             navigableBundle.putBoolean("loginStatus", true)
@@ -136,7 +135,6 @@ class OtpActivity : AppCompatActivity() {
                             editPreferences.putString("foreignKeyId", foreignKeyId)
                             editPreferences.putString("address", address)
                             editPreferences.putString("organisation", organisation)
-                            editPreferences.putString("designation", designation)
                             editPreferences.putString("profileImage", profileImage)
                             editPreferences.putBoolean("loginStatus", true)
 
@@ -176,8 +174,8 @@ class OtpActivity : AppCompatActivity() {
     }
 
     // Should not be changed
-    private fun checkDesignation(userId: Int): String{
-        return when(userId){
+    private fun checkDesignation(userType: Int): String{
+        return when(userType){
             1 -> "Attendee"
             2 -> "Delegate"
             3 -> "Liaison officer"

@@ -28,26 +28,28 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,privat
         // setting data to our views of recycler view.
         val itemsViewModel = ZList[position]
         // sets the text to the textview from our itemHolder class
-        holder.washId.text=itemsViewModel.getwashId().trim()
+        holder.washId.text = itemsViewModel.getwashId().trim()
         holder.nameText.text = itemsViewModel.getName().trim()
         holder.remarks.text = itemsViewModel.getremarks().trim()
-        var DT:String= itemsViewModel.getdate_time().trim()
-        var date:CharSequence=DT.subSequence(0,11)
-        var time:String=DT.substring(11)
-        holder.date.text=date
-        holder.time.text=time
+        var DT: String = itemsViewModel.getdate_time().trim()
+        var date: CharSequence = DT.subSequence(0, 11)
+        var time: String = DT.substring(11)
+        holder.date.text = date
+        holder.time.text = time
 
-        if(itemsViewModel.getstatus() == 1)
-            holder.status.text = "Pending"
-        else
-            holder.status.text = "Resolved"
-
-        holder.status.setOnClickListener{
-            val intent=Intent(mContext, ResolvedRemarksActivity::class.java)
+        if (itemsViewModel.getstatus() == 1)
+        {  holder.status.text = "Pending"
+        holder.status.setOnClickListener {
+            val intent = Intent(mContext, ResolvedRemarksActivity::class.java)
             intent.putExtra("CompId", itemsViewModel.getComplaintId())
             intent.putExtra("Manager", itemsViewModel.getM())
             mContext.startActivity(intent)
         }
+       }
+        else
+            holder.status.text = "Resolved"
+
+
 
     }
 

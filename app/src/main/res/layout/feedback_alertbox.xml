@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Feedback">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:textStyle="bold"
+        android:layout_marginVertical="10sp"
+        android:textSize="20sp"
+        android:text="Select your options"
+        tools:ignore="HardcodedText" />
+
+    <ScrollView
+        android:id="@+id/alertBoxScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:fadeScrollbars="false"
+        android:layout_marginBottom="10sp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/alertBoxLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/checkbox_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Washroom is nice and clean, great job!"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Washroom needs cleaning"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Washroom drain is clogged"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Washroom has foul smell"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Refill paper towels"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Water is leaking"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Door lock is broken"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Washroom light does not work"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Refill hand soap"
+                tools:ignore="HardcodedText" />
+
+            <CheckBox
+                android:id="@+id/checkbox_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Washroom is locked"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.widget.EditText
+        android:id="@+id/alertBoxFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your feedback (Max. 250 words)"
+        android:text=""
+        android:textSize="15sp"
+        tools:ignore="HardcodedText,TouchTargetSizeCheck" />
+
+</LinearLayout>

@@ -19,6 +19,7 @@
         <item name="android:windowActionBarOverlay">true</item>
         <!-- Support library compatibility -->
         <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="actionBarStyle">@style/ThemeActionBar</item>
         <item name="windowActionBarOverlay">false</item>
     </style>
@@ -34,6 +35,7 @@
         <item name="android:background">@null</item>
         <!-- Support library compatibility -->
         <item name="background">@null</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
@@ -46,6 +48,14 @@
     <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
         <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@color/white</item>"
+        <item name="android:scaleX">0.95</item>
+        <item name="android:scaleY">0.95</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyleFeedback</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyleFeedback</item>
     </style>
 
     <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">

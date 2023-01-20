@@ -4,14 +4,18 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import android.view.View
+import android.view.WindowManager
 import android.widget.*
 
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_feedback.*
+import kotlinx.android.synthetic.main.feedback_alertbox.*
+import kotlinx.android.synthetic.main.user_card.view.*
 import kotlinx.android.synthetic.main.zonal_manager_user_card.*
 import kotlinx.coroutines.*
 
@@ -24,10 +28,12 @@ class Feedback : AppCompatActivity() {
 
     private lateinit var binding: ActivityFeedbackBinding
     private var qrScanIntegrator: IntentIntegrator? = null
-    var washroom_Id: Int =0
+    var washroom_Id: Int = 0
+    lateinit var view: View
     var user_id: Int=0 // Previously late init washroomId: String
     private var checkedFeedbacks: String = ""
-    private lateinit var input: EditText
+    private val feedbackTexts = arrayOf("Washroom is nice and clean, great job!", "Washroom needs cleaning", "Washroom drain is clogged", "Washroom has foul smell", "Refill paper towels", "Water is leaking", "Door lock is broken", "Washroom light does not work", "Refill hand soap", "Washroom is locked")
+    private val checkedItems = booleanArrayOf(true, false, false, false, false, false, false, false, false, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,25 +44,24 @@ class Feedback : AppCompatActivity() {
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         binding = ActivityFeedbackBinding.inflate(layoutInflater)
-        val view = binding.root
-        val bundle=intent.extras
+        view = binding.root
+        val bundle = intent.extras
         if(bundle!=null)
         {
             user_id= bundle.getString("userId")!!.toInt()
         }
+
         setContentView(view)
 
         val history= findViewById<TextView>(R.id.History)
-
         setOnClickListener()
-
         setupScanner()
 
         history.setOnClickListener {
             val intent = Intent(this, UserHistoryActivity::class.java)
             intent.putExtra("Name", user_id)
-            startActivity(intent) }
-
+            startActivity(intent)
+        }
     }
 
     private fun setupScanner() {
@@ -66,59 +71,37 @@ class Feedback : AppCompatActivity() {
     }
 
     private fun setOnClickListener() {
-
         binding.scanQrButton.setOnClickListener { performAction() }
     }
+
     private fun performAction() {
         // Code to perform action when button is clicked.
         qrScanIntegrator?.initiateScan()
     }
 
-//    Texts for feedback dialog box
-    private val feedbackTexts = arrayOf("Washroom is nice and clean, great job!", "Washroom needs cleaning", "Washroom drain is clogged", "Washroom has foul smell", "Refill paper towels", "Water is leaking", "Door lock is broken", "Washroom light does not work", "Refill hand soap", "Washroom is locked")
+    fun checkFeedbacks(view: View = View(this@Feedback)){
 
-//     Dialog box for feedback
-    fun checkFeedbacks(view: View){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        val customLayout: View = layoutInflater.inflate(R.layout.feedback_alertbox, null)
+        builder.setView(customLayout)
 
-    val builder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogCustom))
-    builder.setTitle("SELECT YOUR DESIRED OPTIONS")
-    builder.setView(android.R.layout.activity_list_item)
+        val inputFeedback = customLayout.findViewById<EditText>(R.id.alertBoxFeedback)
 
-    val checkedItems = booleanArrayOf(true, false, false, false, false, false, false, false, false, false)
+        builder.setPositiveButton("SUBMIT") { dialog, which ->
 
-    input = EditText(this@Feedback)
-    input.setPadding(40, 40, 40, 40)
-    input.setSingleLine()
-    input.textSize = 15F
-    input.hint = "Enter your feedback here.."
-
-    val lp: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.MATCH_PARENT,)
-    input.layoutParams = lp
-
-    builder.setView(input)
-
-    builder.setMultiChoiceItems(feedbackTexts, checkedItems) { dialog, which, isChecked ->
-        checkedItems[which] = isChecked
-    }
-
-
-    builder.setPositiveButton("SUBMIT") { dialog, which ->
-        // TODO: Redirection to submitFeedback
-        for(i in 0..9){
-            if(checkedItems[i]){
-                checkedFeedbacks += feedbackTexts[i]+", "
+            for(i in 1..10) {
+                val checkbox = customLayout.findViewById<CheckBox>(resources.getIdentifier("checkbox_$i", "id", packageName))
+                if (checkbox.isChecked) {
+                    checkedFeedbacks += ", " + checkbox.text
+                }
             }
+
+            checkedFeedbacks += ", " + inputFeedback.text
+            submitFeedback(checkedFeedbacks, washroom_Id, user_id)
         }
-        checkedFeedbacks += input.text
-        submitFeedback(checkedFeedbacks,washroom_Id, user_id)
-    }
-    builder.setNegativeButton("CANCEL", null)
 
-    val dialog = builder.create()
-    dialog.show()
-
+        builder.setNegativeButton("CANCEL", null)
+        builder.create().show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -139,7 +122,6 @@ class Feedback : AppCompatActivity() {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
-
 
     @OptIn(DelicateCoroutinesApi::class)
     fun submitFeedback(feedback:String, washroomId:Int,userId:Int) {
@@ -169,27 +151,11 @@ class Feedback : AppCompatActivity() {
             )
         }
     }
+
+    private fun spToPx(sp: Float): Int {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, applicationContext.resources.displayMetrics)
+            .toInt()
+    }
 }
 
-//        val checkBoxView: View = View.inflate(this, R.layout.dialog_fragment, null)
-//        val checkBox = checkBoxView.findViewById<CheckBox>(androidx.appcompat.R.id.checkbox)
-//        checkBox.setText("Sample ")
 
-//        val builder = MaterialAlertDialogBuilder(this@Feedback)
-//        builder
-//            .setTitle("Washroom ID: $washroom_Id")
-//            .setMessage("Please select action required for these restrooms")
-//            .setMultiChoiceItems(sampleTextArray, checkedTexts){ dialog, which, isChecked ->
-////                checkedTexts[which] = isChecked
-////                Log.i("Feedback activity msg", "Current item checked: $feedbackTexts[which]")
-//            }
-//            .setPositiveButton("SUBMIT") { dialog, which ->
-//                //TODO: Feedback needs to be submitted
-////                submitFeedback(washroomId = washroom_Id, userId = user_id, feedback = "")
-//            }
-//            .setNegativeButton("CANCEL") { dialog, which ->
-//                dialog.cancel()
-//            }
-//
-//            val dialog = builder.create()
-//            dialog.show()

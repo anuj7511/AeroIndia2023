@@ -21,17 +21,15 @@ import retrofit2.Response
 import universal.appfactory.aeroindia2023.ApiClient
 import universal.appfactory.aeroindia2023.ApiInterface
 import universal.appfactory.aeroindia2023.R
-import universal.appfactory.aeroindia2023.products.ProductAdapter
-import universal.appfactory.aeroindia2023.products.ProductModel
-import universal.appfactory.aeroindia2023.products.ProductResponse
+import universal.appfactory.aeroindia2023.products.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class SelectedExhibitorActivity : AppCompatActivity() {
 
-    private lateinit var adapter: ProductAdapter
-    private lateinit var data: ArrayList<ProductModel>
+    private lateinit var adapter: ProductAdapter2
+    private lateinit var data: ArrayList<ProductModel2>
     private lateinit var recyclerview: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,23 +124,23 @@ class SelectedExhibitorActivity : AppCompatActivity() {
 
             productApi.getExhibitorProduct("Bearer 61b25a411a2dad66bb7b6ff145db3c2f", id)
                 ?.enqueue(object :
-                    Callback<ProductResponse?> {
+                    Callback<ProductResponse2?> {
                     override fun onResponse(
-                        call: Call<ProductResponse?>,
-                        response: Response<ProductResponse?>
+                        call: Call<ProductResponse2?>,
+                        response: Response<ProductResponse2?>
                     ) {
 
                         Log.d("Response: ", response.body().toString())
-                        data = response.body()?.data as java.util.ArrayList<ProductModel>
+                        data = response.body()?.data as java.util.ArrayList<ProductModel2>
                         Collections.sort(data, SortByName())
                         // This will pass the ArrayList to our Adapter
-                        adapter = ProductAdapter(data, this@SelectedExhibitorActivity, "last")
+                        adapter = ProductAdapter2(data, this@SelectedExhibitorActivity, "last")
                         // Setting the Adapter with the recyclerview
                         recyclerview.adapter = adapter
 
                     }
 
-                    override fun onFailure(call: Call<ProductResponse?>, t: Throwable) {
+                    override fun onFailure(call: Call<ProductResponse2?>, t: Throwable) {
                         Toast.makeText(
                             applicationContext, t.message,
                             Toast.LENGTH_SHORT
@@ -154,10 +152,10 @@ class SelectedExhibitorActivity : AppCompatActivity() {
         }
     }
 
-    private class SortByName : Comparator<ProductModel> {
+    private class SortByName : Comparator<ProductModel2> {
         override fun compare(
-            object1: ProductModel,
-            object2: ProductModel
+            object1: ProductModel2,
+            object2: ProductModel2
         ): Int {
             val name1: String = object1.getProduct_title().lowercase(Locale.ROOT).trim()
             val name2: String = object2.getProduct_title().lowercase(Locale.ROOT).trim()

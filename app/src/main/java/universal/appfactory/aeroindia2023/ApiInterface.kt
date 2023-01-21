@@ -20,6 +20,7 @@ import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.SaveTr
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.SaveTrailFeedbackResponse
 import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse
+import universal.appfactory.aeroindia2023.products.ProductResponse2
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
 
 interface ApiInterface {
@@ -76,8 +77,8 @@ interface ApiInterface {
     @GET("api/get-agenda-classification/location")
     fun getAgendaClassificationLocation(@Header("Authorization") bearerToken: String) : Call<LocationResponse?>?
 
-    @GET("api/get-exhibitor-product/{id}")
-    fun getExhibitorProduct(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<ProductResponse?>?
+    @POST("api/get-exhibitor-product/{id}")
+    fun getExhibitorProduct(@Header("Authorization") bearerToken: String, @Path("id") id: Int) : Call<ProductResponse2?>?
 
     @GET("api/get-exhibitor/{id}")
     fun getProductExhibitor(@Header("Authorization") bearerToken: String, @Path("id") id: String) : Call<ExhibitorResponse2?>?
@@ -99,5 +100,8 @@ interface ApiInterface {
 
     @POST("api/save-trail-feedback")
     fun saveTrailFeedback(@Body saveTrailFeedbackModel: SaveTrailFeedbackModel, @Header("Authorization") bearerToken: String): Call<SaveTrailFeedbackResponse>
+
+    @GET("current?lat=12.9716&lon=77.5946&key=624f382318824a2ab0dedb2ee4c7fb22")
+    fun getTemperature() : Call<WeatherResponse?>?
 
 }

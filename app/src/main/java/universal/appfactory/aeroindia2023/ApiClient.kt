@@ -8,7 +8,8 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
 
-    val baseUrl = "http://aeroindia.gov.in/"
+    private const val baseUrl = "http://aeroindia.gov.in/"
+    private const val weatherUrl = "http://api.weatherbit.io/v2.0/"
 
     var okHttpClient = OkHttpClient().newBuilder()
         .connectTimeout(60, TimeUnit.SECONDS)
@@ -21,6 +22,14 @@ object ApiClient {
             .addConverterFactory(GsonConverterFactory.create()).build()
             // we need to add converter factory to
             // convert JSON object to Java object
+
+    }
+
+    fun getInstance2(): Retrofit {
+        return Retrofit.Builder().baseUrl(weatherUrl).client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create()).build()
+        // we need to add converter factory to
+        // convert JSON object to Java object
 
     }
 

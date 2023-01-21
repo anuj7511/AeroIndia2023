@@ -11,3 +11,12 @@ data class ProductResponse(
     @SerializedName("data")
     val data: List<ProductModel>
 )
+
+data class ProductResponse2(
+    @SerializedName("status")
+    val status: Int,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: List<ProductModel2>
+)

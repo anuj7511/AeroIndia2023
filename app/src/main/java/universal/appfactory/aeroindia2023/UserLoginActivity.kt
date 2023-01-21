@@ -100,6 +100,7 @@ class UserLoginActivity : AppCompatActivity() {
         //Accessing API Interface for verifying user email ID
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
 
+        @OptIn(DelicateCoroutinesApi::class)
         GlobalScope.launch(Dispatchers.IO) {
             response.verifyUserLogin(userLoginDataRequestModel,"Bearer 61b25a411a2dad66bb7b6ff145db3c2f").enqueue(
                 object : Callback<UserLoginDataResponseModel> {

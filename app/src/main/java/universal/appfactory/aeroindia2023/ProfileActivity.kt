@@ -1,10 +1,12 @@
 package universal.appfactory.aeroindia2023
 
+import android.app.Notification.Action
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -19,8 +21,6 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         navigableBundle = intent.extras!!

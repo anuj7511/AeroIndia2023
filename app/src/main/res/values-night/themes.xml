@@ -30,11 +30,11 @@
         <item name="windowActionBarOverlay">false</item>
     </style>
 
-    <style name="ThemeActionBar"
-        parent="Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:background">@null</item>
+    <style name="ThemeActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
         <!-- Support library compatibility -->
-        <item name="background">@null</item>
+
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
 

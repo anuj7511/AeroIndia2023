@@ -4,13 +4,19 @@ import android.annotation.SuppressLint
 import android.content.SharedPreferences
 
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
-import android.view.View
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.Button
+import com.android.volley.Response as volleyResponse
+import com.android.volley.toolbox.Volley
+import java.io.IOException
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -22,11 +28,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 class ProfileInfoActivity : AppCompatActivity() {
 
     private lateinit var navigableBundle: Bundle
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editPreferences: SharedPreferences.Editor
+    private lateinit var imageData: ByteArray
+
+    companion object{
+        private const val GALLERY_REQ_CODE = 1000
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +47,17 @@ class ProfileInfoActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         navigableBundle = intent.extras!!
         sharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
         editPreferences = sharedPreferences.edit()
+
         assignOriginalValues()
+
+        findViewById<TextView>(R.id.setProfileImage).setOnClickListener{
+            launchGallery()
+        }
 
         findViewById<ImageView>(R.id.updateProfileIcon).setOnClickListener{
 
@@ -147,6 +162,22 @@ class ProfileInfoActivity : AppCompatActivity() {
             8 -> "email" // Unchangeable
             9 -> "profile_image"
             else -> "Unknown"
+        }
+    }
+
+    private fun launchGallery(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, GALLERY_REQ_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY_REQ_CODE && resultCode == RESULT_OK){
+            findViewById<ImageView>(R.id.userProfileImage).setImageURI(data?.data)
+        }
+        else{
+            Log.i("ProfileInfo Activity msg", "Oru p**** varala")
         }
     }
 }

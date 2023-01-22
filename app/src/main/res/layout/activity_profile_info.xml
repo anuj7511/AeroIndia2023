@@ -64,8 +64,8 @@
 
         <ImageView
             android:id="@+id/userProfileImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10sp"
             android:background="@null"
@@ -76,7 +76,7 @@
             tools:layout_editor_absoluteY="109dp" />
 
         <TextView
-            android:id="@+id/editTextView"
+            android:id="@+id/setProfileImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"

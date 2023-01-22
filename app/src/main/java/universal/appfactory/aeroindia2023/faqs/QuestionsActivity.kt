@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,10 +29,13 @@ class QuestionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
 
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
+
         navigableBundle = intent.extras!!
-        var userType = navigableBundle.getString("userType","0")
+        val userType = navigableBundle.getString("userType","0")
         reach_out_questions.setOnClickListener {
-            var intent = Intent(this, ReachOutActivity::class.java)
+            val intent = Intent(this, ReachOutActivity::class.java)
             startActivity(intent)
         }
 

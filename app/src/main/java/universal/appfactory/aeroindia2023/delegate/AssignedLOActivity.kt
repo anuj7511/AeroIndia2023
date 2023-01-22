@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_assigned_loactivity.*
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -27,6 +28,9 @@ class AssignedLOActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_assigned_loactivity)
+
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         viewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
         viewModel.init((this as AppCompatActivity).applicationContext as Application)

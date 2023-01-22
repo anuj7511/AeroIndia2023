@@ -34,10 +34,7 @@ class ZonalManagerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_zonal_manager)
 
-
         supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         recyclerview = findViewById<RecyclerView>(R.id.recycler_view)

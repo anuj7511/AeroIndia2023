@@ -3,6 +3,7 @@ package universal.appfactory.aeroindia2023.faqs
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import kotlinx.android.synthetic.main.activity_reach_out.*
 import universal.appfactory.aeroindia2023.R
 
@@ -10,6 +11,9 @@ class ReachOutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reach_out)
+
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         send_reach_out.setOnClickListener {
             sendMail()

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_delegate_hotel.*
 import kotlinx.android.synthetic.main.vehicle_view.*
@@ -24,6 +25,9 @@ class DelegateHotelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_delegate_hotel)
+
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         viewModel = ViewModelProvider(this)[DelegateViewModel::class.java]
         viewModel.init((this as  AppCompatActivity).applicationContext as Application)

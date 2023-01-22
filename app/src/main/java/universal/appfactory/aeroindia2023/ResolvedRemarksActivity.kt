@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +16,9 @@ class ResolvedRemarksActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resolved_remarks)
+
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         val submit = findViewById<Button>(R.id.submit)
         val remarks = findViewById<EditText>(R.id.resolvation)

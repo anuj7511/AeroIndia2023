@@ -105,6 +105,6 @@ interface ApiInterface {
     fun saveTrailFeedback(@Body saveTrailFeedbackModel: SaveTrailFeedbackModel, @Header("Authorization") bearerToken: String): Call<SaveTrailFeedbackResponse>
 
     @GET("current?lat=12.9716&lon=77.5946&key=624f382318824a2ab0dedb2ee4c7fb22")
-    fun getTemperature() : Call<WeatherResponse?>?
+    fun getTemperature() : Call<ExhibitorResponse?>? //Should be Weather Response
 
 }

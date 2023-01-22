@@ -3,6 +3,7 @@ package universal.appfactory.aeroindia2023.faqs
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import kotlinx.android.synthetic.main.activity_faqs.*
 import kotlinx.android.synthetic.main.activity_main.*
 import universal.appfactory.aeroindia2023.R
@@ -11,6 +12,9 @@ class FAQsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faqs)
+
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         Event_attendees_visitors.setOnClickListener {
             startCategory(Event_attendees_visitors.text.toString())

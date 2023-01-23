@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "155937915624",
+    "project_id": "aeroindia2023-93536",
+    "storage_bucket": "aeroindia2023-93536.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155937915624:android:234362b9386392f1823f5d",
+        "android_client_info": {
+          "package_name": "universal.appfactory.aeroindia2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155937915624-npe70m3f4he7t2r39fjugfcmvojulvvo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "universal.appfactory.aeroindia2023",
+            "certificate_hash": "f9db02c079b8b388646ed22e57553e70ad34ac50"
+          }
+        },
+        {
+          "client_id": "155937915624-ljk569r1gklijmr0634csrf95prkmglg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGUSN5B55UjMtzShJ5D7rkYEac_5dgrk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155937915624-ljk569r1gklijmr0634csrf95prkmglg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

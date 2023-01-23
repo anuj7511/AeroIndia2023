@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import androidx.appcompat.app.AlertDialog
 
 // Main Activity
 class MainActivity : AppCompatActivity() {
@@ -32,14 +32,15 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity.finish()
                 }
                 else{
-                    Log.i("Internet connections", "Connections invalid and needs permission")
-                    MaterialAlertDialogBuilder(this@MainActivity)
-                        .setTitle("ERROR !")
-                        .setMessage("You need an internet connection to get started. Kindly connect to an internet connection.")
-                        .setNeutralButton("OK") { dialog, which ->
-                            this@MainActivity.finishAffinity()
-                        }
-                        .show()
+
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setTitle("ERROR !")
+                    builder.setMessage("You need an internet connection to get started. Kindly connect to an internet connection.")
+                    builder.setNeutralButton("OK") { dialog, which ->
+                        this@MainActivity.finishAffinity()
+                    }
+                    builder.create().show()
+
                     Log.i("Internet connections", "Connections invalid. Need an internet connection to proceed")
                 }
             }

@@ -408,6 +408,7 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel.loadAllTrail(true)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed(){
         backpress += 1
         if(backpress > 1)

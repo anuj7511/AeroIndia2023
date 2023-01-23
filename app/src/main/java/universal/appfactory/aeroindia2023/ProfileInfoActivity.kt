@@ -5,15 +5,8 @@ import android.content.SharedPreferences
 
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.Button
-import com.android.volley.Response as volleyResponse
-import com.android.volley.toolbox.Volley
-import java.io.IOException
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -34,7 +27,6 @@ class ProfileInfoActivity : AppCompatActivity() {
     private lateinit var navigableBundle: Bundle
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editPreferences: SharedPreferences.Editor
-    private lateinit var imageData: ByteArray
 
     companion object{
         private const val GALLERY_REQ_CODE = 1000
@@ -171,13 +163,14 @@ class ProfileInfoActivity : AppCompatActivity() {
         startActivityForResult(intent, GALLERY_REQ_CODE)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == GALLERY_REQ_CODE && resultCode == RESULT_OK){
             findViewById<ImageView>(R.id.userProfileImage).setImageURI(data?.data)
         }
         else{
-            Log.i("ProfileInfo Activity msg", "Oru p**** varala")
+            Log.i("ProfileInfo Activity msg", "No image found")
         }
     }
 }

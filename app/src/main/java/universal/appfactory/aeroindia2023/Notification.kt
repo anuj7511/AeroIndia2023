@@ -10,7 +10,7 @@ class Notification: Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Log.i("One Signal Activity", "One Signal notification class activated")
+        Log.i("OneSignal Activity", "OneSignal notification class activated")
         
         // Logging set to help debug issues, remove before releasing your app.
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
@@ -18,6 +18,7 @@ class Notification: Application() {
         // OneSignal Initialization
         OneSignal.initWithContext(this)
         OneSignal.setAppId(ONESIGNAL_APP_ID)
+
     }
 
 }

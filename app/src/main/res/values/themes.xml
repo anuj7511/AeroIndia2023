@@ -77,19 +77,12 @@
         <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
         <item name="buttonBarNeutralButtonStyle">@style/NeutralButtonStyle</item>
+        <item name="titleTextStyle">@style/TextAppearance_DialogWindowTitle</item>
     </style>
 
     <style name="TextAppearance_DialogWindowTitle" parent="@android:style/TextAppearance.Holo.DialogWindowTitle">
         <item name="android:textColor">@android:color/holo_red_light</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
-        <item name="android:textColor">@color/black</item>"
-        <item name="android:scaleX">0.95</item>
-        <item name="android:scaleY">0.95</item>
-        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyleFeedback</item>
-        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyleFeedback</item>
     </style>
 
     <style name="NeutralButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">

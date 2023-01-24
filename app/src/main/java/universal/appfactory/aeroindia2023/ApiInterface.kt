@@ -1,11 +1,7 @@
 package universal.appfactory.aeroindia2023
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 import universal.appfactory.aeroindia2023.agendas.AgendaResponse
 import universal.appfactory.aeroindia2023.agendas.CategoryResponse
 import universal.appfactory.aeroindia2023.agendas.LocationResponse
@@ -40,15 +36,20 @@ interface ApiInterface {
     @GET("api/get-products")
     fun getProducts(@Header("Authorization") bearerToken: String) : Call<ProductResponse?>?
 
+    @Headers(
+        "Referrer-Policy: origin"
+    )
     @POST("api/register-user")
     fun sendUserData(@Body userDataRequestModel: UserDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserRegisterResponseModel>
 
     @POST("api/register-verify")
     fun verifyUserData(@Body userVerifyRequestModel: UserVerifyRequestModel,@Header("Authorization") bearerToken: String): Call<UserVerifyResponseModel>
 
-//    @Header("Authorization") refreshToken: String can be added to verifyUserLogin
+    @Headers(
+        "Referrer-Policy: origin"
+    )
     @POST("api/login-user")
-    fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String, @Header("referrer") referrer: String = "origin"): Call<UserLoginDataResponseModel>
+    fun verifyUserLogin(@Body userLoginDataRequestModel: UserLoginDataRequestModel,@Header("Authorization") bearerToken: String): Call<UserLoginDataResponseModel>
 
     @POST("api/update-user-profile")
     fun updateUserInfo(@Body userInfoUpdateRequestModel: UserInfoUpdateRequestModel, @Header("Authorization") bearerToken: String): Call<UserInfoUpdateResponseModel>

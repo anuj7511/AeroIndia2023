@@ -19,8 +19,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// API_1: http://aeroindia.gov.in/api/register-user
-// API_2: http://aeroindia.gov.in/api/register-verify
 // Bearer token: 61b25a411a2dad66bb7b6ff145db3c2f
 
 class UserLoginActivity : AppCompatActivity() {

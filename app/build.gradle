@@ -98,5 +98,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
 
     // OneSignal SDK
-    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    //implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    implementation 'com.onesignal:OneSignal:4.8.4'
 }

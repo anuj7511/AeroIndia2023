@@ -5,10 +5,12 @@ package universal.appfactory.aeroindia2023
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
+import android.view.View
 import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -17,6 +19,7 @@ import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_agenda.*
+import kotlinx.android.synthetic.main.activity_homepage.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
 import universal.appfactory.aeroindia2023.agendas.AgendaViewModel
 import universal.appfactory.aeroindia2023.delegate.*
@@ -36,6 +39,7 @@ class HomepageActivity : AppCompatActivity() {
 
     private var backpress: Int = 0
     private var navigableBundle = Bundle()
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var agendaViewModel: AgendaViewModel
     private lateinit var productViewModel: ProductViewModel
     private lateinit var speakerViewModel: SpeakerViewModel
@@ -69,11 +73,17 @@ class HomepageActivity : AppCompatActivity() {
 
         navigableBundle = intent.extras!!
         lateinit var intent: Intent
+
+        sharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
+
         userType = navigableBundle.getString("userType", "0")
         foreignKeyId = navigableBundle.getString("foreignKeyId","0")
+
+        findViewById<TextView>(R.id.userNameView).text = sharedPreferences.getString("name", "DEFAULT USER")
+
         val hashMap : HashMap<String, Class<*>> = HashMap()
 
-        findViewById<TextView>(R.id.userNameView).text = navigableBundle.getString("name", "DEFAULT USER")
+        loadAllActivities()
 
         Log.i("Homepage activity msg", "User type: $userType")
 
@@ -341,16 +351,18 @@ class HomepageActivity : AppCompatActivity() {
             intent.putExtras(navigableBundle)
             backpress = 0
             this.startActivity(intent)
+
         }
 
-        loadAllActivities()
-
         findViewById<ImageView>(R.id.refreshHomepage).setOnClickListener{
+            findViewById<TextView>(R.id.userNameView).text = sharedPreferences.getString("name", "DEFAULT USER")
+
             agendaViewModel.loadAllAgendas(true)
             productViewModel.loadAllProducts(true)
             speakerViewModel.loadAllSpeakers(true)
             exhibitorViewModel.loadAllExhibitors(true)
-            questionsViewModel.loadAllFaqs(true,userType)
+            questionsViewModel.loadAllFaqs(true, userType)
+
             if(userType=="3"){
                 liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
             }
@@ -362,6 +374,7 @@ class HomepageActivity : AppCompatActivity() {
             Log.i("Homepage activity message", "Homepage refreshed")
             Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     private fun loadAllActivities() {
@@ -422,3 +435,5 @@ class HomepageActivity : AppCompatActivity() {
             .toInt()
     }
 }
+
+

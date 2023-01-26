@@ -27,7 +27,7 @@ class ZonalManagerActivity : AppCompatActivity() {
     private lateinit var adapter: ZonalManagerAdapter
     private  var data: ArrayList<ZonalManagerModel>?=null
     private lateinit var recyclerview: RecyclerView
-    private  var zonalmanagerid:Int=0
+    private  var zfid:Int=0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,9 @@ class ZonalManagerActivity : AppCompatActivity() {
         binding = ActivityZonalManagerBinding.inflate(layoutInflater)
         val view = binding.root
         val bundle=intent.extras
-        zonalmanagerid = bundle!!.getInt("Name",0)
+        zfid = bundle!!.getString("foreignKeyId","0").toInt()
+        Log.i("Foreign Key Id",zfid.toString())
+
 
      fetchPData()
 
@@ -60,7 +62,7 @@ class ZonalManagerActivity : AppCompatActivity() {
         // launching a new coroutine
         GlobalScope.launch(Dispatchers.IO) {
 
-            ZApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",zonalmanagerid)?.enqueue(object :
+            ZApi.getproblem("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",zfid)?.enqueue(object :
                 Callback<ZonalManagerResponse?> {
                 override fun onResponse(
                     call: Call<ZonalManagerResponse?>,

@@ -23,14 +23,14 @@ class ResolvedRemarksActivity : AppCompatActivity() {
         val submit = findViewById<Button>(R.id.submit)
         val remarks = findViewById<EditText>(R.id.resolvation)
         val complaintId = intent.getIntExtra("CompId", 1)
-        val manager = intent.getIntExtra("manager",1)
+        val manager = intent.getStringExtra("manager")!!
         submit.setOnClickListener {
            val rR=remarks.text.toString()
             rRemarks(rR, manager, complaintId)
         }
     }
     @OptIn(DelicateCoroutinesApi::class)
-   private fun rRemarks(remarks: String, manager: Int,complaintId: Int) {
+   private fun rRemarks(remarks: String, manager: String,complaintId: Int) {
         val resolveRequestModel=ResolvedRequestModel(complaintId,manager,remarks)
 
         val response = ServiceBuilder.buildService(ApiInterface::class.java)
@@ -54,6 +54,8 @@ class ResolvedRemarksActivity : AppCompatActivity() {
 
                     override fun onFailure(call: Call<ResolvedResponseModel>, t: Throwable ) {
                         Toast.makeText(this@ResolvedRemarksActivity, t.toString(), Toast.LENGTH_LONG).show()
+                        Log.i("Submit error","t.toString()")
+                        print("error are $t.toString()")
 
 
                     }

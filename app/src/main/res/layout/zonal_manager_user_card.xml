@@ -117,9 +117,10 @@
              android:textSize="20sp"
              android:textStyle="bold"/>
          <EditText
+             android:id="@+id/rmk"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:textSize= "16dp"
+             android:textSize= "16sp"
              android:background="@drawable/edit_text_bottom_border"
              android:layout_margin="3dp"
              android:textColor="@color/black"/>

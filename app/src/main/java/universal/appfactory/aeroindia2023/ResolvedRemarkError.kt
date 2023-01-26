@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class ResolvedRemarkError(
 
     @SerializedName("complaint_id")
-    var user_id: Array<String> = arrayOf("null msg"),
-    @SerializedName("manager_id")
-    var washroom_id: Array<String> = arrayOf("null msg"),
+    var complaint_id: Array<String> = arrayOf("null msg"),
+    @SerializedName("resolved_by")
+    var resolved_by: Array<String> = arrayOf("null msg"),
     @SerializedName("resolved_remarks")
-    var remarks: Array<String> = arrayOf("null msg")
+    var resolved_remarks: Array<String> = arrayOf("null msg")
 )

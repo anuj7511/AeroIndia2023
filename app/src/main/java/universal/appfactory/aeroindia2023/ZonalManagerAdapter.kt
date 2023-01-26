@@ -64,7 +64,7 @@ class ZonalManagerAdapter(private val ZList: ArrayList<ZonalManagerModel>,privat
         // creating variables for our views.
         var washId:TextView=itemView.findViewById(R.id.BId)
         var nameText: TextView = itemView.findViewById(R.id.user)
-        var remarks: TextView = itemView.findViewById(R.id.r)
+        var remarks: TextView = itemView.findViewById(R.id.rmk)
         var date: TextView = itemView.findViewById(R.id.date)
         var time:TextView=itemView.findViewById(R.id.time)
         var status: TextView = itemView.findViewById(R.id.Rstatus)

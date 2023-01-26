@@ -54,8 +54,8 @@ interface ApiInterface {
     @POST("api/update-user-profile")
     fun updateUserInfo(@Body userInfoUpdateRequestModel: UserInfoUpdateRequestModel, @Header("Authorization") bearerToken: String): Call<UserInfoUpdateResponseModel>
 
-    @POST("api/complaint-resolve-save")
-    fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorisation") bearerToken:String):Call<ResolvedResponseModel>
+    @POST("api/complaint-resolved-save")
+    fun resolved(@Body resolvedRequestModel:ResolvedRequestModel, @Header("Authorization") bearerToken:String):Call<ResolvedResponseModel>
 
     @GET("api/get-complaint/{id}")
     fun getproblem(@Header("Authorization") bearerToken: String,@Path("id") id: Int) :Call<ZonalManagerResponse?>?

@@ -18,6 +18,7 @@ import universal.appfactory.aeroindia2023.liaison_officer.trail.trailhome.TrailR
 import universal.appfactory.aeroindia2023.products.ProductResponse
 import universal.appfactory.aeroindia2023.products.ProductResponse2
 import universal.appfactory.aeroindia2023.speakers.SpeakerResponse
+import universal.appfactory.aeroindia2023.weather.WeatherResponse
 
 interface ApiInterface {
 
@@ -105,7 +106,7 @@ interface ApiInterface {
     @POST("api/save-trail-feedback")
     fun saveTrailFeedback(@Body saveTrailFeedbackModel: SaveTrailFeedbackModel, @Header("Authorization") bearerToken: String): Call<SaveTrailFeedbackResponse>
 
-    @GET("current?lat=12.9716&lon=77.5946&key=624f382318824a2ab0dedb2ee4c7fb22")
-    fun getTemperature() : Call<ExhibitorResponse?>? //Should be Weather Response
+    @GET("forecast/daily?lat=12.9716&lon=77.5946&key=624f382318824a2ab0dedb2ee4c7fb22")
+    fun getTemperature() : Call<WeatherResponse?>?
 
 }

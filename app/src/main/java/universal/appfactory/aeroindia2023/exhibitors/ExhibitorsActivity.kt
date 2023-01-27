@@ -90,7 +90,6 @@ class ExhibitorsActivity : AppCompatActivity() {
         })
 
         refreshView.setOnRefreshListener {
-            progressBar.visibility = View.VISIBLE
             fetchExhibitorData()
             refreshView.isRefreshing = false
         }

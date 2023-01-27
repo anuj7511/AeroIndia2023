@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
-import android.view.View
 import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -34,6 +33,7 @@ import universal.appfactory.aeroindia2023.products.ProductViewModel
 import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
 import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
+import universal.appfactory.aeroindia2023.weather.WeatherViewModel
 
 class HomepageActivity : AppCompatActivity() {
 
@@ -48,6 +48,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var trailViewModel: TrailViewModel
     private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var questionsViewModel: FaqsViewModel
+    private lateinit var weatherViewModel: WeatherViewModel
     private lateinit var userType: String
     private lateinit var image: ImageView
     private lateinit var gridLayout1: GridLayout
@@ -147,60 +148,60 @@ class HomepageActivity : AppCompatActivity() {
 
             "2" -> {
 
-                    findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
-                    findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
 
-                    hashMap["1"] = DelegateVehicleActivity::class.java
-                    hashMap["2"] = DelegateHotelActivity::class.java
-                    hashMap["3"] = DelegateTravelActivity::class.java
-                    hashMap["4"] = AssignedLOActivity::class.java
-                    hashMap["5"] = DummyActivity::class.java
-                    hashMap["6"] = AgendaActivity::class.java
-                    hashMap["7"] = SpeakersActivity::class.java
-                    hashMap["8"] = DummyActivity::class.java
-                    hashMap["9"] = MapsActivity::class.java
-                    hashMap["10"] = ExhibitorsActivity::class.java
-                    hashMap["12"] = ProductsActivity::class.java
-                    hashMap["13"] = QuestionsActivity::class.java
-                    hashMap["14"] = Feedback::class.java
+                hashMap["1"] = DelegateVehicleActivity::class.java
+                hashMap["2"] = DelegateHotelActivity::class.java
+                hashMap["3"] = DelegateTravelActivity::class.java
+                hashMap["4"] = AssignedLOActivity::class.java
+                hashMap["5"] = DummyActivity::class.java
+                hashMap["6"] = AgendaActivity::class.java
+                hashMap["7"] = SpeakersActivity::class.java
+                hashMap["8"] = DummyActivity::class.java
+                hashMap["9"] = MapsActivity::class.java
+                hashMap["10"] = ExhibitorsActivity::class.java
+                hashMap["12"] = ProductsActivity::class.java
+                hashMap["13"] = QuestionsActivity::class.java
+                hashMap["14"] = Feedback::class.java
 
-                    for (i in hashMap.keys) {
-                        image = ImageView(this)
-                        image.layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        )
-                        image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
-                        image.setOnClickListener {
-                            backpress = 0
-                            intent = Intent(applicationContext, hashMap[i])
-                            intent.putExtras(navigableBundle)
-                            this@HomepageActivity.startActivity(intent)
-                        }
-                        if (i.toInt() <= 5)
-                            image.setImageResource(
-                                resources.getIdentifier(
-                                    "do_$i",
-                                    "drawable",
-                                    packageName
-                                )
-                            )
-                        else
-                            image.setImageResource(
-                                resources.getIdentifier(
-                                    "gen_" + (i.toInt() - 5).toString(),
-                                    "drawable",
-                                    packageName
-                                )
-                            )
-
-                        if(i.toInt() <= 9)
-                            gridLayout1.addView(image)
-                        else
-                            gridLayout2.addView(image)
-
+                for (i in hashMap.keys) {
+                    image = ImageView(this)
+                    image.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    image.setPadding(spToPx(20F), spToPx(20F), spToPx(20F), spToPx(20F))
+                    image.setOnClickListener {
+                        backpress = 0
+                        intent = Intent(applicationContext, hashMap[i])
+                        intent.putExtras(navigableBundle)
+                        this@HomepageActivity.startActivity(intent)
                     }
+                    if (i.toInt() <= 5)
+                        image.setImageResource(
+                            resources.getIdentifier(
+                                "do_$i",
+                                "drawable",
+                                packageName
+                            )
+                        )
+                    else
+                        image.setImageResource(
+                            resources.getIdentifier(
+                                "gen_" + (i.toInt() - 5).toString(),
+                                "drawable",
+                                packageName
+                            )
+                        )
+
+                    if(i.toInt() <= 9)
+                        gridLayout1.addView(image)
+                    else
+                        gridLayout2.addView(image)
+
                 }
+            }
 
             "3" -> {
 
@@ -362,6 +363,7 @@ class HomepageActivity : AppCompatActivity() {
             speakerViewModel.loadAllSpeakers(true)
             exhibitorViewModel.loadAllExhibitors(true)
             questionsViewModel.loadAllFaqs(true, userType)
+            weatherViewModel.loadAllWeather(true)
 
             if(userType=="3"){
                 liaisonViewModel.loadAllLiaisonOfficers(true,foreignKeyId.toInt())
@@ -397,6 +399,10 @@ class HomepageActivity : AppCompatActivity() {
         questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
         questionsViewModel.init((this as AppCompatActivity).applicationContext as Application)
         questionsViewModel.loadAllFaqs(true,userType)
+
+        weatherViewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
+        weatherViewModel.init((this as AppCompatActivity).applicationContext as Application)
+        weatherViewModel.loadAllWeather(true)
 
         if(userType == "3" || userType =="2") {
             questionsViewModel = ViewModelProvider(this)[FaqsViewModel::class.java]
@@ -435,5 +441,4 @@ class HomepageActivity : AppCompatActivity() {
             .toInt()
     }
 }
-
 

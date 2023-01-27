@@ -95,4 +95,11 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="alert_dialog_text">Select an option</string>
+    <string name="yelahanka_air_force_station">Yelahanka Air Force Station</string>
+    <string name="sun">SUN</string>
+    <string name="_1_23">1/23</string>
+    <string name="_27">27°</string>
+    <string name="_15">/15°</string>
+    <string name="_1">1%</string>
+    <string name="sunny">Sunny</string>
 </resources>

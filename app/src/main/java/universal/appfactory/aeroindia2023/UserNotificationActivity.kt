@@ -6,7 +6,9 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import kotlinx.android.synthetic.main.activity_selected_exhibitor.*
+import kotlinx.android.synthetic.main.activity_user_notification.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,21 +26,24 @@ class UserNotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_notification)
 
-        val notificationHeading = findViewById<EditText>(R.id.notificationHeading).text.toString()
-        val notificationBody = findViewById<EditText>(R.id.notificationBody).text.toString()
+        supportActionBar!!.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar!!.setCustomView(R.layout.action_bar_layout)
 
         findViewById<Button>(R.id.sendNotification).setOnClickListener {
-            sendNotification(notificationHeading, notificationBody)
+            val header = NotificationHeaderLanguages()
+            val body = NotificationContentLanguages()
+
+            header.en = findViewById<EditText>(R.id.notificationHeading).text.toString()
+            body.en = findViewById<EditText>(R.id.notificationBody).text.toString()
+
+            sendNotification(header, body)
         }
 
     }
 
-    fun sendNotification(heading: String, body: String){
+    fun sendNotification(header: NotificationHeaderLanguages, body: NotificationContentLanguages){
 
-        NotificationHeaderLanguages().setHeader(heading)
-        NotificationContentLanguages().setMessage(body)
-
-        val notificationRequestModel = NotificationRequestModel()
+        val notificationRequestModel = NotificationRequestModel(headings = header, contents = body)
 
         //Accessing API Interface for sending notification
         val response = ServiceBuilder.buildNotificationService(ApiInterface::class.java)

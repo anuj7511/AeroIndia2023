@@ -57,6 +57,7 @@
     <string name="my_name">My Name</string>
     <string name="sm">SM</string>
     <string name="icon">icon</string>
+    <string name="send_message">Send message</string>
     <string name="my_profile_information">My Profile Information</string>
     <string name="settings">Settings</string>
     <string name="sign_out">Sign Out</string>

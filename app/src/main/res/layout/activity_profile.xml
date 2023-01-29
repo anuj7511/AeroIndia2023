@@ -19,17 +19,22 @@
         android:paddingVertical="10dp"
         android:paddingHorizontal="7dp">
 
-        <TextView
-            android:id="@+id/my_profile"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/my_profile"
-            android:textAllCaps="true"
-            android:textColor="#6A6667"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_weight="1"/>
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/my_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/my_profile"
+                android:textAllCaps="true"
+                android:textColor="#6A6667"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -37,24 +42,27 @@
             android:contentDescription="@string/line"
             android:src="@drawable/profile_line"/>
 
-        <TextView
-            android:id="@+id/notifications"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/notifications"
-            android:textAllCaps="true"
-            android:textColor="#6A6667"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/notifications"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/notifications"
+                android:textAllCaps="true"
+                android:textColor="#6A6667"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/profile_img"
-        android:tag="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,6 +113,46 @@
             android:background="@drawable/profile_linear_layout_background"
             android:onClick="iconClicked"
             android:orientation="horizontal"
+            android:tag="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_profile"
+                android:tag="0" />
+
+            <ImageView
+                android:id="@+id/message_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:contentDescription="@string/icon"
+                android:src="@drawable/ic_navigate_next"
+                android:tag="0" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="20dp"
+                android:tag="0"
+                android:text="@string/send_message"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profile_linear_layout_background"
+            android:onClick="iconClicked"
+            android:orientation="horizontal"
+            android:layout_marginTop="17dp"
             android:tag="2">
 
             <ImageView

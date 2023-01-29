@@ -320,7 +320,6 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:hint="*Email ID"
                 android:padding="5sp"
                 tools:ignore="HardcodedText"
@@ -336,6 +335,37 @@
                 <!--this is the actual edit text which takes the input-->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userinfo_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#757575"
+                    android:textCursorDrawable="@color/black"
+                    tools:ignore="VisualLintTextFieldSize" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/filledTextField9"
+
+                style="@style/LoginTextInputLayoutStyle"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="*Foreign key ID"
+                android:padding="5sp"
+                tools:ignore="HardcodedText"
+                android:textColorHint="@color/black"
+                app:hintTextColor="@color/black"
+                app:boxBackgroundColor="#CED4DA"
+                android:color="@color/black"
+                android:enabled="false"
+                android:focusable="false"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="212dp">
+
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userinfo_9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="#757575"

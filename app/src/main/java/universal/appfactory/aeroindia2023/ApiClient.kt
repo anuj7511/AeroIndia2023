@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package universal.appfactory.aeroindia2023
 
 import okhttp3.OkHttpClient
@@ -5,16 +7,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object ApiClient {
 
     private const val baseUrl = "http://aeroindia.gov.in/"
     private const val weatherUrl = "http://api.weatherbit.io/v2.0/"
+    private const val notificationUrl = "https://onesignal.com/api/v1/"
 
     var okHttpClient = OkHttpClient().newBuilder()
-        .connectTimeout(60, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS)
-        .writeTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS) // was 60 seconds
+        .readTimeout(60, TimeUnit.SECONDS) // was 60 seconds
+        .writeTimeout(60, TimeUnit.SECONDS) // was 60 seconds
         .build()
 
     fun getInstance(): Retrofit {

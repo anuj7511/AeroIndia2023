@@ -2,6 +2,8 @@ package universal.appfactory.aeroindia2023
 
 import retrofit2.Call
 import retrofit2.http.*
+import universal.appfactory.aeroindia2023.Notifications.NotificationRequestModel
+import universal.appfactory.aeroindia2023.Notifications.NotificationResponseModel
 import universal.appfactory.aeroindia2023.agendas.AgendaResponse
 import universal.appfactory.aeroindia2023.agendas.CategoryResponse
 import universal.appfactory.aeroindia2023.agendas.LocationResponse
@@ -108,5 +110,8 @@ interface ApiInterface {
 
     @GET("forecast/daily?lat=12.9716&lon=77.5946&key=624f382318824a2ab0dedb2ee4c7fb22")
     fun getTemperature() : Call<WeatherResponse?>?
+
+    @POST("notifications")
+    fun sendNotification(@Body notificationRequestModel: NotificationRequestModel, @Header("Authorization") REST_API_KEY: String, @Header("Content-Type") contentType: String): Call<NotificationResponseModel>
 
 }

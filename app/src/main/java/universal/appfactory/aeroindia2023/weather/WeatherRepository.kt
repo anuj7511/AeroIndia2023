@@ -38,9 +38,8 @@ class WeatherRepository(application: Application) {
 
             // launching a new coroutine
             GlobalScope.launch(Dispatchers.IO) {
-                val value = weatherApi.getTemperature()
-                    ?.awaitResponse()
-                val data: List<TemperatureModel> = value?.body()?.data as List<TemperatureModel>
+                val value = weatherApi.getTemperature()?.awaitResponse()
+                val data: List<TemperatureModel>? = value?.body()?.data as List<TemperatureModel>
                 Log.d("Response: ", data.toString())
                 weatherDao.insertAll(data)
             }

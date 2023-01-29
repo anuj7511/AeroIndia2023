@@ -25,7 +25,6 @@ class UserLoginActivity : AppCompatActivity() {
 
     var backpress: Int = 0
     var navigableBundle = Bundle()
-    private lateinit var sessionManager: SessionManager
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,7 +122,7 @@ class UserLoginActivity : AppCompatActivity() {
                                 MaterialAlertDialogBuilder(this@UserLoginActivity)
                                     .setTitle("ALERT !")
                                     .setMessage("Your $emailError due to multiple incorrect login attempts. Kindly try after the locking time.")
-                                    .setNeutralButton("OK") { dialog, which ->
+                                    .setNeutralButton("OK") { _, _ ->
                                         this@UserLoginActivity.finishAffinity()
                                     }
                                     .show()

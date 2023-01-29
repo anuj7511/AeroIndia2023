@@ -37,9 +37,10 @@ class ProfileActivity : AppCompatActivity() {
         Log.i("Profile Activity Msg", "userFunction clicked & tag = $tag")
 
         when(tag.toInt()){
-            0 -> { navigableIntent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
-            1 -> { navigableIntent = Intent(this@ProfileActivity, ProfileSettingsActivity::class.java) }
-            2 -> { userSignOut()
+            1 -> { navigableIntent = Intent(this@ProfileActivity, UserNotificationActivity::class.java) }
+            2 -> { navigableIntent = Intent(this@ProfileActivity, ProfileInfoActivity::class.java) }
+            3 -> { navigableIntent = Intent(this@ProfileActivity, ProfileSettingsActivity::class.java) } // was ProfileSettingsActivity
+            4 -> { userSignOut()
                     passIn = false
                  }
             else -> {

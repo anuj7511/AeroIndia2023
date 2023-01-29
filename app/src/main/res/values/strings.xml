@@ -79,20 +79,14 @@
     <string name="note">Note</string>
     <string name="events">Events</string>
     <string name="exhibitors">Exhibitors</string>
-    <string-array name="user_types">
-        <item>None</item>
-        <item>Delegate</item>
-        <item>Liaison officer</item>
-        <item>Manager</item>
-    </string-array>
     <string name="title_activity_resolved_remarks">ResolvedRemarksActivity</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
+    <!-- Strings used for fragments for navigation -->
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
+
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="alert_dialog_text">Select an option</string>
     <string name="yelahanka_air_force_station">Yelahanka Air Force Station</string>
@@ -102,4 +96,10 @@
     <string name="_15">/15°</string>
     <string name="_1">1%</string>
     <string name="sunny">Sunny</string>
+    <string-array name="user_types">
+        <item>None</item>
+        <item>Delegate</item>
+        <item>Liaison officer</item>
+        <item>Manager</item>
+    </string-array>
 </resources>

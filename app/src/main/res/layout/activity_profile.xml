@@ -20,10 +20,10 @@
         android:paddingHorizontal="7dp">
 
         <TextView
-            android:id="@+id/notifications"
+            android:id="@+id/my_profile"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/notifications"
+            android:layout_height="match_parent"
+            android:text="@string/my_profile"
             android:textAllCaps="true"
             android:textColor="#6A6667"
             android:textSize="18sp"
@@ -38,10 +38,10 @@
             android:src="@drawable/profile_line"/>
 
         <TextView
-            android:id="@+id/my_profile"
+            android:id="@+id/notifications"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/my_profile"
+            android:layout_height="match_parent"
+            android:text="@string/notifications"
             android:textAllCaps="true"
             android:textColor="#6A6667"
             android:textSize="18sp"
@@ -54,6 +54,7 @@
 
     <ImageView
         android:id="@+id/profile_img"
+        android:tag="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +105,7 @@
             android:background="@drawable/profile_linear_layout_background"
             android:onClick="iconClicked"
             android:orientation="horizontal"
-            android:tag="0">
+            android:tag="2">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -144,7 +145,7 @@
             android:background="@drawable/profile_linear_layout_background"
             android:onClick="iconClicked"
             android:orientation="horizontal"
-            android:tag="1">
+            android:tag="3">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -181,7 +182,7 @@
             android:background="@drawable/profile_linear_layout_background"
             android:onClick="iconClicked"
             android:orientation="horizontal"
-            android:tag="2">
+            android:tag="4">
 
             <ImageView
                 android:layout_width="wrap_content"

@@ -19,7 +19,18 @@ object ServiceBuilder {
         .client(client)
         .build()
 
+    // For OneSignal
+    private val retrofit2 = Retrofit.Builder()
+        .baseUrl("https://onesignal.com/api/v1/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(client)
+        .build()
+
     fun<T> buildService(service: Class<T>): T{
         return retrofit.create(service)
+    }
+
+    fun <T> buildNotificationService(service: Class<T>): T{
+        return retrofit2.create(service)
     }
 }

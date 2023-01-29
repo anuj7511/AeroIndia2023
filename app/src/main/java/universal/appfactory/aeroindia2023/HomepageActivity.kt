@@ -17,6 +17,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.lifecycle.ViewModelProvider
+import com.onesignal.OSNotificationReceivedEvent
+import com.onesignal.OneSignal
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.android.synthetic.main.activity_homepage.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
@@ -33,7 +35,9 @@ import universal.appfactory.aeroindia2023.products.ProductViewModel
 import universal.appfactory.aeroindia2023.products.ProductsActivity
 import universal.appfactory.aeroindia2023.speakers.SpeakerViewModel
 import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
+import universal.appfactory.aeroindia2023.weather.WeatherActivity
 import universal.appfactory.aeroindia2023.weather.WeatherViewModel
+import universal.appfactory.aeroindia2023.agendas.*
 
 class HomepageActivity : AppCompatActivity() {
 
@@ -80,7 +84,7 @@ class HomepageActivity : AppCompatActivity() {
         userType = navigableBundle.getString("userType", "0")
         foreignKeyId = navigableBundle.getString("foreignKeyId","0")
 
-        findViewById<TextView>(R.id.userNameView).text = sharedPreferences.getString("name", "DEFAULT USER")
+        setName()
 
         val hashMap : HashMap<String, Class<*>> = HashMap()
 
@@ -92,25 +96,26 @@ class HomepageActivity : AppCompatActivity() {
 
         gridLayout1 = GridLayout(this)
         gridLayout1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        gridLayout1.setPadding(15)
+        gridLayout1.setPadding(0)
         gridLayout1.columnCount = 3
         gridLayout1.rowCount = 3
 
         gridLayout2 = GridLayout(this)
         gridLayout2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        gridLayout2.setPadding(15)
+        gridLayout2.setPadding(0)
         gridLayout2.columnCount = 3
         gridLayout2.rowCount = 3
 
         gridLayout3 = GridLayout(this)
         gridLayout3.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        gridLayout3.setPadding(15)
+        gridLayout3.setPadding(0)
         gridLayout3.columnCount = 3
         gridLayout3.rowCount = 3
 
         when(userType){
             "1" -> {
                 findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
 
                 hashMap["1"] = AgendaActivity::class.java
                 hashMap["2"] = SpeakersActivity::class.java
@@ -121,6 +126,7 @@ class HomepageActivity : AppCompatActivity() {
                 hashMap["7"] = ProductsActivity::class.java
                 hashMap["8"] = QuestionsActivity::class.java
                 hashMap["9"] = Feedback::class.java
+                hashMap["10"] = WeatherActivity::class.java
 
                 for (i in hashMap.keys) {
                     image = ImageView(this)
@@ -142,7 +148,10 @@ class HomepageActivity : AppCompatActivity() {
                         intent.putExtras(navigableBundle)
                         this@HomepageActivity.startActivity(intent)
                     }
-                    gridLayout1.addView(image)
+                    if(i.toInt() <= 9)
+                        gridLayout1.addView(image)
+                    else
+                        gridLayout2.addView(image)
                 }
             }
 
@@ -164,6 +173,7 @@ class HomepageActivity : AppCompatActivity() {
                 hashMap["12"] = ProductsActivity::class.java
                 hashMap["13"] = QuestionsActivity::class.java
                 hashMap["14"] = Feedback::class.java
+                hashMap["15"] = WeatherActivity::class.java
 
                 for (i in hashMap.keys) {
                     image = ImageView(this)
@@ -221,6 +231,7 @@ class HomepageActivity : AppCompatActivity() {
                 hashMap["12"] = ProductsActivity::class.java
                 hashMap["13"] = QuestionsActivity::class.java
                 hashMap["14"] = Feedback::class.java
+                hashMap["15"] = WeatherActivity::class.java
 
                 for (i in hashMap.keys) {
                     image = ImageView(this)
@@ -263,6 +274,7 @@ class HomepageActivity : AppCompatActivity() {
             "4" -> {
 
                 findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
 
                 hashMap["1"] = AgendaActivity::class.java
                 hashMap["2"] = SpeakersActivity::class.java
@@ -273,6 +285,7 @@ class HomepageActivity : AppCompatActivity() {
                 hashMap["7"] = ProductsActivity::class.java
                 hashMap["8"] = QuestionsActivity::class.java
                 hashMap["9"] = ZonalManagerActivity::class.java
+                hashMap["10"] = WeatherActivity::class.java
 
                 for (i in hashMap.keys) {
                     image = ImageView(this)
@@ -298,13 +311,17 @@ class HomepageActivity : AppCompatActivity() {
                     else
                         image.setImageResource(R.drawable.check_complaints)
 
-                    gridLayout1.addView(image)
+                    if(i.toInt() <= 9)
+                        gridLayout1.addView(image)
+                    else
+                        gridLayout2.addView(image)
                 }
             }
 
             "5" -> {
 
                 findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
+                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
 
                 hashMap["1"] = AgendaActivity::class.java
                 hashMap["2"] = SpeakersActivity::class.java
@@ -315,6 +332,7 @@ class HomepageActivity : AppCompatActivity() {
                 hashMap["7"] = ProductsActivity::class.java
                 hashMap["8"] = QuestionsActivity::class.java
                 hashMap["9"] = ManagerActivity::class.java
+                hashMap["10"] = WeatherActivity::class.java
 
                 for (i in hashMap.keys) {
                     image = ImageView(this)
@@ -340,7 +358,10 @@ class HomepageActivity : AppCompatActivity() {
                     else
                         image.setImageResource(R.drawable.check_complaints)
 
-                    gridLayout1.addView(image)
+                    if(i.toInt() <= 9)
+                        gridLayout1.addView(image)
+                    else
+                        gridLayout2.addView(image)
                 }
             }
 
@@ -353,6 +374,7 @@ class HomepageActivity : AppCompatActivity() {
             backpress = 0
             this.startActivity(intent)
 
+            setName()
         }
 
         findViewById<ImageView>(R.id.refreshHomepage).setOnClickListener{
@@ -425,6 +447,7 @@ class HomepageActivity : AppCompatActivity() {
         trailViewModel = ViewModelProvider(this)[TrailViewModel::class.java]
         trailViewModel.init((this as AppCompatActivity).applicationContext as Application)
         trailViewModel.loadAllTrail(true)
+
     }
 
     @Deprecated("Deprecated in Java")
@@ -434,6 +457,10 @@ class HomepageActivity : AppCompatActivity() {
             finishAffinity()
         else
             Toast.makeText(this, "Press back once again to exit", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setName(){
+        findViewById<TextView>(R.id.userNameView).text = sharedPreferences.getString("name", "DEFAULT USER")
     }
 
     private fun spToPx(sp: Float): Int {

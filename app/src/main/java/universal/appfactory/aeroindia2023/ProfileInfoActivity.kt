@@ -1,19 +1,23 @@
 package universal.appfactory.aeroindia2023
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
-
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
+import android.app.ActionBar.LayoutParams
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.activity_faqs.*
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.activity_selected_exhibitor.*
 import kotlinx.coroutines.*
@@ -135,9 +139,10 @@ class ProfileInfoActivity : AppCompatActivity() {
         findViewById<EditText>(R.id.userinfo_3).setText(sharedPreferences.getString("address", "NA"))
         findViewById<EditText>(R.id.userinfo_4).setText(sharedPreferences.getString("organisation", "NA"))
         findViewById<EditText>(R.id.userinfo_5).setText(sharedPreferences.getString("designation", "NA"))
-        findViewById<TextView>(R.id.userinfo_6).setText(sharedPreferences.getString("userId", "NA"))
+        findViewById<EditText>(R.id.userinfo_6).setText(sharedPreferences.getString("userId", "NA"))
         findViewById<EditText>(R.id.userinfo_7).setText(sharedPreferences.getString("userType", "NA"))
         findViewById<EditText>(R.id.userinfo_8).setText(sharedPreferences.getString("email", "NA"))
+        findViewById<EditText>(R.id.userinfo_9).setText(sharedPreferences.getString("foreignKeyId", "NA"))
     }
 
     // Codes should not be changed
@@ -157,16 +162,19 @@ class ProfileInfoActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("IntentReset")
     private fun launchGallery(){
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, GALLERY_REQ_CODE)
+        val imageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        imageIntent.type = "image/*"
+        startActivityForResult(imageIntent, GALLERY_REQ_CODE)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
         if (requestCode == GALLERY_REQ_CODE && resultCode == RESULT_OK){
+            Log.i("Image data", data?.data.toString()+", "+data?.type.toString())
             findViewById<ImageView>(R.id.userProfileImage).setImageURI(data?.data)
         }
         else{

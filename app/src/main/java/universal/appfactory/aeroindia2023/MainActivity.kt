@@ -1,14 +1,19 @@
 package universal.appfactory.aeroindia2023
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.onesignal.OSNotification
+import com.onesignal.OSNotificationReceivedEvent
+import com.onesignal.OneSignal
+
 
 // Main Activity
 class MainActivity : AppCompatActivity() {
@@ -32,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity.finish()
                 }
                 else{
-
                     val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
                     builder.setTitle("ERROR !")
                     builder.setMessage("You need an internet connection to get started. Kindly connect to an internet connection.")

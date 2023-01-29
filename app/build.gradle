@@ -100,4 +100,7 @@ dependencies {
     // OneSignal SDK
     //implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
     implementation 'com.onesignal:OneSignal:4.8.4'
+
+    // Image cropping and save
+
 }

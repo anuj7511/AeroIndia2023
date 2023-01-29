@@ -1,0 +1,58 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "117a180d6f1d70a237d9d40f3e728c8e",
+    "entities": [
+      {
+        "tableName": "weather",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`app_max_temp` REAL NOT NULL, `app_min_temp` REAL NOT NULL, `datetime` TEXT NOT NULL, `precip` REAL NOT NULL, `weather` TEXT NOT NULL, PRIMARY KEY(`app_max_temp`))",
+        "fields": [
+          {
+            "fieldPath": "app_max_temp",
+            "columnName": "app_max_temp",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "app_min_temp",
+            "columnName": "app_min_temp",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "datetime",
+            "columnName": "datetime",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "precip",
+            "columnName": "precip",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weather",
+            "columnName": "weather",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "app_max_temp"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '117a180d6f1d70a237d9d40f3e728c8e')"
+    ]
+  }
+}

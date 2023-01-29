@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="245dp"
         android:layout_marginTop="10dp"
@@ -17,16 +17,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/registrationLogo"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_margin="10sp"
-            app:srcCompat="@drawable/aero_india_logo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027">
 
         <TextView
             android:id="@+id/otpMessage1"
@@ -50,6 +44,18 @@
             android:text="Sample text preview"
             android:textColor="#FFFFFF"
             android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/otpAttempts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Sample text preview"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="513dp" />
 
         <EditText
             android:id="@+id/otp"
@@ -78,18 +84,6 @@
             android:textColor="@color/white"
             app:cornerRadius="50sp"
             app:iconPadding="10dp" />
-
-        <TextView
-            android:id="@+id/otpAttempts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10sp"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Sample text preview"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="513dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

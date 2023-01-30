@@ -4,52 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_background"
     tools:context=".UserNotificationActivity">
 
-    <EditText
-        android:id="@+id/notificationBody"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="545dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
-        android:ems="10"
-        android:hint="Body"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/notificationHeading"
+    <LinearLayout
+        android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="42dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Heading"
-        android:inputType="textMultiLine"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/sendNotification"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filledTextField1"
+
+            style="@style/LoginTextInputLayoutStyle"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="*Heading"
+            android:padding="0sp"
+            android:textColorHint="@color/black"
+            app:boxBackgroundColor="@color/white"
+            app:hintTextColor="@color/black"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="16dp">
+
+            <!--this is the actual edit text which takes the input-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/notificationHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="0dp"
+                android:textColorHint="#757575"
+                android:textCursorDrawable="@color/black"
+                tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filledTextField0"
+
+            style="@style/LoginTextInputLayoutStyle"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="*Message"
+            android:paddingTop="10dp"
+            android:textColorHint="@color/black"
+            app:boxBackgroundColor="@color/white"
+            app:hintTextColor="@color/black"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="16dp">
+
+            <!--this is the actual edit text which takes the input-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/notificationBody"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:gravity="start"
+                android:textColorHint="#757575"
+                android:textCursorDrawable="@color/black"
+                tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/sendNotification"
-        android:onClick="sendNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="160dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="100dp"
         android:text="SEND"
+        android:backgroundTint="#87C38F"
+        android:paddingHorizontal="100dp"
         android:textColor="@color/black"
+        app:cornerRadius="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationBody" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
+        app:layout_constraintVertical_bias="0.303"
+        tools:ignore="HardcodedText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

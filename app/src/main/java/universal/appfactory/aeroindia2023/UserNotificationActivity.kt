@@ -41,7 +41,7 @@ class UserNotificationActivity : AppCompatActivity() {
 
     }
 
-    fun sendNotification(header: NotificationHeaderLanguages, body: NotificationContentLanguages){
+    private fun sendNotification(header: NotificationHeaderLanguages, body: NotificationContentLanguages){
 
         val notificationRequestModel = NotificationRequestModel(headings = header, contents = body)
 
@@ -58,6 +58,8 @@ class UserNotificationActivity : AppCompatActivity() {
                     ) {
                         val id = response.body()?.id.toString()
                         val recipient = response.body()?.recipients.toString()
+
+                        Toast.makeText(this@UserNotificationActivity, "Message sent successfully", Toast.LENGTH_SHORT).show()
 
                         Log.i("Notification response", "ID: $id, Recipients: $recipient")
                     }
